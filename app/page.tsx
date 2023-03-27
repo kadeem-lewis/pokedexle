@@ -1,7 +1,12 @@
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import PageCard from "@/components/PageCard";
 
 export default function Home() {
-  return <div>hi</div>;
+  return (
+    <div>
+      {/* Need to create pages array and map them to page card */}
+      <PageCard />
+      <PageCard />
+      hi
+    </div>
+  );
 }
