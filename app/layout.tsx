@@ -1,5 +1,7 @@
 "use client";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -8,7 +10,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className=" max-w-sm mx-auto">
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }
