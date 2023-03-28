@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeSwitch from "./ThemeSwitch";
+import ThemeSwitch from "../buttons/ThemeSwitch";
 import Link from "next/link";
 export default function Navbar() {
   return (

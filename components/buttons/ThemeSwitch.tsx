@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { BsSun, BsMoon } from "react-icons/bs";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 export default function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -17,9 +17,13 @@ export default function ThemeSwitch() {
       {resolvedTheme && (
         <button
           onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
-          className="border-2 p-2 border-current rounded-md"
+          className="border-2 p-1 border-current rounded-md"
         >
-          {resolvedTheme === "light" ? <BsMoon /> : <BsSun />}
+          {resolvedTheme === "light" ? (
+            <MoonIcon className="h-6 w-6 text-current" />
+          ) : (
+            <SunIcon className="h-6 w-6 text-current" />
+          )}
         </button>
       )}
     </div>
