@@ -1,8 +1,7 @@
 "use client";
-import OptionsBar from "@/components/OptionsBar";
+import OptionsBar from "@/components/layout/OptionsBar";
 import React, { useState, Fragment } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import { FaCaretRight } from "react-icons/fa";
 const people = [
   "Durward Reynolds",
   "Kenton Towne",

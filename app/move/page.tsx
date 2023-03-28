@@ -1,5 +1,5 @@
 "use client";
-import OptionsBar from "@/components/OptionsBar";
+import OptionsBar from "@/components/layout/OptionsBar";
 import React from "react";
 import { Combobox, Tab } from "@headlessui/react";
 
