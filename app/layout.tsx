@@ -1,8 +1,8 @@
 "use client";
 import "./globals.css";
 import Providers from "./providers";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import localFont from "next/font/local";
 const pokemonSolid = localFont({
   src: "../public/fonts/pokemon-solid.ttf",
@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={pokemonDs.className}>
         <Providers>
-          <div className=" max-w-sm mx-auto">
+          <div className=" max-w-md mx-auto px-4">
             <Navbar />
             <main className="pt-2">{children}</main>
             <Footer />
