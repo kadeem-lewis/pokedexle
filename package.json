@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
+    "@heroicons/react": "^2.0.16",
     "@next/font": "^13.2.4",
     "@types/node": "18.15.10",
     "@types/react": "18.0.29",
@@ -20,7 +21,6 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.8.0",
     "typescript": "5.0.2"
   },
   "devDependencies": {
