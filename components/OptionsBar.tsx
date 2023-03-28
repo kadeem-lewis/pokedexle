@@ -4,7 +4,7 @@ import { IoIosStats } from "react-icons/io";
 
 export default function OptionsBar() {
   return (
-    <nav>
+    <nav className=" border-b-2 border-current flex justify-around py-2">
       <button>
         <AiOutlineQuestionCircle />
       </button>
