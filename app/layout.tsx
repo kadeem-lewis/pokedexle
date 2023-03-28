@@ -4,9 +4,12 @@ import Providers from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import localFont from "next/font/local";
-
+const pokemonSolid = localFont({
+  src: "../public/fonts/pokemon-solid.ttf",
+  variable: "--font-pokemon-solid",
+});
 const pokemonDs = localFont({
-  src: "../public/fonts/pokemon-ds-font.ttf",
+  src: "../public/fonts/pokemon-ds.ttf",
   variable: "--font-pokemon-ds",
 });
 
@@ -21,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <div className=" max-w-sm mx-auto">
             <Navbar />
-            <main>{children}</main>
+            <main className="pt-2">{children}</main>
             <Footer />
           </div>
         </Providers>
