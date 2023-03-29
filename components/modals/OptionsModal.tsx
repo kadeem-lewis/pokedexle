@@ -1,5 +1,6 @@
 import React, { Dispatch, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
@@ -42,11 +43,18 @@ export default function OptionsModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="border-4 border-current rounded-lg p-4">
+              <Dialog.Panel className="border-4 border-current rounded-lg p-4 w-full max-w-md">
                 <Dialog.Title as="h3" className="text-4xl font-bold">
                   {title}
                 </Dialog.Title>
-                <div className="text-4xl">{children}</div>
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  <XMarkIcon className="h-6 w-6 text-current" />
+                </button>
+                <div>{children}</div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
