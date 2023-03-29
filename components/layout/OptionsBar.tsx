@@ -3,24 +3,22 @@ import {
   QuestionMarkCircleIcon,
   Cog6ToothIcon,
   ChartBarIcon,
+  ExclamationCircleIcon,
 } from "@heroicons/react/24/solid";
 import OptionsModal from "../modals/OptionsModal";
 import SettingsContent from "../content/SettingsContent";
 import AboutContent from "../content/AboutContent";
 import StatsContent from "../content/StatsContent";
+import HowToPlayContent from "../content/HowToPlayContent";
 export default function OptionsBar() {
   const [settingClick, setSettingClick] = useState(false);
   const [aboutClick, setAboutClick] = useState(false);
   const [statsClick, setStatsClick] = useState(false);
+  const [howToPlayClick, setHowToPlayClick] = useState(false);
   return (
     <nav className=" border-b-2 border-current flex justify-around py-2">
-      <button>
-        <QuestionMarkCircleIcon
-          className="h-6 w-6 text-current"
-          onClick={() => {
-            setAboutClick(true);
-          }}
-        />
+      <button onClick={() => setAboutClick(true)}>
+        <QuestionMarkCircleIcon className="h-6 w-6 text-current" />
       </button>
       {aboutClick && (
         <OptionsModal
@@ -31,13 +29,8 @@ export default function OptionsBar() {
           <AboutContent />
         </OptionsModal>
       )}
-      <button>
-        <Cog6ToothIcon
-          className="h-6 w-6 text-current"
-          onClick={() => {
-            setSettingClick(true);
-          }}
-        />
+      <button onClick={() => setSettingClick(true)}>
+        <Cog6ToothIcon className="h-6 w-6 text-current" />
         {settingClick && (
           <OptionsModal
             isOpen={settingClick}
@@ -48,11 +41,8 @@ export default function OptionsBar() {
           </OptionsModal>
         )}
       </button>
-      <button>
-        <ChartBarIcon
-          className="h-6 w-6 text-current"
-          onClick={() => setStatsClick(true)}
-        />
+      <button onClick={() => setStatsClick(true)}>
+        <ChartBarIcon className="h-6 w-6 text-current" />
       </button>
       {statsClick && (
         <OptionsModal
@@ -61,6 +51,18 @@ export default function OptionsBar() {
           title="Stats"
         >
           <StatsContent />
+        </OptionsModal>
+      )}
+      <button onClick={() => setHowToPlayClick(true)}>
+        <ExclamationCircleIcon className="h-6 w-6 text-current" />
+      </button>
+      {howToPlayClick && (
+        <OptionsModal
+          isOpen={howToPlayClick}
+          setIsOpen={setHowToPlayClick}
+          title="Stats"
+        >
+          <HowToPlayContent />
         </OptionsModal>
       )}
     </nav>
