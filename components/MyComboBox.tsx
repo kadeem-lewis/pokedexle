@@ -8,13 +8,14 @@ interface Item {
 export default function MyComboBox({ data }: { data: Array<Item> }) {
   const [selected, setSelected] = useState("");
   const [query, setQuery] = useState("");
-  //React.ChangeEvent<HTMLInputElement>
+
   const filteredItems =
     query === ""
       ? data
       : data.filter((item) => {
           return item.name.toLowerCase().includes(query.toLowerCase());
         });
+
   return (
     <div className="my-4">
       <Combobox value={selected} onChange={setSelected}>
@@ -62,7 +63,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
                               active ? "text-white" : "text-teal-600"
                             }`}
                           >
-                            <PlayIcon className="h-5 w-5" aria-hidden="true" />
+                            <PlayIcon className="h-3 w-3" aria-hidden="true" />
                           </span>
                         ) : null}
                       </>
