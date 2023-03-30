@@ -1,5 +1,5 @@
 "use client";
-import MyComboBox from "@/components/MyComboBox";
+import MyComboBox from "@/components/ui/MyComboBox";
 import OptionsBar from "@/components/layout/OptionsBar";
 import { useState, useEffect } from "react";
 

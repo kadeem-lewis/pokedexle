@@ -1,6 +1,6 @@
 "use client";
 import OptionsBar from "@/components/layout/OptionsBar";
-import MyComboBox from "@/components/MyComboBox";
+import MyComboBox from "@/components/ui/MyComboBox";
 import React, { useState, useEffect } from "react";
 
 interface Item {
