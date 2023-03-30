@@ -9,7 +9,6 @@ module.exports = {
     extend: {
       fontFamily: {
         "pokemon-ds": ["var(--font-pokemon-ds)"],
-        "pokemon-solid": ["var(--font-pokemon-solid)"],
       },
       boxShadow: {
         "border-1": "0 0 0 4px aqua, 0 0 0 10px black",
