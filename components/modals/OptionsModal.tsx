@@ -33,7 +33,7 @@ export default function OptionsModal({
           <div className="fixed inset-0 bg-black bg-opacity-25" />
         </Transition.Child>
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className="flex min-h-full items-start justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -43,7 +43,7 @@ export default function OptionsModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="border-4 border-current rounded-lg p-4 w-full max-w-md">
+              <Dialog.Panel className="border-4 border-current rounded-lg p-4 my-8 w-full max-w-md relative bg-white dark:bg-black">
                 <Dialog.Title as="h3" className="text-4xl font-bold">
                   {title}
                 </Dialog.Title>
@@ -52,7 +52,7 @@ export default function OptionsModal({
                     setIsOpen(false);
                   }}
                 >
-                  <XMarkIcon className="h-6 w-6 text-current" />
+                  <XMarkIcon className="h-6 w-6 text-current absolute top-6 right-6 stroke-2" />
                 </button>
                 <div>{children}</div>
               </Dialog.Panel>
