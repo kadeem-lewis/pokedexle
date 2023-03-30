@@ -77,7 +77,7 @@ export default function OptionsBar() {
           role="tooltip"
           className="tooltip px-3 py-2 text-center bg-white dark:bg-black rounded relative border-2 border-current"
         >
-          About
+          How to Play
         </span>
       </button>
       {howToPlayClick && (
