@@ -26,15 +26,16 @@ export default function OptionsBar() {
           How to Play
         </span>
       </button>
-      {aboutClick && (
+      {howToPlayClick && (
         <OptionsModal
-          isOpen={aboutClick}
-          setIsOpen={setAboutClick}
-          title="About"
+          isOpen={howToPlayClick}
+          setIsOpen={setHowToPlayClick}
+          title="How To Play"
         >
-          <AboutContent />
+          <HowToPlayContent />
         </OptionsModal>
       )}
+
       <button onClick={() => setSettingClick(true)} className="has-tooltip">
         <Cog6ToothIcon className="h-6 w-6 text-current" />
         <span
@@ -47,7 +48,7 @@ export default function OptionsBar() {
           <OptionsModal
             isOpen={settingClick}
             setIsOpen={setSettingClick}
-            title="Setting"
+            title="Settings"
           >
             <SettingsContent />
           </OptionsModal>
@@ -77,16 +78,16 @@ export default function OptionsBar() {
           role="tooltip"
           className="tooltip px-3 py-2 text-center bg-white dark:bg-black rounded relative border-2 border-current"
         >
-          How to Play
+          About
         </span>
       </button>
-      {howToPlayClick && (
+      {aboutClick && (
         <OptionsModal
-          isOpen={howToPlayClick}
-          setIsOpen={setHowToPlayClick}
-          title="Stats"
+          isOpen={aboutClick}
+          setIsOpen={setAboutClick}
+          title="About"
         >
-          <HowToPlayContent />
+          <AboutContent />
         </OptionsModal>
       )}
     </nav>
