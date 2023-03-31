@@ -1,5 +1,4 @@
 import GameButton from "@/components/buttons/GameButton";
-import Link from "next/link";
 const NAV_LINKS = [
   {
     title: "Classic",
