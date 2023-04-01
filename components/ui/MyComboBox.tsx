@@ -23,7 +23,8 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
           <Combobox.Input
             onChange={(e) => setQuery(e.target.value)}
             displayValue={(item: Item) => item.name}
-            className="w-full border-none py-2 pl-3 pr-10 leading-5 focus:ring-0 "
+            className="w-full py-2 pl-3 pr-10 leading-5 focus:ring-0 border-current border-2"
+            autoComplete="off"
           />
           <Transition
             as={Fragment}
