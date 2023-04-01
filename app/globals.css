@@ -1,16 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-[role="tooltip"],
-.hidetooltip.hidetooltip.hidetooltip [role="tooltip"] {
-  @apply invisible absolute;
-}
-[aria-describedby]:hover,
-[aria-describedby]:focus {
-  @apply relative;
-}
-[aria-describedby]:hover [role="tooltip"],
-[aria-describedby]:focus [role="tooltip"] {
-  @apply visible z-10;
-}
