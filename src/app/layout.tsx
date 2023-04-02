@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import localFont from "next/font/local";
 
 const pokemonDs = localFont({
-  src: "../public/fonts/pokemon-ds.ttf",
+  src: "../../public/fonts/pokemon-ds.ttf",
   variable: "--font-pokemon-ds",
 });
 
