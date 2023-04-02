@@ -6,11 +6,11 @@ interface Item {
   name: string;
   url: string;
 }
-export const guessedAnswerAtom = atom("");
+export const guessedAnswerAtom = atom<Item>({ name: "", url: "" });
 export default function MyComboBox({ data }: { data: Array<Item> }) {
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState<Item | undefined>(undefined);
   const [query, setQuery] = useState("");
-  const [guessedAnswer, setGuessedAnswer] = useAtom(guessedAnswerAtom);
+  const [guessedAnswer, setGuessedAnswer] = useAtom<Item>(guessedAnswerAtom);
   const selectedItemRef = useRef<HTMLInputElement>(null);
 
   const filteredItems =
@@ -20,7 +20,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
           return item.name.toLowerCase().includes(query.toLowerCase());
         });
   const handleSubmit = () => {
-    if (selected !== "") {
+    if (selected !== undefined) {
       setGuessedAnswer(selected);
     }
   };
