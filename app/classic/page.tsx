@@ -2,6 +2,7 @@
 import MyComboBox from "@/components/ui/MyComboBox";
 import OptionsBar from "@/components/layout/OptionsBar";
 import { useState, useEffect } from "react";
+import Gamebox from "@/components/core/Gamebox";
 
 export default function Classic() {
   const [data, setData] = useState([]);
@@ -32,6 +33,7 @@ export default function Classic() {
   return (
     <div>
       <OptionsBar />
+      <Gamebox itemArray={data} />
       <MyComboBox data={data} />
     </div>
   );
