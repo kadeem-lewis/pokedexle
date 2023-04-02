@@ -21,7 +21,7 @@ export default function RootLayout({
         <Providers>
           <div className=" max-w-md mx-auto px-4">
             <Navbar />
-            <main className="pt-2">{children}</main>
+            <main className="pt-2 text-2xl">{children}</main>
             <Footer />
           </div>
         </Providers>
