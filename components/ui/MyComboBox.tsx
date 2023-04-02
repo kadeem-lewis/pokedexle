@@ -10,7 +10,7 @@ export const guessedAnswerAtom = atom<Item>({ name: "", url: "" });
 export default function MyComboBox({ data }: { data: Array<Item> }) {
   const [selected, setSelected] = useState<Item | undefined>(undefined);
   const [query, setQuery] = useState("");
-  const [guessedAnswer, setGuessedAnswer] = useAtom<Item>(guessedAnswerAtom);
+  const [guessedAnswer, setGuessedAnswer] = useAtom(guessedAnswerAtom);
   const selectedItemRef = useRef<HTMLInputElement>(null);
 
   const filteredItems =
