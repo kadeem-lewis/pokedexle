@@ -1,13 +1,17 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlayIcon } from "@heroicons/react/24/solid";
+import { atom, useAtom } from "jotai";
 interface Item {
   name: string;
   url: string;
 }
+export const guessedAnswerAtom = atom("");
 export default function MyComboBox({ data }: { data: Array<Item> }) {
   const [selected, setSelected] = useState("");
   const [query, setQuery] = useState("");
+  const [guessedAnswer, setGuessedAnswer] = useAtom(guessedAnswerAtom);
+  const selectedItemRef = useRef<HTMLInputElement>(null);
 
   const filteredItems =
     query === ""
@@ -15,15 +19,19 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
       : data.filter((item) => {
           return item.name.toLowerCase().includes(query.toLowerCase());
         });
-
+  const handleSubmit = () => {
+    if (selected !== "") {
+      setGuessedAnswer(selected);
+    }
+  };
   return (
-    <div className="my-4">
+    <div className="my-4 flex flex-row">
       <Combobox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Combobox.Input
             onChange={(e) => setQuery(e.target.value)}
             displayValue={(item: Item) => item.name}
-            className="w-full py-2 pl-3 pr-10 leading-5 focus:ring-0 border-current border-2"
+            className=" py-2 pl-3 pr-10 leading-5 focus:ring-0 border-current border-2"
             autoComplete="off"
           />
           <Transition
@@ -33,7 +41,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-white dark:bg-black">
+            <Combobox.Options className="absolute mt-1 max-h-60 overflow-auto rounded-md  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-white dark:bg-black">
               {filteredItems.length === 0 && query !== "" ? (
                 <div className="relative cursor-default select-none py-2 px-4">
                   Nothing found.
@@ -76,6 +84,13 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
           </Transition>
         </div>
       </Combobox>
+      <button
+        type="submit"
+        onClick={() => handleSubmit()}
+        className=" text-2xl rounded-md cursor-pointer transition hover:border-gray-300 hover:bg-gray-100 py-2 px-3"
+      >
+        Submit
+      </button>
     </div>
   );
 }
