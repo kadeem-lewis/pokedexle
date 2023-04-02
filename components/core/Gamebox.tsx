@@ -24,7 +24,7 @@ export default function Gamebox({ itemArray }: { itemArray: Array<Item> }) {
       }
     }
     getItem();
-  }, [itemArray]);
+  }, [itemArray, setItem]);
   //TODO function to deal with game being over is added here
 
   //TODO add modal to show when game is over
