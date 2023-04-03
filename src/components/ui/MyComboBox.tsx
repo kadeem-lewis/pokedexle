@@ -85,7 +85,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
       <button
         type="submit"
         onClick={() => handleSubmit()}
-        className=" text-2xl rounded-md cursor-pointer transition hover:border-gray-300 hover:bg-gray-100 py-2 px-3"
+        className=" text-2xl rounded-md cursor-pointer transition hover:border-gray-300 hover:bg-gray-100 py-2 px-3 uppercase"
       >
         Submit
       </button>
