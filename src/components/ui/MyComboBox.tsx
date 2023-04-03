@@ -2,10 +2,8 @@ import React, { useState, Fragment, useRef } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { atom, useAtom } from "jotai";
-interface Item {
-  name: string;
-  url: string;
-}
+import { Item } from "@/stores/Store";
+
 export const guessedAnswerAtom = atom<Item>({ name: "", url: "" });
 export default function MyComboBox({ data }: { data: Array<Item> }) {
   const [selected, setSelected] = useState<Item | undefined>(undefined);
@@ -61,7 +59,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
                       <>
                         <span
                           className={`block truncate ${
-                            selected ? "font-medium" : "font-normal"
+                            selected ? "font-medium" : "font-normal capitalize"
                           }`}
                         >
                           {item.name}

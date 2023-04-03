@@ -2,11 +2,7 @@
 import OptionsBar from "@/components/layout/OptionsBar";
 import MyComboBox from "@/components/ui/MyComboBox";
 import React, { useState, useEffect } from "react";
-
-interface Item {
-  name: string;
-  url: string;
-}
+import { Item } from "@/stores/Store";
 
 export default function Move() {
   const [data, setData] = useState<Array<Item>>([]);
