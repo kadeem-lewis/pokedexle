@@ -23,13 +23,13 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
     }
   };
   return (
-    <div className="my-4 flex flex-row">
+    <div className="my-4 flex gap-2 flex-row">
       <Combobox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Combobox.Input
             onChange={(e) => setQuery(e.target.value)}
             displayValue={(item: Item) => item.name}
-            className=" py-2 pl-3 pr-10 leading-5 focus:ring-0 border-current border-2"
+            className=" py-2 pl-3 pr-10 leading-5 focus:ring-0 border-dashed border-current border-b-2 text-decoration-underline"
             autoComplete="off"
           />
           <Transition
@@ -85,7 +85,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
       <button
         type="submit"
         onClick={() => handleSubmit()}
-        className=" text-2xl rounded-md cursor-pointer transition hover:border-gray-300 hover:bg-gray-100 py-2 px-3 uppercase"
+        className="cursor-pointer py-2 px-3 uppercase border-2 outline bg-purple-300 hover:bg-purple-400"
       >
         Submit
       </button>
