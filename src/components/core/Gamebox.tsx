@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { itemAtom, guessAtom, Pokemon } from "@/stores/Store";
 import { Item } from "@/stores/Store";
 import PokemonFeedback from "./PokemonFeedback";
