@@ -1,40 +1,34 @@
 "use client";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import MyComboBox from "@/components/ui/MyComboBox";
 import OptionsBar from "@/components/layout/OptionsBar";
-import { useState, useEffect } from "react";
 import Gamebox from "@/components/core/Gamebox";
+import { Item } from "@/stores/Store";
 
-export default function Classic() {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
-        );
-        const data = await response.json();
-        setData(data.results);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No profile data</p>;
-  console.log("Page rerendered");
+function Classic({
+  pokemonList,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log(pokemonList);
   return (
     <div>
       <OptionsBar />
-      <Gamebox itemArray={data} />
-      <MyComboBox data={data} />
+      <Gamebox itemArray={pokemonList} />
+      <MyComboBox data={pokemonList} />
     </div>
   );
 }
+const getStaticProps: GetStaticProps<{ pokemonList: Item[] }> = async (
+  context
+) => {
+  const res = await fetch(
+    "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+  );
+  const pokemonData = await res.json();
+  const pokemonList: Item[] = await pokemonData.results;
+  return {
+    props: {
+      pokemonList,
+    },
+  };
+};
+export default Classic;
