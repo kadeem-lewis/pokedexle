@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+"use client";
+//Try to convert this to a server component
+import React, { useEffect } from "react";
 import { useAtom } from "jotai";
 import { itemAtom, guessAtom, Pokemon } from "@/stores/Store";
 import { Item } from "@/stores/Store";
