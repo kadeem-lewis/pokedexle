@@ -10,13 +10,16 @@ export interface Pokemon {
   generation: string;
   sprite: string;
 }
-function addGuessedAnswer(items: Item[], guessedItem: Item) {}
+
 import { atom } from "jotai";
 export const gameOver = atom(false);
 export const guessAtom = atom(8);
 export const itemAtom = atom<Pokemon | null>(null);
-export const guessedItemsAtom = atom<Pokemon[]>([]);
-export const addGuessedItem = atom(null, (get, set) => {});
+export const guessedItemsAtom = atom<Item[]>([]);
+export const addGuessedItemAtom = atom(null, (get, set, newItem: Item) => {
+  const array = get(guessedItemsAtom);
+  set(guessedItemsAtom, [...get(guessedItemsAtom), newItem]);
+});
 /*
 when user submits an answer clear the selected value,
 add the value to the guessedAnswer array and then run
