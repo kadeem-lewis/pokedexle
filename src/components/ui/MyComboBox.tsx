@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, Fragment, useRef } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlayIcon } from "@heroicons/react/24/solid";
@@ -6,7 +7,7 @@ import { Item } from "@/stores/Store";
 
 export const guessedAnswerAtom = atom<Item>({ name: "", url: "" });
 export default function MyComboBox({ data }: { data: Array<Item> }) {
-  const [selected, setSelected] = useState<Item | undefined>(undefined);
+  const [selected, setSelected] = useState<Item>({ name: "", url: "" });
   const [query, setQuery] = useState("");
   const [guessedAnswer, setGuessedAnswer] = useAtom(guessedAnswerAtom);
   const selectedItemRef = useRef<HTMLInputElement>(null);
@@ -18,10 +19,13 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
           return item.name.toLowerCase().includes(query.toLowerCase());
         });
   const handleSubmit = () => {
-    if (selected !== undefined) {
+    if (selected.name !== "") {
       setGuessedAnswer(selected);
+      setSelected({ name: "", url: "" });
+      setQuery("");
     }
   };
+
   return (
     <div className="my-4 flex gap-2 flex-row">
       <Combobox value={selected} onChange={setSelected}>
@@ -29,7 +33,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
           <Combobox.Input
             onChange={(e) => setQuery(e.target.value)}
             displayValue={(item: Item) => item.name}
-            className=" py-2 pl-3 pr-10 leading-5 focus:ring-0 border-dashed border-current border-b-2 text-decoration-underline"
+            className=" py-1 pl-3 pr-10 focus:ring-0 border-dashed border-current border-b-2 text-decoration-underline"
             autoComplete="off"
           />
           <Transition
