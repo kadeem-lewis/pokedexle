@@ -1,44 +1,24 @@
-"use client";
 import OptionsBar from "@/components/layout/OptionsBar";
 import MyComboBox from "@/components/ui/MyComboBox";
-import React, { useState, useEffect } from "react";
+
 import { Item } from "@/stores/Store";
-
-export default function Move() {
-  const [data, setData] = useState<Array<Item>>([]);
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/move?limit=100000&offset=0"
-        );
-        const data = await response.json();
-        const uniqueData = Array.from(
-          new Set(data.results.map((item: Item) => item.name))
-        ).map((name) => {
-          return data.results.find((item: Item) => item.name === name);
-        });
-        setData(uniqueData);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No profile data</p>;
-
+async function getMoveList() {
+  try {
+    const res = await fetch(
+      "https://pokeapi.co/api/v2/move?limit=100000&offset=0"
+    );
+    const moveData = await res.json();
+    return moveData.results;
+  } catch (err) {
+    console.error(err);
+  }
+}
+export default async function Move() {
+  const moveList = await getMoveList();
   return (
     <div>
       <OptionsBar />
-      <MyComboBox data={data} />
+      <MyComboBox data={moveList} />
     </div>
   );
 }
