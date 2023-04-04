@@ -2,15 +2,13 @@
 import React, { useState, Fragment, useRef } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlayIcon } from "@heroicons/react/24/solid";
-import { atom, useAtom } from "jotai";
-import { Item } from "@/stores/Store";
+import { atom, useAtom, useSetAtom } from "jotai";
+import { Item, addGuessedItemAtom } from "@/stores/Store";
 
-export const guessedAnswerAtom = atom<Item>({ name: "", url: "" });
 export default function MyComboBox({ data }: { data: Array<Item> }) {
   const [selected, setSelected] = useState<Item>({ name: "", url: "" });
   const [query, setQuery] = useState("");
-  const [guessedAnswer, setGuessedAnswer] = useAtom(guessedAnswerAtom);
-  const selectedItemRef = useRef<HTMLInputElement>(null);
+  const addNewGuess = useSetAtom(addGuessedItemAtom);
 
   const filteredItems =
     query === ""
@@ -20,7 +18,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
         });
   const handleSubmit = () => {
     if (selected.name !== "") {
-      setGuessedAnswer(selected);
+      addNewGuess(selected);
       setSelected({ name: "", url: "" });
       setQuery("");
     }
