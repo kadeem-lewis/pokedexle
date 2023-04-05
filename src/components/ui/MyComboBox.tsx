@@ -27,11 +27,11 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
   return (
     <div className="my-4 flex gap-2 flex-row">
       <Combobox value={selected} onChange={setSelected}>
-        <div className="relative mt-1">
+        <div className="relative mt-1 flex-grow">
           <Combobox.Input
             onChange={(e) => setQuery(e.target.value)}
             displayValue={(item: Pokemon) => item?.name}
-            className=" py-1 pl-3 pr-10 focus:ring-0 border-dashed border-current border-b-2 text-decoration-underline"
+            className="w-full py-1 pl-3 border-dashed border-current border-b-2"
             autoComplete="off"
           />
           <Transition
@@ -64,7 +64,9 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                             selected ? "font-medium" : "font-normal capitalize"
                           }`}
                         >
-                          {item.name}
+                          {item.name} -- Gen {item.generation}, {item.types[0]}/
+                          {item.types[1]}, {item.height / 10}m,{" "}
+                          {item.weight / 10}kg
                         </span>
                         {selected ? (
                           <span
@@ -87,7 +89,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
       <button
         type="submit"
         onClick={() => handleSubmit()}
-        className="cursor-pointer py-2 px-3 uppercase border-2 outline bg-purple-300 hover:bg-purple-400"
+        className="cursor-pointer flex-none py-2 px-3 uppercase border-2 outline bg-purple-300 hover:bg-purple-400"
       >
         Submit
       </button>
