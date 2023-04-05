@@ -48,6 +48,9 @@ export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
     const types = pokemon.pokemon_v2_pokemontypes.map(
       (type: any) => type.pokemon_v2_type.name
     );
+    if (types.length === 1) {
+      types.push("None");
+    }
     return {
       name: pokemon.name,
       generation,
