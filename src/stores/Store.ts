@@ -7,16 +7,16 @@ export interface Pokemon {
   types: string[];
   height: number;
   weight: number;
-  generation: string;
-  sprite: string;
+  generation: number;
+  sprite?: string;
 }
 
 import { atom } from "jotai";
 export const gameOver = atom(false);
 export const guessAtom = atom(8);
 export const itemAtom = atom<Pokemon | null>(null);
-export const guessedItemsAtom = atom<Item[]>([]);
-export const addGuessedItemAtom = atom(null, (get, set, newItem: Item) => {
+export const guessedItemsAtom = atom<Pokemon[]>([]);
+export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const array = get(guessedItemsAtom);
   set(guessedItemsAtom, [...get(guessedItemsAtom), newItem]);
 });
