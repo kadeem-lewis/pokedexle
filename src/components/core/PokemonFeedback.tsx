@@ -14,7 +14,7 @@ export default function PokemonFeedback({
 }: {
   correctAnswer: Pokemon;
 }) {
-  const [guesses, setGuesses] = useAtom(guessAtom);
+  const guesses = useAtomValue(guessAtom);
   const guessedItems = useAtomValue(guessedItemsAtom);
   console.log("Feedback rerendered");
   console.log(correctAnswer);
