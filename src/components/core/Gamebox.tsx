@@ -1,4 +1,4 @@
-import { Item, Pokemon } from "@/stores/Store";
+import { Item, Pokemon } from "@/atoms/GameAtoms";
 import PokemonFeedback from "./PokemonFeedback";
 
 export default async function Gamebox({ itemArray }: { itemArray: Pokemon[] }) {

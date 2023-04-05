@@ -3,7 +3,7 @@ import MyComboBox from "@/components/ui/MyComboBox";
 import OptionsBar from "@/components/layout/OptionsBar";
 import Gamebox from "@/components/core/Gamebox";
 import { updatePokemonData } from "@/helpers/DataProcessing";
-import { Pokemon } from "@/stores/Store";
+import { Pokemon } from "@/atoms/GameAtoms";
 
 const query = `
 query MyQuery {

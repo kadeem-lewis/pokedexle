@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
 import { useAtom, useAtomValue } from "jotai";
-import { guessAtom, guessedItemsAtom, itemAtom, Pokemon } from "@/stores/Store";
+import {
+  guessAtom,
+  guessedItemsAtom,
+  itemAtom,
+  Pokemon,
+} from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
 
 export default function PokemonFeedback({

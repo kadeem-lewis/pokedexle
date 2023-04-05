@@ -1,7 +1,7 @@
 import OptionsBar from "@/components/layout/OptionsBar";
 import MyComboBox from "@/components/ui/MyComboBox";
 
-import { Item } from "@/stores/Store";
+import { Item } from "@/atoms/GameAtoms";
 async function getMoveList() {
   try {
     const res = await fetch(

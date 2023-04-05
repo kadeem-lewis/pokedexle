@@ -3,7 +3,7 @@ import React, { useState, Fragment, useRef } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { atom, useAtom, useSetAtom } from "jotai";
-import { addGuessedItemAtom, Pokemon } from "@/stores/Store";
+import { addGuessedItemAtom, Pokemon } from "@/atoms/GameAtoms";
 
 export default function MyComboBox({ data }: { data: Pokemon[] }) {
   const [selected, setSelected] = useState<Pokemon | null>(null);

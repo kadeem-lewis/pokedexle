@@ -1,4 +1,4 @@
-import { Item, Pokemon } from "@/stores/Store";
+import { Item, Pokemon } from "@/atoms/GameAtoms";
 import React from "react";
 import Image from "next/image";
 interface Props {

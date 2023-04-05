@@ -1,4 +1,4 @@
-import { Pokemon } from "@/stores/Store";
+import { Pokemon } from "@/atoms/GameAtoms";
 interface Item {
   name: string;
   url: string;
