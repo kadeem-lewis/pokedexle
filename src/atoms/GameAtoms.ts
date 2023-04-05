@@ -31,6 +31,9 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const array = get(guessedItemsAtom);
   set(guessedItemsAtom, [...get(guessedItemsAtom), newItem]);
 });
+export const decrementGuessAtom = atom(null, (get, set) => {
+  set(guessAtom, get(guessAtom) - 1);
+});
 /*
 when user submits an answer clear the selected value,
 add the value to the guessedAnswer array and then run
