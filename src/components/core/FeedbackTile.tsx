@@ -56,9 +56,17 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
         <div className="bg-green-400 p-2">Gen {correctItem.generation}</div>
       );
     } else if (guessedItem.generation < correctItem.generation) {
-      return <div className="bg-red-400 p-2">higher</div>;
+      return (
+        <div className="bg-red-400 p-2">
+          <div className="arrow-up">higher</div>
+        </div>
+      );
     } else if (guessedItem.generation > correctItem.generation) {
-      return <div className="bg-red-400 p-2">lower</div>;
+      return (
+        <div className="bg-red-400 p-2">
+          <div className="arrow-down">lower</div>
+        </div>
+      );
     }
   }
   function checkWeight() {
@@ -67,18 +75,34 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
         <div className="bg-green-400 p-2">{correctItem.weight / 10}kg</div>
       );
     } else if (guessedItem.weight < correctItem.weight) {
-      return <div className="bg-red-400 p-2">higher</div>;
+      return (
+        <div className="bg-red-400 p-2">
+          <div className="arrow-up">higher</div>
+        </div>
+      );
     } else if (guessedItem.weight > correctItem.weight) {
-      return <div className="bg-red-400 p-2">lower</div>;
+      return (
+        <div className="bg-red-400 p-2">
+          <div className="arrow-down">lower</div>
+        </div>
+      );
     }
   }
   function checkHeight() {
     if (guessedItem.height === correctItem.height) {
       return <div className="bg-green-400 p-2">{correctItem.height / 10}m</div>;
     } else if (guessedItem.height < correctItem.height) {
-      return <div className="bg-red-400 p-2">higher</div>;
+      return (
+        <div className="bg-red-400 p-2">
+          <div className="arrow-up">higher</div>
+        </div>
+      );
     } else if (guessedItem.height > correctItem.height) {
-      return <div className="bg-red-400 p-2">lower</div>;
+      return (
+        <div className="bg-red-400 p-2">
+          <div className="arrow-down">lower</div>
+        </div>
+      );
     }
   }
   function checkTypes(type: string): JSX.Element {
