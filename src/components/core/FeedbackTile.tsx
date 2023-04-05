@@ -1,14 +1,15 @@
 import { Item, Pokemon } from "@/atoms/GameAtoms";
 import React from "react";
-import { useSetAtom } from "jotai";
+import { useSetAtom, useAtom } from "jotai";
 import { guessAtom } from "@/atoms/GameAtoms";
 import Image from "next/image";
+
 interface Props {
   guessedItem: Pokemon;
   correctItem: Pokemon;
 }
 export default function FeedbackTile({ guessedItem, correctItem }: Props) {
-  const setGuesses = useSetAtom(guessAtom);
+  const [guesses, setGuesses] = useAtom(guessAtom);
   function correctGuess() {
     //Set game over true
     return (
@@ -65,18 +66,18 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
       return (
         <div className="bg-green-400 p-2">{correctItem.weight / 10}kg</div>
       );
-    } else if (guessedItem.weight > correctItem.weight) {
-      return <div className="bg-red-400 p-2">higher</div>;
     } else if (guessedItem.weight < correctItem.weight) {
+      return <div className="bg-red-400 p-2">higher</div>;
+    } else if (guessedItem.weight > correctItem.weight) {
       return <div className="bg-red-400 p-2">lower</div>;
     }
   }
   function checkHeight() {
     if (guessedItem.height === correctItem.height) {
       return <div className="bg-green-400 p-2">{correctItem.height / 10}m</div>;
-    } else if (guessedItem.height > correctItem.height) {
-      return <div className="bg-red-400 p-2">higher</div>;
     } else if (guessedItem.height < correctItem.height) {
+      return <div className="bg-red-400 p-2">higher</div>;
+    } else if (guessedItem.height > correctItem.height) {
       return <div className="bg-red-400 p-2">lower</div>;
     }
   }
