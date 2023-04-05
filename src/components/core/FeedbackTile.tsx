@@ -17,7 +17,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
           {correctItem.name}
         </div>
         <div className="border-2 border-current p-2 bg-green-400">
-          {correctItem.generation}
+          Gen {correctItem.generation}
         </div>
         <div className="border-2 border-current p-2 bg-green-400">
           {correctItem.types[0]}
@@ -26,10 +26,10 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
           {correctItem.types[1]}
         </div>
         <div className="border-2 border-current p-2 bg-green-400">
-          {correctItem.weight}
+          {correctItem.weight / 10}kg
         </div>
         <div className="border-2 border-current p-2 bg-green-400">
-          {correctItem.height}
+          {correctItem.height / 10}m
         </div>
       </>
     );
