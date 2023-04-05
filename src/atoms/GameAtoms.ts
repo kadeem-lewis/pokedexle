@@ -10,6 +10,14 @@ export interface Pokemon {
   generation: number;
   sprite?: string;
 }
+export interface Move {
+  name: string;
+  power: number;
+  pp: number;
+  type: string;
+  class: string;
+  accuracy: number;
+}
 
 import { atom } from "jotai";
 export const gameOver = atom(false);
