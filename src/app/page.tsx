@@ -7,9 +7,9 @@ const NAV_LINKS = [
     icon: "",
   },
   {
-    title: "Move",
-    description: "Guess the Move",
-    path: "/move",
+    title: "Move ( In Development )",
+    description: "Coming Soon",
+    path: "#",
     icon: "",
   },
 ];
