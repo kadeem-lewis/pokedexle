@@ -19,12 +19,11 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
         <div className="border-2 border-current p-2 bg-green-400">
           Gen {correctItem.generation}
         </div>
-        <div className="border-2 border-current p-2 bg-green-400">
-          {correctItem.types[0]}
-        </div>
-        <div className="border-2 border-current p-2 bg-green-400">
-          {correctItem.types[1]}
-        </div>
+        {correctItem.types.map((type) => (
+          <div key={type} className="border-2 border-current p-2 bg-green-400">
+            {type}
+          </div>
+        ))}
         <div className="border-2 border-current p-2 bg-green-400">
           {correctItem.weight / 10}kg
         </div>
