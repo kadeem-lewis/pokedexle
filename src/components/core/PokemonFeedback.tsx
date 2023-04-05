@@ -27,9 +27,9 @@ export default function PokemonFeedback({
   return (
     <div className="grid grid-cols-6">
       <div>Name</div>
+      <div>Gen</div>
       <div>Type 1</div>
       <div>Type 2</div>
-      <div>Generation</div>
       <div>Weight</div>
       <div>Height</div>
       {feedbackStatements}
