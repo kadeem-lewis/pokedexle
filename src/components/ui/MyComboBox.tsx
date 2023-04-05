@@ -3,10 +3,10 @@ import React, { useState, Fragment, useRef } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { atom, useAtom, useSetAtom } from "jotai";
-import { Item, addGuessedItemAtom } from "@/stores/Store";
+import { addGuessedItemAtom, Pokemon } from "@/stores/Store";
 
-export default function MyComboBox({ data }: { data: Array<Item> }) {
-  const [selected, setSelected] = useState<Item>({ name: "", url: "" });
+export default function MyComboBox({ data }: { data: Pokemon[] }) {
+  const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
   const addNewGuess = useSetAtom(addGuessedItemAtom);
 
@@ -17,9 +17,9 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
           return item.name.toLowerCase().includes(query.toLowerCase());
         });
   const handleSubmit = () => {
-    if (selected.name !== "") {
+    if (selected && selected.name) {
       addNewGuess(selected);
-      setSelected({ name: "", url: "" });
+      setSelected(null);
       setQuery("");
     }
   };
@@ -30,7 +30,7 @@ export default function MyComboBox({ data }: { data: Array<Item> }) {
         <div className="relative mt-1">
           <Combobox.Input
             onChange={(e) => setQuery(e.target.value)}
-            displayValue={(item: Item) => item.name}
+            displayValue={(item: Pokemon) => item?.name}
             className=" py-1 pl-3 pr-10 focus:ring-0 border-dashed border-current border-b-2 text-decoration-underline"
             autoComplete="off"
           />

@@ -1,3 +1,4 @@
+import { Pokemon } from "@/stores/Store";
 interface Item {
   name: string;
   url: string;
@@ -40,3 +41,19 @@ export function pokemonCleanse(data: Item[]): Item[] {
 }
 
 export function moveCleanse() {}
+
+export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
+  return pokemonData.map((pokemon) => {
+    const generation = pokemon.pokemon_v2_pokemonspecy.generation_id;
+    const types = pokemon.pokemon_v2_pokemontypes.map(
+      (type: any) => type.pokemon_v2_type.name
+    );
+    return {
+      name: pokemon.name,
+      generation,
+      types,
+      height: pokemon.height,
+      weight: pokemon.weight,
+    };
+  });
+}
