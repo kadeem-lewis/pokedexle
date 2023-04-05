@@ -14,8 +14,6 @@ export default function PokemonFeedback({
 }: {
   correctAnswer: Pokemon;
 }) {
-  const [item, setItem] = useAtom(itemAtom);
-
   const [guesses, setGuesses] = useAtom(guessAtom);
   const guessedItems = useAtomValue(guessedItemsAtom);
   console.log("Feedback rerendered");
@@ -30,14 +28,23 @@ export default function PokemonFeedback({
     />
   ));
   return (
-    <div className="grid grid-cols-6">
-      <div>Name</div>
-      <div>Gen</div>
-      <div>Type 1</div>
-      <div>Type 2</div>
-      <div>Weight</div>
-      <div>Height</div>
-      {feedbackStatements}
-    </div>
+    <>
+      <div className="text-center">Guesses={guesses}</div>
+      <div className="grid grid-cols-6 gap-y-2 capitalize">
+        {guessedItems.length !== 0 ? (
+          <>
+            <div>Name</div>
+            <div>Gen</div>
+            <div>Type 1</div>
+            <div>Type 2</div>
+            <div>Weight</div>
+            <div>Height</div>
+          </>
+        ) : (
+          ""
+        )}
+        {feedbackStatements}
+      </div>
+    </>
   );
 }
