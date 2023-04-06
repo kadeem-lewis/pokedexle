@@ -1,6 +1,5 @@
-import { Item, Pokemon } from "@/atoms/GameAtoms";
-import React, { useEffect } from "react";
-import { useSetAtom, useAtom } from "jotai";
+import { Pokemon } from "@/atoms/GameAtoms";
+import { useSetAtom } from "jotai";
 import { guessAtom } from "@/atoms/GameAtoms";
 import Image from "next/image";
 
