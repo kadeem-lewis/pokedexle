@@ -1,5 +1,5 @@
 import { Item, Pokemon } from "@/atoms/GameAtoms";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSetAtom, useAtom } from "jotai";
 import { guessAtom } from "@/atoms/GameAtoms";
 import Image from "next/image";
@@ -9,7 +9,7 @@ interface Props {
   correctItem: Pokemon;
 }
 export default function FeedbackTile({ guessedItem, correctItem }: Props) {
-  const [guesses, setGuesses] = useAtom(guessAtom);
+  const setGuesses = useSetAtom(guessAtom);
   function correctGuess() {
     //Set game over true
     return (
@@ -35,7 +35,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
     );
   }
   function incorrectGuess() {
-    //setGuesses(7);
+    setGuesses((guess) => guess - 1);
     return (
       <>
         <div className="border-2 border-current p-2">{guessedItem.name}</div>

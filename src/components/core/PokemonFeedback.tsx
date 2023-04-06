@@ -1,12 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useAtom, useAtomValue } from "jotai";
-import {
-  guessAtom,
-  guessedItemsAtom,
-  itemAtom,
-  Pokemon,
-} from "@/atoms/GameAtoms";
+import { guessAtom, guessedItemsAtom, Pokemon } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
 
 export default function PokemonFeedback({
@@ -20,13 +15,15 @@ export default function PokemonFeedback({
   console.log(correctAnswer);
   console.log(guessedItems);
 
-  const feedbackStatements = guessedItems.map((guessedItem) => (
-    <FeedbackTile
-      guessedItem={guessedItem}
-      key={guessedItem.name}
-      correctItem={correctAnswer}
-    />
-  ));
+  const feedbackStatements = useMemo(() => {
+    return guessedItems.map((guessedItem) => (
+      <FeedbackTile
+        guessedItem={guessedItem}
+        key={guessedItem.name}
+        correctItem={correctAnswer}
+      />
+    ));
+  }, [guessedItems, correctAnswer]);
   return (
     <>
       <div className="text-center">Guesses={guesses}</div>
