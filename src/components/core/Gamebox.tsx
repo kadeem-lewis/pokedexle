@@ -19,9 +19,7 @@ export default function Gamebox({ itemArray }: { itemArray: Pokemon[] }) {
   useEffect(() => {
     setChosenItem(chooseRandomItem(itemArray));
   }, [newGame, itemArray]);
-  //TODO function to deal with game being over is added here
 
-  //TODO add modal to show when game is over
   return (
     <div>
       <PokemonFeedback correctAnswer={chosenItem} />
