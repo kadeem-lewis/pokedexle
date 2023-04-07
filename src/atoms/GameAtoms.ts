@@ -1,7 +1,3 @@
-export interface Item {
-  name: string;
-  url: string;
-}
 export interface Pokemon {
   name: string;
   types: string[];
@@ -20,6 +16,7 @@ export interface Move {
 }
 
 import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 export const gameOverAtom = atom(false);
 export const newGameAtom = atom(null, (get, set) => {
   set(guessedItemsAtom, []);
