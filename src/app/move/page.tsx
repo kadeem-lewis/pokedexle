@@ -3,7 +3,6 @@ import OptionsBar from "@/components/layout/OptionsBar";
 import MyComboBox from "@/components/ui/MyComboBox";
 import { updateMoveData } from "@/helpers/DataProcessing";
 
-import { Item } from "@/atoms/GameAtoms";
 const query = `
 query MyQuery {
   pokemon_v2_move {
