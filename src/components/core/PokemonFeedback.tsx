@@ -5,6 +5,7 @@ import {
   gameOverAtom,
   guessAtom,
   guessedItemsAtom,
+  itemAtom,
   Pokemon,
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
@@ -18,9 +19,8 @@ export default function PokemonFeedback({
 }) {
   const guesses = useAtomValue(guessAtom);
   const guessedItems = useAtomValue(guessedItemsAtom);
-  console.log("Feedback rerendered");
+  const setAnswer = useSetAtom(itemAtom);
   console.log(correctAnswer);
-  console.log(guessedItems);
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
   useEffect(() => {
@@ -30,6 +30,14 @@ export default function PokemonFeedback({
       setGameOver(false);
     }
   }, [guesses, setGameOver]);
+  useEffect(() => {
+    if (gameOver) {
+      setGameOverClick(true);
+    }
+  }, [gameOver]);
+  useEffect(() => {
+    setAnswer(correctAnswer);
+  }, [setAnswer, correctAnswer]);
   const feedbackStatements = useMemo(() => {
     return guessedItems.map((guessedItem) => (
       <FeedbackTile
@@ -57,7 +65,7 @@ export default function PokemonFeedback({
       </div>
       {gameOver && (
         <OptionsModal
-          isOpen={gameOver}
+          isOpen={gameOverClick}
           setIsOpen={setGameOverClick}
           title="Game Over"
         >
