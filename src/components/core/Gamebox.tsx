@@ -1,9 +1,10 @@
-import { Item, Pokemon } from "@/atoms/GameAtoms";
+import { Pokemon } from "@/atoms/GameAtoms";
 import PokemonFeedback from "./PokemonFeedback";
 
 export default async function Gamebox({ itemArray }: { itemArray: Pokemon[] }) {
   const itemNumber = Math.floor(Math.random() * itemArray.length) + 1;
   const chosenItem = itemArray[itemNumber];
+
   //TODO add functionality to start a new game
   //TODO function to deal with game being over is added here
 
