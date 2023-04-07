@@ -1,15 +1,16 @@
 import React from "react";
-import { useSetAtom } from "jotai";
-import { newGameAtom } from "@/atoms/GameAtoms";
+import { useAtom } from "jotai";
+import { itemAtom, newGameAtom } from "@/atoms/GameAtoms";
 
 export default function GameOverContent() {
-  const newGame = useSetAtom(newGameAtom);
-
+  const [, setNewGame] = useAtom(newGameAtom);
+  const [correctAnswer] = useAtom(itemAtom);
   return (
     <div>
       <h2>GameOverContent</h2>
       <p>You won or Something idk</p>
-      <button onClick={() => newGame}>New Game</button>
+      <p>The answer was : {correctAnswer?.name}</p>
+      <button onClick={() => setNewGame()}>New Game</button>
     </div>
   );
 }
