@@ -1,3 +1,6 @@
+import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
+
 export interface Pokemon {
   name: string;
   types: string[];
@@ -15,12 +18,12 @@ export interface Move {
   accuracy: number;
 }
 
-import { atom } from "jotai";
-import { atomWithReset } from "jotai/utils";
 export const gameOverAtom = atom(false);
 export const newGameAtom = atom(null, (get, set) => {
   set(guessedItemsAtom, []);
   set(guessAtom, 8);
+  set(gameOverAtom, false);
+  set(itemAtom, null);
 });
 export const guessAtom = atom(8);
 export const itemAtom = atom<Pokemon | null>(null);
