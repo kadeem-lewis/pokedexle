@@ -43,7 +43,6 @@ export default async function Classic() {
   return (
     <div>
       <OptionsBar />
-      {/* @ts-expect-error Async Server Component */}
       <Gamebox itemArray={pokemonList} />
       <MyComboBox data={pokemonList} />
     </div>
