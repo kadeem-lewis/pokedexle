@@ -9,7 +9,7 @@ interface Props {
   correctItem: Pokemon;
 }
 export default function FeedbackTile({ guessedItem, correctItem }: Props) {
-  const [guesses, setGuesses] = useAtom(guessAtom);
+  const setGuesses = useSetAtom(guessAtom);
   const setGameOver = useSetAtom(gameOverAtom);
   useEffect(() => {
     if (guessedItem.name !== correctItem.name) {
@@ -17,7 +17,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
     } else {
       setGameOver(true);
     }
-  }, [guessedItem, correctItem, setGuesses, setGameOver, guesses]);
+  }, [guessedItem, correctItem, setGuesses, setGameOver]);
 
   function checkGeneration() {
     if (guessedItem.generation === correctItem.generation) {
