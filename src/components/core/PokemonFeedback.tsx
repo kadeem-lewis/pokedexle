@@ -24,7 +24,7 @@ export default function PokemonFeedback({
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
   useEffect(() => {
-    if (guesses === 0) {
+    if (guesses <= 0) {
       setGameOver(true);
     } else {
       setGameOver(false);
@@ -50,7 +50,7 @@ export default function PokemonFeedback({
   return (
     <>
       <div className="text-center">Guesses={guesses}</div>
-      <div className="grid grid-cols-6 gap-y-2 capitalize">
+      <div className="grid grid-cols-6 gap-y-2 capitalize overflow-x-auto">
         {guessedItems.length !== 0 && (
           <>
             <div>Name</div>
