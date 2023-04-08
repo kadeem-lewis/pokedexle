@@ -50,7 +50,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                 leaveTo="opacity-0"
                 afterLeave={() => setQuery("")}
               >
-                <Combobox.Options className="absolute mt-1 max-h-60 overflow-auto rounded-md  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-white dark:bg-black">
+                <Combobox.Options className="absolute mt-1 max-h-60 overflow-auto rounded-md  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-white w-full dark:bg-black">
                   {filteredItems.length === 0 && query !== "" ? (
                     <div className="relative cursor-default select-none py-2 px-4">
                       Nothing found.
@@ -61,38 +61,23 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                         key={item.name}
                         value={item}
                         className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                          `relative cursor-default select-none py-2 pl-10 pr-4 border-b border-current capitalize ${
                             active ? "bg-teal-600" : ""
                           }`
                         }
                       >
-                        {({ selected, active }) => (
-                          <>
-                            <span
-                              className={`block truncate ${
-                                selected
-                                  ? "font-medium"
-                                  : "font-normal capitalize"
-                              }`}
-                            >
-                              {item.name} -- Gen {item.generation},{" "}
-                              {item.types[0]}/{item.types[1]},{" "}
-                              {item.height / 10}m, {item.weight / 10}kg
-                            </span>
-                            {selected ? (
-                              <span
-                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                  active ? "text-white" : "text-teal-600"
-                                }`}
-                              >
-                                <PlayIcon
-                                  className="h-3 w-3"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            ) : null}
-                          </>
-                        )}
+                        <div
+                          className={`block truncate ${
+                            selected ? "font-medium" : "font-normal capitalize"
+                          }`}
+                        >
+                          <div className="text-xl">{item.name}</div>
+                          <p>
+                            Gen {item.generation}, {item.types[0]}/
+                            {item.types[1]}, {item.height / 10}
+                            m, {item.weight / 10}kg
+                          </p>
+                        </div>
                       </Combobox.Option>
                     ))
                   )}
