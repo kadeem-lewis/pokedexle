@@ -18,8 +18,11 @@ export default function OptionsBar() {
   const [statsClick, setStatsClick] = useState(false);
   const [howToPlayClick, setHowToPlayClick] = useState(false);
   return (
-    <nav className=" border-b-2 border-current flex justify-around py-2">
-      <button onClick={() => setAboutClick(true)}>
+    <nav className=" border-2 border-current flex justify-between">
+      <button
+        onClick={() => setAboutClick(true)}
+        className="border-r-2 border-current py-1"
+      >
         <QuestionMarkCircleIcon className="h-6 w-6 text-current" />
       </button>
       {howToPlayClick && (
@@ -32,7 +35,10 @@ export default function OptionsBar() {
         </OptionsModal>
       )}
 
-      <button onClick={() => setSettingClick(true)}>
+      <button
+        onClick={() => setSettingClick(true)}
+        className="border-r-2 border-current py-1"
+      >
         <Cog6ToothIcon className="h-6 w-6 text-current" />
         {settingClick && (
           <OptionsModal
@@ -44,7 +50,10 @@ export default function OptionsBar() {
           </OptionsModal>
         )}
       </button>
-      <button onClick={() => setStatsClick(true)}>
+      <button
+        onClick={() => setStatsClick(true)}
+        className="border-r-2 border-current py-1"
+      >
         <ChartBarIcon className="h-6 w-6 text-current" />
       </button>
       {statsClick && (
@@ -56,7 +65,10 @@ export default function OptionsBar() {
           <StatsContent />
         </OptionsModal>
       )}
-      <button onClick={() => setAboutClick(true)}>
+      <button
+        onClick={() => setAboutClick(true)}
+        className="border-r-2 border-current py-1"
+      >
         <ExclamationCircleIcon className="h-6 w-6 text-current" />
       </button>
       {aboutClick && (

@@ -34,13 +34,13 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
   return (
     <>
       {gameOver === false ? (
-        <div className="my-4 flex gap-2 flex-row">
+        <div className="my-4 flex flex-row gap-2">
           <Combobox value={selected} onChange={setSelected}>
             <div className="relative mt-1 flex-grow">
               <Combobox.Input
                 onChange={(e) => setQuery(e.target.value)}
                 displayValue={(item: Pokemon) => item?.name}
-                className="w-full py-1 pl-3 border-dashed border-current border-b-2"
+                className="w-full border-b-2 border-dashed border-current py-1 pl-3"
                 autoComplete="off"
               />
               <Transition
@@ -50,9 +50,9 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                 leaveTo="opacity-0"
                 afterLeave={() => setQuery("")}
               >
-                <Combobox.Options className="absolute mt-1 max-h-60 overflow-auto rounded-md  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-white w-full dark:bg-black">
+                <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto  rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-black">
                   {filteredItems.length === 0 && query !== "" ? (
-                    <div className="relative cursor-default select-none py-2 px-4">
+                    <div className="relative cursor-default select-none px-4 py-2">
                       Nothing found.
                     </div>
                   ) : (
@@ -61,7 +61,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                         key={item.name}
                         value={item}
                         className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 border-b border-current capitalize ${
+                          `relative cursor-default select-none border-b border-current py-2 pl-10 pr-4 capitalize ${
                             active ? "bg-teal-600" : ""
                           }`
                         }
@@ -88,7 +88,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
           <button
             type="submit"
             onClick={() => handleSubmit()}
-            className="cursor-pointer flex-none py-2 px-3 uppercase border-2 outline bg-purple-300 hover:bg-purple-400"
+            className="flex-none cursor-pointer border-2 bg-purple-300 px-3 py-2 uppercase outline hover:bg-purple-400"
           >
             Submit
           </button>
