@@ -12,9 +12,16 @@
     20% 50%,
     0 50%
   );
-  @apply bg-red-800 h-12 w-14 mx-auto relative top-0 hover:bg-red-950;
+  @apply relative top-0 mx-auto h-12 w-14 bg-red-800 hover:bg-red-950;
 }
 .arrow-down {
   clip-path: polygon(0 50%, 20% 50%, 20% 0, 80% 0, 80% 50%, 100% 50%, 50% 100%);
-  @apply bg-red-800 h-12 w-14 mx-auto relative top-0 hover:bg-red-950;
+  @apply relative top-0 mx-auto h-12 w-14 bg-red-800 hover:bg-red-950;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px black;
+}
+.text-border {
+  text-shadow: 0px 0px 2px black;
 }
