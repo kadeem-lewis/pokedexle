@@ -40,7 +40,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
               <Combobox.Input
                 onChange={(e) => setQuery(e.target.value)}
                 displayValue={(item: Pokemon) => item?.name}
-                className="w-full border-b-2 border-dashed border-current py-1 pl-3"
+                className="w-full border-b-2 border-dashed border-current bg-transparent py-1 pl-3"
                 autoComplete="off"
               />
               <Transition
@@ -88,7 +88,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
           <button
             type="submit"
             onClick={() => handleSubmit()}
-            className="flex-none cursor-pointer border-2 bg-purple-300 px-3 py-2 uppercase outline hover:bg-purple-400"
+            className="text-border flex-none cursor-pointer border-2 bg-purple-300 px-3 py-2 uppercase text-white outline hover:bg-purple-400"
           >
             Submit
           </button>

@@ -50,7 +50,7 @@ export default function PokemonFeedback({
   return (
     <>
       <div className="text-center">Guesses={guesses}</div>
-      <div className="grid grid-cols-6 gap-y-2 capitalize overflow-x-auto">
+      <div className="grid grid-cols-6 gap-y-2 overflow-x-auto capitalize">
         {guessedItems.length !== 0 && (
           <>
             <div>Name</div>
