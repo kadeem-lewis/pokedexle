@@ -18,12 +18,18 @@ export interface Move {
   accuracy: number;
 }
 
+export function chooseRandomItem(itemArray: Pokemon[]): Pokemon {
+  const itemNumber = Math.floor(Math.random() * itemArray.length);
+  return itemArray[itemNumber];
+}
+
 export const gameOverAtom = atom(false);
+export const itemArrayAtom = atom<Pokemon[]>([]);
 export const newGameAtom = atom(null, (get, set) => {
   set(guessedItemsAtom, []);
   set(guessAtom, 8);
   set(gameOverAtom, false);
-  set(itemAtom, null);
+  set(itemAtom, chooseRandomItem(get(itemArrayAtom)));
 });
 export const guessAtom = atom(8);
 export const itemAtom = atom<Pokemon | null>(null);
