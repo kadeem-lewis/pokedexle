@@ -4,6 +4,7 @@ import OptionsBar from "@/components/layout/OptionsBar";
 import Gamebox from "@/components/core/Gamebox";
 import { updatePokemonData } from "@/helpers/DataProcessing";
 import { Pokemon } from "@/atoms/GameAtoms";
+import PokemonTypes from "@/components/core/PokemonTypes";
 
 const query = `
 query MyQuery {
@@ -45,6 +46,7 @@ export default async function Classic() {
       <OptionsBar />
       <Gamebox itemArray={pokemonList} />
       <MyComboBox data={pokemonList} />
+      <PokemonTypes />
     </div>
   );
 }
