@@ -39,7 +39,7 @@ export default function OptionsBar() {
         onClick={() => setSettingClick(true)}
         className="border-r-2 border-current py-1"
       >
-        <Cog6ToothIcon className="mx-auto h-6 w-6 text-current" />
+        <Cog6ToothIcon className="mx-auto h-6 w-6 text-current transition-all hover:-rotate-45" />
         {settingClick && (
           <OptionsModal
             isOpen={settingClick}
