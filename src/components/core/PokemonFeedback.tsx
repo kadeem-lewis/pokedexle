@@ -11,6 +11,7 @@ import {
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
+import Guesses from "./Guesses";
 
 export default function PokemonFeedback({
   correctAnswer,
@@ -49,7 +50,8 @@ export default function PokemonFeedback({
   }, [guessedItems, correctAnswer]);
   return (
     <>
-      <div className="text-center">Guesses={guesses}</div>
+      {/* HERE lol */}
+      <Guesses />
       <div className="grid grid-cols-6 gap-y-2 overflow-x-auto capitalize">
         {guessedItems.length !== 0 && (
           <>
