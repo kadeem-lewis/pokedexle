@@ -88,7 +88,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
           <button
             type="submit"
             onClick={() => handleSubmit()}
-            className="text-border flex-none cursor-pointer border-2 bg-purple-300 px-3 py-2 uppercase text-white outline hover:bg-purple-400"
+            className="text-border flex-none cursor-pointer border-2 bg-purple-300 px-3 py-2 uppercase text-white outline outline-black hover:bg-purple-400"
           >
             Submit
           </button>
