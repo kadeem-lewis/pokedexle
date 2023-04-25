@@ -18,7 +18,7 @@ export default function ThemeSwitch() {
       {resolvedTheme && (
         <button
           onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
-          className="border-2 p-1 border-current rounded-md"
+          className="rounded-md border-2 border-current p-1"
         >
           {resolvedTheme === "light" ? (
             <MoonIcon className="h-6 w-6 text-current" />
