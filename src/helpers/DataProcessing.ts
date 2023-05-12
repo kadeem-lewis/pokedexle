@@ -12,7 +12,17 @@ const demonymValues: { [key: string]: string } = {
   hisui: "Hisuian",
   paldea: "Paldean",
 };
-const exceptions = ["ho-oh", "porygon-z", "kommo-o"];
+const exceptions = [
+  "ho-oh",
+  "porygon-z",
+  "kommo-o",
+  "hakamo-o",
+  "jangmo-o",
+  "ting-lu",
+  "chien-pao",
+  "chi-yu",
+];
+const otherExceptions = ["mr.", "jr."];
 export function pokemonCleanse(data: Item[]): Item[] {
   const cleanedArray = data
     .filter(({ name }) => name.includes("-"))
