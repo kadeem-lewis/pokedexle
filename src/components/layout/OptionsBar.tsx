@@ -20,7 +20,7 @@ export default function OptionsBar() {
   return (
     <nav className=" grid grid-cols-4 border-2 border-current">
       <button
-        onClick={() => setAboutClick(true)}
+        onClick={() => setHowToPlayClick(true)}
         className="border-r-2 border-current py-1"
       >
         <QuestionMarkCircleIcon className="mx-auto h-6 w-6 text-current" />
@@ -40,16 +40,17 @@ export default function OptionsBar() {
         className="border-r-2 border-current py-1"
       >
         <Cog6ToothIcon className="mx-auto h-6 w-6 text-current transition-all hover:-rotate-45" />
-        {settingClick && (
-          <OptionsModal
-            isOpen={settingClick}
-            setIsOpen={setSettingClick}
-            title="Settings"
-          >
-            <SettingsContent />
-          </OptionsModal>
-        )}
       </button>
+      {settingClick && (
+        <OptionsModal
+          isOpen={settingClick}
+          setIsOpen={setSettingClick}
+          title="Settings"
+        >
+          <SettingsContent />
+        </OptionsModal>
+      )}
+
       <button
         onClick={() => setStatsClick(true)}
         className="border-r-2 border-current py-1"
