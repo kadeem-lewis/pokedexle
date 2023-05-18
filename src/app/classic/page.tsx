@@ -22,7 +22,10 @@ query MyQuery {
     }
   }
 }`;
-
+export const metadata = {
+  title: "Pokedexle | Classic",
+  description: "Guess Pokemon based on hints from previous guesses",
+};
 const getPokemonList = cache(async () => {
   try {
     const res = await fetch("https://beta.pokeapi.co/graphql/v1beta", {

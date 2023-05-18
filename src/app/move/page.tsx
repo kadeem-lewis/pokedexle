@@ -20,6 +20,9 @@ query MyQuery {
   }
 }
 `;
+export const metadata = {
+  title: "Pokedle | Move",
+};
 const getMoveList = cache(async () => {
   try {
     const res = await fetch("https://beta.pokeapi.co/graphql/v1beta", {
