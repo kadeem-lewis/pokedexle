@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -15,7 +15,7 @@ model Pokemon {
   id Int @unique
   name String @unique
   generation Int 
-  //types String[]
+  types String[]
   weight Float
   height Float
 }
@@ -29,10 +29,10 @@ model Move {
   pp Int
 }
 
-model Daily {
-  date DateTime @unique
-  classic Pokemon
-  move Move
-  whosThatPokemon Pokemon
+// model Daily {
+//   date DateTime @unique
+//   classic Pokemon
+//   move Move
+//   whosThatPokemon Pokemon
 
-}
+// }
