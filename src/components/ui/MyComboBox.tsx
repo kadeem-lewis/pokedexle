@@ -19,10 +19,12 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
 
   const filteredItems =
     query === ""
-      ? data
-      : data.filter((item) => {
-          return item.name.toLowerCase().includes(query.toLowerCase());
-        });
+      ? data.splice(0, 6)
+      : data
+          .filter((item) => {
+            return item.name.toLowerCase().includes(query.toLowerCase());
+          })
+          .splice(0, 6);
   const handleSubmit = () => {
     if (selected && selected.name) {
       addNewGuess(selected);
