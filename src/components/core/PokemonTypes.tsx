@@ -1,5 +1,5 @@
 import React from "react";
-const TYPES = [
+export const TYPES = [
   {
     name: "normal",
     color: "bg-normal-200",
