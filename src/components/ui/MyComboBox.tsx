@@ -1,7 +1,6 @@
 "use client";
-import React, { useState, Fragment, useRef } from "react";
+import React, { useState, Fragment } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import { PlayIcon } from "@heroicons/react/24/solid";
 import { useSetAtom, useAtomValue } from "jotai";
 import {
   addGuessedItemAtom,
@@ -9,7 +8,7 @@ import {
   gameOverAtom,
   newGameAtom,
 } from "@/atoms/GameAtoms";
-
+import { TYPES } from "@/components/core/PokemonTypes";
 export default function MyComboBox({ data }: { data: Pokemon[] }) {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
@@ -73,12 +72,34 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                             selected ? "font-medium" : "font-normal capitalize"
                           }`}
                         >
-                          <div className="text-xl">{item.name}</div>
-                          <p>
-                            Gen {item.generation}, {item.types[0]}/
-                            {item.types[1]}, {item.height / 10}
-                            m, {item.weight / 10}kg
-                          </p>
+                          <div className="flex">
+                            <div>{/* Sprite goes here */}</div>
+                            <div className="grid grid-cols-2">
+                              <div className="text-xl font-bold">
+                                {item.name}
+                              </div>
+                              <div>Gen {item.generation}</div>
+                              <div className="col-span-2 space-x-2">
+                                {item.types.map((type) => {
+                                  const typeObj = TYPES.find(
+                                    (element) => element.name === type
+                                  );
+                                  return typeObj ? (
+                                    <span
+                                      key={type}
+                                      className={`text-shadow rounded-md border-b-2 border-t-2 px-1 py-[2px] text-center text-sm uppercase ${typeObj.color} ${typeObj.borderBottomColor} ${typeObj.borderTopColor}`}
+                                    >
+                                      {type}
+                                    </span>
+                                  ) : null;
+                                })}
+                              </div>
+                              <div className="space-x-4">
+                                <span>Height: {item.height / 10}m</span>
+                                <span>Weight: {item.weight / 10}kg</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </Combobox.Option>
                     ))
