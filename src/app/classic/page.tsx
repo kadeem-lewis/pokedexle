@@ -10,6 +10,7 @@ const query = `
 query MyQuery {
   pokemon_v2_pokemon {
     name
+    id
     height
     weight
     pokemon_v2_pokemontypes {
