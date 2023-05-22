@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, Fragment } from "react";
 import { Combobox, Transition } from "@headlessui/react";
+import Fuse from "fuse.js";
 import { useSetAtom, useAtomValue } from "jotai";
 import {
   addGuessedItemAtom,
@@ -13,18 +14,13 @@ import Image from "next/image";
 export default function MyComboBox({ data }: { data: Pokemon[] }) {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
+  const fuse = new Fuse(data, { includeScore: true, keys: ["name", "types"] });
   const addNewGuess = useSetAtom(addGuessedItemAtom);
   const gameOver = useAtomValue(gameOverAtom);
   const setNewGame = useSetAtom(newGameAtom);
 
   const filteredItems =
-    query === ""
-      ? data
-      : data
-          .filter((item) => {
-            return item.name.toLowerCase().includes(query.toLowerCase());
-          })
-          .splice(0, 6);
+    query === "" ? data : fuse.search(query).map((res) => ({ ...res.item }));
   const handleSubmit = () => {
     if (selected && selected.name) {
       addNewGuess(selected);
@@ -74,15 +70,13 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                           }`}
                         >
                           <div className="flex items-center gap-4">
-                            <div>
-                              <Image
-                                src={item.sprite}
-                                width={100}
-                                height={100}
-                                alt={`${item.name} sprite`}
-                                className=""
-                              />
-                            </div>
+                            <Image
+                              src={item.sprite}
+                              width={100}
+                              height={100}
+                              alt={`${item.name} sprite`}
+                              className=""
+                            />
                             <div className="grid grid-cols-2">
                               <div className="text-xl font-bold">
                                 {item.name}
