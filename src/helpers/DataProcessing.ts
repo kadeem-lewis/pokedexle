@@ -12,16 +12,7 @@ const demonymValues: { [key: string]: string } = {
   hisui: "Hisuian",
   paldea: "Paldean",
 };
-const exceptions = [
-  "ho-oh",
-  "porygon-z",
-  "kommo-o",
-  "hakamo-o",
-  "jangmo-o",
-  "ting-lu",
-  "chien-pao",
-  "chi-yu",
-];
+
 const otherExceptions = ["mr.", "jr."];
 export function pokemonCleanse(data: Item[]): Item[] {
   const cleanedArray = data
@@ -55,6 +46,7 @@ export function moveCleanse() {}
 
 export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
   return pokemonData.map((pokemon) => {
+    const name = filterPokemonName(pokemon.name);
     const generation = pokemon.pokemon_v2_pokemonspecy.generation_id;
     const types = pokemon.pokemon_v2_pokemontypes.map(
       (type: any) => type.pokemon_v2_type.name
@@ -62,10 +54,12 @@ export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
     if (types.length === 1) {
       types.push("None");
     }
+    const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
     return {
-      name: pokemon.name,
+      name,
       generation,
       types,
+      sprite,
       height: pokemon.height,
       weight: pokemon.weight,
     };
@@ -85,4 +79,24 @@ export function updateMoveData(moveData: Array<any>): Move[] {
       accuracy: move.accuracy,
     };
   });
+}
+const exceptions = [
+  "ho-oh",
+  "porygon-z",
+  "kommo-o",
+  "hakamo-o",
+  "jangmo-o",
+  "ting-lu",
+  "chien-pao",
+  "chi-yu",
+];
+export function filterPokemonName(name: string) {
+  if (!exceptions.includes(name)) {
+    const parts = name.split("-");
+    const filteredParts = parts.filter((part) => part !== "");
+    if (filteredParts.length === 1) {
+      return filteredParts[0];
+    }
+  }
+  return name;
 }
