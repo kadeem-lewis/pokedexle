@@ -108,7 +108,14 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
         </>
       ) : (
         <>
-          <div className="border-2 border-current p-2">{guessedItem.name}</div>
+          <div className="border-2 border-current p-2">
+            <Image
+              src={guessedItem.sprite}
+              alt={`${guessedItem.name} sprite`}
+              width={100}
+              height={100}
+            />
+          </div>
           <div className="border-2 border-current">{checkGeneration()}</div>
           {guessedItem.types.map((type) => (
             <div key={type} className="border-2 border-current">
