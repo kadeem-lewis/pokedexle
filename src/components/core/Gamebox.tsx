@@ -1,7 +1,8 @@
 "use client";
+import { useEffect, useState } from "react";
+import { Tab } from "@headlessui/react";
 import { Pokemon, newGameAtom } from "@/atoms/GameAtoms";
 import PokemonFeedback from "./PokemonFeedback";
-import { useEffect, useState } from "react";
 import { useSetAtom } from "jotai";
 
 function chooseRandomItem(itemArray: Pokemon[]): Pokemon {
@@ -21,8 +22,17 @@ export default function Gamebox({ itemArray }: { itemArray: Pokemon[] }) {
   }, [newGame, itemArray]);
 
   return (
-    <div>
-      <PokemonFeedback correctAnswer={chosenItem} />
-    </div>
+    <Tab.Group>
+      <Tab.List>
+        <Tab>Daily</Tab>
+        <Tab>Unlimited</Tab>
+      </Tab.List>
+      <Tab.Panels>
+        <Tab.Panel>In Progress</Tab.Panel>
+        <Tab.Panel>
+          <PokemonFeedback correctAnswer={chosenItem} />
+        </Tab.Panel>
+      </Tab.Panels>
+    </Tab.Group>
   );
 }
