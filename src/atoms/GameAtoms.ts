@@ -7,7 +7,7 @@ export interface Pokemon {
   height: number;
   weight: number;
   generation: number;
-  sprite?: string;
+  sprite: string;
 }
 export interface Move {
   name: string;
