@@ -9,6 +9,7 @@ import {
   newGameAtom,
 } from "@/atoms/GameAtoms";
 import { TYPES } from "@/components/core/PokemonTypes";
+import Image from "next/image";
 export default function MyComboBox({ data }: { data: Pokemon[] }) {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
@@ -18,7 +19,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
 
   const filteredItems =
     query === ""
-      ? data.splice(0, 6)
+      ? data
       : data
           .filter((item) => {
             return item.name.toLowerCase().includes(query.toLowerCase());
@@ -62,7 +63,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                         key={item.name}
                         value={item}
                         className={({ active }) =>
-                          `relative cursor-default select-none border-b border-current py-2 pl-10 pr-4 capitalize ${
+                          `relative cursor-default select-none border-b border-current py-2 pl-4 pr-4 capitalize ${
                             active ? "bg-teal-600" : ""
                           }`
                         }
@@ -72,8 +73,16 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
                             selected ? "font-medium" : "font-normal capitalize"
                           }`}
                         >
-                          <div className="flex">
-                            <div>{/* Sprite goes here */}</div>
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <Image
+                                src={item.sprite}
+                                width={100}
+                                height={100}
+                                alt={`${item.name} sprite`}
+                                className=""
+                              />
+                            </div>
                             <div className="grid grid-cols-2">
                               <div className="text-xl font-bold">
                                 {item.name}
