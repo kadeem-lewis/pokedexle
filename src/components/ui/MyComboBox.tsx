@@ -20,7 +20,12 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
   const setNewGame = useSetAtom(newGameAtom);
 
   const filteredItems =
-    query === "" ? data : fuse.search(query).map((res) => ({ ...res.item }));
+    query === ""
+      ? data.slice(0, 6)
+      : fuse
+          .search(query)
+          .map((res) => ({ ...res.item }))
+          .slice(0, 6);
   const handleSubmit = () => {
     if (selected && selected.name) {
       addNewGuess(selected);
@@ -31,7 +36,7 @@ export default function MyComboBox({ data }: { data: Pokemon[] }) {
 
   return (
     <>
-      {gameOver === false ? (
+      {!gameOver ? (
         <div className="my-4 flex flex-row gap-2">
           <Combobox value={selected} onChange={setSelected}>
             <div className="relative mt-1 flex-grow">
