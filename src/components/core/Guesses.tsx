@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import {Icons} from "@/components/Icons";
+import { Icons } from "@/components/Icons";
 import { useAtomValue } from "jotai";
 import { guessAtom } from "@/atoms/GameAtoms";
 

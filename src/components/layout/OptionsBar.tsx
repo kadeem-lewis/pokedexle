@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { HelpCircle, Settings, BarChart2, AlertCircle } from "lucide-react";
 import { Icons } from "@/components/Icons";
 import OptionsModal from "../ui/OptionsModal";
 import SettingsContent from "../content/SettingsContent";
