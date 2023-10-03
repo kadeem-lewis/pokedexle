@@ -1,11 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import {
-  QuestionMarkCircleIcon,
-  Cog6ToothIcon,
-  ChartBarIcon,
-  ExclamationCircleIcon,
-} from "@heroicons/react/24/solid";
+import { HelpCircle, Settings, BarChart2, AlertCircle } from "lucide-react";
+import { Icons } from "@/components/Icons";
 import OptionsModal from "../ui/OptionsModal";
 import SettingsContent from "../content/SettingsContent";
 import AboutContent from "../content/AboutContent";
@@ -23,7 +19,7 @@ export default function OptionsBar() {
         onClick={() => setHowToPlayClick(true)}
         className="border-r-2 border-current py-1"
       >
-        <QuestionMarkCircleIcon className="mx-auto h-6 w-6 text-current" />
+        <Icons.questionMark className="mx-auto h-6 w-6 text-current" />
       </button>
       {howToPlayClick && (
         <OptionsModal
@@ -39,7 +35,7 @@ export default function OptionsBar() {
         onClick={() => setSettingClick(true)}
         className="border-r-2 border-current py-1"
       >
-        <Cog6ToothIcon className="mx-auto h-6 w-6 text-current transition-all hover:-rotate-45" />
+        <Icons.settings className="mx-auto h-6 w-6 text-current transition-all hover:-rotate-45" />
       </button>
       {settingClick && (
         <OptionsModal
@@ -55,7 +51,7 @@ export default function OptionsBar() {
         onClick={() => setStatsClick(true)}
         className="border-r-2 border-current py-1"
       >
-        <ChartBarIcon className="mx-auto h-6 w-6 text-current" />
+        <Icons.chart className="mx-auto h-6 w-6 text-current" />
       </button>
       {statsClick && (
         <OptionsModal
@@ -67,7 +63,7 @@ export default function OptionsBar() {
         </OptionsModal>
       )}
       <button onClick={() => setAboutClick(true)} className="py-1">
-        <ExclamationCircleIcon className="mx-auto h-6 w-6 text-current" />
+        <Icons.exclamationMark className="mx-auto h-6 w-6 text-current" />
       </button>
       {aboutClick && (
         <OptionsModal

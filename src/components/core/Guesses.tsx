@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import PokeballIcon from "@public/icons/pokeball.svg";
+import {Icons} from "@/components/Icons";
 import { useAtomValue } from "jotai";
 import { guessAtom } from "@/atoms/GameAtoms";
 
@@ -11,10 +11,8 @@ export default function Guesses() {
   return (
     <div className="my-4 flex flex-row justify-end gap-1">
       {[...Array(totalGuesses)].map((value, index) => (
-        <Image
+        <Icons.pokeball
           key={index}
-          src={PokeballIcon}
-          alt={`pokeball-${index}`}
           className={` -mx-5 aspect-auto h-6 ${
             index + 1 > guesses ? "grayscale" : ""
           }`}
