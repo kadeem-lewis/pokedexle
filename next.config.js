@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    swcPlugins: [["@swc-jotai/react-refresh", {}]],
   },
   images: {
     remotePatterns: [
