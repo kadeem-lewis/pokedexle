@@ -58,7 +58,7 @@ export const Icons = {
     </svg>
   ),
   pokeball: (props: IconProps) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" {...props}>
       <circle cx="32" cy="32" r="30" style={{ fill: "#d1d8db" }} />
       <path
         d="M32 2C15.431 2 2 15.431 2 32h60C62 15.431 48.569 2 32 2z"
