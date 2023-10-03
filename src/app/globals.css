@@ -19,9 +19,11 @@
   @apply relative top-0 mx-auto h-12 w-14 bg-red-800 hover:bg-red-950;
 }
 
-.text-shadow {
-  text-shadow: 1px 1px black;
-}
-.text-border {
-  text-shadow: 0px 0px 2px black;
+@layer utilities {
+  .text-shadow {
+    text-shadow: 1px 1px black;
+  }
+  .text-border {
+    text-shadow: 0px 0px 2px black;
+  }
 }
