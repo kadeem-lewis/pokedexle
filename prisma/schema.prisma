@@ -15,6 +15,7 @@ model Pokemon {
   id Int @unique
   name String @unique
   generation Int 
+  sprite String @unique
   types String[]
   weight Float
   height Float
