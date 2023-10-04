@@ -17,12 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={pokemonDs.className}>
         <Providers>
-          <div className=" max-w-md mx-auto px-4">
+          <div className=" max-w-md h-screen mx-auto px-4 flex flex-col">
             <Navbar />
-            <main className="pt-2 text-2xl">{children}</main>
+            <main className="pt-2 text-2xl grow mb-auto">{children}</main>
             <Footer />
           </div>
         </Providers>
