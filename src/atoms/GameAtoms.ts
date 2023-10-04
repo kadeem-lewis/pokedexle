@@ -2,6 +2,7 @@ import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
 export interface Pokemon {
+  id: number;
   name: string;
   types: string[];
   height: number;
