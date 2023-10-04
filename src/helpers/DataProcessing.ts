@@ -12,7 +12,7 @@ export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
         (type: any) => type.pokemon_v2_type.name
       );
       if (types.length === 1) {
-        types.push("None");
+        types.push("none");
       }
       const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
       return {
