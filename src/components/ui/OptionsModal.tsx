@@ -1,6 +1,6 @@
 import React, { Dispatch, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { Icons } from "@/components/Icons";
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
@@ -52,7 +52,7 @@ export default function OptionsModal({
                     setIsOpen(false);
                   }}
                 >
-                  <XMarkIcon className="absolute right-6 top-6 h-6 w-6 stroke-2 text-current" />
+                  <Icons.xMark className="absolute right-6 top-6 h-6 w-6 stroke-2 text-current" />
                 </button>
                 <div>{children}</div>
               </Dialog.Panel>
