@@ -1,27 +1,30 @@
 import { Pokemon, Move } from "@/atoms/GameAtoms";
 
-const otherExceptions = ["mr.", "jr."];
-
 export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
-  return pokemonData.map((pokemon) => {
-    const name = filterPokemonName(pokemon.name);
-    const generation = pokemon.pokemon_v2_pokemonspecy.generation_id;
-    const types = pokemon.pokemon_v2_pokemontypes.map(
-      (type: any) => type.pokemon_v2_type.name
-    );
-    if (types.length === 1) {
-      types.push("None");
-    }
-    const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
-    return {
-      name,
-      generation,
-      types,
-      sprite,
-      height: pokemon.height,
-      weight: pokemon.weight,
-    };
-  });
+  return pokemonData
+    .filter((pokemon) => pokemon.id < 10000)
+    .map((pokemon) => {
+      const name = !exceptions.includes(pokemon.name)
+        ? pokemon.name.replace("-", " ")
+        : pokemon.name;
+      const generation = pokemon.pokemon_v2_pokemonspecy.generation_id;
+      const types = pokemon.pokemon_v2_pokemontypes.map(
+        (type: any) => type.pokemon_v2_type.name
+      );
+      if (types.length === 1) {
+        types.push("None");
+      }
+      const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+      return {
+        id: pokemon.id,
+        name,
+        generation,
+        types,
+        sprite,
+        height: pokemon.height,
+        weight: pokemon.weight,
+      };
+    });
 }
 export function updateMoveData(moveData: Array<any>): Move[] {
   return moveData.map((move) => {
@@ -48,21 +51,3 @@ const exceptions = [
   "chien-pao",
   "chi-yu",
 ];
-const demonymValues: { [key: string]: string } = {
-  mega: "Mega",
-  galar: "Galarian",
-  alola: "Alolan",
-  hisui: "Hisuian",
-  paldea: "Paldean",
-};
-
-export function filterPokemonName(name: string) {
-  if (!exceptions.includes(name)) {
-    const parts = name.split("-");
-    const filteredParts = parts.filter((part) => part !== "");
-    if (filteredParts.length === 1) {
-      return filteredParts[0];
-    }
-  }
-  return name;
-}
