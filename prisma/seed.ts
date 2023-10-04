@@ -1,44 +1,48 @@
 import { PrismaClient } from "@prisma/client";
+import { updatePokemonData } from "../src/helpers/DataProcessing";
 const prisma = new PrismaClient();
+
+const query = `
+query MyQuery {
+  pokemon_v2_pokemon {
+    name
+    id
+    height
+    weight
+    pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        name
+      }
+    }
+    pokemon_v2_pokemonspecy {
+      generation_id
+    }
+  }
+}`;
+
 async function main() {
-  // const alice = await prisma.user.upsert({
-  //   where: { email: "alice@prisma.io" },
-  //   update: {},
-  //   create: {
-  //     email: "alice@prisma.io",
-  //     name: "Alice",
-  //     posts: {
-  //       create: {
-  //         title: "Check out Prisma with Next.js",
-  //         content: "https://www.prisma.io/nextjs",
-  //         published: true,
-  //       },
-  //     },
-  //   },
-  // });
-  // const bob = await prisma.user.upsert({
-  //   where: { email: "bob@prisma.io" },
-  //   update: {},
-  //   create: {
-  //     email: "bob@prisma.io",
-  //     name: "Bob",
-  //     posts: {
-  //       create: [
-  //         {
-  //           title: "Follow Prisma on Twitter",
-  //           content: "https://twitter.com/prisma",
-  //           published: true,
-  //         },
-  //         {
-  //           title: "Follow Nexus on Twitter",
-  //           content: "https://twitter.com/nexusgql",
-  //           published: true,
-  //         },
-  //       ],
-  //     },
-  //   },
-  // });
-  // console.log({ alice, bob });
+  try {
+    const res = await fetch("https://beta.pokeapi.co/graphql/v1beta", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query }),
+    });
+
+    const { data } = await res.json();
+
+    if (data && data.pokemon_v2_pokemon) {
+      const transformedData = updatePokemonData(data.pokemon_v2_pokemon);
+      await prisma.pokemon.createMany({ data: transformedData });
+
+      console.log("Pokemons seeded!");
+    } else {
+      console.error("Failed to fetch Pokemon data");
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
 main()
   .then(async () => {
