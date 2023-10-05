@@ -5,7 +5,6 @@ import {
   gameOverAtom,
   guessAtom,
   guessedItemsAtom,
-  itemAtom,
   Pokemon,
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
@@ -20,7 +19,6 @@ export default function PokemonFeedback({
 }) {
   const guesses = useAtomValue(guessAtom);
   const guessedItems = useAtomValue(guessedItemsAtom);
-  const setAnswer = useSetAtom(itemAtom);
   console.log(correctAnswer);
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
@@ -36,9 +34,7 @@ export default function PokemonFeedback({
       setGameOverClick(true);
     }
   }, [gameOver]);
-  useEffect(() => {
-    setAnswer(correctAnswer);
-  }, [setAnswer, correctAnswer]);
+
   const feedbackStatements = useMemo(() => {
     return guessedItems.map((guessedItem) => (
       <FeedbackTile

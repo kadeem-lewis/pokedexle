@@ -32,16 +32,18 @@ export function chooseRandomItem(itemArray: Pokemon[]): Pokemon {
   return itemArray[itemNumber];
 }
 
+export const pokedexAtom = atom<Pokemon[]>([]);
+export const pokemonToGuessAtom = atom<Pokemon>((get) =>
+  chooseRandomItem(get(pokedexAtom))
+);
+
 export const gameOverAtom = atom(false);
-export const itemArrayAtom = atom<Pokemon[]>([]);
 export const newGameAtom = atom(null, (get, set) => {
   set(guessedItemsAtom, []);
   set(guessAtom, 8);
   set(gameOverAtom, false);
-  set(itemAtom, chooseRandomItem(get(itemArrayAtom)));
 });
 export const guessAtom = atom(8);
-export const itemAtom = atom<Pokemon | null>(null);
 export const guessedItemsAtom = atom<Pokemon[]>([]);
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const array = get(guessedItemsAtom);
