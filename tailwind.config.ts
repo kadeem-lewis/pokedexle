@@ -102,5 +102,5 @@ export default {
   },
 
   darkMode: "class",
-  plugins: [],
+  plugins: [require("@headlessui/tailwindcss")],
 } satisfies Config;
