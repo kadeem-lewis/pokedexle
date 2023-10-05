@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default async function Classic() {
-  const pokemonList: Pokemon[] = (await prisma.pokemon.findMany()) || [];
+  const pokemonList: Pokemon[] = await prisma.pokemon.findMany();
   return (
     <div>
       <OptionsBar />
