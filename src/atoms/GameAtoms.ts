@@ -19,6 +19,14 @@ export interface Move {
   accuracy: number;
 }
 
+//TODO: have atom that stores the pokemon collection
+
+//TODO: have atom that connects to localstorage and stores all the game stats
+
+//?: Maybe each game type should have its own atom so that the current results for each game mode is saved between sessions. It needs to check
+
+//!: Should probably keep the whole atom responsible for resetting everything and making a new game
+
 export function chooseRandomItem(itemArray: Pokemon[]): Pokemon {
   const itemNumber = Math.floor(Math.random() * itemArray.length);
   return itemArray[itemNumber];
