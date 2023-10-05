@@ -1,8 +1,6 @@
-import { cache } from "react";
-import OptionsBar from "../../components/layout/OptionsBar";
-import Gamebox from "../../components/core/Gamebox";
-import { Pokemon } from "../../atoms/GameAtoms";
-import { prisma } from "../../lib/prisma";
+import OptionsBar from "@/components/layout/OptionsBar";
+import Gamebox from "@/components/core/Gamebox";
+import { getPokedex } from "@/lib/pokemon";
 
 export const metadata = {
   title: "Pokedexle | Classic",
@@ -10,11 +8,11 @@ export const metadata = {
 };
 
 export default async function Classic() {
-  const pokemonList: Pokemon[] = await prisma.pokemon.findMany();
+  const { pokedex } = await getPokedex();
   return (
     <div>
       <OptionsBar />
-      <Gamebox data={pokemonList} />
+      {pokedex && <Gamebox data={pokedex} />}
     </div>
   );
 }
