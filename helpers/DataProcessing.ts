@@ -1,4 +1,4 @@
-import { Pokemon, Move } from "@/atoms/GameAtoms";
+import { Pokemon, Move } from "../atoms/GameAtoms";
 
 export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
   return pokemonData

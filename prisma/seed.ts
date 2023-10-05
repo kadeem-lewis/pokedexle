@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { updatePokemonData } from "../src/helpers/DataProcessing";
+import { updatePokemonData } from "../helpers/DataProcessing";
 const prisma = new PrismaClient();
 
 const query = `

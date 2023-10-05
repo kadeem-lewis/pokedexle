@@ -1,6 +1,6 @@
 import React, { Dispatch, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Icons } from "@/components/Icons";
+import { Icons } from "../Icons";
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;

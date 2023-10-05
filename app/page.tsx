@@ -1,4 +1,4 @@
-import GameButton from "@/components/buttons/GameButton";
+import GameButton from "../components/buttons/GameButton";
 const NAV_LINKS = [
   {
     title: "Classic",

@@ -9,8 +9,8 @@ import {
   gameOverAtom,
   newGameAtom,
   pokedexAtom,
-} from "@/atoms/GameAtoms";
-import { TYPES } from "@/components/core/PokemonTypes";
+} from "../../atoms/GameAtoms";
+import { TYPES } from "../core/PokemonTypes";
 import Image from "next/image";
 export default function MyComboBox() {
   const [selected, setSelected] = useState<Pokemon | null>(null);

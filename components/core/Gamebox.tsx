@@ -3,7 +3,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { Tab } from "@headlessui/react";
 import { useHydrateAtoms } from "jotai/utils";
-import { Pokemon, pokedexAtom, pokemonToGuessAtom } from "@/atoms/GameAtoms";
+import {
+  Pokemon,
+  pokedexAtom,
+  pokemonToGuessAtom,
+} from "../../atoms/GameAtoms";
 import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";

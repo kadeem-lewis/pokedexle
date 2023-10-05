@@ -1,8 +1,8 @@
 import { cache } from "react";
-import OptionsBar from "@/components/layout/OptionsBar";
-import Gamebox from "@/components/core/Gamebox";
-import { Pokemon } from "@/atoms/GameAtoms";
-import { prisma } from "@/lib/prisma";
+import OptionsBar from "../../components/layout/OptionsBar";
+import Gamebox from "../../components/core/Gamebox";
+import { Pokemon } from "../../atoms/GameAtoms";
+import { prisma } from "../../lib/prisma";
 
 export const metadata = {
   title: "Pokedexle | Classic",

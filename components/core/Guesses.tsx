@@ -1,7 +1,7 @@
 import React from "react";
-import { Icons } from "@/components/Icons";
+import { Icons } from "../Icons";
 import { useAtomValue } from "jotai";
-import { guessAtom } from "@/atoms/GameAtoms";
+import { guessAtom } from "../../atoms/GameAtoms";
 
 export default function Guesses() {
   const totalGuesses = 8;

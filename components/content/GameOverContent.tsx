@@ -1,6 +1,6 @@
 import React from "react";
-import { useAtomValue, useSetAtom, useAtom } from "jotai";
-import { pokemonToGuessAtom, newGameAtom } from "@/atoms/GameAtoms";
+import { useAtomValue, useAtom } from "jotai";
+import { pokemonToGuessAtom, newGameAtom } from "../../atoms/GameAtoms";
 import Image from "next/image";
 
 export default function GameOverContent() {

@@ -1,7 +1,7 @@
 import "./globals.css";
 import Providers from "./providers";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 import localFont from "next/font/local";
 
 const pokemonDs = localFont({

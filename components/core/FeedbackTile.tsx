@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { Pokemon } from "@/atoms/GameAtoms";
+import { Pokemon } from "../../atoms/GameAtoms";
 import { useSetAtom, useAtom } from "jotai";
-import { guessAtom, gameOverAtom } from "@/atoms/GameAtoms";
+import { guessAtom, gameOverAtom } from "../../atoms/GameAtoms";
 import Image from "next/image";
 
 interface Props {

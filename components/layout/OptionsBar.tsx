@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Icons } from "@/components/Icons";
+import { Icons } from "../Icons";
 import OptionsModal from "../ui/OptionsModal";
 import SettingsContent from "../content/SettingsContent";
 import AboutContent from "../content/AboutContent";

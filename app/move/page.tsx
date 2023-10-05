@@ -1,7 +1,7 @@
 import { cache } from "react";
-import OptionsBar from "@/components/layout/OptionsBar";
-import MyComboBox from "@/components/ui/MyComboBox";
-import { updateMoveData } from "@/helpers/DataProcessing";
+import OptionsBar from "../../components/layout/OptionsBar";
+import MyComboBox from "../../components/ui/MyComboBox";
+import { updateMoveData } from "../../helpers/DataProcessing";
 
 const query = `
 query MyQuery {
