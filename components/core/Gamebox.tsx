@@ -33,25 +33,25 @@ export default function Gamebox({ data }: { data: Pokemon[] }) {
         <Tab.List className="flex justify-center gap-2">
           <Tab
             as={Link}
-            href={"/classic"}
-            className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
-          >
-            Daily
-          </Tab>
-          <Tab
-            as={Link}
             href={`/classic/?unlimited`}
             shallow
             className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
           >
             Unlimited
           </Tab>
+          <Tab
+            as={Link}
+            href={"/classic"}
+            className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
+          >
+            Daily
+          </Tab>
         </Tab.List>
         <Tab.Panels>
-          <Tab.Panel>In Progress</Tab.Panel>
           <Tab.Panel>
             <PokemonFeedback correctAnswer={pokemonToGuess} />
           </Tab.Panel>
+          <Tab.Panel>In Progress</Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
       <MyComboBox />
