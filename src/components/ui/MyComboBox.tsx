@@ -8,20 +8,26 @@ import {
   Pokemon,
   gameOverAtom,
   newGameAtom,
+  pokedexAtom,
 } from "@/atoms/GameAtoms";
 import { TYPES } from "@/components/core/PokemonTypes";
 import Image from "next/image";
-export default function MyComboBox({ data }: { data: Pokemon[] }) {
+export default function MyComboBox() {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
-  const fuse = new Fuse(data, { includeScore: true, keys: ["name", "types"] });
+  const pokedex = useAtomValue(pokedexAtom);
+
+  const fuse = new Fuse(pokedex, {
+    includeScore: true,
+    keys: ["name", "types"],
+  });
   const addNewGuess = useSetAtom(addGuessedItemAtom);
   const gameOver = useAtomValue(gameOverAtom);
   const setNewGame = useSetAtom(newGameAtom);
 
   const filteredItems =
     query === ""
-      ? data.slice(0, 6)
+      ? pokedex.slice(0, 6)
       : fuse
           .search(query)
           .map((res) => ({ ...res.item }))
