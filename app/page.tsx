@@ -1,4 +1,4 @@
-import GameButton from "../components/buttons/GameButton";
+import GameButton from "@/components/buttons/GameButton";
 const NAV_LINKS = [
   {
     title: "Classic",
@@ -15,14 +15,13 @@ const NAV_LINKS = [
   {
     title: "Who's that Pokemon?",
     description: "Coming Soon",
-    path: "#",
+    path: "/whosthatpokemon",
     background: "",
   },
 ];
 export default function Home() {
   return (
     <div>
-      {/* Need to create pages array and map them to page card */}
       <h3 className="text-2xl">Test your Pokemon Knowledge</h3>
       {NAV_LINKS.map((link) => (
         <GameButton
