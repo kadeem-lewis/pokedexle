@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
+import { useAtomsDebugValue } from "jotai-devtools";
 
 export interface Pokemon {
   id: number;
@@ -32,27 +33,43 @@ export function chooseRandomItem(itemArray: Pokemon[]): Pokemon {
   return itemArray[itemNumber];
 }
 
+//gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
+pokedexAtom.debugLabel = "pokedexAtom";
+
+//the number of guesses a user has
+//? should a setter or derived atom or something be updating the guesses state?
+export const guessAtom = atom(8);
+guessAtom.debugLabel = "guessAtom";
+
+//selects a pokemon from that array to be the pokemon to guess. Derived readable atom of pokedex
 export const pokemonToGuessAtom = atom<Pokemon>((get) =>
   chooseRandomItem(get(pokedexAtom))
 );
+pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
+//atom that is responsible for saying if the game is over or not
 export const gameOverAtom = atom(false);
+gameOverAtom.debugLabel = "gameOverAtom";
+
+//derived writable atom that is attempting to reset all values back to their defaults
+//? It doesnt take any params
+//? This resets the value specified but it doesnt have a way to reset the derived pokemonToGuess Atom
 export const newGameAtom = atom(null, (get, set) => {
   set(guessedItemsAtom, []);
   set(guessAtom, 8);
   set(gameOverAtom, false);
 });
-export const guessAtom = atom(8);
+newGameAtom.debugLabel = "newGameAtom";
+
+//atom that stores the pokemon that have been guessed
 export const guessedItemsAtom = atom<Pokemon[]>([]);
+guessedItemsAtom.debugLabel = "guessedItemsAtom";
+
+//derived writable atom that adds the value passed into the guessed item array
+//? Could have write function take in a key to specify which array to add item to
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const array = get(guessedItemsAtom);
   set(guessedItemsAtom, [...get(guessedItemsAtom), newItem]);
 });
-
-/*
-when user submits an answer clear the selected value,
-add the value to the guessedAnswer array and then run
-a function to get the api data of the pokemon and 
-check if the stats were correct or not
-*/
+addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
