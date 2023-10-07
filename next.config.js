@@ -3,6 +3,7 @@ const nextConfig = {
   experimental: {
     swcPlugins: [["@swc-jotai/react-refresh", {}]],
   },
+  transpilePackages: ["jotai-devtools"],
   images: {
     remotePatterns: [
       {
