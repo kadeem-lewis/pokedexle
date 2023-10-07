@@ -1,6 +1,4 @@
 import { atom } from "jotai";
-import { atomWithReset } from "jotai/utils";
-import { useAtomsDebugValue } from "jotai-devtools";
 
 export interface Pokemon {
   id: number;
@@ -12,12 +10,14 @@ export interface Pokemon {
   sprite: string;
 }
 export interface Move {
+  id: number;
+  generation: number;
   name: string;
-  power: number;
+  power?: number;
   pp: number;
   type: string;
   class: string;
-  accuracy: number;
+  accuracy?: number;
 }
 
 //TODO: have atom that stores the pokemon collection
@@ -65,7 +65,6 @@ guessedItemsAtom.debugLabel = "guessedItemsAtom";
 //derived writable atom that adds the value passed into the guessed item array
 //? Could have write function take in a key to specify which array to add item to
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
-  const array = get(guessedItemsAtom);
   set(guessedItemsAtom, [...get(guessedItemsAtom), newItem]);
   if (!(newItem.name === get(pokemonToGuessAtom)?.name)) {
     set(guessAtom, get(guessAtom) - 1);
