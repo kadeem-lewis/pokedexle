@@ -15,7 +15,7 @@
     "@emotion/react": "^11.11.1",
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.2.0",
-    "@prisma/client": "^5.3.1",
+    "@prisma/client": "^5.4.1",
     "fuse.js": "^6.6.2",
     "jotai": "^2.4.3",
     "jotai-devtools": "^0.6.3",
@@ -34,7 +34,7 @@
     "eslint-config-next": "^13.5.4",
     "postcss": "^8.4.31",
     "prettier-plugin-tailwindcss": "^0.5.3",
-    "prisma": "^5.3.1",
+    "prisma": "^5.4.1",
     "tailwindcss": "^3.3.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
