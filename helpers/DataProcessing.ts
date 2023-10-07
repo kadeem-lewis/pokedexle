@@ -27,19 +27,22 @@ export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
     });
 }
 export function updateMoveData(moveData: Array<any>): Move[] {
-  return moveData.map((move) => {
-    const moveClass = move.pokemon_v2_movedamageclass.name;
-    const moveType = move.pokemon_v2_type.name;
-    return {
-      name: move.name,
-      power: move.power,
-      pp: move.pp,
-      generation: move.generation_id,
-      class: moveClass,
-      type: moveType,
-      accuracy: move.accuracy,
-    };
-  });
+  return moveData
+    .filter((move) => move.id < 10000)
+    .map((move) => {
+      const moveClass = move.pokemon_v2_movedamageclass.name;
+      const moveType = move.pokemon_v2_type.name;
+      return {
+        id: move.id,
+        name: move.name.replace("-", " "),
+        power: move.power,
+        pp: move.pp,
+        generation: move.generation_id,
+        class: moveClass,
+        type: moveType,
+        accuracy: move.accuracy,
+      };
+    });
 }
 const exceptions = [
   "ho-oh",
