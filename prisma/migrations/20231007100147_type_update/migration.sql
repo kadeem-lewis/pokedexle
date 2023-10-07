@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Move" ALTER COLUMN "type" SET DATA TYPE TEXT;

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Move" ALTER COLUMN "power" DROP NOT NULL,
+ALTER COLUMN "accuracy" DROP NOT NULL;
