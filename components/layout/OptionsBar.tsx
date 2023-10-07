@@ -34,7 +34,7 @@ export default function OptionsBar() {
         onClick={() => setSettingClick(true)}
         className="border-r-2 border-current py-1"
       >
-        <Icons.settings className="mx-auto h-6 w-6 text-current transition-all hover:-rotate-45" />
+        <Icons.settings className="mx-auto h-6 w-6 text-current transition-transform hover:-rotate-45" />
       </button>
       {settingClick && (
         <OptionsModal
