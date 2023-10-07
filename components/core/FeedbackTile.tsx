@@ -1,4 +1,4 @@
-import { Pokemon } from "../../atoms/GameAtoms";
+import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
 
 interface Props {
