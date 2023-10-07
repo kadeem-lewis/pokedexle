@@ -16,6 +16,8 @@
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.2.0",
     "@prisma/client": "^5.4.1",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
     "fuse.js": "^6.6.2",
     "jotai": "^2.4.3",
     "jotai-devtools": "^0.6.3",
