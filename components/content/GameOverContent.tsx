@@ -1,10 +1,10 @@
 import React from "react";
-import { useAtomValue, useAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { pokemonToGuessAtom, newGameAtom } from "../../atoms/GameAtoms";
 import Image from "next/image";
 
 export default function GameOverContent() {
-  const [, setNewGame] = useAtom(newGameAtom);
+  const setNewGame = useSetAtom(newGameAtom);
   const correctAnswer = useAtomValue(pokemonToGuessAtom);
   return (
     <div>
