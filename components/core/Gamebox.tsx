@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Tab } from "@headlessui/react";
 import { useHydrateAtoms } from "jotai/utils";
@@ -11,11 +11,15 @@ import {
 import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 
 export default function Gamebox({ data }: { data: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, data]]);
-  const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
+  const [pokemonToGuess, setPokemonToGuess] = useAtom(pokemonToGuessAtom);
+
+  useEffect(() => {
+    setPokemonToGuess(data[Math.floor(Math.random() * data.length)]);
+  }, [data, setPokemonToGuess]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -49,7 +53,9 @@ export default function Gamebox({ data }: { data: Pokemon[] }) {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            <PokemonFeedback correctAnswer={pokemonToGuess} />
+            {pokemonToGuess && (
+              <PokemonFeedback correctAnswer={pokemonToGuess} />
+            )}
           </Tab.Panel>
           <Tab.Panel>In Progress</Tab.Panel>
         </Tab.Panels>
