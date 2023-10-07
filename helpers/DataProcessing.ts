@@ -5,7 +5,7 @@ export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
     .filter((pokemon) => pokemon.id < 10000)
     .map((pokemon) => {
       const name = !exceptions.includes(pokemon.name)
-        ? pokemon.name.replace("-", " ")
+        ? pokemon.name.replaceAll("-", " ")
         : pokemon.name;
       const generation = pokemon.pokemon_v2_pokemonspecy.generation_id;
       const types = pokemon.pokemon_v2_pokemontypes.map(
@@ -34,7 +34,7 @@ export function updateMoveData(moveData: Array<any>): Move[] {
       const moveType = move.pokemon_v2_type.name;
       return {
         id: move.id,
-        name: move.name.replace("-", " "),
+        name: move.name.replaceAll("-", " "),
         power: move.power,
         pp: move.pp,
         generation: move.generation_id,
