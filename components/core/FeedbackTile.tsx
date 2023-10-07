@@ -11,13 +11,15 @@ interface Props {
 export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   const setGuesses = useSetAtom(guessAtom);
   const setGameOver = useSetAtom(gameOverAtom);
+  //this could potentially be running twice which causes guesses to decrement by 2
+  //this could also be what is potentially causing decrements on changing tabs since useEffect could be rerunning?
   useEffect(() => {
     if (guessedItem.name !== correctItem.name) {
       setGuesses((guess: number) => guess - 1);
     } else {
       setGameOver(true);
     }
-  }, [guessedItem, correctItem, setGuesses, setGameOver]);
+  }, [guessedItem, correctItem, setGuesses, setGameOver]); //?something here might be updating and causing render?
 
   function checkGeneration() {
     if (guessedItem.generation === correctItem.generation) {
