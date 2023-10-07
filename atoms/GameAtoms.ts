@@ -28,11 +28,6 @@ export interface Move {
 
 //!: Should probably keep the whole atom responsible for resetting everything and making a new game
 
-export function chooseRandomItem(itemArray: Pokemon[]): Pokemon {
-  const itemNumber = Math.floor(Math.random() * itemArray.length);
-  return itemArray[itemNumber];
-}
-
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";
@@ -43,9 +38,7 @@ export const guessAtom = atom(8);
 guessAtom.debugLabel = "guessAtom";
 
 //selects a pokemon from that array to be the pokemon to guess. Derived readable atom of pokedex
-export const pokemonToGuessAtom = atom<Pokemon>((get) =>
-  chooseRandomItem(get(pokedexAtom))
-);
+export const pokemonToGuessAtom = atom<Pokemon | null>(null);
 pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
 //atom that is responsible for saying if the game is over or not
@@ -53,12 +46,15 @@ export const gameOverAtom = atom(false);
 gameOverAtom.debugLabel = "gameOverAtom";
 
 //derived writable atom that is attempting to reset all values back to their defaults
-//? It doesnt take any params
 //? This resets the value specified but it doesnt have a way to reset the derived pokemonToGuess Atom
 export const newGameAtom = atom(null, (get, set) => {
   set(guessedItemsAtom, []);
   set(guessAtom, 8);
   set(gameOverAtom, false);
+  set(
+    pokemonToGuessAtom,
+    get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)]
+  );
 });
 newGameAtom.debugLabel = "newGameAtom";
 
@@ -71,5 +67,10 @@ guessedItemsAtom.debugLabel = "guessedItemsAtom";
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const array = get(guessedItemsAtom);
   set(guessedItemsAtom, [...get(guessedItemsAtom), newItem]);
+  if (!(newItem.name === get(pokemonToGuessAtom)?.name)) {
+    set(guessAtom, get(guessAtom) - 1);
+  } else {
+    set(gameOverAtom, true);
+  }
 });
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
