@@ -36,6 +36,7 @@ model Move {
 }
 
 model Daily {
+  id Int @unique @default(autoincrement())
   date DateTime @unique
   classic Pokemon @relation("classic",fields: [classicId],references: [id])
   classicId Int @unique
