@@ -7,19 +7,41 @@ import {
   Pokemon,
   pokedexAtom,
   pokemonToGuessAtom,
+  guessedItemsAtom,
 } from "../../atoms/GameAtoms";
 import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
+import { Daily } from "@prisma/client";
 
-export default function Gamebox({ data }: { data: Pokemon[] }) {
-  useHydrateAtoms([[pokedexAtom, data]]);
+export default function Gamebox({
+  pokedex,
+  dailies,
+}: {
+  pokedex: Pokemon[];
+  dailies: Daily[];
+}) {
+  useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [pokemonToGuess, setPokemonToGuess] = useAtom(pokemonToGuessAtom);
+  const setGuessedItems = useSetAtom(guessedItemsAtom);
+  console.log(dailies);
 
   useEffect(() => {
-    setPokemonToGuess(data[Math.floor(Math.random() * data.length)]);
-  }, [data, setPokemonToGuess]);
+    const storedPokemon = localStorage.getItem("classic_practice_solution");
+    const storedAnswers = localStorage.getItem("classic_practice_answers");
+
+    if (storedPokemon) {
+      setPokemonToGuess(JSON.parse(storedPokemon));
+      if (storedAnswers) setGuessedItems(JSON.parse(storedAnswers));
+    } else {
+      setPokemonToGuess(pokedex[Math.floor(Math.random() * pokedex.length)]);
+      localStorage.setItem(
+        "classic_practice_solution",
+        JSON.stringify(pokemonToGuess)
+      );
+    }
+  }, [pokedex, setGuessedItems, setPokemonToGuess]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
