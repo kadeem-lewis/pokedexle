@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
 export interface Pokemon {
   id: number;
@@ -32,6 +33,8 @@ export interface Move {
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";
 
+//! see if it is possible to fetch daily answer into atom directly
+
 //the number of guesses a user has
 //? should a setter or derived atom or something be updating the guesses state?
 export const guessAtom = atom(8);
@@ -55,6 +58,7 @@ export const newGameAtom = atom(null, (get, set) => {
     pokemonToGuessAtom,
     get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)]
   );
+  set(classicPracticeSolutionAtom, get(pokemonToGuessAtom));
 });
 newGameAtom.debugLabel = "newGameAtom";
 
@@ -66,6 +70,10 @@ guessedItemsAtom.debugLabel = "guessedItemsAtom";
 //? Could have write function take in a key to specify which array to add item to
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   set(guessedItemsAtom, [...get(guessedItemsAtom), newItem]);
+  set(classicPracticeAnswersAtom, [
+    ...get(classicPracticeAnswersAtom),
+    newItem,
+  ]);
   if (!(newItem.name === get(pokemonToGuessAtom)?.name)) {
     set(guessAtom, get(guessAtom) - 1);
   } else {
@@ -73,3 +81,24 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   }
 });
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
+
+export const classicAnswersAtom = atomWithStorage<string[]>(
+  "classic_answers",
+  []
+);
+export const classicPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
+  "classic_practice_answers",
+  []
+);
+export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
+  "classic_practice_solution",
+  null
+);
+export const whosThatPokemonAnswersAtom = atomWithStorage<string[]>(
+  "wtp_answers",
+  []
+);
+export const whosThatPokemonPracticeAtom = atomWithStorage<string[]>(
+  "wtp_practice_answers",
+  []
+);
