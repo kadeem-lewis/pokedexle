@@ -37,8 +37,10 @@ export default function PokemonFeedback({
     }
   }, [guesses, mode, setClassicGameOver, setGameOver]);
   useEffect(() => {
-    if (gameOver[mode]) {
+    if (gameOver[mode] === true) {
       setGameOverClick(true);
+    } else {
+      setGameOverClick(false);
     }
   }, [gameOver, mode]);
 

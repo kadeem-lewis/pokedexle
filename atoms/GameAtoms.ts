@@ -90,6 +90,7 @@ export const newGameAtom = atom(null, (get, set) => {
 
     // Set the classic practice solution (assuming this is only for "classicUnlimited" mode).
     set(classicPracticeSolutionAtom, newPokemonToGuess);
+    set(classicPracticeAnswersAtom, []);
   }
 
   // For "classic" mode:
