@@ -63,9 +63,9 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   }
   function checkTypes(type: string): JSX.Element {
     if (correctItem.types.includes(type)) {
-      return <div className="h-full bg-green-400 p-2">{type}</div>;
+      return <div className="h-full bg-green-400 p-2 text-center">{type}</div>;
     }
-    return <div className="h-full bg-red-400 p-2">{type}</div>;
+    return <div className="h-full bg-red-400 p-2 text-center">{type}</div>;
   }
 
   return (
