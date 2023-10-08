@@ -1,5 +1,5 @@
 import Gamebox from "@/components/core/Gamebox";
-import { getPokedex } from "@/lib/pokemon";
+import { prisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "Pokedexle | Classic",
@@ -7,6 +7,16 @@ export const metadata = {
 };
 
 export default async function Classic() {
-  const { pokedex } = await getPokedex();
-  return <div>{pokedex && <Gamebox data={pokedex} />}</div>;
+  const pokedex = await prisma.pokemon.findMany();
+  const dailies = await prisma.daily.findMany({
+    orderBy: {
+      date: "desc",
+    },
+    take: 2,
+  });
+  return (
+    <div>
+      {pokedex && dailies && <Gamebox pokedex={pokedex} dailies={dailies} />}
+    </div>
+  );
 }
