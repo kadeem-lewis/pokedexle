@@ -2,20 +2,22 @@
 import React, { useState, Fragment } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import Fuse from "fuse.js";
-import { useSetAtom, useAtomValue } from "jotai";
+import { useSetAtom, useAtomValue, useAtom } from "jotai";
 import {
   addGuessedItemAtom,
   Pokemon,
   gameOverAtom,
   newGameAtom,
   pokedexAtom,
-} from "../../atoms/GameAtoms";
+  currentGameMode,
+} from "@/atoms/GameAtoms";
 import { TYPES } from "../core/PokemonTypes";
 import Image from "next/image";
 export default function MyComboBox() {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
   const pokedex = useAtomValue(pokedexAtom);
+  const [mode, SetMode] = useAtom(currentGameMode);
 
   const fuse = new Fuse(pokedex, {
     includeScore: true,
@@ -42,7 +44,7 @@ export default function MyComboBox() {
 
   return (
     <>
-      {!gameOver ? (
+      {!gameOver[mode] ? (
         <div className="my-4 flex flex-row gap-2">
           <Combobox value={selected} onChange={setSelected}>
             <div className="relative mt-1 flex-grow">
@@ -130,8 +132,10 @@ export default function MyComboBox() {
             Submit
           </button>
         </div>
-      ) : (
+      ) : mode === "classicUnlimited" ? (
         <button onClick={() => setNewGame()}>New Game</button>
+      ) : (
+        <p>New Game soon</p>
       )}
     </>
   );

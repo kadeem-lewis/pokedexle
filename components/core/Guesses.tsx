@@ -1,11 +1,12 @@
 import React from "react";
 import { Icons } from "../Icons";
 import { useAtomValue } from "jotai";
-import { guessAtom } from "../../atoms/GameAtoms";
+import { currentGameMode, guessAtom } from "../../atoms/GameAtoms";
 
 export default function Guesses() {
   const totalGuesses = 8;
-  const guesses = useAtomValue(guessAtom);
+  const mode = useAtomValue(currentGameMode);
+  const guesses = useAtomValue(guessAtom)[mode];
 
   return (
     <div className="my-4 flex flex-row justify-end gap-0.5">

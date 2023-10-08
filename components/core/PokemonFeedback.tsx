@@ -2,6 +2,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
+  classicGameOver,
+  currentGameMode,
   gameOverAtom,
   guessAtom,
   guessedItemsAtom,
@@ -17,23 +19,28 @@ export default function PokemonFeedback({
 }: {
   correctAnswer: Pokemon;
 }) {
-  const guesses = useAtomValue(guessAtom);
-  const guessedItems = useAtomValue(guessedItemsAtom);
+  const [mode, setMode] = useAtom(currentGameMode);
+
+  const guesses = useAtomValue(guessAtom)[mode];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   console.log(correctAnswer);
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
+  const setClassicGameOver = useSetAtom(classicGameOver);
+
   useEffect(() => {
     if (guesses <= 0) {
-      setGameOver(true);
+      setGameOver((prev) => ({ ...prev, [mode]: true }));
     } else {
-      setGameOver(false);
+      setGameOver((prev) => ({ ...prev, [mode]: false }));
+      if (mode === "classic") setClassicGameOver(true);
     }
-  }, [guesses, setGameOver]);
+  }, [guesses, mode, setClassicGameOver, setGameOver]);
   useEffect(() => {
-    if (gameOver) {
+    if (gameOver[mode]) {
       setGameOverClick(true);
     }
-  }, [gameOver]);
+  }, [gameOver, mode]);
 
   const feedbackStatements = useMemo(() => {
     return guessedItems.map((guessedItem) => (
