@@ -9,7 +9,7 @@ const pokemonDs = localFont({
   variable: "--font-pokemon-ds",
 });
 export const metadata = {
-  title: "Pokedexle",
+  title: "Pokédéxlé",
 };
 export default function RootLayout({
   children,

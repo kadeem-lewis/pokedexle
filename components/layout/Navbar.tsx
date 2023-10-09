@@ -7,7 +7,7 @@ export default function Navbar() {
     <header className=" flex max-w-md items-center justify-between md:max-w-full">
       <h1 className="text-4xl">
         <Link href="/" className="text-5xl font-extrabold text-shadow">
-          Pokèdèxlè
+          Pokédéxlé
         </Link>
       </h1>
       <div>

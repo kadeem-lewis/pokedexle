@@ -2,12 +2,12 @@ import LinkCard from "@/components/ui/LinkCard";
 const NAV_LINKS = [
   {
     title: "Classic",
-    description: "Guess the Pokemon",
+    description: "Guess the Pokémon",
     path: "/classic",
     background: "",
   },
   {
-    title: "Who's that Pokemon?",
+    title: "Who's that Pokémon?",
     description: "Coming Soon",
     path: "/whosthatpokemon",
     background: "",
@@ -22,7 +22,7 @@ const NAV_LINKS = [
 export default function Home() {
   return (
     <div>
-      <h3 className="text-2xl">Test your Pokemon Knowledge</h3>
+      <h3 className="text-2xl">Test your Pokémon Knowledge</h3>
       {NAV_LINKS.map((link) => (
         <LinkCard
           title={link.title}
