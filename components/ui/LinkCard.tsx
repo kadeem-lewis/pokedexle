@@ -5,7 +5,7 @@ interface Props {
   description: string;
   path: string;
 }
-export default function GameButton({ title, description, path }: Props) {
+export default function LinkCard({ title, description, path }: Props) {
   return (
     <div className="my-6 p-4 rounded-lg border-amber-300 border-4 outline-3 outline outline-current">
       <Link href={path}>

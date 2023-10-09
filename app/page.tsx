@@ -1,4 +1,4 @@
-import GameButton from "@/components/buttons/GameButton";
+import LinkCard from "@/components/ui/LinkCard";
 const NAV_LINKS = [
   {
     title: "Classic",
@@ -7,15 +7,15 @@ const NAV_LINKS = [
     background: "",
   },
   {
-    title: "Move ( In Development )",
-    description: "Coming Soon",
-    path: "#",
-    background: "",
-  },
-  {
     title: "Who's that Pokemon?",
     description: "Coming Soon",
     path: "/whosthatpokemon",
+    background: "",
+  },
+  {
+    title: "Move ( In Development )",
+    description: "Coming Soon",
+    path: "#",
     background: "",
   },
 ];
@@ -24,7 +24,7 @@ export default function Home() {
     <div>
       <h3 className="text-2xl">Test your Pokemon Knowledge</h3>
       {NAV_LINKS.map((link) => (
-        <GameButton
+        <LinkCard
           title={link.title}
           description={link.description}
           path={link.path}
