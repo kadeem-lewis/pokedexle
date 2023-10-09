@@ -29,8 +29,8 @@ pokedexAtom.debugLabel = "pokedexAtom";
 
 //the number of guesses a user has
 export const guessAtom = atom({
-  classic: 8,
-  classicUnlimited: 8,
+  classic: 6,
+  classicUnlimited: 6,
 });
 guessAtom.debugLabel = "guessAtom";
 

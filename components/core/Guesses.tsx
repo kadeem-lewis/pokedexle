@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 import { currentGameMode, guessAtom } from "../../atoms/GameAtoms";
 
 export default function Guesses() {
-  const totalGuesses = 8;
+  const totalGuesses = 6;
   const mode = useAtomValue(currentGameMode);
   const guesses = useAtomValue(guessAtom)[mode];
 

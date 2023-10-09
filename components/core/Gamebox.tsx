@@ -45,7 +45,7 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
       });
       setGuesses({
         ...guesses,
-        classicUnlimited: 8 - classicPracticeAnswers.length,
+        classicUnlimited: 6 - classicPracticeAnswers.length,
       });
       console.log(guesses.classicUnlimited);
     }
