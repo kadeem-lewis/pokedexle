@@ -9,7 +9,9 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   function checkGeneration() {
     if (guessedItem.generation === correctItem.generation) {
       return (
-        <div className="bg-green-400 p-2">Gen {correctItem.generation}</div>
+        <div className="bg-green-400 p-2 h-full">
+          Gen {correctItem.generation}
+        </div>
       );
     } else if (guessedItem.generation < correctItem.generation) {
       return (
@@ -28,7 +30,9 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   function checkWeight() {
     if (guessedItem.weight === correctItem.weight) {
       return (
-        <div className="bg-green-400 p-2">{correctItem.weight / 10}kg</div>
+        <div className="bg-green-400 p-2 h-full">
+          {correctItem.weight / 10}kg
+        </div>
       );
     } else if (guessedItem.weight < correctItem.weight) {
       return (
@@ -46,7 +50,11 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   }
   function checkHeight() {
     if (guessedItem.height === correctItem.height) {
-      return <div className="bg-green-400 p-2">{correctItem.height / 10}m</div>;
+      return (
+        <div className="bg-green-400 p-2 h-full">
+          {correctItem.height / 10}m
+        </div>
+      );
     } else if (guessedItem.height < correctItem.height) {
       return (
         <div className="bg-red-400 p-2">
