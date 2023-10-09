@@ -79,6 +79,7 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
           <Tab
             as={Link}
             href={`/classic?unlimited`}
+            shallow
             className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
           >
             Unlimited
