@@ -1,5 +1,5 @@
 import { VariantProps, cva, cx } from "class-variance-authority";
-import { ComponentProps, FC } from "react";
+import { ComponentProps } from "react";
 
 const badgeVariants = cva(
   "border-b-2 border-t-2 text-center font-medium uppercase rounded-md leading-none text-shadow",
