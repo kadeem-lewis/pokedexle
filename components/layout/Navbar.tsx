@@ -6,8 +6,8 @@ export default function Navbar() {
   return (
     <header className=" flex max-w-md items-center justify-between md:max-w-full">
       <h1 className="text-4xl">
-        <Link href="/">
-          <Image src="./logo.svg" alt="logo image" width={150} height={150} />
+        <Link href="/" className="text-5xl font-extrabold text-shadow">
+          Pokèdèxlè
         </Link>
       </h1>
       <div>
