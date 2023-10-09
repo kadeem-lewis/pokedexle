@@ -29,6 +29,7 @@ export default function GameOverContent() {
           <Image
             src={correctAnswer.sprite}
             alt={`${correctAnswer.name} sprite`}
+            priority={true}
             width={200}
             height={200}
           />

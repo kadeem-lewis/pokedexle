@@ -103,10 +103,11 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
         </>
       ) : (
         <>
-          <div className="border-2 border-current p-2 mx-auto">
+          <div className="border-2 border-current mx-auto">
             <Image
               src={guessedItem.sprite}
               alt={`${guessedItem.name} sprite`}
+              priority={true}
               width={100}
               height={100}
             />
