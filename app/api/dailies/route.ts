@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { startOfDay, subMinutes } from "date-fns";
 
@@ -16,7 +15,7 @@ export async function GET(request: Request) {
         date: utcDate,
       },
     });
-    return NextResponse.json(dailies);
+    return Response.json(dailies);
   } catch (error) {
     return new Response("Error", { status: 500 });
   }
