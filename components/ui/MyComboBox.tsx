@@ -99,7 +99,6 @@ export default function MyComboBox() {
                                 width={100}
                                 height={100}
                                 alt={`${item.name} sprite`}
-                                className=""
                               />
                               <div className="grid grid-cols-2">
                                 <div className="text-xl font-bold">
