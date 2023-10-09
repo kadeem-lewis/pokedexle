@@ -13,7 +13,7 @@ const NAV_LINKS = [
     background: "",
   },
   {
-    title: "Move ( In Development )",
+    title: "Guess the Move",
     description: "Coming Soon",
     path: "#",
     background: "",
