@@ -54,7 +54,7 @@ dailyAtom.debugLabel = "dailyAtom";
 //Initializes the pokemon to guess Object
 export const pokemonToGuessAtom = atom((get) => {
   return {
-    classic: get(dailyPokemonAtom), //!This doesn't fully work
+    classic: get(dailyPokemonAtom),
     classicUnlimited: get(classicPracticeSolutionAtom)
       ? get(classicPracticeSolutionAtom)
       : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
@@ -66,29 +66,14 @@ pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 const dailyPokemonAtom = atom<Pokemon | null>(null);
 dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 
-//have a localStorageAtom that fetches the id from the fetch function to mark when a game has been completed
-const dailyClassicPokemonAtom = atom<Promise<Pokemon>>(async (get) => {
-  const { classicId } = await get(dailyAtom);
-  const dailyClassicPokemon = get(pokedexAtom).find(
-    (pokemon) => pokemon.id === classicId
-  );
-  console.log("Daily Pokemon", dailyClassicPokemon);
-  if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
-  return dailyClassicPokemon;
-});
-dailyClassicPokemonAtom.debugLabel = "dailyClassicPokemonAtom";
 //*This works but only runs if called in code
 export const setDailiesAtom = atom(null, async (get, set) => {
   const { classicId, moveId, whosThatPokemonId } = await get(dailyAtom);
   const mode = get(currentGameMode);
 
-  console.log(get(pokedexAtom));
-  console.log("Function Daily", classicId);
-
   const dailyClassicPokemon = get(pokedexAtom).find(
     (pokemon) => pokemon.id === classicId
   );
-  console.log("Daily Pokemon", dailyClassicPokemon);
   if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
 
   set(dailyPokemonAtom, dailyClassicPokemon);
@@ -127,6 +112,9 @@ export const newGameAtom = atom(null, (get, set) => {
 
   // For "classicUnlimited" mode:
   if (mode === "classicUnlimited") {
+    // Update game over status for the "classicUnlimited" mode.
+    set(gameOverAtom, { ...get(gameOverAtom), classicUnlimited: false });
+
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
       get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)];
@@ -136,9 +124,6 @@ export const newGameAtom = atom(null, (get, set) => {
 
     // Update guess count for the "classicUnlimited" mode.
     set(guessAtom, { ...get(guessAtom), classicUnlimited: 8 });
-
-    // Update game over status for the "classicUnlimited" mode.
-    set(gameOverAtom, { ...get(gameOverAtom), classicUnlimited: false });
 
     // Update the Pokemon to guess for the "classicUnlimited" mode.
     // set(pokemonToGuessAtom, {
@@ -168,8 +153,7 @@ newGameAtom.debugLabel = "newGameAtom";
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const mode = get(currentGameMode);
 
-  const currentGuesses = get(guessedItemsAtom)[mode];
-  const updatedGuesses = [...currentGuesses, newItem];
+  const updatedGuesses = [...get(guessedItemsAtom)[mode], newItem];
 
   const updatedGuessItems = {
     ...get(guessedItemsAtom),
