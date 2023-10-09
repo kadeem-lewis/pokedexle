@@ -12,6 +12,7 @@ import {
   classicPracticeAnswersAtom,
   guessedItemsAtom,
   guessAtom,
+  defaultGuesses,
 } from "@/atoms/GameAtoms";
 import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
@@ -45,7 +46,7 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
       });
       setGuesses({
         ...guesses,
-        classicUnlimited: 6 - classicPracticeAnswers.length,
+        classicUnlimited: defaultGuesses - classicPracticeAnswers.length,
       });
       console.log(guesses.classicUnlimited);
     }

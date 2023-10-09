@@ -23,14 +23,15 @@ export interface Move {
   accuracy?: number;
 }
 
+export const defaultGuesses = 6;
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";
 
 //the number of guesses a user has
 export const guessAtom = atom({
-  classic: 6,
-  classicUnlimited: 6,
+  classic: defaultGuesses,
+  classicUnlimited: defaultGuesses,
 });
 guessAtom.debugLabel = "guessAtom";
 
@@ -123,7 +124,7 @@ export const newGameAtom = atom(null, (get, set) => {
     set(guessedItemsAtom, { ...get(guessedItemsAtom), classicUnlimited: [] });
 
     // Update guess count for the "classicUnlimited" mode.
-    set(guessAtom, { ...get(guessAtom), classicUnlimited: 8 });
+    set(guessAtom, { ...get(guessAtom), classicUnlimited: defaultGuesses });
 
     // Update the Pokemon to guess for the "classicUnlimited" mode.
     // set(pokemonToGuessAtom, {
@@ -142,7 +143,7 @@ export const newGameAtom = atom(null, (get, set) => {
     set(guessedItemsAtom, { ...get(guessedItemsAtom), classic: [] });
 
     // Reset guess count for the "classic" mode.
-    set(guessAtom, { ...get(guessAtom), classic: 8 });
+    set(guessAtom, { ...get(guessAtom), classic: defaultGuesses });
   }
 });
 

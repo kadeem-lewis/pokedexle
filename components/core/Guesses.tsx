@@ -1,10 +1,14 @@
 import React from "react";
 import { Icons } from "../Icons";
 import { useAtomValue } from "jotai";
-import { currentGameMode, guessAtom } from "../../atoms/GameAtoms";
+import {
+  currentGameMode,
+  defaultGuesses,
+  guessAtom,
+} from "../../atoms/GameAtoms";
 
 export default function Guesses() {
-  const totalGuesses = 6;
+  const totalGuesses = defaultGuesses;
   const mode = useAtomValue(currentGameMode);
   const guesses = useAtomValue(guessAtom)[mode];
 
