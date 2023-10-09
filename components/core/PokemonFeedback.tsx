@@ -23,7 +23,7 @@ export default function PokemonFeedback({
 
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
-  console.log(correctAnswer);
+  console.log("Correct Answer:", mode, correctAnswer);
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
   const setClassicGameOver = useSetAtom(classicGameOver);
