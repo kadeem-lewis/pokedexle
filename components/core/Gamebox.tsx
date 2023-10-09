@@ -9,15 +9,21 @@ import {
   pokemonToGuessAtom,
   currentGameMode,
   setDailiesAtom,
+  classicPracticeAnswersAtom,
+  guessedItemsAtom,
+  guessAtom,
 } from "@/atoms/GameAtoms";
 import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
 
 export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [pokemonToGuess, setPokemonToGuess] = useAtom(pokemonToGuessAtom);
+  const [classicPracticeAnswers, _] = useAtom(classicPracticeAnswersAtom);
+  const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
+  const [guesses, setGuesses] = useAtom(guessAtom);
   const [mode, setMode] = useAtom(currentGameMode);
   const setDailies = useSetAtom(setDailiesAtom);
 
@@ -26,6 +32,24 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
       setDailies();
     })();
   }, [setDailies]);
+
+  useEffect(() => {
+    if (
+      classicPracticeAnswers !== null &&
+      mode === "classicUnlimited" &&
+      guessedItems[mode].length === 0
+    ) {
+      setGuessedItems({
+        ...guessedItems,
+        classicUnlimited: classicPracticeAnswers,
+      });
+      setGuesses({
+        ...guesses,
+        classicUnlimited: 8 - classicPracticeAnswers.length,
+      });
+      console.log(guesses.classicUnlimited);
+    }
+  }, [mode]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
