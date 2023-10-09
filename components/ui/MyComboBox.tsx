@@ -12,8 +12,9 @@ import {
   currentGameMode,
   guessedItemsAtom,
 } from "@/atoms/GameAtoms";
-import { TYPES } from "../core/PokemonTypes";
+import { PokemonType, TYPES } from "../core/PokemonTypes";
 import Image from "next/image";
+import { TypeBadge } from "./TypeBadge";
 export default function MyComboBox() {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
@@ -70,7 +71,7 @@ export default function MyComboBox() {
                   leaveTo="opacity-0"
                   afterLeave={() => setQuery("")}
                 >
-                  <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto  rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-black">
+                  <Combobox.Options className="absolute mt-1 max-h-80 w-full overflow-auto  rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-black">
                     {filteredItems.length === 0 && query !== "" ? (
                       <div className="relative cursor-default select-none px-4 py-2">
                         Nothing found.
@@ -105,18 +106,19 @@ export default function MyComboBox() {
                                   {item.name}
                                 </div>
                                 <div>Gen {item.generation}</div>
-                                <div className="col-span-2 space-x-2">
+                                <div className="col-span-2 space-x-2 flex">
                                   {item.types.map((type) => {
                                     const typeObj = TYPES.find(
-                                      (element) => element.name === type
+                                      (element) => element === type
                                     );
                                     return typeObj ? (
-                                      <span
+                                      <TypeBadge
                                         key={type}
-                                        className={`text-shadow rounded-md border-b-2 border-t-2 px-1 py-[2px] text-center text-sm uppercase ${typeObj.color} ${typeObj.borderBottomColor} ${typeObj.borderTopColor}`}
+                                        type={type as PokemonType}
+                                        className="px-1 py-[2px] text-sm col-span-1"
                                       >
                                         {type}
-                                      </span>
+                                      </TypeBadge>
                                     ) : null;
                                   })}
                                 </div>
