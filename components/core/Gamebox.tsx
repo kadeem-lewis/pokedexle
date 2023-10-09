@@ -69,19 +69,10 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
         }}
       >
         <Tab.List className="flex justify-center gap-2">
-          <Tab
-            as={Link}
-            href={"/classic"}
-            className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
-          >
+          <Tab className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black">
             Daily
           </Tab>
-          <Tab
-            as={Link}
-            href={`/classic?unlimited`}
-            shallow
-            className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
-          >
+          <Tab className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black">
             Unlimited
           </Tab>
         </Tab.List>
