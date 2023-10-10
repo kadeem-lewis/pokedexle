@@ -99,8 +99,13 @@ export default {
         },
       },
     },
+    clipPath: {
+      arrowup:
+        "polygon(50% 0,100% 50%,80% 50%,80% 100%,20% 100%,20% 50%,0 50%)",
+      arrowdown: "polygon(0 50%,20% 50%,20% 0,80% 0,80% 50%,100% 50%,50% 100%)",
+    },
   },
 
   darkMode: "class",
-  plugins: [require("@headlessui/tailwindcss")],
+  plugins: [require("@headlessui/tailwindcss"), require("tailwind-clip-path")],
 } satisfies Config;

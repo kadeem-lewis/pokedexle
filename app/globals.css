@@ -2,23 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.arrow-up {
-  clip-path: polygon(
-    50% 0,
-    100% 50%,
-    80% 50%,
-    80% 100%,
-    20% 100%,
-    20% 50%,
-    0 50%
-  );
-  @apply relative top-0 mx-auto h-12 w-14 bg-red-800 hover:bg-red-950;
-}
-.arrow-down {
-  clip-path: polygon(0 50%, 20% 50%, 20% 0, 80% 0, 80% 50%, 100% 50%, 50% 100%);
-  @apply relative top-0 mx-auto h-12 w-14 bg-red-800 hover:bg-red-950;
-}
-
 @layer utilities {
   .text-shadow {
     text-shadow: 1px 1px black;
