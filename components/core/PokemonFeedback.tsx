@@ -55,9 +55,9 @@ export default function PokemonFeedback({
   }, [guessedItems, correctAnswer]);
   return (
     <>
-      {/* HERE lol */}
       <Guesses />
       <div className="grid grid-cols-6 gap-y-2 overflow-x-auto capitalize">
+        {/* TODO: center headings for grid */}
         {guessedItems.length !== 0 && (
           <>
             <div>Name</div>

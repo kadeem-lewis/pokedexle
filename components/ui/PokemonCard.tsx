@@ -6,7 +6,7 @@ import { Pokemon } from "@/atoms/GameAtoms";
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (
     <div className="block truncate h-24">
-      {/*TODO:Change to a non pixelated font to improve readability */}
+      {/*TODO:Change to a non pixelated font to improve readability or remove the text-border if it has any */}
       <div className="flex items-center justify-center h-full gap-4">
         <Image
           src={pokemon.sprite}

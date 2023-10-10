@@ -55,8 +55,6 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  //TODO add functionality to start a new game
-
   return (
     <>
       <Tab.Group

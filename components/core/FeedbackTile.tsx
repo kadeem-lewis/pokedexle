@@ -6,6 +6,9 @@ interface Props {
   correctItem: Pokemon;
 }
 export default function FeedbackTile({ guessedItem, correctItem }: Props) {
+  //TODO: change components from showing higher or lower and show value with arrow behind representing higher or lower
+  //TODO: find a way to have the pokemon images scale to the size of the container so smaller characters arent barely visible
+  //TODO: increase the size of the grid and have each box have a defined size and have them be in a vertical scrollable container
   function checkGeneration() {
     if (guessedItem.generation === correctItem.generation) {
       return (
