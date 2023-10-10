@@ -1,5 +1,6 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
+import { Tile, TileContent } from "../ui/Tile";
 
 interface Props {
   guessedItem: Pokemon;
@@ -13,9 +14,17 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   const poundConversion = 0.0022046;
   function checkTypes(type: string): JSX.Element {
     if (correctItem.types.includes(type)) {
-      return <div className="h-full bg-green-400 p-2 text-center">{type}</div>;
+      return (
+        <Tile status="correct">
+          <TileContent>{type}</TileContent>
+        </Tile>
+      );
     }
-    return <div className="h-full bg-red-400 p-2 text-center">{type}</div>;
+    return (
+      <Tile status="incorrect">
+        <TileContent>{type}</TileContent>
+      </Tile>
+    );
   }
 
   return (
@@ -31,91 +40,85 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
               height={100}
             />
           </div>
-          <div className="border-2 border-current bg-green-400 p-2">
-            Gen {correctItem.generation}
-          </div>
+          <Tile status="correct">
+            <TileContent>Gen {correctItem.generation}</TileContent>
+          </Tile>
           {correctItem.types.map((type) => (
-            <div
-              key={type}
-              className="border-2 border-current bg-green-400 p-2"
-            >
-              {type}
-            </div>
+            <Tile key={type} status="correct">
+              <TileContent>{type}</TileContent>
+            </Tile>
           ))}
-          <div className="border-2 border-current bg-green-400 p-2">
-            {(correctItem.weight * poundConversion).toFixed(1)}lbs
-          </div>
-          <div className="border-2 border-current bg-green-400 p-2">
-            {correctItem.height / 10}m
-          </div>
+          <Tile status="correct">
+            <TileContent>
+              {(correctItem.weight * poundConversion).toFixed(1)}lbs
+            </TileContent>
+          </Tile>
+          <Tile status="correct">
+            <TileContent>{correctItem.height / 10}m</TileContent>
+          </Tile>
         </>
       ) : (
         <>
-          <div className="border-2 border-current mx-auto">
-            <Image
-              src={guessedItem.sprite}
-              alt={`${guessedItem.name} sprite`}
-              priority={true}
-              width={100}
-              height={100}
-            />
-          </div>
+          <Tile>
+            <TileContent>
+              <Image
+                src={guessedItem.sprite}
+                alt={`${guessedItem.name} sprite`}
+                priority={true}
+                width={100}
+                height={100}
+              />
+            </TileContent>
+          </Tile>
 
           {guessedItem.generation === correctItem.generation ? (
-            <div className="bg-green-400 p-2 border-2 border-current">
-              Gen {correctItem.generation}
-            </div>
+            <Tile status="correct">
+              <TileContent>Gen {correctItem.generation}</TileContent>
+            </Tile>
           ) : (
-            <div className="bg-red-400 p-2 border-2 border-current">
-              <div
-                className={
-                  guessedItem.generation > correctItem.generation
-                    ? "arrow-down"
-                    : "arrow-up"
-                }
-              >
-                Gen {guessedItem.generation}
-              </div>
-            </div>
+            <Tile
+              status="incorrect"
+              difference={
+                guessedItem.generation > correctItem.generation
+                  ? "lower"
+                  : "higher"
+              }
+            >
+              <TileContent>Gen {guessedItem.generation}</TileContent>
+            </Tile>
           )}
-          {guessedItem.types.map((type) => (
-            <div key={type} className="border-2 border-current">
-              {checkTypes(type)}
-            </div>
-          ))}
+          {guessedItem.types.map((type) => checkTypes(type))}
           {guessedItem.weight === correctItem.weight ? (
-            <div className="bg-green-400 p-2 border-2 border-current">
-              {(correctItem.weight * poundConversion).toFixed(1)} lbs
-            </div>
+            <Tile status="correct">
+              <TileContent>
+                {(correctItem.weight * poundConversion).toFixed(1)} lbs
+              </TileContent>
+            </Tile>
           ) : (
-            <div className="bg-red-400 p-2 border-2 border-current">
-              <div
-                className={
-                  guessedItem.weight > correctItem.weight
-                    ? "arrow-down"
-                    : "arrow-up"
-                }
-              >
+            <Tile
+              status="incorrect"
+              difference={
+                guessedItem.weight > correctItem.weight ? "lower" : "higher"
+              }
+            >
+              <TileContent>
                 {(guessedItem.weight * poundConversion).toFixed(1)} lbs
-              </div>
-            </div>
+              </TileContent>
+            </Tile>
           )}
           {guessedItem.height === correctItem.height ? (
             <div className="bg-green-400 p-2 border-2 border-current">
               {correctItem.height}
             </div>
           ) : (
-            <div className="bg-red-400 p-2 border-2 border-current">
-              <div
-                className={
-                  guessedItem.height > correctItem.height
-                    ? "arrow-down"
-                    : "arrow-up"
-                }
-              >
-                {guessedItem.height / 10}m
-              </div>
-            </div>
+            <Tile
+              status="incorrect"
+              difference={
+                guessedItem.height > correctItem.height ? "lower" : "higher"
+              }
+            >
+              <TileContent>{guessedItem.height / 10}m</TileContent>
+            </Tile>
           )}
         </>
       )}
