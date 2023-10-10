@@ -13,6 +13,7 @@ import {
   guessedItemsAtom,
 } from "@/atoms/GameAtoms";
 import PokemonCard from "./PokemonCard";
+import { Button } from "./Button";
 export default function MyComboBox() {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
@@ -93,13 +94,14 @@ export default function MyComboBox() {
                 </Transition>
               </div>
             </Combobox>
-            <button
+            <Button
               type="submit"
               onClick={() => handleSubmit()}
-              className="text-border flex-none cursor-pointer border-2 bg-purple-300 px-3 py-2 uppercase text-white outline outline-black hover:bg-purple-400"
+              variant="flat"
+              className="flex-none cursor-pointer bg-purple-300   hover:bg-purple-400"
             >
               Submit
-            </button>
+            </Button>
           </div>
           {error && <p>Pokemon Already Entered</p>}
         </>

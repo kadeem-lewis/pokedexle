@@ -18,6 +18,7 @@ import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
+import { Button } from "../ui/Button";
 
 export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
@@ -69,11 +70,21 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
           }
         }}
       >
-        <Tab.List className="flex justify-center gap-2">
-          <Tab className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black">
+        <Tab.List className="flex justify-center gap-2 mt-2">
+          <Tab
+            className="bg-yellow-500 ui-not-selected:brightness-75"
+            as={Button}
+            variant="flat"
+            size="tall"
+          >
             Daily
           </Tab>
-          <Tab className="ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black">
+          <Tab
+            className="bg-yellow-500 ui-not-selected:brightness-75"
+            as={Button}
+            variant="flat"
+            size="tall"
+          >
             Unlimited
           </Tab>
         </Tab.List>
