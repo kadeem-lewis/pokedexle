@@ -6,72 +6,11 @@ interface Props {
   correctItem: Pokemon;
 }
 export default function FeedbackTile({ guessedItem, correctItem }: Props) {
-  //TODO: change components from showing higher or lower and show value with arrow behind representing higher or lower
+  //TODO: arrows dont probably show text within
   //TODO: find a way to have the pokemon images scale to the size of the container so smaller characters arent barely visible
   //TODO: increase the size of the grid and have each box have a defined size and have them be in a vertical scrollable container
-  function checkGeneration() {
-    if (guessedItem.generation === correctItem.generation) {
-      return (
-        <div className="bg-green-400 p-2 h-full">
-          Gen {correctItem.generation}
-        </div>
-      );
-    } else if (guessedItem.generation < correctItem.generation) {
-      return (
-        <div className="bg-red-400 p-2">
-          <div className="arrow-up">higher</div>
-        </div>
-      );
-    } else if (guessedItem.generation > correctItem.generation) {
-      return (
-        <div className="bg-red-400 p-2">
-          <div className="arrow-down">lower</div>
-        </div>
-      );
-    }
-  }
-  function checkWeight() {
-    if (guessedItem.weight === correctItem.weight) {
-      return (
-        <div className="bg-green-400 p-2 h-full">
-          {correctItem.weight / 10}kg
-        </div>
-      );
-    } else if (guessedItem.weight < correctItem.weight) {
-      return (
-        <div className="bg-red-400 p-2">
-          <div className="arrow-up">higher</div>
-        </div>
-      );
-    } else if (guessedItem.weight > correctItem.weight) {
-      return (
-        <div className="bg-red-400 p-2">
-          <div className="arrow-down">lower</div>
-        </div>
-      );
-    }
-  }
-  function checkHeight() {
-    if (guessedItem.height === correctItem.height) {
-      return (
-        <div className="bg-green-400 p-2 h-full">
-          {correctItem.height / 10}m
-        </div>
-      );
-    } else if (guessedItem.height < correctItem.height) {
-      return (
-        <div className="bg-red-400 p-2">
-          <div className="arrow-up">higher</div>
-        </div>
-      );
-    } else if (guessedItem.height > correctItem.height) {
-      return (
-        <div className="bg-red-400 p-2">
-          <div className="arrow-down">lower</div>
-        </div>
-      );
-    }
-  }
+
+  const poundConversion = 0.0022046;
   function checkTypes(type: string): JSX.Element {
     if (correctItem.types.includes(type)) {
       return <div className="h-full bg-green-400 p-2 text-center">{type}</div>;
@@ -83,8 +22,14 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
     <>
       {guessedItem.name === correctItem.name ? (
         <>
-          <div className="border-2 border-current bg-green-400 p-2">
-            {correctItem.name}
+          <div className="border-2 border-current mx-auto">
+            <Image
+              src={guessedItem.sprite}
+              alt={`${guessedItem.name} sprite`}
+              priority={true}
+              width={100}
+              height={100}
+            />
           </div>
           <div className="border-2 border-current bg-green-400 p-2">
             Gen {correctItem.generation}
@@ -98,7 +43,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
             </div>
           ))}
           <div className="border-2 border-current bg-green-400 p-2">
-            {correctItem.weight / 10}kg
+            {(correctItem.weight * poundConversion).toFixed(1)}lbs
           </div>
           <div className="border-2 border-current bg-green-400 p-2">
             {correctItem.height / 10}m
@@ -115,14 +60,63 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
               height={100}
             />
           </div>
-          <div className="border-2 border-current">{checkGeneration()}</div>
+
+          {guessedItem.generation === correctItem.generation ? (
+            <div className="bg-green-400 p-2 border-2 border-current">
+              Gen {correctItem.generation}
+            </div>
+          ) : (
+            <div className="bg-red-400 p-2 border-2 border-current">
+              <div
+                className={
+                  guessedItem.generation > correctItem.generation
+                    ? "arrow-down"
+                    : "arrow-up"
+                }
+              >
+                Gen {correctItem.generation}
+              </div>
+            </div>
+          )}
           {guessedItem.types.map((type) => (
             <div key={type} className="border-2 border-current">
               {checkTypes(type)}
             </div>
           ))}
-          <div className="border-2 border-current">{checkWeight()}</div>
-          <div className="border-2 border-current">{checkHeight()}</div>
+          {guessedItem.weight === correctItem.weight ? (
+            <div className="bg-green-400 p-2 border-2 border-current">
+              {(correctItem.weight * poundConversion).toFixed(1)} lbs
+            </div>
+          ) : (
+            <div className="bg-red-400 p-2 border-2 border-current">
+              <div
+                className={
+                  guessedItem.weight > correctItem.weight
+                    ? "arrow-down"
+                    : "arrow-up"
+                }
+              >
+                {(correctItem.weight * poundConversion).toFixed(1)} lbs
+              </div>
+            </div>
+          )}
+          {guessedItem.height === correctItem.height ? (
+            <div className="bg-green-400 p-2 border-2 border-current">
+              {correctItem.height}
+            </div>
+          ) : (
+            <div className="bg-red-400 p-2 border-2 border-current">
+              <div
+                className={
+                  guessedItem.height > correctItem.height
+                    ? "arrow-down"
+                    : "arrow-up"
+                }
+              >
+                {correctItem.height / 10}m
+              </div>
+            </div>
+          )}
         </>
       )}
     </>
