@@ -14,12 +14,14 @@ import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
 import Guesses from "./Guesses";
 
+const HEADINGS = ["Name", "Gen", "Type 1", "Type 2", "Weight", "Height"];
+
 export default function PokemonFeedback({
   correctAnswer,
 }: {
   correctAnswer: Pokemon;
 }) {
-  const [mode, setMode] = useAtom(currentGameMode);
+  const mode = useAtomValue(currentGameMode);
 
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
@@ -56,16 +58,15 @@ export default function PokemonFeedback({
   return (
     <>
       <Guesses />
-      <div className="grid grid-cols-6 gap-y-2 overflow-x-auto capitalize">
+      <div className="grid grid-cols-6 gap-y-2 overflow-x-auto md:overflow-visible capitalize max-w-3xl">
         {/* TODO: center headings for grid */}
         {guessedItems.length !== 0 && (
           <>
-            <div>Name</div>
-            <div>Gen</div>
-            <div>Type 1</div>
-            <div>Type 2</div>
-            <div>Weight</div>
-            <div>Height</div>
+            {HEADINGS.map((heading) => (
+              <div key={heading} className="text-center font-medium">
+                {heading}
+              </div>
+            ))}
           </>
         )}
         {feedbackStatements}
