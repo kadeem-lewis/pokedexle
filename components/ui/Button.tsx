@@ -10,8 +10,8 @@ const buttonVariants = cva(
         flat: "border-2 border-white outline outline-black text-border text-white",
       },
       size: {
-        default: "px-3 py-2",
-        tall: "py-1 px-0.5",
+        default: "px-2 py-1",
+        tall: "py-0.5 px-px",
       },
     },
     defaultVariants: {
