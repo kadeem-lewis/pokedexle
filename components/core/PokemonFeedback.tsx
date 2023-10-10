@@ -58,16 +58,19 @@ export default function PokemonFeedback({
   return (
     <>
       <Guesses />
-      <div className="grid grid-cols-6 gap-y-2 overflow-x-auto md:overflow-visible capitalize max-w-3xl">
+      <div className="flex flex-col gap-y-2 gap-x-1 overflow-x-auto capitalize justify-center w-full max-w-2xl">
         {/* TODO: center headings for grid */}
         {guessedItems.length !== 0 && (
-          <>
+          <div className="flex">
             {HEADINGS.map((heading) => (
-              <div key={heading} className="text-center font-medium">
+              <div
+                key={heading}
+                className="text-center basis-1/6 font-medium uppercase"
+              >
                 {heading}
               </div>
             ))}
-          </>
+          </div>
         )}
         {feedbackStatements}
       </div>

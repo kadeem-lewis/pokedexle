@@ -27,7 +27,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   }
 
   return (
-    <>
+    <div className="flex gap-x-1">
       {guessedItem.name === correctItem.name ? (
         <>
           <div className="border-2 border-current mx-auto">
@@ -121,6 +121,6 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
           )}
         </>
       )}
-    </>
+    </div>
   );
 }
