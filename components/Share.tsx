@@ -9,6 +9,7 @@ import {
   dailyAtom,
 } from "@/atoms/GameAtoms";
 import { Pokemon } from "@/atoms/GameAtoms";
+import { Button } from "./ui/Button";
 
 const emojis = ["🟥", "🟩", "🔽", "🔼"];
 
@@ -86,7 +87,11 @@ ${window.location.href}
     return null;
   }
 
-  return <button onClick={handleShareClick}>Share</button>;
+  return (
+    <Button onClick={handleShareClick} variant="flat">
+      Share
+    </Button>
+  );
 };
 
 export default Share;
