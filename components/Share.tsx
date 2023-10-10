@@ -11,11 +11,15 @@ import {
 import { Pokemon } from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
 
-const emojis = ["🟥", "🟩", "🔽", "🔼"];
+//TODO: change from array to object so I can use names instead of random indexes
+const emojis: { [key: string]: string } = {
+  incorrect: "🟥",
+  correct: "🟩",
+  lower: "🔽",
+  higher: "🔼",
+};
 
-interface ShareProps {}
-
-const Share: React.FC<ShareProps> = () => {
+export default function Share() {
   const mode = useAtomValue(currentGameMode);
   const correctAnswer = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessedItemsAtom)[mode];
@@ -26,8 +30,8 @@ const Share: React.FC<ShareProps> = () => {
     correctValue: number,
     guessedValue: number
   ): string => {
-    if (guessedValue === correctValue) return emojis[1];
-    return guessedValue < correctValue ? emojis[2] : emojis[3];
+    if (guessedValue === correctValue) return emojis["correct"];
+    return guessedValue < correctValue ? emojis["higher"] : emojis["lower"];
   };
 
   const comparePokemonTypes = (
@@ -35,7 +39,7 @@ const Share: React.FC<ShareProps> = () => {
     guessedTypes: string[]
   ): string[] => {
     return guessedTypes.map((type) =>
-      correctTypes.includes(type) ? emojis[1] : emojis[0]
+      correctTypes.includes(type) ? emojis["correct"] : emojis["incorrect"]
     );
   };
 
@@ -69,7 +73,9 @@ const Share: React.FC<ShareProps> = () => {
     const grid = createEmojiGrid();
     const turns = 6 - guesses.length;
     const textToCopy = `
-Pokedexle ${mode} ${id} ${turns}/${defaultGuesses}
+Pokedexle ${mode} ${id} ${
+      turns > 0 ? `${turns}/${defaultGuesses}` : `X/${defaultGuesses}`
+    }
 ${grid}
 ${window.location.href}
     `;
@@ -92,6 +98,4 @@ ${window.location.href}
       Share
     </Button>
   );
-};
-
-export default Share;
+}
