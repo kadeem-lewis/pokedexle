@@ -74,7 +74,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
                     : "arrow-up"
                 }
               >
-                Gen {correctItem.generation}
+                Gen {guessedItem.generation}
               </div>
             </div>
           )}
@@ -96,7 +96,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
                     : "arrow-up"
                 }
               >
-                {(correctItem.weight * poundConversion).toFixed(1)} lbs
+                {(guessedItem.weight * poundConversion).toFixed(1)} lbs
               </div>
             </div>
           )}
@@ -113,7 +113,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
                     : "arrow-up"
                 }
               >
-                {correctItem.height / 10}m
+                {guessedItem.height / 10}m
               </div>
             </div>
           )}
