@@ -7,11 +7,10 @@ interface Props {
   correctItem: Pokemon;
 }
 export default function FeedbackTile({ guessedItem, correctItem }: Props) {
-  //TODO: arrows dont probably show text within
   //TODO: find a way to have the pokemon images scale to the size of the container so smaller characters arent barely visible
   //TODO: increase the size of the grid and have each box have a defined size and have them be in a vertical scrollable container
 
-  const poundConversion = 0.0022046;
+  const poundConversion = 0.22046; //hectograms to pounds
   function checkTypes(type: string): JSX.Element {
     if (correctItem.types.includes(type)) {
       return (
