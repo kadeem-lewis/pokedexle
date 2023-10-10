@@ -40,7 +40,7 @@ const dateAtom = atom(new Date());
 dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
-const dailyAtom = atom(async (get) => {
+export const dailyAtom = atom(async (get) => {
   const response = await fetch(
     `/api/dailies?date=${get(dateAtom).toISOString()}`
   );
