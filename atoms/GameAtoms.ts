@@ -24,6 +24,7 @@ export interface Move {
 }
 
 export const defaultGuesses = 6;
+export const poundConversion = 0.22046; //hectograms to pounds
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";

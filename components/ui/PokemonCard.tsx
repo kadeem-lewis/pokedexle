@@ -2,6 +2,7 @@ import Image from "next/image";
 import { TYPES, PokemonType } from "../core/PokemonTypes";
 import { TypeBadge } from "./TypeBadge";
 import { Pokemon } from "@/atoms/GameAtoms";
+import { poundConversion } from "@/atoms/GameAtoms";
 
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (
@@ -38,7 +39,7 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
             </span>
             <span className="space-x-1">
               <span className="font-semibold">Weight:</span>
-              <span>{pokemon.weight / 10}kg</span>
+              <span>{pokemon.weight * poundConversion}lbs</span>
             </span>
           </div>
         </div>

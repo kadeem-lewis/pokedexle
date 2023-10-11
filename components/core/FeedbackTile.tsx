@@ -1,6 +1,7 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import { Tile, TileContent } from "../ui/Tile";
+import { poundConversion } from "@/atoms/GameAtoms";
 
 interface Props {
   guessedItem: Pokemon;
@@ -10,7 +11,6 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   //TODO: find a way to have the pokemon images scale to the size of the container so smaller characters arent barely visible
   //TODO: increase the size of the grid and have each box have a defined size and have them be in a vertical scrollable container
 
-  const poundConversion = 0.22046; //hectograms to pounds
   function checkTypes(type: string): JSX.Element {
     if (correctItem.types.includes(type)) {
       return (
@@ -109,7 +109,7 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
           )}
           {guessedItem.height === correctItem.height ? (
             <div className="bg-green-400 p-2 border-2 border-current">
-              {correctItem.height}
+              {correctItem.height / 10}m
             </div>
           ) : (
             <Tile
