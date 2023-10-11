@@ -73,10 +73,11 @@ export default function Share() {
 
   const handleShareClick = async (): Promise<void> => {
     const grid = createEmojiGrid();
-    const turns = defaultGuesses - attempts;
     const textToCopy = `
 Pokedexle ${mode} ${id} ${
-      turns > 0 ? `${turns}/${defaultGuesses}` : `X/${defaultGuesses}`
+      attempts > 0
+        ? `${guesses.length}/${defaultGuesses}`
+        : `X/${defaultGuesses}`
     }
 ${grid}
 ${window.location.href}
