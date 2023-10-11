@@ -1,7 +1,7 @@
 import React from "react";
 import ThemeSwitch from "../buttons/ThemeSwitch";
 import Link from "next/link";
-import Image from "next/image";
+
 export default function Navbar() {
   return (
     <header className=" flex items-center justify-between ">
