@@ -30,15 +30,17 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
     <div className="flex gap-x-1">
       {guessedItem.name === correctItem.name ? (
         <>
-          <div className="border-2 border-current mx-auto">
-            <Image
-              src={guessedItem.sprite}
-              alt={`${guessedItem.name} sprite`}
-              priority={true}
-              width={100}
-              height={100}
-            />
-          </div>
+          <Tile status="correct">
+            <TileContent>
+              <Image
+                src={guessedItem.sprite}
+                alt={`${guessedItem.name} sprite`}
+                priority={true}
+                width={100}
+                height={100}
+              />
+            </TileContent>
+          </Tile>
           <Tile status="correct">
             <TileContent>Gen {correctItem.generation}</TileContent>
           </Tile>
