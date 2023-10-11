@@ -39,7 +39,7 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
             </span>
             <span className="space-x-1">
               <span className="font-semibold">Weight:</span>
-              <span>{pokemon.weight * poundConversion}lbs</span>
+              <span>{(pokemon.weight * poundConversion).toFixed(1)}lbs</span>
             </span>
           </div>
         </div>
