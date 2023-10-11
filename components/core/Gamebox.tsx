@@ -39,19 +39,26 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
     if (
       classicPracticeAnswers !== null &&
       mode === "classicUnlimited" &&
-      guessedItems[mode].length === 0
+      guessedItems.classicUnlimited.length === 0
     ) {
-      setGuessedItems({
-        ...guessedItems,
+      setGuessedItems((prev) => ({
+        ...prev,
         classicUnlimited: classicPracticeAnswers,
-      });
-      setGuesses({
-        ...guesses,
+      }));
+      setGuesses((prev) => ({
+        ...prev,
         classicUnlimited: defaultGuesses - classicPracticeAnswers.length,
-      });
+      }));
       console.log(guesses.classicUnlimited);
     }
-  }, [mode]);
+  }, [
+    mode,
+    classicPracticeAnswers,
+    setGuessedItems,
+    setGuesses,
+    guesses.classicUnlimited,
+    guessedItems.classicUnlimited,
+  ]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
