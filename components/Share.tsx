@@ -7,6 +7,7 @@ import {
   gameOverAtom,
   defaultGuesses,
   dailyAtom,
+  guessAtom,
 } from "@/atoms/GameAtoms";
 import { Pokemon } from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
@@ -22,6 +23,7 @@ const emojis: { [key: string]: string } = {
 export default function Share() {
   const mode = useAtomValue(currentGameMode);
   const correctAnswer = useAtomValue(pokemonToGuessAtom)[mode];
+  const attempts = useAtomValue(guessAtom)[mode];
   const guesses = useAtomValue(guessedItemsAtom)[mode];
   const gameOver = useAtomValue(gameOverAtom);
   const { id } = useAtomValue(dailyAtom);
@@ -71,7 +73,7 @@ export default function Share() {
 
   const handleShareClick = async (): Promise<void> => {
     const grid = createEmojiGrid();
-    const turns = 6 - guesses.length;
+    const turns = defaultGuesses - attempts;
     const textToCopy = `
 Pokedexle ${mode} ${id} ${
       turns > 0 ? `${turns}/${defaultGuesses}` : `X/${defaultGuesses}`
