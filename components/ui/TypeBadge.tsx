@@ -25,6 +25,11 @@ const badgeVariants = cva(
         dark: "bg-dark-200 border-t-dark-100 border-b-dark-300",
         fairy: "bg-fairy-200 border-t-fairy-100 border-b-fairy-300",
       },
+      effect: {
+        default: "",
+        disabled: "brightness-75 grayscale opacity-75",
+        highlighted: "ring-2 ring-black dark:ring-white", //have it be a bright text color
+      },
     },
   }
 );
@@ -33,8 +38,13 @@ interface BadgeProps
   extends ComponentProps<"div">,
     VariantProps<typeof badgeVariants> {}
 
-function TypeBadge({ className, type, ...props }: BadgeProps) {
-  return <div {...props} className={cx(badgeVariants({ type, className }))} />;
+function TypeBadge({ className, type, effect, ...props }: BadgeProps) {
+  return (
+    <div
+      {...props}
+      className={cx(badgeVariants({ type, effect, className }))}
+    />
+  );
 }
 
 export { TypeBadge, badgeVariants };
