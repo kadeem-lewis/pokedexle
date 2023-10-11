@@ -8,8 +8,24 @@ const pokemonDs = localFont({
   src: "../public/fonts/pokemon-ds.ttf",
   variable: "--font-pokemon-ds",
 });
+//add an icon and also set a favicon if thats different
 export const metadata = {
-  title: "Pokédexle",
+  title: {
+    default: "Pokedexle",
+    template: "Pokedexle | %s",
+  },
+  description:
+    "A variety of different game modes themed around guessing all things pokemon",
+  metadataBase: new URL("https://pokedexle.com"),
+  openGraph: {
+    title: "Pokedexle",
+    description:
+      "A variety of different game modes themed around guessing all things pokemon",
+    siteName: "Pokedexle",
+    url: "https://pokedexle.com",
+    locale: "en_US",
+    type: "website",
+  },
 };
 export default function RootLayout({
   children,

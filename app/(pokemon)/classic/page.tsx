@@ -2,7 +2,7 @@ import Gamebox from "@/components/core/Gamebox";
 import { prisma } from "@/lib/prisma";
 
 export const metadata = {
-  title: "Pokedexle | Classic",
+  title: "Classic",
   description: "Guess Pokemon based on hints from previous guesses",
 };
 
