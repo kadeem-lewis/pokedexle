@@ -8,6 +8,7 @@ import {
   guessAtom,
   guessedItemsAtom,
   Pokemon,
+  pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
@@ -22,22 +23,23 @@ export default function PokemonFeedback({
   correctAnswer: Pokemon;
 }) {
   const mode = useAtomValue(currentGameMode);
-
+  const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   console.log("Correct Answer:", mode, correctAnswer);
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
-  const setClassicGameOver = useSetAtom(classicGameOver);
 
   useEffect(() => {
-    if (guesses <= 0) {
+    if (
+      guesses <= 0 ||
+      guessedItems.some((item) => item.name === pokemonToGuess?.name)
+    ) {
       setGameOver((prev) => ({ ...prev, [mode]: true }));
     } else {
       setGameOver((prev) => ({ ...prev, [mode]: false }));
-      if (mode === "classic") setClassicGameOver(true);
     }
-  }, [guesses, mode, setClassicGameOver, setGameOver]);
+  }, [guessedItems, guesses, mode, pokemonToGuess?.name, setGameOver]);
   useEffect(() => {
     if (gameOver[mode] === true) {
       setGameOverClick(true);
