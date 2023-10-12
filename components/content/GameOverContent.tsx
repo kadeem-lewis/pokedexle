@@ -1,18 +1,18 @@
 import React from "react";
-import { useAtomValue, useSetAtom, useAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   pokemonToGuessAtom,
   newGameAtom,
   currentGameMode,
   guessAtom,
-} from "../../atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import Image from "next/image";
 import Countdown from "../Countdown";
 import { addDays, startOfDay } from "date-fns";
 import Share from "../Share";
 
 export default function GameOverContent() {
-  const [mode, setMode] = useAtom(currentGameMode);
+  const mode = useAtomValue(currentGameMode);
   const setNewGame = useSetAtom(newGameAtom);
   const guesses = useAtomValue(guessAtom)[mode];
   const pokemonGuesses = useAtomValue(pokemonToGuessAtom);

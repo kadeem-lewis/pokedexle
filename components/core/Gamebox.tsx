@@ -23,7 +23,7 @@ import { Button } from "../ui/Button";
 export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
-  const [classicPracticeAnswers] = useAtom(classicPracticeAnswersAtom);
+  const classicPracticeAnswers = useAtomValue(classicPracticeAnswersAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
   const [mode, setMode] = useAtom(currentGameMode);
