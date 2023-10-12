@@ -14,6 +14,9 @@ import {
 } from "@/atoms/GameAtoms";
 import PokemonCard from "./PokemonCard";
 import { Button } from "./Button";
+import Countdown from "../Countdown";
+import { startOfDay, addDays } from "date-fns";
+
 export default function MyComboBox() {
   const [selected, setSelected] = useState<Pokemon | null>(null);
   const [query, setQuery] = useState("");
@@ -21,6 +24,7 @@ export default function MyComboBox() {
   const pokedex = useAtomValue(pokedexAtom);
   const mode = useAtomValue(currentGameMode);
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
+  const targetDate = addDays(startOfDay(new Date()), 1);
 
   const fuse = useMemo(
     () =>
@@ -106,9 +110,16 @@ export default function MyComboBox() {
           {error && <p>Pokemon Already Entered</p>}
         </>
       ) : mode === "classicUnlimited" ? (
-        <button onClick={() => setNewGame()}>New Game</button>
+        <div className="flex justify-center my-2">
+          <Button variant="flat" onClick={() => setNewGame()}>
+            New Game
+          </Button>
+        </div>
       ) : (
-        <p>New Game soon</p>
+        <div className="flex justify-center items-center my-2 gap-2">
+          <p className="text-3xl">New Game in:</p>
+          <Countdown targetDate={targetDate} />
+        </div>
       )}
     </>
   );
