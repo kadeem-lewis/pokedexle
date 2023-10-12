@@ -22,10 +22,10 @@ import { Button } from "../ui/Button";
 
 export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
-  const [pokemonToGuess, setPokemonToGuess] = useAtom(pokemonToGuessAtom);
-  const [classicPracticeAnswers, _] = useAtom(classicPracticeAnswersAtom);
+  const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
+  const [classicPracticeAnswers] = useAtom(classicPracticeAnswersAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
-  const [guesses, setGuesses] = useAtom(guessAtom);
+  const setGuesses = useSetAtom(guessAtom);
   const [mode, setMode] = useAtom(currentGameMode);
   const setDailies = useSetAtom(setDailiesAtom);
 
@@ -49,14 +49,12 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
         ...prev,
         classicUnlimited: defaultGuesses - classicPracticeAnswers.length,
       }));
-      console.log(guesses.classicUnlimited);
     }
   }, [
     mode,
     classicPracticeAnswers,
     setGuessedItems,
     setGuesses,
-    guesses.classicUnlimited,
     guessedItems.classicUnlimited,
   ]);
 
