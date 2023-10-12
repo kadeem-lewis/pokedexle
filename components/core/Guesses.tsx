@@ -8,11 +8,11 @@ export default function Guesses() {
   const guesses = useAtomValue(guessAtom)[mode];
 
   return (
-    <div className="gap-0.5 my-4 flex flex-row justify-end ">
+    <div className="my-4 flex flex-row justify-end gap-0.5 ">
       {[...Array(defaultGuesses)].map((value, index) => (
         <Icons.pokeball
           key={index}
-          className={`w-6 h-6 ${index + 1 > guesses ? "grayscale" : ""}`}
+          className={`h-6 w-6 ${index + 1 > guesses ? "grayscale" : ""}`}
         />
       ))}
     </div>

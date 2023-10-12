@@ -58,14 +58,14 @@ export default function PokemonFeedback({
   return (
     <>
       <Guesses />
-      <div className="flex flex-col gap-y-2 gap-x-1 overflow-x-auto capitalize justify-center">
+      <div className="flex flex-col justify-center gap-x-1 gap-y-2 overflow-x-auto capitalize">
         {/* TODO: center headings for grid */}
         {guessedItems.length !== 0 && (
           <div className="flex">
             {HEADINGS.map((heading) => (
               <div
                 key={heading}
-                className="text-center basis-1/6 font-medium uppercase"
+                className="basis-1/6 text-center font-medium uppercase"
               >
                 {heading}
               </div>

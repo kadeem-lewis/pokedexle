@@ -73,7 +73,7 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
           }
         }}
       >
-        <Tab.List className="flex justify-center gap-2 mt-2">
+        <Tab.List className="mt-2 flex justify-center gap-2">
           <Tab
             className="bg-yellow-500 ui-selected:brightness-110 ui-not-selected:brightness-75"
             as={Button}

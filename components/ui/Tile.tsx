@@ -3,7 +3,7 @@ import { ComponentProps } from "react";
 //proposed reusable component that would be responsible for showing the titles in the FeedbackRow?
 
 const tileVariants = cva(
-  "basis-1/6 border-2 before:block shadow-inner text-white border-black text-shadow",
+  "text-shadow basis-1/6 border-2 border-black text-white shadow-inner before:block",
   {
     variants: {
       status: {
@@ -12,12 +12,12 @@ const tileVariants = cva(
       },
       difference: {
         higher:
-          "relative after:w-full after:absolute after:h-full after:clip-path-arrowup after:bg-red-800 after:hover:bg-red-950 after:-z-10 after:left-0 after:top-0",
+          "relative after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:bg-red-800 after:clip-path-arrowup after:hover:bg-red-950",
         lower:
-          "relative after:clip-path-arrowdown after:w-full after:absolute after:h-full after:bg-red-800 after:hover:bg-red-950 after:-z-10 after:left-0 after:top-0",
+          "relative after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:bg-red-800 after:clip-path-arrowdown after:hover:bg-red-950",
       },
     },
-  }
+  },
 );
 
 interface TileProps
@@ -39,8 +39,8 @@ function TileContent({ className, ...props }: TitleContentProps) {
   return (
     <div
       className={cx(
-        "flex justify-center items-center h-full text-center",
-        className
+        "flex h-full items-center justify-center text-center",
+        className,
       )}
       {...props}
     />

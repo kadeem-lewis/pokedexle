@@ -30,7 +30,7 @@ export default function GameOverContent() {
       </div>
 
       {correctAnswer && (
-        <div className="flex justify-center flex-col items-center">
+        <div className="flex flex-col items-center justify-center">
           <Image
             src={correctAnswer.sprite}
             alt={`${correctAnswer.name} sprite`}
@@ -42,7 +42,7 @@ export default function GameOverContent() {
         </div>
       )}
       {mode === "classicUnlimited" ? (
-        <div className="flex gap-4 justify-center text-2xl">
+        <div className="flex justify-center gap-4 text-2xl">
           <span>Wanna try again?</span>
           <button onClick={() => setNewGame()}>New Game</button>
         </div>

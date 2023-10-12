@@ -14,15 +14,15 @@ export default function LinkCard({
 }: Props) {
   return (
     <div
-      className="my-6  rounded-lg text-white border-amber-300 border-4 outline-3 outline outline-black dark:outline-white dark:border-amber-500"
+      className="outline-3 my-6 rounded-lg border-4 border-amber-300 text-white outline outline-black dark:border-amber-500 dark:outline-white"
       style={{ backgroundImage: `url(${background})` }}
     >
-      <div className="w-full h-full bg-white/10 p-4">
+      <div className="h-full w-full bg-white/10 p-4">
         <Link href={path}>
-          <p className="text-3xl drop-shadow-md uppercase text-shadow">
+          <p className="text-shadow text-3xl uppercase drop-shadow-md">
             {title}
           </p>
-          <p className="text-2xl text-shadow">{description}</p>
+          <p className="text-shadow text-2xl">{description}</p>
         </Link>
       </div>
     </div>

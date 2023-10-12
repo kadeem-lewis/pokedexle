@@ -6,9 +6,9 @@ import { poundConversion } from "@/atoms/GameAtoms";
 
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (
-    <div className="block truncate h-24">
+    <div className="block h-24 truncate">
       {/*TODO:Change to a non pixelated font to improve readability or remove the text-border if it has any */}
-      <div className="flex items-center justify-center h-full gap-4">
+      <div className="flex h-full items-center justify-center gap-4">
         <Image
           src={pokemon.sprite}
           width={80}
@@ -18,14 +18,14 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
         <div className="grid grid-cols-2 text-xl">
           <div className="text-xl font-bold">{pokemon.name}</div>
           <div className="font-semibold">Gen {pokemon.generation}</div>
-          <div className="col-span-2 space-x-2 flex">
+          <div className="col-span-2 flex space-x-2">
             {pokemon.types.map((type) => {
               const typeObj = TYPES.find((element) => element === type);
               return typeObj ? (
                 <TypeBadge
                   key={type}
                   type={type as PokemonType}
-                  className="px-1 py-0.5 text-sm col-span-1"
+                  className="col-span-1 px-1 py-0.5 text-sm"
                 >
                   {type}
                 </TypeBadge>

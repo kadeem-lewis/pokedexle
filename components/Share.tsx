@@ -29,7 +29,7 @@ export default function Share() {
 
   const comparePokemonValue = (
     correctValue: number,
-    guessedValue: number
+    guessedValue: number,
   ): string => {
     if (guessedValue === correctValue) return emojis["correct"];
     return guessedValue < correctValue ? emojis["higher"] : emojis["lower"];
@@ -37,10 +37,10 @@ export default function Share() {
 
   const comparePokemonTypes = (
     correctTypes: string[],
-    guessedTypes: string[]
+    guessedTypes: string[],
   ): string[] => {
     return guessedTypes.map((type) =>
-      correctTypes.includes(type) ? emojis["correct"] : emojis["incorrect"]
+      correctTypes.includes(type) ? emojis["correct"] : emojis["incorrect"],
     );
   };
 
@@ -51,19 +51,19 @@ export default function Share() {
       .map((guess) => {
         const generationEmoji = comparePokemonValue(
           correctAnswer.generation,
-          guess.generation
+          guess.generation,
         );
         const weightEmoji = comparePokemonValue(
           correctAnswer.weight,
-          guess.weight
+          guess.weight,
         );
         const heightEmoji = comparePokemonValue(
           correctAnswer.height,
-          guess.height
+          guess.height,
         );
         const typesEmoji = comparePokemonTypes(
           correctAnswer.types,
-          guess.types
+          guess.types,
         ).join("");
         return `${generationEmoji} ${typesEmoji} ${weightEmoji} ${heightEmoji} `;
       })

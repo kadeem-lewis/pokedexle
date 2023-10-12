@@ -36,9 +36,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={pokemonDs.className}>
         <Providers>
-          <div className=" max-w-md h-screen mx-auto px-4 flex flex-col">
+          <div className=" mx-auto flex h-screen max-w-md flex-col px-4">
             <Navbar />
-            <main className="pt-2 text-2xl grow mb-auto">{children}</main>
+            <main className="mb-auto grow pt-2 text-2xl">{children}</main>
             <Footer />
           </div>
         </Providers>

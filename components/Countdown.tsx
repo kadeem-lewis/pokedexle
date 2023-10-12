@@ -3,7 +3,7 @@ import { differenceInSeconds } from "date-fns";
 
 export default function Countdown({ targetDate }: { targetDate: Date }) {
   const [timeLeft, setTimeLeft] = useState<number>(
-    calculateTimeLeft(targetDate)
+    calculateTimeLeft(targetDate),
   );
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { defaultGuesses } from "@/atoms/GameAtoms";
 
 export default function HowToPlayContent() {
   return (
-    <div className=" text-2xl space-y-2">
+    <div className=" space-y-2 text-2xl">
       <p>Guess the pokemon in {defaultGuesses} tries</p>
       <hr />
       <p>

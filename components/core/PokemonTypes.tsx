@@ -55,13 +55,13 @@ export default function PokemonTypes() {
   //if the type isnt in the correct answer but it was guess disable it
   //if the type is in the guessed items array and in the correct answer then highlight it
   const getTypeEffect = (
-    type: PokemonType
+    type: PokemonType,
   ): "highlighted" | "disabled" | "default" => {
     if (guessedItems.length) {
       if (
         guessedItems.some(
           (item) =>
-            item.types.includes(type) && pokemonToGuess?.types.includes(type)
+            item.types.includes(type) && pokemonToGuess?.types.includes(type),
         )
       ) {
         return "highlighted";
@@ -69,7 +69,7 @@ export default function PokemonTypes() {
       if (
         guessedItems.some(
           (item) =>
-            item.types.includes(type) && !pokemonToGuess?.types.includes(type)
+            item.types.includes(type) && !pokemonToGuess?.types.includes(type),
         )
       ) {
         return "disabled";

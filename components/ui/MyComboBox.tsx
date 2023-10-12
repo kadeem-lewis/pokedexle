@@ -32,7 +32,7 @@ export default function MyComboBox() {
         keys: ["name", "types"],
         threshold: 0.3,
       }),
-    [pokedex]
+    [pokedex],
   );
   const addNewGuess = useSetAtom(addGuessedItemAtom);
   const gameOver = useAtomValue(gameOverAtom);
@@ -110,7 +110,7 @@ export default function MyComboBox() {
           {error && <p>Pokemon Already Entered</p>}
         </>
       ) : mode === "classicUnlimited" ? (
-        <div className="flex justify-center my-2">
+        <div className="my-2 flex justify-center">
           <Button
             variant="flat"
             className="bg-blue-400 hover:bg-blue-500"
@@ -120,7 +120,7 @@ export default function MyComboBox() {
           </Button>
         </div>
       ) : (
-        <div className="flex justify-center items-center my-2 gap-2">
+        <div className="my-2 flex items-center justify-center gap-2">
           <p className="text-3xl">New Game in:</p>
           <Countdown targetDate={targetDate} />
         </div>
