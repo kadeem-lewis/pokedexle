@@ -60,7 +60,7 @@ export default function PokemonFeedback({
   return (
     <>
       <Guesses />
-      <div className="flex flex-col gap-y-2 gap-x-1 overflow-x-auto capitalize justify-center w-full max-w-2xl">
+      <div className="flex flex-col gap-y-2 gap-x-1 overflow-x-auto capitalize justify-center">
         {/* TODO: center headings for grid */}
         {guessedItems.length !== 0 && (
           <div className="flex">
