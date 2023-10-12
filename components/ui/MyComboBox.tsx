@@ -111,7 +111,11 @@ export default function MyComboBox() {
         </>
       ) : mode === "classicUnlimited" ? (
         <div className="flex justify-center my-2">
-          <Button variant="flat" onClick={() => setNewGame()}>
+          <Button
+            variant="flat"
+            className="bg-blue-400 hover:bg-blue-500"
+            onClick={() => setNewGame()}
+          >
             New Game
           </Button>
         </div>
