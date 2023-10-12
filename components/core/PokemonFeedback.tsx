@@ -1,8 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
-  classicGameOver,
   currentGameMode,
   gameOverAtom,
   guessAtom,
