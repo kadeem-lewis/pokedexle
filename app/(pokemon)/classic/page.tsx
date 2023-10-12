@@ -8,5 +8,5 @@ export const metadata = {
 
 export default async function Classic() {
   const pokedex = await prisma.pokemon.findMany();
-  return <div>{pokedex && <Gamebox pokedex={pokedex} />}</div>;
+  return <>{pokedex && <Gamebox pokedex={pokedex} />}</>;
 }

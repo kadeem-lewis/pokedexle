@@ -8,7 +8,7 @@ export default function PokemonLayout({
   return (
     <>
       <OptionsBar />
-      <div>{children}</div>
+      {children}
     </>
   );
 }
