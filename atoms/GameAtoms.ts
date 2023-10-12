@@ -141,15 +141,6 @@ export const newGameAtom = atom(null, (get, set) => {
     set(classicPracticeSolutionAtom, newPokemonToGuess);
     set(classicPracticeAnswersAtom, []);
   }
-
-  // For "classic" mode:
-  if (mode === "classic") {
-    // Reset guessed items for the "classic" mode.
-    set(guessedItemsAtom, { ...get(guessedItemsAtom), classic: [] });
-
-    // Reset guess count for the "classic" mode.
-    set(guessAtom, { ...get(guessAtom), classic: defaultGuesses });
-  }
 });
 
 newGameAtom.debugLabel = "newGameAtom";
