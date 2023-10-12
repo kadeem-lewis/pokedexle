@@ -1,6 +1,6 @@
 import { atom } from "jotai";
-import { RESET, atomWithStorage } from "jotai/utils";
-import { startOfDay, isToday, subMinutes, isSameDay } from "date-fns";
+import { atomWithStorage } from "jotai/utils";
+import { isSameDay, startOfDay, subMinutes } from "date-fns";
 import { Daily } from "@prisma/client";
 
 export interface Pokemon {
@@ -35,6 +35,14 @@ export const guessAtom = atom({
   classicUnlimited: defaultGuesses,
 });
 guessAtom.debugLabel = "guessAtom";
+
+//!find a way to set the inital value to localStorageItem if available. Also maybe track the classic answers and solution in the same atom to prevent desync
+//atom that stores the pokemon that have been guessed
+export const guessedItemsAtom = atom({
+  classic: [] as Pokemon[],
+  classicUnlimited: [] as Pokemon[],
+});
+guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
 //atom that gets the current Date and can be used to get dates of other days
 const dateAtom = atom(new Date());
@@ -80,7 +88,10 @@ export const setDailiesAtom = atom(null, async (get, set) => {
 
   set(dailyPokemonAtom, dailyClassicPokemon);
 
-  if (get(classicAnswersAtom).date === date) {
+  if (
+    isSameDay(get(classicAnswersAtom).date, new Date(date)) &&
+    get(classicAnswersAtom).answers.length
+  ) {
     set(guessedItemsAtom, (prev) => ({
       ...prev,
       classic: get(classicAnswersAtom).answers,
@@ -107,22 +118,14 @@ export const gameOverAtom = atom({
 });
 gameOverAtom.debugLabel = "gameOverAtom";
 
-//!find a way to set the inital value to localStorageItem if available. Also maybe track the classic answers and solution in the same atom to prevent desync
-//atom that stores the pokemon that have been guessed
-export const guessedItemsAtom = atom({
-  classic: [] as Pokemon[],
-  classicUnlimited: [] as Pokemon[],
-});
-guessedItemsAtom.debugLabel = "guessedItemsAtom";
-
 //?maybe use enum for types or some other typescript feature
 export const currentGameMode = atom<"classic" | "classicUnlimited">("classic");
 currentGameMode.debugLabel = "currentGameMode";
+
 //derived writable atom that is attempting to reset all values back to their defaults
 export const newGameAtom = atom(null, (get, set) => {
   const mode = get(currentGameMode);
 
-  // For "classicUnlimited" mode:
   if (mode === "classicUnlimited") {
     // Update game over status for the "classicUnlimited" mode.
     set(gameOverAtom, { ...get(gameOverAtom), classicUnlimited: false });
@@ -131,22 +134,16 @@ export const newGameAtom = atom(null, (get, set) => {
     const newPokemonToGuess =
       get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)];
 
-    // Update guessed items for the "classicUnlimited" mode.
+    //resetting values
     set(guessedItemsAtom, { ...get(guessedItemsAtom), classicUnlimited: [] });
-
-    // Update guess count for the "classicUnlimited" mode.
     set(guessAtom, { ...get(guessAtom), classicUnlimited: defaultGuesses });
-
-    // Set the classic practice solution (assuming this is only for "classicUnlimited" mode).
     set(classicPracticeSolutionAtom, newPokemonToGuess);
     set(classicPracticeAnswersAtom, []);
   }
 });
-
 newGameAtom.debugLabel = "newGameAtom";
 
 //derived writable atom that adds the value passed into the guessed item array
-//? Could have write function take in a key to specify which array to add item to
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const mode = get(currentGameMode);
 
@@ -213,5 +210,3 @@ export const whosThatPokemonPracticeAtom = atomWithStorage<string[]>(
   []
 );
 export const classicWinsAtom = atomWithStorage("classic_win_count", 0);
-
-export const classicGameOver = atomWithStorage("classic_game_over", false);
