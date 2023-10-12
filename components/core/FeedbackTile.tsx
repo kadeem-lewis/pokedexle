@@ -108,9 +108,9 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
             </Tile>
           )}
           {guessedItem.height === correctItem.height ? (
-            <div className="bg-green-400 p-2 border-2 border-current">
-              {correctItem.height / 10}m
-            </div>
+            <Tile status="correct">
+              <TileContent>{correctItem.height / 10}m</TileContent>
+            </Tile>
           ) : (
             <Tile
               status="incorrect"
