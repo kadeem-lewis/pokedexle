@@ -51,7 +51,7 @@ dateAtom.debugLabel = "dateAtom";
 //function to fetch Daily entry from database
 export const dailyAtom = atom(async (get) => {
   const response = await fetch(
-    `/api/dailies?date=${get(dateAtom).toISOString()}`
+    `/api/dailies?date=${get(dateAtom).toISOString()}`,
   );
   if (!response.ok) {
     throw new Error("Network response was not OK");
@@ -82,7 +82,7 @@ export const setDailiesAtom = atom(null, async (get, set) => {
   const mode = get(currentGameMode);
 
   const dailyClassicPokemon = get(pokedexAtom).find(
-    (pokemon) => pokemon.id === classicId
+    (pokemon) => pokemon.id === classicId,
   );
   if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
 
@@ -104,7 +104,7 @@ export const setDailiesAtom = atom(null, async (get, set) => {
     set(classicAnswersAtom, {
       date: subMinutes(
         startOfDay(new Date()),
-        startOfDay(new Date()).getTimezoneOffset()
+        startOfDay(new Date()).getTimezoneOffset(),
       ),
       answers: [] as Pokemon[],
     });
@@ -183,7 +183,7 @@ addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
 export const classicAnswersAtom = atomWithStorage("classic_answers", {
   date: subMinutes(
     startOfDay(new Date()),
-    startOfDay(new Date()).getTimezoneOffset()
+    startOfDay(new Date()).getTimezoneOffset(),
   ),
   answers: [] as Pokemon[],
 });
@@ -191,22 +191,22 @@ classicAnswersAtom.debugLabel = "classicAnswersAtom";
 
 export const classicPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
   "classic_practice_answers",
-  []
+  [],
 );
 classicPracticeAnswersAtom.debugLabel = "classicPracticeAnswersAtom";
 
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
   "classic_practice_solution",
-  null
+  null,
 );
 classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
 
 export const whosThatPokemonAnswersAtom = atomWithStorage<string[]>(
   "wtp_answers",
-  []
+  [],
 );
 export const whosThatPokemonPracticeAtom = atomWithStorage<string[]>(
   "wtp_practice_answers",
-  []
+  [],
 );
 export const classicWinsAtom = atomWithStorage("classic_win_count", 0);
