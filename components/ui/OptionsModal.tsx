@@ -44,8 +44,13 @@ export default function OptionsModal({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="relative my-8 w-full max-w-md rounded-lg border-4 border-current bg-white p-4 dark:bg-black">
-                <Dialog.Title as="h3" className="text-4xl font-bold">
+                <Dialog.Title
+                  as="h3"
+                  className="flex items-center justify-start gap-x-2 text-4xl font-bold uppercase"
+                >
+                  <Icons.pokeballOutline className="h-8 w-8" />
                   {title}
+                  <Icons.pokeballOutline className="h-8 w-8" />
                 </Dialog.Title>
                 <button
                   onClick={() => {
@@ -54,7 +59,7 @@ export default function OptionsModal({
                 >
                   <Icons.xMark className="absolute right-6 top-6 h-6 w-6 stroke-2 text-current" />
                 </button>
-                <div>{children}</div>
+                {children}
               </Dialog.Panel>
             </Transition.Child>
           </div>
