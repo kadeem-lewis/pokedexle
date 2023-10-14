@@ -11,7 +11,6 @@ import {
 } from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
 
-//TODO: change from array to object so I can use names instead of random indexes
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",
   correct: "🟩",
