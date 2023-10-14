@@ -45,7 +45,7 @@ export const guessedItemsAtom = atom({
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
 //atom that gets the current Date and can be used to get dates of other days
-const dateAtom = atom(new Date());
+export const dateAtom = atom(new Date());
 dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
