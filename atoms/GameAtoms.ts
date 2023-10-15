@@ -2,6 +2,7 @@ import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
 import { Daily } from "@prisma/client";
+import { defaultGuesses } from "@/constants";
 
 export interface Pokemon {
   id: number;
@@ -23,8 +24,16 @@ export interface Move {
   accuracy?: number;
 }
 
-export const defaultGuesses = 6;
-export const poundConversion = 0.22046; //hectograms to pounds
+interface DailyStorage {
+  date: Date;
+  answers: Pokemon[];
+}
+
+interface GuessedItems {
+  classic: Pokemon[];
+  classicUnlimited: Pokemon[];
+}
+
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";
@@ -38,9 +47,9 @@ guessAtom.debugLabel = "guessAtom";
 
 //!find a way to set the inital value to localStorageItem if available. Also maybe track the classic answers and solution in the same atom to prevent desync
 //atom that stores the pokemon that have been guessed
-export const guessedItemsAtom = atom({
-  classic: [] as Pokemon[],
-  classicUnlimited: [] as Pokemon[],
+export const guessedItemsAtom = atom<GuessedItems>({
+  classic: [],
+  classicUnlimited: [],
 });
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
@@ -61,6 +70,12 @@ export const dailyAtom = atom(async (get) => {
 });
 dailyAtom.debugLabel = "dailyAtom";
 
+export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
+  "classic_practice_solution",
+  null,
+);
+classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
+
 //Initializes the pokemon to guess Object
 export const pokemonToGuessAtom = atom((get) => {
   return {
@@ -76,6 +91,24 @@ pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 const dailyPokemonAtom = atom<Pokemon | null>(null);
 dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 
+export const classicAnswersAtom = atomWithStorage<DailyStorage>(
+  "classic_answers",
+  {
+    date: subMinutes(
+      startOfDay(new Date()),
+      startOfDay(new Date()).getTimezoneOffset(),
+    ),
+    answers: [],
+  },
+);
+classicAnswersAtom.debugLabel = "classicAnswersAtom";
+
+export const classicPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
+  "classic_practice_answers",
+  [],
+);
+classicPracticeAnswersAtom.debugLabel = "classicPracticeAnswersAtom";
+
 //*This works but only runs if called in code
 export const setDailiesAtom = atom(null, async (get, set) => {
   const { classicId, moveId, whosThatPokemonId, date } = await get(dailyAtom);
@@ -88,10 +121,7 @@ export const setDailiesAtom = atom(null, async (get, set) => {
 
   set(dailyPokemonAtom, dailyClassicPokemon);
 
-  if (
-    isSameDay(get(classicAnswersAtom).date, new Date(date)) &&
-    get(classicAnswersAtom).answers.length
-  ) {
+  if (isSameDay(get(classicAnswersAtom).date, new Date(date))) {
     set(guessedItemsAtom, (prev) => ({
       ...prev,
       classic: get(classicAnswersAtom).answers,
@@ -106,7 +136,7 @@ export const setDailiesAtom = atom(null, async (get, set) => {
         startOfDay(new Date()),
         startOfDay(new Date()).getTimezoneOffset(),
       ),
-      answers: [] as Pokemon[],
+      answers: [],
     });
   }
 });
@@ -128,15 +158,15 @@ export const newGameAtom = atom(null, (get, set) => {
 
   if (mode === "classicUnlimited") {
     // Update game over status for the "classicUnlimited" mode.
-    set(gameOverAtom, { ...get(gameOverAtom), classicUnlimited: false });
+    set(gameOverAtom, (prev) => ({ ...prev, classicUnlimited: false }));
 
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
       get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)];
 
     //resetting values
-    set(guessedItemsAtom, { ...get(guessedItemsAtom), classicUnlimited: [] });
-    set(guessAtom, { ...get(guessAtom), classicUnlimited: defaultGuesses });
+    set(guessedItemsAtom, (prev) => ({ ...prev, classicUnlimited: [] }));
+    set(guessAtom, (prev) => ({ ...prev, classicUnlimited: defaultGuesses }));
     set(classicPracticeSolutionAtom, newPokemonToGuess);
     set(classicPracticeAnswersAtom, []);
   }
@@ -157,10 +187,7 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
       answers: [...prev.answers, newItem],
     }));
   } else if (mode === "classicUnlimited") {
-    set(classicPracticeAnswersAtom, [
-      ...get(classicPracticeAnswersAtom),
-      newItem,
-    ]);
+    set(classicPracticeAnswersAtom, (prev) => [...prev, newItem]);
   }
   if (!(newItem.name === get(pokemonToGuessAtom)[mode]?.name)) {
     set(guessAtom, (prev) => ({
@@ -179,27 +206,6 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   }
 });
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
-
-export const classicAnswersAtom = atomWithStorage("classic_answers", {
-  date: subMinutes(
-    startOfDay(new Date()),
-    startOfDay(new Date()).getTimezoneOffset(),
-  ),
-  answers: [] as Pokemon[],
-});
-classicAnswersAtom.debugLabel = "classicAnswersAtom";
-
-export const classicPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
-  "classic_practice_answers",
-  [],
-);
-classicPracticeAnswersAtom.debugLabel = "classicPracticeAnswersAtom";
-
-export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
-  "classic_practice_solution",
-  null,
-);
-classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
 
 export const whosThatPokemonAnswersAtom = atomWithStorage<string[]>(
   "wtp_answers",
