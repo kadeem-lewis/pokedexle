@@ -1,4 +1,6 @@
 import OptionsBar from "@/components/layout/OptionsBar";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export default function PokemonLayout({
   children,
@@ -8,7 +10,7 @@ export default function PokemonLayout({
   return (
     <>
       <OptionsBar />
-      {children}
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </>
   );
 }
