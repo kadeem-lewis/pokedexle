@@ -1,5 +1,5 @@
 import React from "react";
-import { defaultGuesses } from "@/atoms/GameAtoms";
+import { defaultGuesses } from "@/constants";
 
 export default function HowToPlayContent() {
   return (

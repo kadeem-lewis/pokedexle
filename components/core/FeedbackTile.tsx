@@ -1,7 +1,7 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import { Tile, TileContent } from "../ui/Tile";
-import { poundConversion } from "@/atoms/GameAtoms";
+import { poundConversion } from "@/constants";
 
 interface Props {
   guessedItem: Pokemon;

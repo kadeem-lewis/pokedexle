@@ -1,7 +1,8 @@
 import React from "react";
 import { Icons } from "../Icons";
 import { useAtomValue } from "jotai";
-import { currentGameMode, defaultGuesses, guessAtom } from "@/atoms/GameAtoms";
+import { currentGameMode, guessAtom } from "@/atoms/GameAtoms";
+import { defaultGuesses } from "@/constants";
 
 export default function Guesses() {
   const mode = useAtomValue(currentGameMode);

@@ -5,11 +5,11 @@ import {
   currentGameMode,
   pokemonToGuessAtom,
   gameOverAtom,
-  defaultGuesses,
   dailyAtom,
   guessAtom,
 } from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
+import { defaultGuesses } from "@/constants";
 
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",

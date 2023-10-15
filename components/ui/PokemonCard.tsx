@@ -2,7 +2,7 @@ import Image from "next/image";
 import { TYPES, PokemonType } from "../core/PokemonTypes";
 import { TypeBadge } from "./TypeBadge";
 import { Pokemon } from "@/atoms/GameAtoms";
-import { poundConversion } from "@/atoms/GameAtoms";
+import { poundConversion } from "@/constants";
 
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (

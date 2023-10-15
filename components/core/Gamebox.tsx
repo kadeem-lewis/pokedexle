@@ -12,8 +12,8 @@ import {
   classicPracticeAnswersAtom,
   guessedItemsAtom,
   guessAtom,
-  defaultGuesses,
 } from "@/atoms/GameAtoms";
+import { defaultGuesses } from "@/constants";
 import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
