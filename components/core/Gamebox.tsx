@@ -47,25 +47,24 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   }, [classicId, pokedex, setDailyPokemon]);
 
   useEffect(() => {
-    if (mode === "classic" && guessedItems.classic.length === 0) {
-      if (isSameDay(new Date(classicAnswers.date), new Date(date))) {
-        setGuessedItems((prev) => ({
-          ...prev,
-          classic: classicAnswers.answers,
-        }));
-        setGuesses((prev) => ({
-          ...prev,
-          classic: defaultGuesses - classicAnswers.answers.length,
-        }));
-      } else {
-        setClassicAnswers({
-          date: subMinutes(
-            startOfDay(new Date()),
-            startOfDay(new Date()).getTimezoneOffset(),
-          ),
-          answers: [],
-        });
-      }
+    if (mode !== "classic") return;
+    if (isSameDay(new Date(classicAnswers.date), new Date(date))) {
+      setGuessedItems((prev) => ({
+        ...prev,
+        classic: classicAnswers.answers,
+      }));
+      setGuesses((prev) => ({
+        ...prev,
+        classic: defaultGuesses - classicAnswers.answers.length,
+      }));
+    } else {
+      setClassicAnswers({
+        date: subMinutes(
+          startOfDay(new Date()),
+          startOfDay(new Date()).getTimezoneOffset(),
+        ),
+        answers: [],
+      });
     }
   }, [
     classicAnswers.date,
