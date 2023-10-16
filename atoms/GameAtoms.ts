@@ -88,7 +88,7 @@ export const pokemonToGuessAtom = atom((get) => {
 pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
 //controls the daily classic Pokemon
-const dailyPokemonAtom = atom<Pokemon | null>(null);
+export const dailyPokemonAtom = atom<Pokemon | null>(null);
 dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
@@ -108,38 +108,6 @@ export const classicPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
   [],
 );
 classicPracticeAnswersAtom.debugLabel = "classicPracticeAnswersAtom";
-
-//*This works but only runs if called in code
-export const setDailiesAtom = atom(null, async (get, set) => {
-  const { classicId, moveId, whosThatPokemonId, date } = await get(dailyAtom);
-  const mode = get(currentGameMode);
-
-  const dailyClassicPokemon = get(pokedexAtom).find(
-    (pokemon) => pokemon.id === classicId,
-  );
-  if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
-
-  set(dailyPokemonAtom, dailyClassicPokemon);
-
-  if (isSameDay(get(classicAnswersAtom).date, new Date(date))) {
-    set(guessedItemsAtom, (prev) => ({
-      ...prev,
-      classic: get(classicAnswersAtom).answers,
-    }));
-    set(guessAtom, (prev) => ({
-      ...prev,
-      classic: defaultGuesses - get(classicAnswersAtom).answers.length,
-    }));
-  } else {
-    set(classicAnswersAtom, {
-      date: subMinutes(
-        startOfDay(new Date()),
-        startOfDay(new Date()).getTimezoneOffset(),
-      ),
-      answers: [],
-    });
-  }
-});
 
 //atom that is responsible for saying if the game is over or not
 export const gameOverAtom = atom({

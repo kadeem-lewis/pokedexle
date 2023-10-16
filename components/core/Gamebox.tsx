@@ -8,10 +8,12 @@ import {
   pokedexAtom,
   pokemonToGuessAtom,
   currentGameMode,
-  setDailiesAtom,
   classicPracticeAnswersAtom,
   guessedItemsAtom,
   guessAtom,
+  classicAnswersAtom,
+  dailyAtom,
+  dailyPokemonAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import MyComboBox from "../ui/MyComboBox";
@@ -19,6 +21,7 @@ import PokemonTypes from "./PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { Button } from "../ui/Button";
+import { isSameDay, startOfDay, subMinutes } from "date-fns";
 
 export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
@@ -27,13 +30,66 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
   const [mode, setMode] = useAtom(currentGameMode);
-  const setDailies = useSetAtom(setDailiesAtom);
+  const { date, classicId } = useAtomValue(dailyAtom);
+  const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
+  const setDailyPokemon = useSetAtom(dailyPokemonAtom);
 
   useEffect(() => {
-    (async () => {
-      setDailies();
-    })();
-  }, [setDailies]);
+    function setDailies() {
+      const dailyClassicPokemon = pokedex.find(
+        (pokemon) => pokemon.id === classicId,
+      );
+      if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
+
+      setDailyPokemon(dailyClassicPokemon);
+    }
+    setDailies();
+  }, [classicId, pokedex, setDailyPokemon]);
+
+  useEffect(() => {
+    if (mode === "classic" && guessedItems.classic.length === 0) {
+      if (isSameDay(new Date(classicAnswers.date), new Date(date))) {
+        setGuessedItems((prev) => ({
+          ...prev,
+          classic: classicAnswers.answers,
+        }));
+        setGuesses((prev) => ({
+          ...prev,
+          classic: defaultGuesses - classicAnswers.answers.length,
+        }));
+      }
+      // else {
+      //   console.log("fml");
+      //   setClassicAnswers({
+      //     date: subMinutes(
+      //       startOfDay(new Date()),
+      //       startOfDay(new Date()).getTimezoneOffset(),
+      //     ),
+      //     answers: [
+      //       {
+      //         id: 10999,
+      //         name: "WTF this stinks",
+      //         generation: 10,
+      //         sprite:
+      //           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/892.png",
+      //         types: ["fucking", "stupid"],
+      //         weight: 420,
+      //         height: 69,
+      //       },
+      //     ],
+      //   });
+      // }
+    }
+  }, [
+    classicAnswers.date,
+    classicAnswers.answers,
+    date,
+    guessedItems.classic.length,
+    mode,
+    setClassicAnswers,
+    setGuessedItems,
+    setGuesses,
+  ]);
 
   useEffect(() => {
     if (
