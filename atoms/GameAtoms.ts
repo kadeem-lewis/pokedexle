@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { isSameDay, startOfDay, subMinutes } from "date-fns";
+import { startOfDay, subMinutes } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
 
@@ -60,7 +60,9 @@ dateAtom.debugLabel = "dateAtom";
 //function to fetch Daily entry from database
 export const dailyAtom = atom(async (get) => {
   const response = await fetch(
-    `/api/dailies?date=${get(dateAtom).toISOString()}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(
+      dateAtom,
+    ).toISOString()}`,
   );
   if (!response.ok) {
     throw new Error("Network response was not OK");
