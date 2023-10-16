@@ -64,7 +64,7 @@ export default function Share() {
           correctAnswer.types,
           guess.types,
         ).join("");
-        return `${generationEmoji} ${typesEmoji} ${weightEmoji} ${heightEmoji} `;
+        return `${generationEmoji} ${typesEmoji} ${heightEmoji} ${weightEmoji}`;
       })
       .join("\n");
   };

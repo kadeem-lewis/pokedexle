@@ -14,7 +14,7 @@ import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
 import Guesses from "./Guesses";
 
-const HEADINGS = ["Name", "Gen", "Type 1", "Type 2", "Weight", "Height"];
+const HEADINGS = ["Name", "Gen", "Type 1", "Type 2", "Height", "Weight"];
 
 export default function PokemonFeedback({
   correctAnswer,

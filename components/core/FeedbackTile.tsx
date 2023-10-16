@@ -89,6 +89,20 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
             </Tile>
           )}
           {guessedItem.types.map((type) => checkTypes(type))}
+          {guessedItem.height === correctItem.height ? (
+            <Tile status="correct">
+              <TileContent>{correctItem.height / 10}m</TileContent>
+            </Tile>
+          ) : (
+            <Tile
+              status="incorrect"
+              difference={
+                guessedItem.height > correctItem.height ? "lower" : "higher"
+              }
+            >
+              <TileContent>{guessedItem.height / 10}m</TileContent>
+            </Tile>
+          )}
           {guessedItem.weight === correctItem.weight ? (
             <Tile status="correct">
               <TileContent>
@@ -105,20 +119,6 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
               <TileContent>
                 {(guessedItem.weight * poundConversion).toFixed(1)} lbs
               </TileContent>
-            </Tile>
-          )}
-          {guessedItem.height === correctItem.height ? (
-            <Tile status="correct">
-              <TileContent>{correctItem.height / 10}m</TileContent>
-            </Tile>
-          ) : (
-            <Tile
-              status="incorrect"
-              difference={
-                guessedItem.height > correctItem.height ? "lower" : "higher"
-              }
-            >
-              <TileContent>{guessedItem.height / 10}m</TileContent>
             </Tile>
           )}
         </>
