@@ -14,13 +14,13 @@ export default function FeedbackTile({ guessedItem, correctItem }: Props) {
   function checkTypes(type: string): JSX.Element {
     if (correctItem.types.includes(type)) {
       return (
-        <Tile status="correct">
+        <Tile status="correct" key={type}>
           <TileContent>{type}</TileContent>
         </Tile>
       );
     }
     return (
-      <Tile status="incorrect">
+      <Tile status="incorrect" key={type}>
         <TileContent>{type}</TileContent>
       </Tile>
     );
