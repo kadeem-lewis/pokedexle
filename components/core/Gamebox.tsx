@@ -57,28 +57,15 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
           ...prev,
           classic: defaultGuesses - classicAnswers.answers.length,
         }));
+      } else {
+        setClassicAnswers({
+          date: subMinutes(
+            startOfDay(new Date()),
+            startOfDay(new Date()).getTimezoneOffset(),
+          ),
+          answers: [],
+        });
       }
-      // else {
-      //   console.log("fml");
-      //   setClassicAnswers({
-      //     date: subMinutes(
-      //       startOfDay(new Date()),
-      //       startOfDay(new Date()).getTimezoneOffset(),
-      //     ),
-      //     answers: [
-      //       {
-      //         id: 10999,
-      //         name: "WTF this stinks",
-      //         generation: 10,
-      //         sprite:
-      //           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/892.png",
-      //         types: ["fucking", "stupid"],
-      //         weight: 420,
-      //         height: 69,
-      //       },
-      //     ],
-      //   });
-      // }
     }
   }, [
     classicAnswers.date,
