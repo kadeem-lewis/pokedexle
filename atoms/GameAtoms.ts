@@ -32,6 +32,10 @@ interface DailyStorage {
 interface GuessedItems {
   classic: Pokemon[];
   classicUnlimited: Pokemon[];
+  whosthatpokemon: Pokemon[];
+  whosthatpokemonUnlimited: Pokemon[];
+  move: Move[];
+  moveUnlimited: Move[];
 }
 
 //gets the array of pokemon from prisma
@@ -42,6 +46,10 @@ pokedexAtom.debugLabel = "pokedexAtom";
 export const guessAtom = atom({
   classic: defaultGuesses,
   classicUnlimited: defaultGuesses,
+  whosthatpokemon: defaultGuesses,
+  whosthatpokemonUnlimited: defaultGuesses,
+  move: defaultGuesses,
+  moveUnlimited: defaultGuesses,
 });
 guessAtom.debugLabel = "guessAtom";
 
@@ -50,6 +58,10 @@ guessAtom.debugLabel = "guessAtom";
 export const guessedItemsAtom = atom<GuessedItems>({
   classic: [],
   classicUnlimited: [],
+  whosthatpokemon: [],
+  whosthatpokemonUnlimited: [],
+  move: [],
+  moveUnlimited: [],
 });
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
@@ -85,11 +97,16 @@ export const pokemonToGuessAtom = atom((get) => {
     classicUnlimited: get(classicPracticeSolutionAtom)
       ? get(classicPracticeSolutionAtom)
       : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
+    whosthatpokemon: null,
+    whosthatpokemonUnlimited: null,
+    move: null,
+    moveUnlimited: null,
   };
 });
 pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
 //controls the daily classic Pokemon
+//TODO: turn this into an object that stores all the daily pokemon?
 export const dailyPokemonAtom = atom<Pokemon | null>(null);
 dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 
@@ -115,11 +132,22 @@ classicPracticeAnswersAtom.debugLabel = "classicPracticeAnswersAtom";
 export const gameOverAtom = atom({
   classic: false,
   classicUnlimited: false,
+  whosthatpokemon: false,
+  whosthatpokemonUnlimited: false,
+  move: false,
+  moveUnlimited: false,
 });
 gameOverAtom.debugLabel = "gameOverAtom";
 
 //?maybe use enum for types or some other typescript feature
-export const currentGameMode = atom<"classic" | "classicUnlimited">("classic");
+export const currentGameMode = atom<
+  | "classic"
+  | "classicUnlimited"
+  | "whosthatpokemon"
+  | "whosthatpokemonUnlimited"
+  | "move"
+  | "moveUnlimited"
+>("classic");
 currentGameMode.debugLabel = "currentGameMode";
 
 //derived writable atom that is attempting to reset all values back to their defaults
