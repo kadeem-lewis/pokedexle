@@ -5,6 +5,7 @@ import {
   newGameAtom,
   currentGameMode,
   guessAtom,
+  Pokemon,
 } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import Countdown from "../Countdown";
@@ -16,7 +17,7 @@ export default function GameOverContent() {
   const setNewGame = useSetAtom(newGameAtom);
   const guesses = useAtomValue(guessAtom)[mode];
   const pokemonGuesses = useAtomValue(pokemonToGuessAtom);
-  const correctAnswer = pokemonGuesses[mode];
+  const correctAnswer = pokemonGuesses[mode] as Pokemon | null;
 
   const targetDate = addDays(startOfDay(new Date()), 1);
   return (

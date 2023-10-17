@@ -2,6 +2,7 @@ import React from "react";
 import { TypeBadge } from "../ui/TypeBadge";
 import { useAtomValue } from "jotai";
 import {
+  Pokemon,
   currentGameMode,
   guessedItemsAtom,
   pokemonToGuessAtom,
@@ -50,8 +51,10 @@ export const TYPES: PokemonType[] = [
 
 export default function PokemonTypes() {
   const mode = useAtomValue(currentGameMode);
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
-  const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
+  const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[
+    mode
+  ] as Pokemon | null;
   //if the type isnt in the correct answer but it was guess disable it
   //if the type is in the guessed items array and in the correct answer then highlight it
   const getTypeEffect = (
