@@ -38,6 +38,12 @@ interface GuessedItems {
   moveUnlimited: Move[];
 }
 
+interface DailyAnswers {
+  classic: Pokemon | null;
+  whosthatpokemon: Pokemon | null;
+  move: Move | null;
+}
+
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";
@@ -90,16 +96,21 @@ export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
 );
 classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
 
+export const whosthatpokemonPracticeSolutionAtom =
+  atomWithStorage<Pokemon | null>("whosthatpokemon_solution", null);
+
 //Initializes the pokemon to guess Object
 export const pokemonToGuessAtom = atom((get) => {
   return {
-    classic: get(dailyPokemonAtom),
+    classic: get(dailyPokemonAtom).classic,
     classicUnlimited: get(classicPracticeSolutionAtom)
       ? get(classicPracticeSolutionAtom)
       : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
-    whosthatpokemon: null,
-    whosthatpokemonUnlimited: null,
-    move: null,
+    whosthatpokemon: get(dailyPokemonAtom).whosthatpokemon,
+    whosthatpokemonUnlimited: get(whosthatpokemonPracticeSolutionAtom)
+      ? get(whosthatpokemonPracticeSolutionAtom)
+      : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
+    move: get(dailyPokemonAtom).move,
     moveUnlimited: null,
   };
 });
@@ -107,7 +118,11 @@ pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
 //controls the daily classic Pokemon
 //TODO: turn this into an object that stores all the daily pokemon?
-export const dailyPokemonAtom = atom<Pokemon | null>(null);
+export const dailyPokemonAtom = atom<DailyAnswers>({
+  classic: null,
+  whosthatpokemon: null,
+  move: null,
+});
 dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
@@ -122,11 +137,28 @@ export const classicAnswersAtom = atomWithStorage<DailyStorage>(
 );
 classicAnswersAtom.debugLabel = "classicAnswersAtom";
 
+export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
+  "whosthatpokemon_answers",
+  {
+    date: subMinutes(
+      startOfDay(new Date()),
+      startOfDay(new Date()).getTimezoneOffset(),
+    ),
+    answers: [],
+  },
+);
+whosthatpokemonAnswersAtom.debugLabel = "whosthatpokemonAnswersAtom";
+
 export const classicPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
   "classic_practice_answers",
   [],
 );
 classicPracticeAnswersAtom.debugLabel = "classicPracticeAnswersAtom";
+
+export const whosthatpokemonPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
+  "whosthatpokemon_practice_answers",
+  [],
+);
 
 //atom that is responsible for saying if the game is over or not
 export const gameOverAtom = atom({
@@ -205,12 +237,4 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
 });
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
 
-export const whosThatPokemonAnswersAtom = atomWithStorage<string[]>(
-  "wtp_answers",
-  [],
-);
-export const whosThatPokemonPracticeAtom = atomWithStorage<string[]>(
-  "wtp_practice_answers",
-  [],
-);
 export const classicWinsAtom = atomWithStorage("classic_win_count", 0);
