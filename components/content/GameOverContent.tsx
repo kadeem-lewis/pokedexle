@@ -32,13 +32,15 @@ export default function GameOverContent() {
 
       {correctAnswer && (
         <div className="flex flex-col items-center justify-center">
-          <Image
-            src={correctAnswer.sprite}
-            alt={`${correctAnswer.name} sprite`}
-            priority={true}
-            width={200}
-            height={200}
-          />
+          {mode !== "move" && mode !== "moveUnlimited" && (
+            <Image
+              src={correctAnswer.sprite}
+              alt={`${correctAnswer.name} sprite`}
+              priority={true}
+              width={200}
+              height={200}
+            />
+          )}
           <p className="text-2xl">The answer was : {correctAnswer.name}</p>
         </div>
       )}
