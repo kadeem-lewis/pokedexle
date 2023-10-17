@@ -7,6 +7,7 @@ import {
   gameOverAtom,
   dailyAtom,
   guessAtom,
+  Pokemon,
 } from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
 import { defaultGuesses } from "@/constants";
@@ -20,9 +21,11 @@ const emojis: { [key: string]: string } = {
 
 export default function Share() {
   const mode = useAtomValue(currentGameMode);
-  const correctAnswer = useAtomValue(pokemonToGuessAtom)[mode];
+  const correctAnswer = useAtomValue(pokemonToGuessAtom)[
+    mode
+  ] as Pokemon | null;
   const attempts = useAtomValue(guessAtom)[mode];
-  const guesses = useAtomValue(guessedItemsAtom)[mode];
+  const guesses = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const gameOver = useAtomValue(gameOverAtom);
   const { id } = useAtomValue(dailyAtom);
 
