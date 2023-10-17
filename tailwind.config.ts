@@ -102,9 +102,9 @@ export default {
         1: "4px",
         2: "6px",
         3: "8px",
-        4: "10px",
-        5: "12px",
-        6: "14px",
+        4: "12px",
+        5: "14px",
+        6: "16px",
       },
     },
     clipPath: {
