@@ -41,7 +41,7 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
       );
       if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
 
-      setDailyPokemon(dailyClassicPokemon);
+      setDailyPokemon((prev) => ({ ...prev, classic: dailyClassicPokemon }));
     }
     setDailies();
   }, [classicId, pokedex, setDailyPokemon]);
