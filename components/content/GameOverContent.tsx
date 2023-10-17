@@ -41,7 +41,7 @@ export default function GameOverContent() {
           <p className="text-2xl">The answer was : {correctAnswer.name}</p>
         </div>
       )}
-      {mode === "classicUnlimited" ? (
+      {mode === "classicUnlimited" || mode === "whosthatpokemonUnlimited" ? (
         <div className="flex justify-center gap-4 text-2xl">
           <span>Wanna try again?</span>
           <button onClick={() => setNewGame()}>New Game</button>
