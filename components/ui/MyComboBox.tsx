@@ -25,6 +25,9 @@ export default function MyComboBox() {
   const mode = useAtomValue(currentGameMode);
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   const targetDate = addDays(startOfDay(new Date()), 1);
+  const addNewGuess = useSetAtom(addGuessedItemAtom);
+  const gameOver = useAtomValue(gameOverAtom);
+  const setNewGame = useSetAtom(newGameAtom);
 
   const fuse = useMemo(
     () =>
@@ -34,9 +37,6 @@ export default function MyComboBox() {
       }),
     [pokedex],
   );
-  const addNewGuess = useSetAtom(addGuessedItemAtom);
-  const gameOver = useAtomValue(gameOverAtom);
-  const setNewGame = useSetAtom(newGameAtom);
 
   const filteredItems =
     query === ""
@@ -109,7 +109,7 @@ export default function MyComboBox() {
           </div>
           {error && <p>Pokemon Already Entered</p>}
         </>
-      ) : mode === "classicUnlimited" ? (
+      ) : mode === "classicUnlimited" || mode === "whosthatpokemonUnlimited" ? (
         <div className="my-2 flex justify-center">
           <Button
             variant="flat"
