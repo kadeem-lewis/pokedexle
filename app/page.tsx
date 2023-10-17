@@ -8,7 +8,7 @@ const NAV_LINKS = [
   },
   {
     title: "Who's that Pokémon?",
-    description: "Coming Soon",
+    description: "Guess the Pokémon based on the image",
     path: "/whosthatpokemon",
     background: "/images/hollowed-boxes.svg",
   },
