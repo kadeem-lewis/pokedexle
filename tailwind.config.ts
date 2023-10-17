@@ -98,6 +98,14 @@ export default {
           300: "#9B6470",
         },
       },
+      blur: {
+        1: "4px",
+        2: "6px",
+        3: "8px",
+        4: "10px",
+        5: "12px",
+        6: "14px",
+      },
     },
     clipPath: {
       arrowup:
