@@ -74,8 +74,9 @@ export default function ImagePanel({
       >
         <Image
           src={correctAnswer.sprite}
-          height={200}
-          width={200}
+          height={300}
+          width={300}
+          priority
           alt={`${correctAnswer.name} sprite`}
         />
       </div>
