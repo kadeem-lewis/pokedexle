@@ -14,8 +14,8 @@ const NAV_LINKS = [
   },
   {
     title: "Guess the Move",
-    description: "Coming Soon",
-    path: "#",
+    description: "Guess the Move",
+    path: "/move",
     background: "/images/dragon-scales.svg",
   },
 ];
