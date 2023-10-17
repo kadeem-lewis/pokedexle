@@ -1,15 +1,17 @@
+import Gamebox from "@/components/move/Gamebox";
 import OptionsBar from "../../components/layout/OptionsBar";
-import MyComboBox from "../../components/ui/MyComboBox";
+import { prisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "Move",
 };
 
 export default async function Move() {
+  const moveList = await prisma.move.findMany();
   return (
     <div>
       <OptionsBar />
-      {/* <MyComboBox data={moveList} /> */}
+      {moveList && <Gamebox moveList={moveList} />}
     </div>
   );
 }
