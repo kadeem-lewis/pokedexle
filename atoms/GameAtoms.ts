@@ -200,6 +200,26 @@ export const newGameAtom = atom(null, (get, set) => {
     set(classicPracticeSolutionAtom, newPokemonToGuess);
     set(classicPracticeAnswersAtom, []);
   }
+  if (mode === "whosthatpokemonUnlimited") {
+    // Update game over status for the "classicUnlimited" mode.
+    set(gameOverAtom, (prev) => ({ ...prev, whosthatpokemonUnlimited: false }));
+
+    // Create a new Pokemon to guess.
+    const newPokemonToGuess =
+      get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)];
+
+    //resetting values
+    set(guessedItemsAtom, (prev) => ({
+      ...prev,
+      whosthatpokemonUnlimited: [],
+    }));
+    set(guessAtom, (prev) => ({
+      ...prev,
+      whosthatpokemonUnlimited: defaultGuesses,
+    }));
+    set(whosthatpokemonPracticeSolutionAtom, newPokemonToGuess);
+    set(whosthatpokemonPracticeAnswersAtom, []);
+  }
 });
 newGameAtom.debugLabel = "newGameAtom";
 
@@ -218,6 +238,13 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
     }));
   } else if (mode === "classicUnlimited") {
     set(classicPracticeAnswersAtom, (prev) => [...prev, newItem]);
+  } else if (mode === "whosthatpokemon") {
+    set(whosthatpokemonAnswersAtom, (prev) => ({
+      date: prev.date,
+      answers: [...prev.answers, newItem],
+    }));
+  } else if (mode === "whosthatpokemonUnlimited") {
+    set(whosthatpokemonPracticeAnswersAtom, (prev) => [...prev, newItem]);
   }
   if (!(newItem.name === get(pokemonToGuessAtom)[mode]?.name)) {
     set(guessAtom, (prev) => ({
@@ -233,6 +260,9 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
       set(classicWinsAtom, (prev) => prev++);
     }
     if (mode === "classicUnlimited") set(classicPracticeAnswersAtom, []);
+    if (mode === "whosthatpokemonUnlimited") {
+      set(whosthatpokemonPracticeAnswersAtom, []);
+    }
   }
 });
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
