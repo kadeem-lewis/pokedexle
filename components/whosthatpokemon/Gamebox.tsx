@@ -21,6 +21,7 @@ import ImagePanel from "./ImagePanel";
 import { useHydrateAtoms } from "jotai/utils";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
 import { defaultGuesses } from "@/constants";
+import { usePathname } from "next/navigation";
 
 export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
@@ -38,6 +39,12 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
     whosthatpokemonAnswersAtom,
   );
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
+  const currentPath = usePathname();
+
+  useEffect(() => {
+    if (currentPath === "/whosthatpokemon" && selectedIndex === 0)
+      setMode("whosthatpokemon");
+  }, [currentPath, selectedIndex, setMode]);
 
   useEffect(() => {
     function setDailies() {

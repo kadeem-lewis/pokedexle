@@ -22,6 +22,8 @@ import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { Button } from "../ui/Button";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
+import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
@@ -33,6 +35,13 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
   const { date, classicId } = useAtomValue(dailyAtom);
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const currentPath = usePathname();
+
+  useEffect(() => {
+    if (currentPath === "/classic" && selectedIndex === 0) setMode("classic");
+  }, [currentPath, selectedIndex, setMode]);
 
   useEffect(() => {
     function setDailies() {
@@ -99,8 +108,6 @@ export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
     setGuesses,
     guessedItems.classicUnlimited,
   ]);
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <>
