@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { differenceInSeconds } from "date-fns";
 
-export default function Countdown({ targetDate }: { targetDate: Date }) {
+type CountdownProps = {
+  targetDate: Date;
+};
+
+export default function Countdown({ targetDate }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState<number>(
     calculateTimeLeft(targetDate),
   );

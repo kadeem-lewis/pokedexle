@@ -3,11 +3,14 @@ import Image from "next/image";
 import { Tile, TileContent } from "../ui/Tile";
 import { poundConversion } from "@/constants";
 
-interface Props {
+type FeedbackTileProps = {
   guessedItem: Pokemon;
   correctItem: Pokemon;
-}
-export default function FeedbackTile({ guessedItem, correctItem }: Props) {
+};
+export default function FeedbackTile({
+  guessedItem,
+  correctItem,
+}: FeedbackTileProps) {
   //TODO: find a way to have the pokemon images scale to the size of the container so smaller characters arent barely visible
   //TODO: increase the size of the grid and have each box have a defined size and have them be in a vertical scrollable container
 

@@ -23,7 +23,11 @@ import { isSameDay, startOfDay, subMinutes } from "date-fns";
 import { defaultGuesses } from "@/constants";
 import { usePathname } from "next/navigation";
 
-export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
+type GameboxProps = {
+  pokedex: Pokemon[];
+};
+
+export default function Gamebox({ pokedex }: GameboxProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [mode, setMode] = useAtom(currentGameMode);
   const [selectedIndex, setSelectedIndex] = useState(0);

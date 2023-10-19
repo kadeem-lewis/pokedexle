@@ -23,7 +23,11 @@ import { defaultGuesses } from "@/constants";
 import { usePathname } from "next/navigation";
 import MoveFeedback from "./MoveFeedback";
 
-export default function Gamebox({ moveList }: { moveList: Move[] }) {
+type GameboxProps = {
+  moveList: Move[];
+};
+
+export default function Gamebox({ moveList }: GameboxProps) {
   useHydrateAtoms([[moveListAtom, moveList]]);
   const [mode, setMode] = useAtom(currentGameMode);
   const [selectedIndex, setSelectedIndex] = useState(0);

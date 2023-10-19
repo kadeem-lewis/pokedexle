@@ -1,12 +1,12 @@
 import OptionsBar from "@/components/layout/OptionsBar";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import Loading from "./loading";
 
-export default function PokemonLayout({
-  children,
-}: {
+type PokemonLayoutProps = {
   children: React.ReactNode;
-}) {
+};
+
+export default function PokemonLayout({ children }: PokemonLayoutProps) {
   return (
     <>
       <OptionsBar />

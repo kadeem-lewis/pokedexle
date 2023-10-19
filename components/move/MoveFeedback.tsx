@@ -14,13 +14,13 @@ import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
 import Guesses from "@/components/core/Guesses";
 
+type MoveFeedbackProps = {
+  correctAnswer: Move;
+};
+
 const HEADINGS = ["Name", "Gen", "Class", "Type", "Power", "PP", "Accuracy"];
 
-export default function PokemonFeedback({
-  correctAnswer,
-}: {
-  correctAnswer: Move;
-}) {
+export default function PokemonFeedback({ correctAnswer }: MoveFeedbackProps) {
   const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];

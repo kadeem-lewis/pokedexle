@@ -2,11 +2,14 @@ import { Move } from "@/atoms/GameAtoms";
 import { Tile, TileContent } from "../ui/Tile";
 import Image from "next/image";
 
-interface Props {
+type FeedbackTileProps = {
   guessedItem: Move;
   correctItem: Move;
-}
-export default function FeedbackTile({ guessedItem, correctItem }: Props) {
+};
+export default function FeedbackTile({
+  guessedItem,
+  correctItem,
+}: FeedbackTileProps) {
   //TODO: find a way to have the pokemon images scale to the size of the container so smaller characters arent barely visible
   //TODO: increase the size of the grid and have each box have a defined size and have them be in a vertical scrollable container
 

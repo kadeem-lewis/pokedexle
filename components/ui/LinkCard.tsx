@@ -1,17 +1,17 @@
 import React from "react";
 import Link from "next/link";
-interface Props {
+type ModalProps = {
   title: string;
   description: string;
   path: string;
   background: string;
-}
+};
 export default function LinkCard({
   title,
   description,
   path,
   background,
-}: Props) {
+}: ModalProps) {
   return (
     <div
       className="outline-3 my-6 rounded-lg border-4 border-amber-300 text-white outline outline-black dark:border-amber-500 dark:outline-white"

@@ -22,10 +22,13 @@ import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { Button } from "../ui/Button";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
-import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 
-export default function Gamebox({ pokedex }: { pokedex: Pokemon[] }) {
+type GameboxProps = {
+  pokedex: Pokemon[];
+};
+
+export default function Gamebox({ pokedex }: GameboxProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const classicPracticeAnswers = useAtomValue(classicPracticeAnswersAtom);

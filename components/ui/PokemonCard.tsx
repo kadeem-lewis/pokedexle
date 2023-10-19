@@ -4,6 +4,10 @@ import { TypeBadge } from "./TypeBadge";
 import { Pokemon } from "@/atoms/GameAtoms";
 import { poundConversion } from "@/constants";
 
+type PokemonCard = {
+  pokemon: Pokemon;
+};
+
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (
     <div className="block h-24 truncate">

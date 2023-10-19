@@ -1,18 +1,18 @@
 import React, { Dispatch, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Icons } from "../Icons";
-interface Props {
+type ModalProps = {
   isOpen: boolean;
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
   title: string;
-}
+};
 export default function OptionsModal({
   isOpen,
   setIsOpen,
   children,
   title,
-}: Props) {
+}: ModalProps) {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog

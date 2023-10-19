@@ -4,7 +4,7 @@ import { startOfDay, subMinutes } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
 
-export interface Pokemon {
+export type Pokemon = {
   id: number;
   name: string;
   types: string[];
@@ -12,8 +12,8 @@ export interface Pokemon {
   weight: number;
   generation: number;
   sprite: string;
-}
-export interface Move {
+};
+export type Move = {
   id: number;
   generation: number;
   name: string;
@@ -22,32 +22,32 @@ export interface Move {
   type: string;
   class: string;
   accuracy: number | null;
-}
+};
 
-interface DailyStorage {
+type DailyStorage = {
   date: Date;
   answers: Pokemon[];
-}
+};
 
-interface DailyMoveStorage {
+type DailyMoveStorage = {
   date: Date;
   answers: Move[];
-}
+};
 
-interface GuessedItems {
+type GuessedItems = {
   classic: Pokemon[];
   classicUnlimited: Pokemon[];
   whosthatpokemon: Pokemon[];
   whosthatpokemonUnlimited: Pokemon[];
   move: Move[];
   moveUnlimited: Move[];
-}
+};
 
-interface DailyAnswers {
+type DailyAnswers = {
   classic: Pokemon | null;
   whosthatpokemon: Pokemon | null;
   move: Move | null;
-}
+};
 
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);

@@ -4,7 +4,11 @@ import { ThemeProvider } from "next-themes";
 import { Provider as JotaiProvider } from "jotai";
 import { DevTools } from "jotai-devtools";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+type ProviderProps = {
+  children: React.ReactNode;
+};
+
+export default function Providers({ children }: ProviderProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <JotaiProvider>

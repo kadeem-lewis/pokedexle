@@ -13,6 +13,10 @@ import { useAtomValue, useAtom } from "jotai";
 import GameOverContent from "../content/GameOverContent";
 import OptionsModal from "../ui/OptionsModal";
 
+type ImagePanelProps = {
+  correctAnswer: Pokemon;
+};
+
 function blurIntensity(guesses: number) {
   switch (guesses) {
     case 1:
@@ -38,11 +42,7 @@ function blurIntensity(guesses: number) {
   }
 }
 
-export default function ImagePanel({
-  correctAnswer,
-}: {
-  correctAnswer: Pokemon;
-}) {
+export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
   const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
