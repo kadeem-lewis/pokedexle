@@ -1,5 +1,5 @@
 import React from "react";
-import { TypeBadge } from "../ui/TypeBadge";
+import { TypeBadge } from "./ui/TypeBadge";
 import { useAtomValue } from "jotai";
 import {
   Pokemon,
