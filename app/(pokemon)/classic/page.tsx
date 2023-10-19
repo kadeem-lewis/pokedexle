@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "Classic",
-  description: "Guess Pokemon based on hints from previous guesses",
+  description: "Guess the Pokémon based on hints from previous guesses",
 };
 
 export default async function Classic() {
