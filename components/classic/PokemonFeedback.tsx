@@ -12,7 +12,7 @@ import {
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
-import Guesses from "./Guesses";
+import Guesses from "../Guesses";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;

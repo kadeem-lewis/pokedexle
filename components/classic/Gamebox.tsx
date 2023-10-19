@@ -17,7 +17,7 @@ import {
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import MyComboBox from "../ui/MyComboBox";
-import PokemonTypes from "./PokemonTypes";
+import PokemonTypes from "../PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { Button } from "../ui/Button";
