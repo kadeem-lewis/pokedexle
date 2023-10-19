@@ -16,7 +16,7 @@ import {
   whosthatpokemonAnswersAtom,
   whosthatpokemonPracticeAnswersAtom,
 } from "@/atoms/GameAtoms";
-import PokemonTypes from "../core/PokemonTypes";
+import PokemonTypes from "../PokemonTypes";
 import ImagePanel from "./ImagePanel";
 import { useHydrateAtoms } from "jotai/utils";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";

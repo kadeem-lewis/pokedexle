@@ -12,7 +12,7 @@ import {
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
-import Guesses from "@/components/core/Guesses";
+import Guesses from "@/components/Guesses";
 
 type MoveFeedbackProps = {
   correctAnswer: Move;

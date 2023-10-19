@@ -16,7 +16,7 @@ import {
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
 import { Move } from "@prisma/client";
-import PokemonTypes from "../core/PokemonTypes";
+import PokemonTypes from "../PokemonTypes";
 import { useHydrateAtoms } from "jotai/utils";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
 import { defaultGuesses } from "@/constants";

@@ -17,7 +17,7 @@ import { Button } from "../ui/Button";
 import Countdown from "../Countdown";
 import Image from "next/image";
 import { TypeBadge } from "../ui/TypeBadge";
-import { PokemonType } from "../core/PokemonTypes";
+import { PokemonType } from "../PokemonTypes";
 
 export default function MoveCombobox() {
   const [selected, setSelected] = useState<Move | null>(null);

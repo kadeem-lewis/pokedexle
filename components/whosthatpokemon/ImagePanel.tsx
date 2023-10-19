@@ -1,6 +1,6 @@
 import { Pokemon } from "@prisma/client";
 import React, { useEffect, useState } from "react";
-import Guesses from "../core/Guesses";
+import Guesses from "../Guesses";
 import Image from "next/image";
 import {
   currentGameMode,

@@ -1,4 +1,4 @@
-import Gamebox from "@/components/core/Gamebox";
+import Gamebox from "@/components/classic/Gamebox";
 import { prisma } from "@/lib/prisma";
 
 export const metadata = {
