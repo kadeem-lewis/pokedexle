@@ -17,6 +17,7 @@ export default function ThemeSwitch() {
     <div className="my-auto">
       {resolvedTheme && (
         <button
+          name="theme-toggle"
           onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
           className="rounded-md border-2 border-current p-1"
         >
