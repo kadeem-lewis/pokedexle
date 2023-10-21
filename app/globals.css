@@ -4,9 +4,9 @@
 
 @layer base {
   :root {
-    --background: 259.6 5% 100%;
+    --background: 259.6 5% 93%;
     --foreground: 0 0% 0%;
-    --primary: 259.6 5% 93%;
+    --primary: 259.6 5% 100%;
     --primary-foreground:;
     --secondary:;
     --secondary-foreground:;
