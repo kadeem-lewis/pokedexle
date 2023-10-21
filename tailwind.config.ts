@@ -7,6 +7,9 @@ export default {
         "pokemon-ds": ["var(--font-pokemon-ds)"],
       },
       colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: "hsl(var(--primary))",
         normal: {
           100: "#C6C6A7",
           200: "#A8A878",

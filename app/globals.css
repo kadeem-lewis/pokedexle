@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --primary: 0 0% 93%;
+    --primary-foreground:;
+    --secondary:;
+    --secondary-foreground:;
+  }
+  .dark {
+    --background: 0 0% 13%;
+    --foreground: 0 0% 95%;
+    --primary: 0 0% 25%;
+    --primary-foreground:;
+    --secondary:;
+    --secondary-foreground:;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 @layer utilities {
   .text-shadow {
     text-shadow: 1px 1px black;
