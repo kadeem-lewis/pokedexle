@@ -17,6 +17,7 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
           src={pokemon.sprite}
           width={80}
           height={80}
+          priority={true}
           alt={`${pokemon.name} sprite`}
         />
         <div className="grid grid-cols-2 text-xl">

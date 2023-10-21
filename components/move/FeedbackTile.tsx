@@ -69,6 +69,7 @@ export default function FeedbackTile({
                 src={`/images/${guessedItem.class}-icon.png`}
                 width={100}
                 height={100}
+                priority={true}
                 alt={`${guessedItem.class} icon`}
               />
             </TileContent>

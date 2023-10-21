@@ -76,7 +76,7 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
           src={correctAnswer.sprite}
           height={300}
           width={300}
-          priority
+          priority={true}
           alt={`${correctAnswer.name} sprite`}
         />
       </div>
