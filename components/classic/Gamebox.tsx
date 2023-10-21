@@ -23,6 +23,7 @@ import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { Button } from "../ui/Button";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
 import { usePathname } from "next/navigation";
+import { Daily } from "@prisma/client";
 
 type GameboxProps = {
   pokedex: Pokemon[];
@@ -35,7 +36,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
   const [mode, setMode] = useAtom(currentGameMode);
-  const { date, classicId } = useAtomValue(dailyAtom);
+  const { date, classicId } = useAtomValue<Promise<Daily>>(dailyAtom);
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -56,6 +57,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
       setDailyPokemon((prev) => ({ ...prev, classic: dailyClassicPokemon }));
     }
     setDailies();
+    console.log("hey, I'm rerunning!");
   }, [classicId, pokedex, setDailyPokemon]);
 
   useEffect(() => {

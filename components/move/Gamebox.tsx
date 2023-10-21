@@ -15,7 +15,7 @@ import {
   movePracticeAnswersAtom,
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
-import { Move } from "@prisma/client";
+import { Daily, Move } from "@prisma/client";
 import PokemonTypes from "../PokemonTypes";
 import { useHydrateAtoms } from "jotai/utils";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
@@ -36,7 +36,7 @@ export default function Gamebox({ moveList }: GameboxProps) {
   const movePracticeAnswers = useAtomValue(movePracticeAnswersAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date, moveId } = useAtomValue(dailyAtom);
+  const { date, moveId } = useAtomValue<Promise<Daily>>(dailyAtom);
   const [moveAnswers, setMoveAnswers] = useAtom(moveAnswersAtom);
   const setDailyMove = useSetAtom(dailyPokemonAtom);
   const currentPath = usePathname();

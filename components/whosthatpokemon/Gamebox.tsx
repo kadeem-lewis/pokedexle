@@ -22,6 +22,7 @@ import { useHydrateAtoms } from "jotai/utils";
 import { isSameDay, startOfDay, subMinutes } from "date-fns";
 import { defaultGuesses } from "@/constants";
 import { usePathname } from "next/navigation";
+import { Daily } from "@prisma/client";
 
 type GameboxProps = {
   pokedex: Pokemon[];
@@ -38,7 +39,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
   );
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date, whosThatPokemonId } = useAtomValue(dailyAtom);
+  const { date, whosThatPokemonId } = useAtomValue<Promise<Daily>>(dailyAtom);
   const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
     whosthatpokemonAnswersAtom,
   );
