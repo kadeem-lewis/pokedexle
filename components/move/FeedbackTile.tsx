@@ -18,6 +18,9 @@ export default function FeedbackTile({
       {guessedItem.name === correctItem.name ? (
         <>
           <Tile status="correct">
+            <TileContent className="capitalize">{guessedItem.name}</TileContent>
+          </Tile>
+          <Tile status="correct">
             <TileContent>Gen {correctItem.generation}</TileContent>
           </Tile>
           <Tile status="correct">
@@ -40,7 +43,7 @@ export default function FeedbackTile({
       ) : (
         <>
           <Tile status="incorrect">
-            <TileContent>{guessedItem.name}</TileContent>
+            <TileContent className="capitalize">{guessedItem.name}</TileContent>
           </Tile>
           {guessedItem.generation === correctItem.generation ? (
             <Tile status="correct">
