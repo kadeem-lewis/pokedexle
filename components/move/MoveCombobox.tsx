@@ -47,7 +47,8 @@ export default function MoveCombobox() {
           .search(query)
           .map((res) => ({ ...res.item }))
           .slice(0, 6);
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (selected && selected.name) {
       if (guessedItems.some((item) => item.name === selected.name)) {
         setError(true);
@@ -64,7 +65,7 @@ export default function MoveCombobox() {
     <>
       {!gameOver[mode] ? (
         <>
-          <div className="my-4 flex flex-row gap-2">
+          <form onSubmit={handleSubmit} className="my-4 flex flex-row gap-2">
             <Combobox value={selected} onChange={setSelected}>
               <div className="relative mt-1 flex-grow">
                 <Combobox.Input
@@ -141,13 +142,12 @@ export default function MoveCombobox() {
             </Combobox>
             <Button
               type="submit"
-              onClick={() => handleSubmit()}
               variant="flat"
               className="flex-none cursor-pointer bg-purple-300   hover:bg-purple-400"
             >
               Submit
             </Button>
-          </div>
+          </form>
           {error && <p>Move Already Entered</p>}
         </>
       ) : mode === "moveUnlimited" ? (
