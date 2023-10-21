@@ -11,6 +11,7 @@ import {
 } from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
 import { defaultGuesses } from "@/constants";
+import { Icons } from "./Icons";
 
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",
@@ -98,7 +99,8 @@ ${window.location.href}
   }
 
   return (
-    <Button onClick={handleShareClick} variant="flat">
+    <Button onClick={handleShareClick} variant="flat" className="flex gap-2">
+      <Icons.share className="h-5 w-5" />
       Share
     </Button>
   );
