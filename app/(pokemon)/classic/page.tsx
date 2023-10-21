@@ -7,13 +7,16 @@ export const metadata = {
   description: "Guess the Pokémon based on hints from previous guesses",
 };
 
-async function readPokedex():Promise<Pokemon[]>{
+async function readPokedex(): Promise<Pokemon[]> {
   try {
-    const data = await fs.readFile(`${process.cwd()}/data/pokedex.json`, 'utf8');
+    const data = await fs.readFile(
+      `${process.cwd()}/data/pokedex.json`,
+      "utf8",
+    );
     return JSON.parse(data);
   } catch (error) {
-    console.error(error)
-    return []
+    console.error(error);
+    return [];
   }
 }
 

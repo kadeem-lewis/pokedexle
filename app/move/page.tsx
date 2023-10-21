@@ -7,13 +7,16 @@ export const metadata = {
   title: "Move",
 };
 
-async function readMovedex():Promise<Move[]>{
+async function readMovedex(): Promise<Move[]> {
   try {
-    const data = await fs.readFile(`${process.cwd()}/data/movedex.json`, 'utf8');
+    const data = await fs.readFile(
+      `${process.cwd()}/data/movedex.json`,
+      "utf8",
+    );
     return JSON.parse(data);
   } catch (error) {
-    console.error(error)
-    return []
+    console.error(error);
+    return [];
   }
 }
 
