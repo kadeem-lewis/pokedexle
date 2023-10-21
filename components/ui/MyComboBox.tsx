@@ -68,7 +68,7 @@ export default function MyComboBox() {
                 <Combobox.Input
                   onChange={(e) => setQuery(e.target.value)}
                   displayValue={(item: Pokemon) => item?.name}
-                  className="w-full border-b-2 border-dashed border-current bg-transparent py-1 pl-3"
+                  className="w-full border-b-2 border-dashed border-foreground bg-transparent py-1 pl-3"
                   autoComplete="off"
                 />
                 <Transition
@@ -78,7 +78,7 @@ export default function MyComboBox() {
                   leaveTo="opacity-0"
                   afterLeave={() => setQuery("")}
                 >
-                  <Combobox.Options className=" absolute mt-1 h-fit max-h-80 w-full  overflow-y-auto rounded-md  bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-black md:max-h-[590px]">
+                  <Combobox.Options className=" absolute mt-1 h-fit max-h-80 w-full  overflow-y-auto rounded-md bg-primary text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:max-h-[590px]">
                     {filteredItems.length === 0 && query !== "" ? (
                       <div className="relative cursor-default select-none px-4 py-2">
                         Nothing found.
@@ -88,7 +88,7 @@ export default function MyComboBox() {
                         <Combobox.Option
                           key={item.name}
                           value={item}
-                          className="relative cursor-default select-none border-b border-current capitalize ui-active:bg-teal-600"
+                          className="relative cursor-default select-none border-b border-foreground capitalize ui-active:bg-teal-600"
                         >
                           <PokemonCard pokemon={item} />
                         </Combobox.Option>

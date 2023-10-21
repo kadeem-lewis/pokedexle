@@ -43,7 +43,7 @@ export default function OptionsModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="relative my-8 w-full max-w-md rounded-lg border-4 border-current bg-white p-4 dark:bg-black">
+              <Dialog.Panel className="relative my-8 w-full max-w-md rounded-lg border-4 border-foreground bg-background p-4">
                 <Dialog.Title
                   as="h3"
                   className="flex items-center justify-start gap-x-2 text-4xl font-bold uppercase"
@@ -57,7 +57,7 @@ export default function OptionsModal({
                     setIsOpen(false);
                   }}
                 >
-                  <Icons.xMark className="absolute right-6 top-6 h-6 w-6 stroke-2 text-current" />
+                  <Icons.xMark className="absolute right-6 top-6 h-6 w-6 stroke-2" />
                 </button>
                 {children}
               </Dialog.Panel>

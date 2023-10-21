@@ -15,12 +15,12 @@ export default function OptionsBar() {
   const [howToPlayClick, setHowToPlayClick] = useState(false);
   const [calendarClick, setCalendarClick] = useState(false);
   return (
-    <nav className=" grid grid-cols-5 border-2 border-current">
+    <nav className=" grid grid-cols-5 border-2 border-foreground">
       <button
         onClick={() => setHowToPlayClick(true)}
-        className="border-r-2 border-current py-1"
+        className="border-r-2 border-foreground py-1"
       >
-        <Icons.questionMark className="mx-auto h-6 w-6 text-current" />
+        <Icons.questionMark className="mx-auto h-6 w-6" />
       </button>
       {howToPlayClick && (
         <OptionsModal
@@ -34,9 +34,9 @@ export default function OptionsBar() {
 
       <button
         onClick={() => setSettingClick(true)}
-        className="border-r-2 border-current py-1"
+        className="border-r-2 border-foreground py-1"
       >
-        <Icons.settings className="mx-auto h-6 w-6 text-current transition-transform hover:-rotate-45" />
+        <Icons.settings className="mx-auto h-6 w-6 transition-transform hover:-rotate-45" />
       </button>
       {settingClick && (
         <OptionsModal
@@ -50,9 +50,9 @@ export default function OptionsBar() {
 
       <button
         onClick={() => setCalendarClick(true)}
-        className="border-r-2 border-current py-1"
+        className="border-r-2 border-foreground py-1"
       >
-        <Icons.calendar className="mx-auto h-6 w-6 text-current" />
+        <Icons.calendar className="mx-auto h-6 w-6" />
       </button>
       {/* {calendarClick && (
         <OptionsModal
@@ -66,9 +66,9 @@ export default function OptionsBar() {
 
       <button
         onClick={() => setStatsClick(true)}
-        className="border-r-2 border-current py-1"
+        className="border-r-2 border-foreground py-1"
       >
-        <Icons.chart className="mx-auto h-6 w-6 text-current" />
+        <Icons.chart className="mx-auto h-6 w-6" />
       </button>
       {statsClick && (
         <OptionsModal
@@ -80,7 +80,7 @@ export default function OptionsBar() {
         </OptionsModal>
       )}
       <button onClick={() => setAboutClick(true)} className="py-1">
-        <Icons.exclamationMark className="mx-auto h-6 w-6 text-current" />
+        <Icons.exclamationMark className="mx-auto h-6 w-6" />
       </button>
       {aboutClick && (
         <OptionsModal
