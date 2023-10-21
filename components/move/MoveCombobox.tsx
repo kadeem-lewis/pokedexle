@@ -101,7 +101,7 @@ export default function MoveCombobox() {
                                 alt={`${item.class} icon`}
                               />
                               <div className="grid grid-cols-2 text-xl">
-                                <div>{item.name}</div>
+                                <div className="capitalize">{item.name}</div>
                                 <div>Gen {item.generation}</div>
                                 <div className="col-span-2 flex">
                                   <TypeBadge

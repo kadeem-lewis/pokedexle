@@ -41,7 +41,9 @@ export default function GameOverContent() {
               height={200}
             />
           )}
-          <p className="text-2xl">The answer was : {correctAnswer.name}</p>
+          <p className="text-2xl capitalize">
+            The answer was : {correctAnswer.name}
+          </p>
         </div>
       )}
       {mode === "classicUnlimited" || mode === "whosthatpokemonUnlimited" ? (
