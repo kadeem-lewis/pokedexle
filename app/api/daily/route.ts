@@ -6,12 +6,8 @@ import { Move, Pokemon } from "@/atoms/GameAtoms";
 
 export async function GET(params: NextRequest) {
   try {
-    const allPokemon = (await readJson(
-      `${process.cwd()}/data/pokedex.json`,
-    )) as Pokemon[];
-    const allMoves = (await readJson(
-      `${process.cwd()}/data/movedex.json`,
-    )) as Move[];
+    const allPokemon = (await readJson("/data/pokedex.json")) as Pokemon[];
+    const allMoves = (await readJson("/data/movedex.json")) as Move[];
 
     // Fetch Moves and Pokémon that have been used in the Daily table
     const usedClassicPokemonIds = await prisma.daily.findMany({
