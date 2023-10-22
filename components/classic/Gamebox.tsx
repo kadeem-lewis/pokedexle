@@ -57,11 +57,13 @@ export default function Gamebox({ pokedex }: GameboxProps) {
       setDailyPokemon((prev) => ({ ...prev, classic: dailyClassicPokemon }));
     }
     setDailies();
-    console.log("hey, I'm rerunning!");
   }, [classicId, pokedex, setDailyPokemon]);
 
   useEffect(() => {
     if (mode !== "classic") return;
+    console.log("Date from server: ", date);
+    console.log("Date from localStorage: ", date);
+    console.log("Now: ", new Date());
     if (isSameDay(new Date(classicAnswers.date), new Date(date))) {
       setGuessedItems((prev) => ({
         ...prev,
