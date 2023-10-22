@@ -63,7 +63,6 @@ export default function Gamebox({ pokedex }: GameboxProps) {
     if (mode !== "classic") return;
     console.log("Date from server: ", date);
     console.log("Date from localStorage: ", date);
-    console.log("Now: ", new Date());
     if (isSameDay(new Date(classicAnswers.date), new Date(date))) {
       setGuessedItems((prev) => ({
         ...prev,
