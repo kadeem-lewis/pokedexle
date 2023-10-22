@@ -1,11 +1,17 @@
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { addDays, startOfDay } from "date-fns";
+import { readJson } from "@/helpers/FileSystem";
+import { Move, Pokemon } from "@/atoms/GameAtoms";
 
 export async function GET(params: NextRequest) {
   try {
-    const allPokemon = await prisma.pokemon.findMany();
-    const allMoves = await prisma.move.findMany();
+    const allPokemon = (await readJson(
+      `${process.cwd()}/data/pokedex.json`,
+    )) as Pokemon[];
+    const allMoves = (await readJson(
+      `${process.cwd()}/data/movedex.json`,
+    )) as Move[];
 
     // Fetch Moves and Pokémon that have been used in the Daily table
     const usedClassicPokemonIds = await prisma.daily.findMany({
@@ -20,16 +26,16 @@ export async function GET(params: NextRequest) {
 
     const unusedClassicPokemon = allPokemon.filter(
       (pokemon) =>
-        !usedClassicPokemonIds.some((used) => used.classicId === pokemon.id)
+        !usedClassicPokemonIds.some((used) => used.classicId === pokemon.id),
     );
     const unusedWhosThatPokemon = allPokemon.filter(
       (pokemon) =>
         !usedWhosThatPokemonIds.some(
-          (used) => used.whosThatPokemonId === pokemon.id
-        )
+          (used) => used.whosThatPokemonId === pokemon.id,
+        ),
     );
     const unusedMoves = allMoves.filter(
-      (move) => !usedMoveIds.some((used) => used.moveId === move.id)
+      (move) => !usedMoveIds.some((used) => used.moveId === move.id),
     );
 
     // Random selection logic remains the same
