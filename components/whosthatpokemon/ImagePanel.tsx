@@ -12,6 +12,7 @@ import {
 import { useAtomValue, useAtom } from "jotai";
 import GameOverContent from "../content/GameOverContent";
 import OptionsModal from "../ui/OptionsModal";
+import { defaultGuesses } from "@/constants";
 
 type ImagePanelProps = {
   correctAnswer: Pokemon;
@@ -42,11 +43,25 @@ function blurIntensity(guesses: number) {
   }
 }
 
+function calculateValue(value: number, correctValue: number) {
+  if (value > correctValue) {
+    return;
+  }
+}
+
 export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
   const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
+  const [range, setRange] = useState({
+    generationLowerLimit: "???",
+    generationUpperLimit: "???",
+    heightLowerLimit: "???",
+    heightUpperLimit: "???",
+    weightLowerLimit: "???",
+    weightUpperLimit: "???",
+  });
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
   useEffect(() => {
@@ -70,7 +85,9 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
     <>
       <Guesses />
       <div
-        className={`flex items-center justify-center ${blurIntensity(guesses)}`}
+        className={`flex items-center justify-center ${
+          !gameOver[mode] ? blurIntensity(guesses) : ""
+        }`}
       >
         <Image
           src={correctAnswer.sprite}
@@ -79,6 +96,20 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
           priority={true}
           alt={`${correctAnswer.name} sprite`}
         />
+      </div>
+      <div className="flex justify-between">
+        <div className="space-x-2">
+          <span>Gen:</span>
+          <span>{guesses < defaultGuesses ? "" : "???"}</span>
+        </div>
+        <div className="space-x-2">
+          <span>Height:</span>
+          <span>{guesses < defaultGuesses ? "" : "???"}</span>
+        </div>
+        <div className="space-x-2">
+          <span>Weight:</span>
+          <span>{guesses < defaultGuesses ? "" : "???"}</span>
+        </div>
       </div>
       {gameOver && (
         <OptionsModal
