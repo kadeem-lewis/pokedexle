@@ -54,7 +54,7 @@ async function fetchPokemonData() {
       const transformedData = updatePokemonData(data.pokemon_v2_pokemon);
       await fs.writeFile(
         "../data/pokedex.json",
-        JSON.stringify(transformedData,null,2),
+        JSON.stringify(transformedData, null, 2),
       );
 
       console.log("Pokemon data added");
@@ -80,7 +80,7 @@ async function fetchPokemonData() {
       const transformedMoveData = updateMoveData(moveData.data.pokemon_v2_move);
       await fs.writeFile(
         "../data/movedex.json",
-        JSON.stringify(transformedMoveData,null,2),
+        JSON.stringify(transformedMoveData, null, 2),
       );
 
       console.log("Moves seeded!");
