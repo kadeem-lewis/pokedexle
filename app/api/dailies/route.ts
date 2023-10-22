@@ -8,7 +8,12 @@ export async function GET(request: Request) {
 
     if (dateString === null) throw new Error("dateString is null");
     const date = startOfDay(new Date(dateString));
-    const utcDate = subMinutes(date, date.getTimezoneOffset());
+    console.log(date.getTimezoneOffset());
+    const utcDate =
+      date.getTimezoneOffset() > 0
+        ? subMinutes(date, date.getTimezoneOffset())
+        : date;
+    console.log(utcDate);
 
     const dailies = await prisma.daily.findUnique({
       where: {
