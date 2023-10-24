@@ -1,10 +1,11 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { format, startOfTomorrow } from "date-fns";
 import { readJson } from "@/helpers/FileSystem";
 import { Move, Pokemon } from "@/atoms/GameAtoms";
+import { verifySignatureEdge } from "@upstash/qstash/dist/nextjs";
 
-export async function GET(params: NextRequest) {
+async function handler(_req: NextRequest) {
   try {
     const allPokemon = (await readJson("/data/pokedex.json")) as Pokemon[];
     const allMoves = (await readJson("/data/movedex.json")) as Move[];
@@ -66,9 +67,13 @@ export async function GET(params: NextRequest) {
     });
 
     console.log("New daily entry added:", newDaily);
-    return new Response("OK");
+    return NextResponse.json({ status: "OK" });
   } catch (error) {
     console.error("Error adding new daily entry:", error);
-    return new Response("Error");
+    return NextResponse.json({ status: "Error" });
   }
 }
+
+export const GET = verifySignatureEdge(handler);
+
+export const runtime = "edge";
