@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { addDays, startOfDay } from "date-fns";
+import { startOfTomorrow } from "date-fns";
 import { readJson } from "@/helpers/FileSystem";
 import { Move, Pokemon } from "@/atoms/GameAtoms";
 
@@ -56,12 +56,9 @@ export async function GET(params: NextRequest) {
 
     const move = unusedMoves[Math.floor(Math.random() * unusedMoves.length)];
 
-    // Getting the current date, advancing it by 1 day, and setting the time to midnight
-    const nextDayMidnight = startOfDay(addDays(new Date(), 1));
-
     const newDaily = await prisma.daily.create({
       data: {
-        date: nextDayMidnight,
+        date: startOfTomorrow(),
         classicId: classic.id,
         whosThatPokemonId: whosThatPokemon.id,
         moveId: move.id,

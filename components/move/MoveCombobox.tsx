@@ -2,14 +2,13 @@ import {
   moveListAtom,
   currentGameMode,
   guessedItemsAtom,
-  addGuessedItemAtom,
   gameOverAtom,
   newGameAtom,
   Move,
   addGuessedMoveAtom,
 } from "@/atoms/GameAtoms";
 import { Combobox, Transition } from "@headlessui/react";
-import { addDays, startOfDay } from "date-fns";
+import { startOfTomorrow } from "date-fns";
 import Fuse from "fuse.js";
 import { useAtomValue, useSetAtom } from "jotai";
 import React, { Fragment, useMemo, useState } from "react";
@@ -26,7 +25,6 @@ export default function MoveCombobox() {
   const moveList = useAtomValue(moveListAtom);
   const mode = useAtomValue(currentGameMode);
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
-  const targetDate = addDays(startOfDay(new Date()), 1);
   const addNewGuess = useSetAtom(addGuessedMoveAtom);
   const gameOver = useAtomValue(gameOverAtom);
   const setNewGame = useSetAtom(newGameAtom);
@@ -163,7 +161,7 @@ export default function MoveCombobox() {
       ) : (
         <div className="my-2 flex items-center justify-center gap-2">
           <p className="text-3xl">New Game in:</p>
-          <Countdown targetDate={targetDate} />
+          <Countdown targetDate={startOfTomorrow()} />
         </div>
       )}
     </>

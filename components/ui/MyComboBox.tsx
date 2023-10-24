@@ -15,7 +15,7 @@ import {
 import PokemonCard from "./PokemonCard";
 import { Button } from "./Button";
 import Countdown from "../Countdown";
-import { startOfDay, addDays } from "date-fns";
+import { startOfTomorrow } from "date-fns";
 
 export default function MyComboBox() {
   const [selected, setSelected] = useState<Pokemon | null>(null);
@@ -24,7 +24,7 @@ export default function MyComboBox() {
   const pokedex = useAtomValue(pokedexAtom);
   const mode = useAtomValue(currentGameMode);
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
-  const targetDate = addDays(startOfDay(new Date()), 1);
+  const targetDate = startOfTomorrow();
   const addNewGuess = useSetAtom(addGuessedItemAtom);
   const gameOver = useAtomValue(gameOverAtom);
   const setNewGame = useSetAtom(newGameAtom);
