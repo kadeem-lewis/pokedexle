@@ -88,9 +88,9 @@ export const dailyAtom = atom(async (get) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
   );
-  if (!response.ok) {
-    throw new Error("Network response was not OK");
-  }
+  // if (!response.ok) {
+  //   throw new Error("Network response was not OK");
+  // }
   const data: Daily = await response.json();
   return data;
 });
