@@ -1,4 +1,4 @@
-import { Pokemon } from "@prisma/client";
+import { Pokemon } from "@/atoms/GameAtoms";
 import React, { useEffect, useState } from "react";
 import Guesses from "../Guesses";
 import Image from "next/image";
