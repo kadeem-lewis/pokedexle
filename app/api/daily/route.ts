@@ -75,5 +75,3 @@ async function handler(_req: NextRequest) {
 }
 
 export const GET = verifySignatureEdge(handler);
-
-export const runtime = "edge";
