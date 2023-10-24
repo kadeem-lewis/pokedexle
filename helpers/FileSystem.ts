@@ -1,5 +1,5 @@
 import { Move, Pokemon } from "@/atoms/GameAtoms";
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 
 export async function readJson(path: string): Promise<Pokemon[] | Move[]> {
   try {
