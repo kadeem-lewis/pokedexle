@@ -85,14 +85,21 @@ dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
 export const dailyAtom = atom(async (get) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
-  );
-  if (!response.ok) {
-    throw new Error("Network response was not OK");
-  }
-  const data: Daily = await response.json();
-  return data;
+  // const response = await fetch(
+  //   `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
+  // );
+  // if (!response.ok) {
+  //   throw new Error("Network response was not OK");
+  // }
+  // const data: Daily = await response.json();
+  // return data;
+  return {
+    id: 1,
+    date: "2023-10-24",
+    classicId: 1,
+    whosthatpokemonId: 1,
+    moveId: 1,
+  };
 });
 dailyAtom.debugLabel = "dailyAtom";
 
