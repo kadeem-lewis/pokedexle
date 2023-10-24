@@ -9,9 +9,6 @@
     "lint": "next lint",
     "populate": "ts-node --esm scripts/GetPokemonData.ts"
   },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
-  },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@headlessui/react": "^1.7.17",
