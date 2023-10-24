@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAtomValue } from "jotai";
 import {
   guessedItemsAtom,
@@ -29,6 +29,7 @@ export default function Share() {
   const guesses = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const gameOver = useAtomValue(gameOverAtom);
   const { id } = useAtomValue(dailyAtom);
+  const [isCopied, setIsCopied] = useState(false);
 
   const comparePokemonValue = (
     correctValue: number,
@@ -75,6 +76,7 @@ export default function Share() {
 
   const handleShareClick = async (): Promise<void> => {
     const grid = createEmojiGrid();
+    //! Shows X/6 if answer is guessed on 6th try
     const textToCopy = `
 Pokedexle ${mode} ${id} ${
       attempts > 0
@@ -87,7 +89,10 @@ ${window.location.href}
 
     try {
       await navigator.clipboard.writeText(textToCopy);
-      alert("Grid copied to clipboard successfully!");
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
     } catch (error) {
       alert("Failed to copy grid: " + error);
     }
@@ -100,8 +105,17 @@ ${window.location.href}
 
   return (
     <Button onClick={handleShareClick} variant="flat" className="flex gap-2">
-      <Icons.share className="h-5 w-5" />
-      Share
+      {!isCopied ? (
+        <>
+          <Icons.share className="h-5 w-5" />
+          Share
+        </>
+      ) : (
+        <>
+          <Icons.check className="h-5 w-5" />
+          Copied
+        </>
+      )}
     </Button>
   );
 }
