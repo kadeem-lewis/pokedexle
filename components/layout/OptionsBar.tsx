@@ -54,7 +54,7 @@ export default function OptionsBar() {
       >
         <Icons.calendar className="mx-auto h-6 w-6" />
       </button>
-      {/* {calendarClick && (
+      {calendarClick && (
         <OptionsModal
           isOpen={calendarClick}
           setIsOpen={setCalendarClick}
@@ -62,7 +62,7 @@ export default function OptionsBar() {
         >
           <Calendar />
         </OptionsModal>
-      )} */}
+      )}
 
       <button
         onClick={() => setStatsClick(true)}
