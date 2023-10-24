@@ -97,7 +97,7 @@ export const dailyAtom = atom(async (get) => {
     id: 1,
     date: "2023-10-24",
     classicId: 1,
-    whosthatpokemonId: 1,
+    whosThatPokemonId: 1,
     moveId: 1,
   };
 });
