@@ -11,37 +11,10 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Pokemon {
-  id Int @unique
-  name String @unique
-  generation Int 
-  sprite String @unique
-  types String[]
-  weight Float
-  height Float
-  classicDay Daily? @relation("classic")
-  whosThatPokemonDay Daily? @relation("whosThatPokemon")
-}
-
-model Move {
-  id Int @unique
-  name String
-  generation Int
-  power Int?
-  type String
-  class String
-  accuracy Int? 
-  pp Int
-  moveDay Daily?
-}
-
 model Daily {
   id Int @unique @default(autoincrement())
-  date DateTime @unique
-  classic Pokemon @relation("classic",fields: [classicId],references: [id])
+  date String @unique
   classicId Int @unique
-  move Move @relation(fields: [moveId],references: [id])
   moveId Int @unique
-  whosThatPokemon Pokemon @relation("whosThatPokemon",fields: [whosThatPokemonId],references: [id])
   whosThatPokemonId Int @unique
 }
