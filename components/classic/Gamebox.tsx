@@ -21,7 +21,7 @@ import PokemonTypes from "../PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { Button } from "../ui/Button";
-import { isSameDay, startOfDay, subMinutes } from "date-fns";
+import { format } from "date-fns";
 import { usePathname } from "next/navigation";
 import { Daily } from "@prisma/client";
 
@@ -44,10 +44,12 @@ export default function Gamebox({ pokedex }: GameboxProps) {
   const currentPath = usePathname();
 
   useEffect(() => {
+    console.log("change mode useEffect is running");
     if (currentPath === "/classic" && selectedIndex === 0) setMode("classic");
   }, [currentPath, selectedIndex, setMode]);
 
   useEffect(() => {
+    console.log("Set Dailies useEffect is running");
     function setDailies() {
       const dailyClassicPokemon = pokedex.find(
         (pokemon) => pokemon.id === classicId,
@@ -61,9 +63,14 @@ export default function Gamebox({ pokedex }: GameboxProps) {
 
   useEffect(() => {
     if (mode !== "classic") return;
-    console.log("Date from server: ", date);
-    console.log("Date from localStorage: ", classicAnswers.date);
-    if (isSameDay(new Date(classicAnswers.date), new Date(date))) {
+    console.log("Classic useEffect is running");
+    const clientLocalDate = format(new Date(), "yyyy-MM-dd");
+    if (date !== clientLocalDate) {
+      setClassicAnswers({
+        date: clientLocalDate,
+        answers: [],
+      });
+    } else {
       setGuessedItems((prev) => ({
         ...prev,
         classic: classicAnswers.answers,
@@ -72,14 +79,6 @@ export default function Gamebox({ pokedex }: GameboxProps) {
         ...prev,
         classic: defaultGuesses - classicAnswers.answers.length,
       }));
-    } else {
-      setClassicAnswers({
-        date: subMinutes(
-          startOfDay(new Date()),
-          startOfDay(new Date()).getTimezoneOffset(),
-        ),
-        answers: [],
-      });
     }
   }, [
     classicAnswers.date,
@@ -93,6 +92,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
   ]);
 
   useEffect(() => {
+    console.log("Classic Unlimited useEffect is running");
     if (
       classicPracticeAnswers !== null &&
       mode === "classicUnlimited" &&

@@ -15,10 +15,11 @@ import {
   movePracticeAnswersAtom,
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
-import { Daily, Move } from "@prisma/client";
+import { Daily } from "@prisma/client";
+import { type Move } from "@/atoms/GameAtoms";
 import PokemonTypes from "../PokemonTypes";
 import { useHydrateAtoms } from "jotai/utils";
-import { isSameDay, startOfDay, subMinutes } from "date-fns";
+import { format } from "date-fns";
 import { defaultGuesses } from "@/constants";
 import { usePathname } from "next/navigation";
 import MoveFeedback from "./MoveFeedback";
@@ -60,7 +61,13 @@ export default function Gamebox({ moveList }: GameboxProps) {
 
   useEffect(() => {
     if (mode !== "move") return;
-    if (isSameDay(new Date(moveAnswers.date), new Date(date))) {
+    const clientLocalDate = format(new Date(), "yyyy-MM-dd");
+    if (date !== clientLocalDate) {
+      setMoveAnswers({
+        date: format(new Date(), "yyyy-MM-dd"),
+        answers: [],
+      });
+    } else {
       setGuessedItems((prev) => ({
         ...prev,
         move: moveAnswers.answers,
@@ -69,14 +76,6 @@ export default function Gamebox({ moveList }: GameboxProps) {
         ...prev,
         move: defaultGuesses - moveAnswers.answers.length,
       }));
-    } else {
-      setMoveAnswers({
-        date: subMinutes(
-          startOfDay(new Date()),
-          startOfDay(new Date()).getTimezoneOffset(),
-        ),
-        answers: [],
-      });
     }
   }, [
     date,

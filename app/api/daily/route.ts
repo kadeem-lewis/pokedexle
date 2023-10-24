@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { startOfTomorrow } from "date-fns";
+import { format, startOfTomorrow } from "date-fns";
 import { readJson } from "@/helpers/FileSystem";
 import { Move, Pokemon } from "@/atoms/GameAtoms";
 
@@ -58,7 +58,7 @@ export async function GET(params: NextRequest) {
 
     const newDaily = await prisma.daily.create({
       data: {
-        date: startOfTomorrow(),
+        date: format(startOfTomorrow(), "yyyy-MM-dd"),
         classicId: classic.id,
         whosThatPokemonId: whosThatPokemon.id,
         moveId: move.id,

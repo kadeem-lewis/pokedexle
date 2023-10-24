@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { startOfDay, subMinutes } from "date-fns";
+import { format } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
 
@@ -25,12 +25,12 @@ export type Move = {
 };
 
 type DailyStorage = {
-  date: Date;
+  date: string;
   answers: Pokemon[];
 };
 
 type DailyMoveStorage = {
-  date: Date;
+  date: string;
   answers: Move[];
 };
 
@@ -80,15 +80,13 @@ export const guessedItemsAtom = atom<GuessedItems>({
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
 //atom that gets the current Date and can be used to get dates of other days
-export const dateAtom = atom(new Date());
+export const dateAtom = atom(format(new Date(), "yyyy-MM-dd"));
 dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
 export const dailyAtom = atom(async (get) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(
-      dateAtom,
-    ).toISOString()}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
   );
   if (!response.ok) {
     throw new Error("Network response was not OK");
@@ -142,10 +140,7 @@ dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
   "classic_answers",
   {
-    date: subMinutes(
-      startOfDay(new Date()),
-      startOfDay(new Date()).getTimezoneOffset(),
-    ),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
   },
 );
@@ -154,10 +149,7 @@ classicAnswersAtom.debugLabel = "classicAnswersAtom";
 export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
   "whosthatpokemon_answers",
   {
-    date: subMinutes(
-      startOfDay(new Date()),
-      startOfDay(new Date()).getTimezoneOffset(),
-    ),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
   },
 );
@@ -304,10 +296,7 @@ addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
 export const moveAnswersAtom = atomWithStorage<DailyMoveStorage>(
   "move_answers",
   {
-    date: subMinutes(
-      startOfDay(new Date()),
-      startOfDay(new Date()).getTimezoneOffset(),
-    ),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
   },
 );
