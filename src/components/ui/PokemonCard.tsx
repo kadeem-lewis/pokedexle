@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { TYPES, PokemonType } from "../PokemonTypes";
 import { TypeBadge } from "./TypeBadge";
-import { Pokemon } from "@/app/atoms/GameAtoms";
+import { Pokemon } from "@/atoms/GameAtoms";
 import { poundConversion } from "@/constants";
 
 type PokemonCard = {

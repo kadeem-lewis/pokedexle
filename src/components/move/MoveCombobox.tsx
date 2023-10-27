@@ -6,7 +6,7 @@ import {
   newGameAtom,
   Move,
   addGuessedMoveAtom,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import { Combobox, Transition } from "@headlessui/react";
 import { startOfTomorrow } from "date-fns";
 import Fuse from "fuse.js";

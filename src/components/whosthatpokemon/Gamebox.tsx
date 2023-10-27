@@ -15,7 +15,7 @@ import {
   pokemonToGuessAtom,
   whosthatpokemonAnswersAtom,
   whosthatpokemonPracticeAnswersAtom,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import PokemonTypes from "../PokemonTypes";
 import ImagePanel from "./ImagePanel";
 import { useHydrateAtoms } from "jotai/utils";

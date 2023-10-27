@@ -8,7 +8,7 @@ import {
   dailyAtom,
   guessAtom,
   Pokemon,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
 import { defaultGuesses } from "@/constants";
 import { Icons } from "./Icons";

@@ -6,7 +6,7 @@ import {
   currentGameMode,
   guessedItemsAtom,
   pokemonToGuessAtom,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 
 export type PokemonType =
   | "normal"

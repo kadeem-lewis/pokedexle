@@ -11,7 +11,7 @@ import {
   pokedexAtom,
   currentGameMode,
   guessedItemsAtom,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import PokemonCard from "./PokemonCard";
 import { Button } from "./Button";
 import Countdown from "../Countdown";

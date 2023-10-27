@@ -14,7 +14,7 @@ import {
   classicAnswersAtom,
   dailyAtom,
   dailyPokemonAtom,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import MyComboBox from "../ui/MyComboBox";
 import PokemonTypes from "../PokemonTypes";

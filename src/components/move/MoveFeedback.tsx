@@ -8,7 +8,7 @@ import {
   guessedItemsAtom,
   Move,
   pokemonToGuessAtom,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";

@@ -6,7 +6,7 @@ import {
   currentGameMode,
   guessAtom,
   Pokemon,
-} from "@/app/atoms/GameAtoms";
+} from "@/atoms/GameAtoms";
 import Image from "next/image";
 import Countdown from "../Countdown";
 import { startOfTomorrow } from "date-fns";
