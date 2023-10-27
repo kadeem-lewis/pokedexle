@@ -19,7 +19,7 @@ import { Daily } from "@prisma/client";
 import { type Move } from "@/atoms/GameAtoms";
 import PokemonTypes from "../PokemonTypes";
 import { useHydrateAtoms } from "jotai/utils";
-import { format } from "date-fns";
+import { format, isSameDay, startOfToday } from "date-fns";
 import { defaultGuesses } from "@/constants";
 import { usePathname } from "next/navigation";
 import MoveFeedback from "./MoveFeedback";
@@ -61,13 +61,7 @@ export default function Gamebox({ moveList }: GameboxProps) {
 
   useEffect(() => {
     if (mode !== "move") return;
-    const clientLocalDate = format(new Date(), "yyyy-MM-dd");
-    if (date !== clientLocalDate) {
-      setMoveAnswers({
-        date: format(new Date(), "yyyy-MM-dd"),
-        answers: [],
-      });
-    } else {
+    if (isSameDay(startOfToday(), new Date(date))) {
       setGuessedItems((prev) => ({
         ...prev,
         move: moveAnswers.answers,
@@ -76,6 +70,11 @@ export default function Gamebox({ moveList }: GameboxProps) {
         ...prev,
         move: defaultGuesses - moveAnswers.answers.length,
       }));
+    } else {
+      setMoveAnswers({
+        date: startOfToday(),
+        answers: [],
+      });
     }
   }, [
     date,
