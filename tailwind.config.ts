@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 export default {
-  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
+  content: ["./src/components/**/*.{ts,tsx}", "./src/app/**/*.{ts,tsx}"],
   theme: {
     extend: {
       fontFamily: {
