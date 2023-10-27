@@ -2,7 +2,10 @@ import Image from "next/image";
 import { TYPES, PokemonType } from "../PokemonTypes";
 import { TypeBadge } from "./TypeBadge";
 import { Pokemon } from "@/atoms/GameAtoms";
-import { poundConversion } from "@/constants";
+import {
+  decimeterToImperial,
+  hectogramToImperial,
+} from "@/helpers/Conversions";
 
 type PokemonCard = {
   pokemon: Pokemon;
@@ -39,12 +42,14 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
           </div>
           <div className="space-x-4">
             <span className="space-x-1">
-              <span className="font-semibold">Height:</span>
-              <span>{pokemon.height / 10}m</span>
+              <span className="font-semibold">HT:</span>
+              <span>{decimeterToImperial(pokemon.height)}</span>
             </span>
             <span className="space-x-1">
-              <span className="font-semibold">Weight:</span>
-              <span>{(pokemon.weight * poundConversion).toFixed(1)}lbs</span>
+              <span className="font-semibold">WT:</span>
+              <span className="lowercase">
+                {hectogramToImperial(pokemon.weight)}
+              </span>
             </span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import { Tile, TileContent } from "../ui/Tile";
-import { poundConversion } from "@/constants";
+import { hectogramToImperial } from "@/helpers/Conversions";
 
 type FeedbackTileProps = {
   guessedItem: Pokemon;
@@ -53,9 +53,7 @@ export default function FeedbackTile({
             </Tile>
           ))}
           <Tile status="correct">
-            <TileContent>
-              {(correctItem.weight * poundConversion).toFixed(1)}lbs
-            </TileContent>
+            <TileContent>{hectogramToImperial(correctItem.weight)}</TileContent>
           </Tile>
           <Tile status="correct">
             <TileContent>{correctItem.height / 10}m</TileContent>
@@ -109,7 +107,7 @@ export default function FeedbackTile({
           {guessedItem.weight === correctItem.weight ? (
             <Tile status="correct">
               <TileContent>
-                {(correctItem.weight * poundConversion).toFixed(1)} lbs
+                {hectogramToImperial(correctItem.weight)}
               </TileContent>
             </Tile>
           ) : (
@@ -120,7 +118,7 @@ export default function FeedbackTile({
               }
             >
               <TileContent>
-                {(guessedItem.weight * poundConversion).toFixed(1)} lbs
+                {hectogramToImperial(correctItem.weight)}
               </TileContent>
             </Tile>
           )}
