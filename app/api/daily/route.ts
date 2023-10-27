@@ -1,11 +1,10 @@
-import { NextResponse, type NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { format, startOfTomorrow } from "date-fns";
+import { startOfTomorrow } from "date-fns";
 import { readJson } from "@/helpers/FileSystem";
 import { Move, Pokemon } from "@/atoms/GameAtoms";
-import { verifySignatureEdge } from "@upstash/qstash/dist/nextjs";
 
-async function handler(_req: NextRequest) {
+export async function GET(params: NextRequest) {
   try {
     const allPokemon = (await readJson("/data/pokedex.json")) as Pokemon[];
     const allMoves = (await readJson("/data/movedex.json")) as Move[];
@@ -59,7 +58,7 @@ async function handler(_req: NextRequest) {
 
     const newDaily = await prisma.daily.create({
       data: {
-        date: format(startOfTomorrow(), "yyyy-MM-dd"),
+        date: startOfTomorrow(),
         classicId: classic.id,
         whosThatPokemonId: whosThatPokemon.id,
         moveId: move.id,
@@ -67,11 +66,9 @@ async function handler(_req: NextRequest) {
     });
 
     console.log("New daily entry added:", newDaily);
-    return NextResponse.json({ status: "OK" });
+    return new Response("OK");
   } catch (error) {
     console.error("Error adding new daily entry:", error);
-    return NextResponse.json({ status: "Error" });
+    return new Response("Error");
   }
 }
-
-export const GET = verifySignatureEdge(handler);
