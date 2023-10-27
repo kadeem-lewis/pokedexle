@@ -7,9 +7,12 @@ export async function GET(request: Request) {
 
     if (dateString === null) throw new Error("dateString is null");
 
+    const date = new Date(dateString);
+    console.log(date)
+
     const dailies = await prisma.daily.findUnique({
       where: {
-        date: dateString,
+        date: date,
       },
     });
     return Response.json(dailies);
