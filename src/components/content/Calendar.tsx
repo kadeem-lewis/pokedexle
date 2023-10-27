@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { useAtom } from "jotai";
-import { dateAtom } from "@/atoms/GameAtoms";
+import { dateAtom } from "@/app/atoms/GameAtoms";
 import { addDays, endOfMonth, format } from "date-fns";
 // Your App.tsx file
 import "react-day-picker/dist/style.css";

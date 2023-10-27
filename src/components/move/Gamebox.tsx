@@ -14,9 +14,9 @@ import {
   moveListAtom,
   movePracticeAnswersAtom,
   pokemonToGuessAtom,
-} from "@/atoms/GameAtoms";
+} from "@/app/atoms/GameAtoms";
 import { Daily } from "@prisma/client";
-import { type Move } from "@/atoms/GameAtoms";
+import { type Move } from "@/app/atoms/GameAtoms";
 import PokemonTypes from "../PokemonTypes";
 import { useHydrateAtoms } from "jotai/utils";
 import { format, isSameDay, startOfToday } from "date-fns";

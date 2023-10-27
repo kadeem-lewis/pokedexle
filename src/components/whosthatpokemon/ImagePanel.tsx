@@ -1,4 +1,4 @@
-import { Pokemon } from "@/atoms/GameAtoms";
+import { Pokemon } from "@/app/atoms/GameAtoms";
 import React, { useEffect, useState } from "react";
 import Guesses from "../Guesses";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import {
   guessAtom,
   guessedItemsAtom,
   gameOverAtom,
-} from "@/atoms/GameAtoms";
+} from "@/app/atoms/GameAtoms";
 import { useAtomValue, useAtom } from "jotai";
 import GameOverContent from "../content/GameOverContent";
 import OptionsModal from "../ui/OptionsModal";

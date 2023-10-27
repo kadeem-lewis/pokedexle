@@ -1,4 +1,4 @@
-import { Move } from "@/atoms/GameAtoms";
+import { Move } from "@/app/atoms/GameAtoms";
 import { Tile, TileContent } from "../ui/Tile";
 import Image from "next/image";
 

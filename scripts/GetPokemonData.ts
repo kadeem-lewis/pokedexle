@@ -1,4 +1,4 @@
-import { updatePokemonData, updateMoveData } from "../helpers/DataProcessing";
+import { updatePokemonData, updateMoveData } from "@/helpers/DataProcessing";
 import { promises as fs } from "fs";
 
 const query = `
@@ -53,7 +53,7 @@ async function fetchPokemonData() {
     if (data && data.pokemon_v2_pokemon) {
       const transformedData = updatePokemonData(data.pokemon_v2_pokemon);
       await fs.writeFile(
-        "../data/pokedex.json",
+        "../src/data/pokedex.json",
         JSON.stringify(transformedData, null, 2),
       );
 
@@ -79,7 +79,7 @@ async function fetchPokemonData() {
     if (moveData && moveData.data && moveData.data.pokemon_v2_move) {
       const transformedMoveData = updateMoveData(moveData.data.pokemon_v2_move);
       await fs.writeFile(
-        "../data/movedex.json",
+        "../src/data/movedex.json",
         JSON.stringify(transformedMoveData, null, 2),
       );
 

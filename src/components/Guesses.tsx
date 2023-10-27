@@ -7,7 +7,7 @@ import {
   currentGameMode,
   guessAtom,
   guessedItemsAtom,
-} from "@/atoms/GameAtoms";
+} from "@/app/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import PokemonCard from "./ui/PokemonCard";
 

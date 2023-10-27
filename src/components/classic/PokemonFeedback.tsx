@@ -6,26 +6,28 @@ import {
   gameOverAtom,
   guessAtom,
   guessedItemsAtom,
-  Move,
+  Pokemon,
   pokemonToGuessAtom,
-} from "@/atoms/GameAtoms";
+} from "@/app/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
-import Guesses from "@/components/Guesses";
+import Guesses from "../Guesses";
 
-type MoveFeedbackProps = {
-  correctAnswer: Move;
+type PokemonFeedbackProps = {
+  correctAnswer: Pokemon;
 };
 
-const HEADINGS = ["Name", "Gen", "Class", "Type", "Power", "PP", "Accuracy"];
+const HEADINGS = ["Name", "Gen", "Type 1", "Type 2", "Height", "Weight"];
 
-export default function PokemonFeedback({ correctAnswer }: MoveFeedbackProps) {
+export default function PokemonFeedback({
+  correctAnswer,
+}: PokemonFeedbackProps) {
   const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
   //TODO: find a better way to result the pokemon[] or move[] error
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Move[];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
 

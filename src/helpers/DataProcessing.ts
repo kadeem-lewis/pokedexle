@@ -1,4 +1,4 @@
-import { Pokemon, Move } from "../atoms/GameAtoms";
+import { Pokemon, Move } from "../src/app/atoms/GameAtoms";
 
 export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
   return pokemonData
@@ -9,7 +9,7 @@ export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
         : pokemon.name;
       const generation = pokemon.pokemon_v2_pokemonspecy.generation_id;
       const types = pokemon.pokemon_v2_pokemontypes.map(
-        (type: any) => type.pokemon_v2_type.name
+        (type: any) => type.pokemon_v2_type.name,
       );
       if (types.length === 1) {
         types.push("none");

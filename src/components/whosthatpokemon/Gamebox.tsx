@@ -1,27 +1,26 @@
 "use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
-import { useHydrateAtoms } from "jotai/utils";
+import MyComboBox from "../ui/MyComboBox";
+import { Button } from "../ui/Button";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   Pokemon,
-  pokedexAtom,
-  pokemonToGuessAtom,
   currentGameMode,
-  classicPracticeAnswersAtom,
-  guessedItemsAtom,
-  guessAtom,
-  classicAnswersAtom,
   dailyAtom,
   dailyPokemonAtom,
-} from "@/atoms/GameAtoms";
-import { defaultGuesses } from "@/constants";
-import MyComboBox from "../ui/MyComboBox";
+  guessAtom,
+  guessedItemsAtom,
+  pokedexAtom,
+  pokemonToGuessAtom,
+  whosthatpokemonAnswersAtom,
+  whosthatpokemonPracticeAnswersAtom,
+} from "@/app/atoms/GameAtoms";
 import PokemonTypes from "../PokemonTypes";
-import PokemonFeedback from "./PokemonFeedback";
-import { useAtom, useSetAtom, useAtomValue } from "jotai";
-import { Button } from "../ui/Button";
+import ImagePanel from "./ImagePanel";
+import { useHydrateAtoms } from "jotai/utils";
 import { format, isSameDay, startOfToday } from "date-fns";
+import { defaultGuesses } from "@/constants";
 import { usePathname } from "next/navigation";
 import { Daily } from "@prisma/client";
 
@@ -31,88 +30,93 @@ type GameboxProps = {
 
 export default function Gamebox({ pokedex }: GameboxProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
-  const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
-  const classicPracticeAnswers = useAtomValue(classicPracticeAnswersAtom);
-  const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
-  const setGuesses = useSetAtom(guessAtom);
   const [mode, setMode] = useAtom(currentGameMode);
-  const { date, classicId } = useAtomValue<Promise<Daily>>(dailyAtom);
-  const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
-  const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
+  const whosthatpokemonPracticeAnswers = useAtomValue(
+    whosthatpokemonPracticeAnswersAtom,
+  );
+  const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
+  const setGuesses = useSetAtom(guessAtom);
+  const { date, whosThatPokemonId } = useAtomValue<Promise<Daily>>(dailyAtom);
+  const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
+    whosthatpokemonAnswersAtom,
+  );
+  const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const currentPath = usePathname();
 
   useEffect(() => {
-    console.log("change mode useEffect is running");
-    if (currentPath === "/classic" && selectedIndex === 0) setMode("classic");
+    if (currentPath === "/whosthatpokemon" && selectedIndex === 0)
+      setMode("whosthatpokemon");
   }, [currentPath, selectedIndex, setMode]);
 
   useEffect(() => {
-    console.log("Set Dailies useEffect is running");
     function setDailies() {
       const dailyClassicPokemon = pokedex.find(
-        (pokemon) => pokemon.id === classicId,
+        (pokemon) => pokemon.id === whosThatPokemonId,
       );
       if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
 
-      setDailyPokemon((prev) => ({ ...prev, classic: dailyClassicPokemon }));
+      setDailyPokemon((prev) => ({
+        ...prev,
+        whosthatpokemon: dailyClassicPokemon,
+      }));
     }
     setDailies();
-  }, [classicId, pokedex, setDailyPokemon]);
+  }, [pokedex, setDailyPokemon, whosThatPokemonId]);
 
   useEffect(() => {
-    if (mode !== "classic") return;
-    console.log("Classic useEffect is running");
-    console.log("Server Date: ", new Date(date));
-    if (isSameDay(new Date(), new Date(date))) {
+    if (mode !== "whosthatpokemon") return;
+    console.log("Server Date", new Date(date));
+    if (isSameDay(whosthatpokemonAnswers.date, new Date(date))) {
       setGuessedItems((prev) => ({
         ...prev,
-        classic: classicAnswers.answers,
+        whosthatpokemon: whosthatpokemonAnswers.answers,
       }));
       setGuesses((prev) => ({
         ...prev,
-        classic: defaultGuesses - classicAnswers.answers.length,
+        whosthatpokemon: defaultGuesses - whosthatpokemonAnswers.answers.length,
       }));
     } else {
-      setClassicAnswers({
+      setWhosthatpokemonAnswers({
         date: startOfToday(),
         answers: [],
       });
     }
   }, [
-    classicAnswers.date,
-    classicAnswers.answers,
     date,
     guessedItems.classic.length,
     mode,
-    setClassicAnswers,
     setGuessedItems,
     setGuesses,
+    whosthatpokemonAnswers.date,
+    whosthatpokemonAnswers.answers,
+    setWhosthatpokemonAnswers,
   ]);
 
   useEffect(() => {
-    console.log("Classic Unlimited useEffect is running");
     if (
-      classicPracticeAnswers !== null &&
-      mode === "classicUnlimited" &&
-      guessedItems.classicUnlimited.length === 0
+      whosthatpokemonPracticeAnswers !== null &&
+      mode === "whosthatpokemonUnlimited" &&
+      guessedItems.whosthatpokemonUnlimited.length === 0
     ) {
       setGuessedItems((prev) => ({
         ...prev,
-        classicUnlimited: classicPracticeAnswers,
+        whosthatpokemonUnlimited: whosthatpokemonPracticeAnswers,
       }));
       setGuesses((prev) => ({
         ...prev,
-        classicUnlimited: defaultGuesses - classicPracticeAnswers.length,
+        whosthatpokemonUnlimited:
+          defaultGuesses - whosthatpokemonPracticeAnswers.length,
       }));
     }
   }, [
     mode,
-    classicPracticeAnswers,
     setGuessedItems,
     setGuesses,
-    guessedItems.classicUnlimited,
+    guessedItems.whosthatpokemonUnlimited,
+    whosthatpokemonPracticeAnswers,
   ]);
 
   return (
@@ -122,9 +126,9 @@ export default function Gamebox({ pokedex }: GameboxProps) {
         onChange={(index) => {
           setSelectedIndex(index);
           if (index === 0) {
-            setMode("classic");
+            setMode("whosthatpokemon");
           } else {
-            setMode("classicUnlimited");
+            setMode("whosthatpokemonUnlimited");
           }
         }}
       >
@@ -148,21 +152,21 @@ export default function Gamebox({ pokedex }: GameboxProps) {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            {pokemonToGuess.classic && (
-              <PokemonFeedback correctAnswer={pokemonToGuess.classic} />
+            {pokemonToGuess.whosthatpokemon && (
+              <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemon} />
             )}
           </Tab.Panel>
           <Tab.Panel>
-            {pokemonToGuess.classicUnlimited && (
-              <PokemonFeedback
-                correctAnswer={pokemonToGuess.classicUnlimited}
+            {pokemonToGuess.whosthatpokemonUnlimited && (
+              <ImagePanel
+                correctAnswer={pokemonToGuess.whosthatpokemonUnlimited}
               />
             )}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
-      <MyComboBox />
       <PokemonTypes />
+      <MyComboBox />
     </>
   );
 }

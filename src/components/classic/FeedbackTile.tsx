@@ -1,4 +1,4 @@
-import { Pokemon } from "@/atoms/GameAtoms";
+import { Pokemon } from "@/app/atoms/GameAtoms";
 import Image from "next/image";
 import { Tile, TileContent } from "../ui/Tile";
 import { poundConversion } from "@/constants";
