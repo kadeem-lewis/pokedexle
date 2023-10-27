@@ -12,8 +12,8 @@ datasource db {
 }
 
 model Daily {
-  id Int @unique @default(autoincrement())
-  date String @unique
+  id Int @id @default(autoincrement())
+  date DateTime @db.Date @unique
   classicId Int @unique
   moveId Int @unique
   whosThatPokemonId Int @unique
