@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { format } from "date-fns";
+import { format, startOfToday } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
 
@@ -25,12 +25,12 @@ export type Move = {
 };
 
 type DailyStorage = {
-  date: string;
+  date: Date;
   answers: Pokemon[];
 };
 
 type DailyMoveStorage = {
-  date: string;
+  date: Date;
   answers: Move[];
 };
 
@@ -140,7 +140,7 @@ dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
   "classic_answers",
   {
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: startOfToday(),
     answers: [],
   },
 );
@@ -149,7 +149,7 @@ classicAnswersAtom.debugLabel = "classicAnswersAtom";
 export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
   "whosthatpokemon_answers",
   {
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: startOfToday(),
     answers: [],
   },
 );
@@ -296,7 +296,7 @@ addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
 export const moveAnswersAtom = atomWithStorage<DailyMoveStorage>(
   "move_answers",
   {
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: startOfToday(),
     answers: [],
   },
 );
