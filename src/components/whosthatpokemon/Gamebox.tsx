@@ -72,7 +72,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
       new Date(whosthatpokemonAnswers.date),
       "yyyy-MM-dd",
     );
-    const serverTime = format(addDays(new Date(date), 1), "yyyy-MM-dd");
+    const serverTime = format(new Date(date), "yyyy-MM-dd");
     if (serverTime === localTime) {
       setGuessedItems((prev) => ({
         ...prev,

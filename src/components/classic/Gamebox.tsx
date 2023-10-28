@@ -64,7 +64,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
   useEffect(() => {
     if (mode !== "classic") return;
     const localTime = format(new Date(classicAnswers.date), "yyyy-MM-dd");
-    const serverTime = format(addDays(new Date(date), 1), "yyyy-MM-dd");
+    const serverTime = format(new Date(date), "yyyy-MM-dd");
     if (serverTime === localTime) {
       setGuessedItems((prev) => ({
         ...prev,
