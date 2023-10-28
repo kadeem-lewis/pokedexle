@@ -19,7 +19,7 @@ import {
 import PokemonTypes from "../PokemonTypes";
 import ImagePanel from "./ImagePanel";
 import { useHydrateAtoms } from "jotai/utils";
-import { format, isSameDay, startOfToday } from "date-fns";
+import { addDays, format, isSameDay, startOfToday } from "date-fns";
 import { defaultGuesses } from "@/constants";
 import { usePathname } from "next/navigation";
 import { Daily } from "@prisma/client";
@@ -68,8 +68,12 @@ export default function Gamebox({ pokedex }: GameboxProps) {
 
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;
-    console.log("Server Date", new Date(date));
-    if (isSameDay(whosthatpokemonAnswers.date, new Date(date))) {
+    const localTime = format(
+      new Date(whosthatpokemonAnswers.date),
+      "yyyy-MM-dd",
+    );
+    const serverTime = format(addDays(new Date(date), 1), "yyyy-MM-dd");
+    if (serverTime === localTime) {
       setGuessedItems((prev) => ({
         ...prev,
         whosthatpokemon: whosthatpokemonAnswers.answers,

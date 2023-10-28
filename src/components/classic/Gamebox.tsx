@@ -21,7 +21,7 @@ import PokemonTypes from "../PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { Button } from "../ui/Button";
-import { format, isSameDay, startOfToday } from "date-fns";
+import { addDays, format, isSameDay, startOfToday } from "date-fns";
 import { usePathname } from "next/navigation";
 import { Daily } from "@prisma/client";
 
@@ -63,9 +63,9 @@ export default function Gamebox({ pokedex }: GameboxProps) {
 
   useEffect(() => {
     if (mode !== "classic") return;
-    console.log("Classic useEffect is running");
-    console.log("Server Date: ", new Date(date));
-    if (isSameDay(new Date(), new Date(date))) {
+    const localTime = format(new Date(classicAnswers.date), "yyyy-MM-dd");
+    const serverTime = format(addDays(new Date(date), 1), "yyyy-MM-dd");
+    if (serverTime === localTime) {
       setGuessedItems((prev) => ({
         ...prev,
         classic: classicAnswers.answers,
@@ -75,6 +75,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
         classic: defaultGuesses - classicAnswers.answers.length,
       }));
     } else {
+      console.log("HaHa I keep printing");
       setClassicAnswers({
         date: startOfToday(),
         answers: [],
