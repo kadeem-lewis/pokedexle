@@ -27,7 +27,7 @@ const badgeVariants = cva(
       },
       effect: {
         default: "",
-        disabled: "-z-10 opacity-75 brightness-75 grayscale",
+        disabled: "-z-10 opacity-50 brightness-50 grayscale",
         highlighted: "ring-2 ring-black dark:ring-white", //have it be a bright text color
       },
     },
