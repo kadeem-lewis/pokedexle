@@ -62,9 +62,8 @@ export default function Gamebox({ moveList }: GameboxProps) {
   useEffect(() => {
     if (mode !== "move") return;
 
-    const localTime = format(new Date(moveAnswers.date), "yyyy-MM-dd");
     const serverTime = format(new Date(date), "yyyy-MM-dd");
-    if (serverTime === localTime) {
+    if (serverTime === moveAnswers.date) {
       setGuessedItems((prev) => ({
         ...prev,
         move: moveAnswers.answers,
@@ -75,7 +74,7 @@ export default function Gamebox({ moveList }: GameboxProps) {
       }));
     } else {
       setMoveAnswers({
-        date: startOfToday(),
+        date: serverTime,
         answers: [],
       });
     }

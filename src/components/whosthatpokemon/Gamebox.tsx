@@ -68,12 +68,8 @@ export default function Gamebox({ pokedex }: GameboxProps) {
 
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;
-    const localTime = format(
-      new Date(whosthatpokemonAnswers.date),
-      "yyyy-MM-dd",
-    );
     const serverTime = format(new Date(date), "yyyy-MM-dd");
-    if (serverTime === localTime) {
+    if (serverTime === whosthatpokemonAnswers.date) {
       setGuessedItems((prev) => ({
         ...prev,
         whosthatpokemon: whosthatpokemonAnswers.answers,
@@ -84,7 +80,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
       }));
     } else {
       setWhosthatpokemonAnswers({
-        date: startOfToday(),
+        date: serverTime,
         answers: [],
       });
     }

@@ -25,12 +25,12 @@ export type Move = {
 };
 
 type DailyStorage = {
-  date: Date;
+  date: string;
   answers: Pokemon[];
 };
 
 type DailyMoveStorage = {
-  date: Date;
+  date: string;
   answers: Move[];
 };
 
@@ -129,7 +129,6 @@ export const pokemonToGuessAtom = atom((get) => {
 pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
 //controls the daily classic Pokemon
-//TODO: turn this into an object that stores all the daily pokemon?
 export const dailyPokemonAtom = atom<DailyAnswers>({
   classic: null,
   whosthatpokemon: null,
@@ -140,7 +139,7 @@ dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
   "classic_answers",
   {
-    date: startOfToday(),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
   },
 );
@@ -149,7 +148,7 @@ classicAnswersAtom.debugLabel = "classicAnswersAtom";
 export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
   "whosthatpokemon_answers",
   {
-    date: startOfToday(),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
   },
 );
@@ -296,7 +295,7 @@ addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
 export const moveAnswersAtom = atomWithStorage<DailyMoveStorage>(
   "move_answers",
   {
-    date: startOfToday(),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
   },
 );
