@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Icons } from "./Icons";
 import { useAtomValue } from "jotai";
 import { Tooltip } from "react-tooltip";
