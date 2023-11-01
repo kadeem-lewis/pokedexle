@@ -102,12 +102,8 @@ export default {
         },
       },
       blur: {
-        1: "4px",
         2: "6px",
-        3: "8px",
-        4: "12px",
         5: "14px",
-        6: "16px",
       },
     },
     clipPath: {
