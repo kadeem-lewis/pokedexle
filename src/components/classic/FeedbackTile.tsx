@@ -56,10 +56,10 @@ export default function FeedbackTile({
             </Tile>
           ))}
           <Tile status="correct">
-            <TileContent>{hectogramToImperial(correctItem.weight)}</TileContent>
+            <TileContent>{decimeterToImperial(guessedItem.height)}</TileContent>
           </Tile>
           <Tile status="correct">
-            <TileContent>{correctItem.height / 10}m</TileContent>
+            <TileContent>{hectogramToImperial(correctItem.weight)}</TileContent>
           </Tile>
         </>
       ) : (
