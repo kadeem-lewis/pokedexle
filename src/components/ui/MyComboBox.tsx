@@ -2,7 +2,7 @@
 import React, { useState, Fragment, useMemo } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import Fuse from "fuse.js";
-import { useSetAtom, useAtomValue, useAtom } from "jotai";
+import { useSetAtom, useAtomValue } from "jotai";
 import {
   addGuessedItemAtom,
   Pokemon,
