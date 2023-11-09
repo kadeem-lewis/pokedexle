@@ -79,23 +79,6 @@ export const guessedItemsAtom = atom<GuessedItems>({
 });
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
-//atom that gets the current Date and can be used to get dates of other days
-export const dateAtom = atom(format(new Date(), "yyyy-MM-dd"));
-dateAtom.debugLabel = "dateAtom";
-
-//function to fetch Daily entry from database
-export const dailyAtom = atom(async (get) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
-  );
-  if (!response.ok) {
-    throw new Error("Network response was not OK");
-  }
-  const data: Daily = await response.json();
-  return data;
-});
-dailyAtom.debugLabel = "dailyAtom";
-
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
   "classic_practice_solution",
   null,

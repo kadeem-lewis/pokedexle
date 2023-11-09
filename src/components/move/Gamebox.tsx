@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   currentGameMode,
-  dailyAtom,
   dailyPokemonAtom,
   guessAtom,
   guessedItemsAtom,

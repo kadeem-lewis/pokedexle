@@ -10,7 +10,6 @@ import {
   guessedItemsAtom,
   guessAtom,
   classicAnswersAtom,
-  dailyAtom,
   dailyPokemonAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";

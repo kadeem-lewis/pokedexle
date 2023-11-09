@@ -5,7 +5,6 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   Pokemon,
   currentGameMode,
-  dailyAtom,
   dailyPokemonAtom,
   guessAtom,
   guessedItemsAtom,
