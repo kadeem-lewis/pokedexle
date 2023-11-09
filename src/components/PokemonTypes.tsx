@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { TypeBadge } from "./ui/TypeBadge";
 import { useAtomValue } from "jotai";
