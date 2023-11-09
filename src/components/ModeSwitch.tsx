@@ -7,15 +7,15 @@ import { useSearchParams } from "next/navigation";
 
 type ModeSwitchProps = {
   href: string;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default function ModeSwitch({ href }: ModeSwitchProps) {
-  const searchParams = useSearchParams();
+export default function ModeSwitch({ href, searchParams }: ModeSwitchProps) {
   return (
     <div className="mt-2 flex justify-center gap-2">
       <Link
         className={cx(
-          !searchParams.get("mode") ? "brightness-110" : "brightness-75",
+          !searchParams.mode ? "brightness-110" : "brightness-75",
           buttonVariants({ variant: "flat", size: "tall" }),
           "bg-yellow-500",
         )}
@@ -25,7 +25,7 @@ export default function ModeSwitch({ href }: ModeSwitchProps) {
       </Link>
       <Link
         className={cx(
-          searchParams.get("mode") === "unlimited"
+          searchParams.mode === "unlimited"
             ? "brightness-110"
             : "brightness-75",
           buttonVariants({ variant: "flat", size: "tall" }),
