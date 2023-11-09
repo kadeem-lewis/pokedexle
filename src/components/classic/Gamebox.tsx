@@ -1,7 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Tab } from "@headlessui/react";
+import { useEffect } from "react";
 import { useHydrateAtoms } from "jotai/utils";
 import {
   Pokemon,
@@ -16,8 +14,6 @@ import {
   dailyPokemonAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
-import MyComboBox from "../ui/MyComboBox";
-import PokemonTypes from "../PokemonTypes";
 import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { format } from "date-fns";
@@ -124,8 +120,6 @@ export default function Gamebox({ pokedex }: GameboxProps) {
         searchParams.get("mode") === "unlimited" && (
           <PokemonFeedback correctAnswer={pokemonToGuess.classicUnlimited} />
         )}
-      <MyComboBox />
-      <PokemonTypes />
     </>
   );
 }

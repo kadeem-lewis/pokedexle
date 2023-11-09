@@ -127,8 +127,6 @@ export default function Gamebox({ pokedex }: GameboxProps) {
         searchParams.get("mode") === "unlimited" && (
           <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemonUnlimited} />
         )}
-      <PokemonTypes />
-      <MyComboBox />
     </>
   );
 }

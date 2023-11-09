@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
-import MoveCombobox from "./MoveCombobox";
+import { useEffect } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   currentGameMode,
@@ -124,7 +123,6 @@ export default function Gamebox({ moveList }: GameboxProps) {
         )}
 
       {/* <PokemonTypes /> */}
-      <MoveCombobox />
     </>
   );
 }
