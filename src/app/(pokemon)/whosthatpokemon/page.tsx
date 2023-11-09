@@ -1,4 +1,5 @@
 import { Pokemon } from "@/atoms/GameAtoms";
+import ModeSwitch from "@/components/ModeSwitch";
 import Gamebox from "@/components/whosthatpokemon/Gamebox";
 import { readJson } from "@/helpers/FileSystem";
 
@@ -11,6 +12,7 @@ export default async function WhosThatPokemon() {
   const pokedex = (await readJson("/data/pokedex.json")) as Pokemon[];
   return (
     <>
+      <ModeSwitch href="/whosthatpokemon" />
       <Gamebox pokedex={pokedex} />
     </>
   );

@@ -1,4 +1,5 @@
 import { Pokemon } from "@/atoms/GameAtoms";
+import ModeSwitch from "@/components/ModeSwitch";
 import Gamebox from "@/components/classic/Gamebox";
 import { readJson } from "@/helpers/FileSystem";
 
@@ -9,5 +10,10 @@ export const metadata = {
 
 export default async function Classic() {
   const pokedex = (await readJson("/data/pokedex.json")) as Pokemon[];
-  return <>{pokedex && <Gamebox pokedex={pokedex} />}</>;
+  return (
+    <>
+      <ModeSwitch href="/classic" />
+      {pokedex && <Gamebox pokedex={pokedex} />}
+    </>
+  );
 }
