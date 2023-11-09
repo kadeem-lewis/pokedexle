@@ -24,9 +24,10 @@ import { Daily } from "@prisma/client";
 
 type GameboxProps = {
   pokedex: Pokemon[];
+  dailies: Daily;
 };
 
-export default function Gamebox({ pokedex }: GameboxProps) {
+export default function Gamebox({ pokedex, dailies }: GameboxProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [mode, setMode] = useAtom(currentGameMode);
 
@@ -36,7 +37,7 @@ export default function Gamebox({ pokedex }: GameboxProps) {
   );
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date, whosThatPokemonId } = useAtomValue<Promise<Daily>>(dailyAtom);
+  const { date, whosThatPokemonId } = dailies;
   const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
     whosthatpokemonAnswersAtom,
   );

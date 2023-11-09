@@ -4,6 +4,7 @@ import PokemonTypes from "@/components/PokemonTypes";
 import Gamebox from "@/components/classic/Gamebox";
 import MyComboBox from "@/components/ui/MyComboBox";
 import { readJson } from "@/helpers/FileSystem";
+import { prisma } from "@/lib/prisma";
 
 type ClassicProps = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -16,10 +17,16 @@ export const metadata = {
 
 export default async function Classic({ searchParams }: ClassicProps) {
   const pokedex = (await readJson("/data/pokedex.json")) as Pokemon[];
+  const dailies = await prisma.daily.findUnique({
+    where: {
+      date: new Date(),
+    },
+  });
+
   return (
     <>
       <ModeSwitch href="/classic" searchParams={searchParams} />
-      {pokedex && <Gamebox pokedex={pokedex} />}
+      {dailies && <Gamebox pokedex={pokedex} dailies={dailies} />}
       <MyComboBox />
       <PokemonTypes />
     </>

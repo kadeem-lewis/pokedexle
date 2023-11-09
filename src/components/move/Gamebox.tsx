@@ -23,9 +23,10 @@ import MoveFeedback from "./MoveFeedback";
 
 type GameboxProps = {
   moveList: Move[];
+  dailies: Daily;
 };
 
-export default function Gamebox({ moveList }: GameboxProps) {
+export default function Gamebox({ moveList, dailies }: GameboxProps) {
   useHydrateAtoms([[moveListAtom, moveList]]);
   const [mode, setMode] = useAtom(currentGameMode);
 
@@ -33,7 +34,7 @@ export default function Gamebox({ moveList }: GameboxProps) {
   const movePracticeAnswers = useAtomValue(movePracticeAnswersAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date, moveId } = useAtomValue<Promise<Daily>>(dailyAtom);
+  const { date, moveId } = dailies;
   const [moveAnswers, setMoveAnswers] = useAtom(moveAnswersAtom);
   const setDailyMove = useSetAtom(dailyPokemonAtom);
   const currentPath = usePathname();
