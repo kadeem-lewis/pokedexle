@@ -1,8 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Tab } from "@headlessui/react";
+import React, { useEffect } from "react";
 import MyComboBox from "../ui/MyComboBox";
-import { Button } from "../ui/Button";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   Pokemon,
@@ -19,9 +17,9 @@ import {
 import PokemonTypes from "../PokemonTypes";
 import ImagePanel from "./ImagePanel";
 import { useHydrateAtoms } from "jotai/utils";
-import { addDays, format, isSameDay, startOfToday } from "date-fns";
+import { format } from "date-fns";
 import { defaultGuesses } from "@/constants";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Daily } from "@prisma/client";
 
 type GameboxProps = {
@@ -31,7 +29,6 @@ type GameboxProps = {
 export default function Gamebox({ pokedex }: GameboxProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [mode, setMode] = useAtom(currentGameMode);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const whosthatpokemonPracticeAnswers = useAtomValue(
@@ -45,11 +42,13 @@ export default function Gamebox({ pokedex }: GameboxProps) {
   );
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const currentPath = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (currentPath === "/whosthatpokemon" && selectedIndex === 0)
-      setMode("whosthatpokemon");
-  }, [currentPath, selectedIndex, setMode]);
+    if (currentPath === "/whosthatpokemon") setMode("whosthatpokemon");
+    if (searchParams.get("mode") === "unlimited")
+      setMode("whosthatpokemonUnlimited");
+  }, [currentPath, searchParams, setMode]);
 
   useEffect(() => {
     function setDailies() {
@@ -88,10 +87,10 @@ export default function Gamebox({ pokedex }: GameboxProps) {
     date,
     guessedItems.classic.length,
     mode,
-    setGuessedItems,
-    setGuesses,
     whosthatpokemonAnswers.date,
     whosthatpokemonAnswers.answers,
+    setGuessedItems,
+    setGuesses,
     setWhosthatpokemonAnswers,
   ]);
 
@@ -121,50 +120,13 @@ export default function Gamebox({ pokedex }: GameboxProps) {
 
   return (
     <>
-      <Tab.Group
-        selectedIndex={selectedIndex}
-        onChange={(index) => {
-          setSelectedIndex(index);
-          if (index === 0) {
-            setMode("whosthatpokemon");
-          } else {
-            setMode("whosthatpokemonUnlimited");
-          }
-        }}
-      >
-        <Tab.List className="mt-2 flex justify-center gap-2">
-          <Tab
-            className="bg-yellow-500 ui-selected:brightness-110 ui-not-selected:brightness-75"
-            as={Button}
-            variant="flat"
-            size="tall"
-          >
-            Daily
-          </Tab>
-          <Tab
-            className="bg-yellow-500 ui-selected:brightness-110 ui-not-selected:brightness-75"
-            as={Button}
-            variant="flat"
-            size="tall"
-          >
-            Unlimited
-          </Tab>
-        </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>
-            {pokemonToGuess.whosthatpokemon && (
-              <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemon} />
-            )}
-          </Tab.Panel>
-          <Tab.Panel>
-            {pokemonToGuess.whosthatpokemonUnlimited && (
-              <ImagePanel
-                correctAnswer={pokemonToGuess.whosthatpokemonUnlimited}
-              />
-            )}
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+      {pokemonToGuess.whosthatpokemon && !searchParams.has("mode") && (
+        <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemon} />
+      )}
+      {pokemonToGuess.whosthatpokemonUnlimited &&
+        searchParams.get("mode") === "unlimited" && (
+          <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemonUnlimited} />
+        )}
       <PokemonTypes />
       <MyComboBox />
     </>

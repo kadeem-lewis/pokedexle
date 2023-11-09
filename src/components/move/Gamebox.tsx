@@ -1,8 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Tab } from "@headlessui/react";
+import React, { useEffect } from "react";
 import MoveCombobox from "./MoveCombobox";
-import { Button } from "../ui/Button";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   currentGameMode,
@@ -19,9 +17,9 @@ import { Daily } from "@prisma/client";
 import { type Move } from "@/atoms/GameAtoms";
 import PokemonTypes from "../PokemonTypes";
 import { useHydrateAtoms } from "jotai/utils";
-import { addDays, format, isSameDay, startOfToday } from "date-fns";
+import { format } from "date-fns";
 import { defaultGuesses } from "@/constants";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import MoveFeedback from "./MoveFeedback";
 
 type GameboxProps = {
@@ -31,7 +29,6 @@ type GameboxProps = {
 export default function Gamebox({ moveList }: GameboxProps) {
   useHydrateAtoms([[moveListAtom, moveList]]);
   const [mode, setMode] = useAtom(currentGameMode);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const movePracticeAnswers = useAtomValue(movePracticeAnswersAtom);
@@ -41,10 +38,12 @@ export default function Gamebox({ moveList }: GameboxProps) {
   const [moveAnswers, setMoveAnswers] = useAtom(moveAnswersAtom);
   const setDailyMove = useSetAtom(dailyPokemonAtom);
   const currentPath = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (currentPath === "/move" && selectedIndex === 0) setMode("move");
-  }, [currentPath, selectedIndex, setMode]);
+    if (currentPath === "/move") setMode("move");
+    if (searchParams.get("mode") === "unlimited") setMode("moveUnlimited");
+  }, [currentPath, searchParams, setMode]);
 
   useEffect(() => {
     function setDailies() {
@@ -115,48 +114,15 @@ export default function Gamebox({ moveList }: GameboxProps) {
 
   return (
     <>
-      <Tab.Group
-        selectedIndex={selectedIndex}
-        onChange={(index) => {
-          setSelectedIndex(index);
-          if (index === 0) {
-            setMode("move");
-          } else {
-            setMode("moveUnlimited");
-          }
-        }}
-      >
-        <Tab.List className="mt-2 flex justify-center gap-2">
-          <Tab
-            className="bg-yellow-500 ui-selected:brightness-110 ui-not-selected:brightness-75"
-            as={Button}
-            variant="flat"
-            size="tall"
-          >
-            Daily
-          </Tab>
-          <Tab
-            className="bg-yellow-500 ui-selected:brightness-110 ui-not-selected:brightness-75"
-            as={Button}
-            variant="flat"
-            size="tall"
-          >
-            Unlimited
-          </Tab>
-        </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>
-            {pokemonToGuess.move && (
-              <MoveFeedback correctAnswer={pokemonToGuess.move} />
-            )}
-          </Tab.Panel>
-          <Tab.Panel>
-            {pokemonToGuess.moveUnlimited && (
-              <MoveFeedback correctAnswer={pokemonToGuess.moveUnlimited} />
-            )}
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+      {pokemonToGuess.move && !searchParams.has("mode") && (
+        <MoveFeedback correctAnswer={pokemonToGuess.move} />
+      )}
+
+      {pokemonToGuess.moveUnlimited &&
+        searchParams.get("mode") === "unlimited" && (
+          <MoveFeedback correctAnswer={pokemonToGuess.moveUnlimited} />
+        )}
+
       {/* <PokemonTypes /> */}
       <MoveCombobox />
     </>
