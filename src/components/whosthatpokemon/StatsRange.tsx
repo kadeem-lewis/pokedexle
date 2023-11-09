@@ -22,60 +22,80 @@ export default function StatsRange() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode] as Pokemon;
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
 
-  const [generationRange, setGenerationRange] = useState({ max: 0, min: 0 });
-  const [weightRange, setWeightRange] = useState({ max: 0, min: 0 });
-  const [heightRange, setHeightRange] = useState({ max: 0, min: 0 });
+  const [generationRange, setGenerationRange] = useState({
+    whosthatpokemon: { max: 0, min: 0 },
+    whosthatpokemonUnlimited: { max: 0, min: 0 },
+  });
+  const [weightRange, setWeightRange] = useState({
+    whosthatpokemon: { max: 0, min: 0 },
+    whosthatpokemonUnlimited: { max: 0, min: 0 },
+  });
+  const [heightRange, setHeightRange] = useState({
+    whosthatpokemon: { max: 0, min: 0 },
+    whosthatpokemonUnlimited: { max: 0, min: 0 },
+  });
+
+  const generationRangeMode = generationRange[mode];
+  const weightRangeMode = weightRange[mode];
+  const heightRangeMode = heightRange[mode];
 
   useEffect(() => {
     for (const item of guessedItems) {
       if (
-        item.height < heightRange.max &&
+        item.height < heightRangeMode.max &&
         item.height > pokemonToGuess.height
       ) {
-        setHeightRange((prev) => ({ ...prev, max: item.height }));
+        setHeightRange((prev) => ({ ...prev, [mode]: { max: item.height } }));
       }
       if (
-        item.height > heightRange.min &&
+        item.height > heightRangeMode.min &&
         item.height < pokemonToGuess.height
       ) {
-        setHeightRange((prev) => ({ ...prev, min: item.height }));
+        setHeightRange((prev) => ({ ...prev, [mode]: { min: item.height } }));
       }
       if (
-        item.weight < weightRange.max &&
+        item.weight < weightRangeMode.max &&
         item.weight > pokemonToGuess.weight
       ) {
-        setWeightRange((prev) => ({ ...prev, max: item.weight }));
+        setWeightRange((prev) => ({ ...prev, [mode]: { max: item.weight } }));
       }
       if (
-        item.weight > weightRange.min &&
+        item.weight > weightRangeMode.min &&
         item.weight < pokemonToGuess.weight
       ) {
-        setWeightRange((prev) => ({ ...prev, min: item.weight }));
+        setWeightRange((prev) => ({ ...prev, [mode]: { min: item.weight } }));
       }
       if (
-        item.generation < generationRange.max &&
+        item.generation < generationRangeMode.max &&
         item.generation > pokemonToGuess.generation
       ) {
-        setGenerationRange((prev) => ({ ...prev, max: item.generation }));
+        setGenerationRange((prev) => ({
+          ...prev,
+          [mode]: { max: item.generation },
+        }));
       }
       if (
-        item.generation > generationRange.min &&
+        item.generation > generationRangeMode.min &&
         item.generation < pokemonToGuess.generation
       ) {
-        setGenerationRange((prev) => ({ ...prev, min: item.generation }));
+        setGenerationRange((prev) => ({
+          ...prev,
+          [mode]: { min: item.generation },
+        }));
       }
     }
   }, [
-    generationRange.max,
-    generationRange.min,
+    generationRangeMode.max,
+    generationRangeMode.min,
     guessedItems,
-    heightRange.max,
-    heightRange.min,
+    heightRangeMode.max,
+    heightRangeMode.min,
+    mode,
     pokemonToGuess.generation,
     pokemonToGuess.height,
     pokemonToGuess.weight,
-    weightRange.max,
-    weightRange.min,
+    weightRangeMode.max,
+    weightRangeMode.min,
   ]);
 
   function displayHeightRange(heightRange: StatRange) {
