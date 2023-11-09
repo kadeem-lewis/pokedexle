@@ -3,6 +3,7 @@ import OptionsBar from "../../components/layout/OptionsBar";
 import { Move } from "@/atoms/GameAtoms";
 import { readJson } from "@/helpers/FileSystem";
 import ModeSwitch from "@/components/ModeSwitch";
+import MoveCombobox from "@/components/move/MoveCombobox";
 
 export const metadata = {
   title: "Move",
@@ -15,6 +16,7 @@ export default async function Move() {
       <OptionsBar />
       <ModeSwitch href="/move" />
       {moveList && <Gamebox moveList={moveList} />}
+      <MoveCombobox />
     </>
   );
 }

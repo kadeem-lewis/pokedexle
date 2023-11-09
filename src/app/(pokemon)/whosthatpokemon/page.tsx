@@ -1,5 +1,7 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import ModeSwitch from "@/components/ModeSwitch";
+import PokemonTypes from "@/components/PokemonTypes";
+import MyComboBox from "@/components/ui/MyComboBox";
 import Gamebox from "@/components/whosthatpokemon/Gamebox";
 import { readJson } from "@/helpers/FileSystem";
 
@@ -14,6 +16,8 @@ export default async function WhosThatPokemon() {
     <>
       <ModeSwitch href="/whosthatpokemon" />
       <Gamebox pokedex={pokedex} />
+      <PokemonTypes />
+      <MyComboBox />
     </>
   );
 }

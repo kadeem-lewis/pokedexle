@@ -1,6 +1,8 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import ModeSwitch from "@/components/ModeSwitch";
+import PokemonTypes from "@/components/PokemonTypes";
 import Gamebox from "@/components/classic/Gamebox";
+import MyComboBox from "@/components/ui/MyComboBox";
 import { readJson } from "@/helpers/FileSystem";
 
 export const metadata = {
@@ -14,6 +16,8 @@ export default async function Classic() {
     <>
       <ModeSwitch href="/classic" />
       {pokedex && <Gamebox pokedex={pokedex} />}
+      <MyComboBox />
+      <PokemonTypes />
     </>
   );
 }
