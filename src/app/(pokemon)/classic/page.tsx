@@ -1,8 +1,6 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import GameWrapper from "@/components/GameWrapper";
 import ModeSwitch from "@/components/ModeSwitch";
-import PokemonTypes from "@/components/PokemonTypes";
-import MyComboBox from "@/components/ui/MyComboBox";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
 
