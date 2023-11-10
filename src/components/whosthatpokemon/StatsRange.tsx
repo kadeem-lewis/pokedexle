@@ -18,7 +18,9 @@ type StatRange = {
 };
 
 export default function StatsRange() {
-  const mode = useAtomValue(currentGameMode);
+  const mode = useAtomValue(currentGameMode) as
+    | "whosthatpokemon"
+    | "whosthatpokemonUnlimited";
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode] as Pokemon;
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
 
@@ -45,25 +47,37 @@ export default function StatsRange() {
         item.height < heightRangeMode.max &&
         item.height > pokemonToGuess.height
       ) {
-        setHeightRange((prev) => ({ ...prev, [mode]: { max: item.height } }));
+        setHeightRange((prev) => ({
+          ...prev,
+          [mode]: { ...prev[mode], max: item.height },
+        }));
       }
       if (
         item.height > heightRangeMode.min &&
         item.height < pokemonToGuess.height
       ) {
-        setHeightRange((prev) => ({ ...prev, [mode]: { min: item.height } }));
+        setHeightRange((prev) => ({
+          ...prev,
+          [mode]: { ...prev[mode], min: item.height },
+        }));
       }
       if (
         item.weight < weightRangeMode.max &&
         item.weight > pokemonToGuess.weight
       ) {
-        setWeightRange((prev) => ({ ...prev, [mode]: { max: item.weight } }));
+        setWeightRange((prev) => ({
+          ...prev,
+          [mode]: { ...prev[mode], max: item.weight },
+        }));
       }
       if (
         item.weight > weightRangeMode.min &&
         item.weight < pokemonToGuess.weight
       ) {
-        setWeightRange((prev) => ({ ...prev, [mode]: { min: item.weight } }));
+        setWeightRange((prev) => ({
+          ...prev,
+          [mode]: { ...prev[mode], min: item.weight },
+        }));
       }
       if (
         item.generation < generationRangeMode.max &&
@@ -71,7 +85,7 @@ export default function StatsRange() {
       ) {
         setGenerationRange((prev) => ({
           ...prev,
-          [mode]: { max: item.generation },
+          [mode]: { ...prev[mode], max: item.generation },
         }));
       }
       if (
@@ -80,7 +94,7 @@ export default function StatsRange() {
       ) {
         setGenerationRange((prev) => ({
           ...prev,
-          [mode]: { min: item.generation },
+          [mode]: { ...prev[mode], min: item.generation },
         }));
       }
     }
@@ -149,15 +163,15 @@ export default function StatsRange() {
     <div className="my-4 flex justify-between text-xl">
       <div className="space-x-2">
         <span>Gen:</span>
-        <span>{displayGenerationRange(generationRange)}</span>
+        <span>{displayGenerationRange(generationRangeMode)}</span>
       </div>
       <div className="space-x-2">
         <span>HT:</span>
-        <span>{displayHeightRange(heightRange)}</span>
+        <span>{displayHeightRange(heightRangeMode)}</span>
       </div>
       <div className="space-x-2">
         <span>WT:</span>
-        <span>{displayWeightRange(weightRange)}</span>
+        <span>{displayWeightRange(weightRangeMode)}</span>
       </div>
     </div>
   );
