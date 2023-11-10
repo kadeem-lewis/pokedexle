@@ -62,6 +62,15 @@ export default function StatsRange() {
           [mode]: { ...prev[mode], min: item.height },
         }));
       }
+      if (item.height === pokemonToGuess.height) {
+        setHeightRange((prev) => ({
+          ...prev,
+          [mode]: {
+            min: pokemonToGuess.height,
+            max: pokemonToGuess.height,
+          },
+        }));
+      }
       if (
         item.weight < weightRangeMode.max &&
         item.weight > pokemonToGuess.weight
@@ -80,6 +89,15 @@ export default function StatsRange() {
           [mode]: { ...prev[mode], min: item.weight },
         }));
       }
+      if (item.weight === pokemonToGuess.weight) {
+        setWeightRange((prev) => ({
+          ...prev,
+          [mode]: {
+            min: pokemonToGuess.weight,
+            max: pokemonToGuess.weight,
+          },
+        }));
+      }
       if (
         item.generation < generationRangeMode.max &&
         item.generation > pokemonToGuess.generation
@@ -96,6 +114,15 @@ export default function StatsRange() {
         setGenerationRange((prev) => ({
           ...prev,
           [mode]: { ...prev[mode], min: item.generation },
+        }));
+      }
+      if (item.generation === pokemonToGuess.generation) {
+        setGenerationRange((prev) => ({
+          ...prev,
+          [mode]: {
+            min: pokemonToGuess.generation,
+            max: pokemonToGuess.generation,
+          },
         }));
       }
     }
@@ -124,6 +151,12 @@ export default function StatsRange() {
       if (heightRange.min === heightRange.max) {
         return <span>{decimeterToImperial(heightRange.min)}</span>;
       }
+      return (
+        <span>
+          {decimeterToImperial(heightRange.min)} -{" "}
+          {decimeterToImperial(heightRange.max)}
+        </span>
+      );
     } else {
       return <span>???</span>;
     }
@@ -139,6 +172,12 @@ export default function StatsRange() {
       if (weightRange.min === weightRange.max) {
         return <span>{hectogramToImperial(weightRange.min)}</span>;
       }
+      return (
+        <span>
+          {hectogramToImperial(weightRange.min)} -{" "}
+          {hectogramToImperial(weightRange.max)}
+        </span>
+      );
     } else {
       return <span>???</span>;
     }
