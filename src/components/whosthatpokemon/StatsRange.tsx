@@ -5,6 +5,7 @@ import {
   guessAtom,
   guessedItemsAtom,
 } from "@/atoms/GameAtoms";
+import { maxValue, minValue } from "@/constants";
 import {
   decimeterToImperial,
   hectogramToImperial,
@@ -25,16 +26,16 @@ export default function StatsRange() {
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
 
   const [generationRange, setGenerationRange] = useState({
-    whosthatpokemon: { max: 0, min: 0 },
-    whosthatpokemonUnlimited: { max: 0, min: 0 },
+    whosthatpokemon: { max: maxValue, min: minValue },
+    whosthatpokemonUnlimited: { max: maxValue, min: minValue },
   });
   const [weightRange, setWeightRange] = useState({
-    whosthatpokemon: { max: 0, min: 0 },
-    whosthatpokemonUnlimited: { max: 0, min: 0 },
+    whosthatpokemon: { max: maxValue, min: minValue },
+    whosthatpokemonUnlimited: { max: maxValue, min: minValue },
   });
   const [heightRange, setHeightRange] = useState({
-    whosthatpokemon: { max: 0, min: 0 },
-    whosthatpokemonUnlimited: { max: 0, min: 0 },
+    whosthatpokemon: { max: maxValue, min: minValue },
+    whosthatpokemonUnlimited: { max: maxValue, min: minValue },
   });
 
   const generationRangeMode = generationRange[mode];
@@ -113,36 +114,48 @@ export default function StatsRange() {
   ]);
 
   function displayHeightRange(heightRange: StatRange) {
-    if (heightRange.min === 0 && heightRange.max === 0) return <span>???</span>;
-    if (heightRange.min === 0) {
-      return <span>??? - {decimeterToImperial(heightRange.max)}</span>;
-    }
-    if (heightRange.max === 0) {
-      return <span>{decimeterToImperial(heightRange.min)} - ???</span>;
-    }
-    if (heightRange.min === heightRange.max) {
-      return <span>{decimeterToImperial(heightRange.min)}</span>;
+    if (heightRange.min !== minValue || heightRange.max !== maxValue) {
+      if (heightRange.min === minValue && heightRange.max !== maxValue) {
+        return <span>??? - {decimeterToImperial(heightRange.max)}</span>;
+      }
+      if (heightRange.max === maxValue && heightRange.min !== minValue) {
+        return <span>{decimeterToImperial(heightRange.min)} - ???</span>;
+      }
+      if (heightRange.min === heightRange.max) {
+        return <span>{decimeterToImperial(heightRange.min)}</span>;
+      }
+    } else {
+      return <span>???</span>;
     }
   }
   function displayWeightRange(weightRange: StatRange) {
-    if (weightRange.min === 0 && weightRange.max === 0) return <span>???</span>;
-    if (weightRange.min === 0) {
-      return <span>??? - {hectogramToImperial(weightRange.max)}</span>;
-    }
-    if (weightRange.max === 0) {
-      return <span>{hectogramToImperial(weightRange.min)} - ???</span>;
-    }
-    if (weightRange.min === weightRange.max) {
-      return <span>{hectogramToImperial(weightRange.min)}</span>;
+    if (weightRange.min !== minValue || weightRange.max !== maxValue) {
+      if (weightRange.min === minValue && weightRange.max !== maxValue) {
+        return <span>??? - {hectogramToImperial(weightRange.max)}</span>;
+      }
+      if (weightRange.max === maxValue && weightRange.min !== minValue) {
+        return <span>{hectogramToImperial(weightRange.min)} - ???</span>;
+      }
+      if (weightRange.min === weightRange.max) {
+        return <span>{hectogramToImperial(weightRange.min)}</span>;
+      }
+    } else {
+      return <span>???</span>;
     }
   }
 
   function displayGenerationRange(generationRange: StatRange) {
-    if (generationRange.min !== 0 || generationRange.max !== 0) {
-      if (generationRange.min === 0 && generationRange.max !== 0) {
+    if (generationRange.min !== minValue || generationRange.max !== maxValue) {
+      if (
+        generationRange.min === minValue &&
+        generationRange.max !== maxValue
+      ) {
         return <span>??? - {generationRange.max}</span>;
       }
-      if (generationRange.max === 0 && generationRange.min !== 0) {
+      if (
+        generationRange.max === maxValue &&
+        generationRange.min !== minValue
+      ) {
         return <span>{generationRange.min} - ???</span>;
       }
       if (generationRange.min === generationRange.max) {

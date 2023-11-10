@@ -13,7 +13,6 @@ import {
   whosthatpokemonAnswersAtom,
   whosthatpokemonPracticeAnswersAtom,
 } from "@/atoms/GameAtoms";
-import PokemonTypes from "../PokemonTypes";
 import ImagePanel from "./ImagePanel";
 import { useHydrateAtoms } from "jotai/utils";
 import { format } from "date-fns";
@@ -52,14 +51,14 @@ export default function Gamebox({ pokedex, dailies }: GameboxProps) {
 
   useEffect(() => {
     function setDailies() {
-      const dailyClassicPokemon = pokedex.find(
+      const dailyWhosThatPokemon = pokedex.find(
         (pokemon) => pokemon.id === whosThatPokemonId,
       );
-      if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
+      if (!dailyWhosThatPokemon) throw new Error("Daily Pokemon Not Found");
 
       setDailyPokemon((prev) => ({
         ...prev,
-        whosthatpokemon: dailyClassicPokemon,
+        whosthatpokemon: dailyWhosThatPokemon,
       }));
     }
     setDailies();
