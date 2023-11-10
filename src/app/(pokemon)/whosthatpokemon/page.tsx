@@ -1,11 +1,11 @@
 import { Pokemon } from "@/atoms/GameAtoms";
+import GameWrapper from "@/components/GameWrapper";
 import ModeSwitch from "@/components/ModeSwitch";
 import PokemonTypes from "@/components/PokemonTypes";
 import MyComboBox from "@/components/ui/MyComboBox";
 import Gamebox from "@/components/whosthatpokemon/Gamebox";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
-import { format } from "date-fns";
 
 type WhosThatPokemonProps = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -28,7 +28,7 @@ export default async function WhosThatPokemon({
   return (
     <>
       <ModeSwitch href="/whosthatpokemon" searchParams={searchParams} />
-      {dailies && <Gamebox pokedex={pokedex} dailies={dailies} />}
+      {dailies && <GameWrapper pokedex={pokedex} dailies={dailies} />}
       <PokemonTypes />
       <MyComboBox />
     </>

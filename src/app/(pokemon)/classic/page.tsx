@@ -1,7 +1,7 @@
 import { Pokemon } from "@/atoms/GameAtoms";
+import GameWrapper from "@/components/GameWrapper";
 import ModeSwitch from "@/components/ModeSwitch";
 import PokemonTypes from "@/components/PokemonTypes";
-import Gamebox from "@/components/classic/Gamebox";
 import MyComboBox from "@/components/ui/MyComboBox";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
@@ -26,7 +26,7 @@ export default async function Classic({ searchParams }: ClassicProps) {
   return (
     <>
       <ModeSwitch href="/classic" searchParams={searchParams} />
-      {dailies && <Gamebox pokedex={pokedex} dailies={dailies} />}
+      {dailies && <GameWrapper pokedex={pokedex} dailies={dailies} />}
       <MyComboBox />
       <PokemonTypes />
     </>
