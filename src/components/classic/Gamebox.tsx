@@ -18,6 +18,7 @@ import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
+import { Daily } from "@prisma/client";
 
 export default function Gamebox() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
@@ -25,7 +26,7 @@ export default function Gamebox() {
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
   const mode = useAtomValue(currentGameMode);
-  const { date } = useAtomValue(dailyAtom);
+  const { date } = useAtomValue(dailyAtom) as Daily;
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
 
   const searchParams = useSearchParams();

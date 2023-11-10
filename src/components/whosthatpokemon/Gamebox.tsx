@@ -14,6 +14,7 @@ import ImagePanel from "./ImagePanel";
 import { format } from "date-fns";
 import { defaultGuesses } from "@/constants";
 import { useSearchParams } from "next/navigation";
+import { Daily } from "@prisma/client";
 
 export default function Gamebox() {
   const mode = useAtomValue(currentGameMode);
@@ -24,7 +25,7 @@ export default function Gamebox() {
   );
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date } = useAtomValue(dailyAtom);
+  const { date } = useAtomValue(dailyAtom) as Daily;
   const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
     whosthatpokemonAnswersAtom,
   );
