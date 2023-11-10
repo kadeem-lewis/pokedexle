@@ -1,33 +1,22 @@
 "use client";
 import React, { useEffect } from "react";
-import MyComboBox from "../ui/MyComboBox";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
-  Pokemon,
   currentGameMode,
-  dailyPokemonAtom,
+  dailyAtom,
   guessAtom,
   guessedItemsAtom,
-  pokedexAtom,
   pokemonToGuessAtom,
   whosthatpokemonAnswersAtom,
   whosthatpokemonPracticeAnswersAtom,
 } from "@/atoms/GameAtoms";
 import ImagePanel from "./ImagePanel";
-import { useHydrateAtoms } from "jotai/utils";
 import { format } from "date-fns";
 import { defaultGuesses } from "@/constants";
-import { usePathname, useSearchParams } from "next/navigation";
-import { Daily } from "@prisma/client";
+import { useSearchParams } from "next/navigation";
 
-type GameboxProps = {
-  pokedex: Pokemon[];
-  dailies: Daily;
-};
-
-export default function Gamebox({ pokedex, dailies }: GameboxProps) {
-  useHydrateAtoms([[pokedexAtom, pokedex]]);
-  const [mode, setMode] = useAtom(currentGameMode);
+export default function Gamebox() {
+  const mode = useAtomValue(currentGameMode);
 
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const whosthatpokemonPracticeAnswers = useAtomValue(
@@ -35,34 +24,11 @@ export default function Gamebox({ pokedex, dailies }: GameboxProps) {
   );
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date, whosThatPokemonId } = dailies;
+  const { date } = useAtomValue(dailyAtom);
   const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
     whosthatpokemonAnswersAtom,
   );
-  const setDailyPokemon = useSetAtom(dailyPokemonAtom);
-  const currentPath = usePathname();
   const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (currentPath === "/whosthatpokemon") setMode("whosthatpokemon");
-    if (searchParams.get("mode") === "unlimited")
-      setMode("whosthatpokemonUnlimited");
-  }, [currentPath, searchParams, setMode]);
-
-  useEffect(() => {
-    function setDailies() {
-      const dailyWhosThatPokemon = pokedex.find(
-        (pokemon) => pokemon.id === whosThatPokemonId,
-      );
-      if (!dailyWhosThatPokemon) throw new Error("Daily Pokemon Not Found");
-
-      setDailyPokemon((prev) => ({
-        ...prev,
-        whosthatpokemon: dailyWhosThatPokemon,
-      }));
-    }
-    setDailies();
-  }, [pokedex, setDailyPokemon, whosThatPokemonId]);
 
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;

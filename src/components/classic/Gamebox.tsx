@@ -11,51 +11,24 @@ import {
   guessAtom,
   classicAnswersAtom,
   dailyPokemonAtom,
+  dailyAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import PokemonFeedback from "./PokemonFeedback";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import { format } from "date-fns";
-import { usePathname, useSearchParams } from "next/navigation";
-import { Daily } from "@prisma/client";
+import { useSearchParams } from "next/navigation";
 
-type GameboxProps = {
-  pokedex: Pokemon[];
-  dailies: Daily;
-};
-
-export default function Gamebox({ pokedex, dailies }: GameboxProps) {
-  useHydrateAtoms([[pokedexAtom, pokedex]]);
+export default function Gamebox() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const classicPracticeAnswers = useAtomValue(classicPracticeAnswersAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const [mode, setMode] = useAtom(currentGameMode);
-  const { date, classicId } = dailies;
+  const mode = useAtomValue(currentGameMode);
+  const { date } = useAtomValue(dailyAtom);
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
-  const setDailyPokemon = useSetAtom(dailyPokemonAtom);
 
-  const currentPath = usePathname();
   const searchParams = useSearchParams();
-
-  useEffect(() => {
-    console.log("change mode useEffect is running");
-    if (currentPath === "/classic") setMode("classic");
-    if (searchParams.get("mode") === "unlimited") setMode("classicUnlimited");
-  }, [currentPath, searchParams, setMode]);
-
-  useEffect(() => {
-    console.log("Set Dailies useEffect is running");
-    function setDailies() {
-      const dailyClassicPokemon = pokedex.find(
-        (pokemon) => pokemon.id === classicId,
-      );
-      if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
-
-      setDailyPokemon((prev) => ({ ...prev, classic: dailyClassicPokemon }));
-    }
-    setDailies();
-  }, [classicId, pokedex, setDailyPokemon]);
 
   useEffect(() => {
     if (mode !== "classic") return;
