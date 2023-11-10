@@ -29,8 +29,6 @@ export default async function WhosThatPokemon({
     <>
       <ModeSwitch href="/whosthatpokemon" searchParams={searchParams} />
       {dailies && <GameWrapper pokedex={pokedex} dailies={dailies} />}
-      <PokemonTypes />
-      <MyComboBox />
     </>
   );
 }

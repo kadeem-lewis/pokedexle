@@ -27,8 +27,6 @@ export default async function Classic({ searchParams }: ClassicProps) {
     <>
       <ModeSwitch href="/classic" searchParams={searchParams} />
       {dailies && <GameWrapper pokedex={pokedex} dailies={dailies} />}
-      <MyComboBox />
-      <PokemonTypes />
     </>
   );
 }
