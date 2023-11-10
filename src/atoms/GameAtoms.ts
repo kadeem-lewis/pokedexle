@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { format, startOfToday } from "date-fns";
+import { format } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
 
@@ -78,6 +78,9 @@ export const guessedItemsAtom = atom<GuessedItems>({
   moveUnlimited: [],
 });
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
+
+export const dailyAtom = atom<Daily | null>(null);
+dailyAtom.debugLabel = "dailyAtom";
 
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
   "classic_practice_solution",
