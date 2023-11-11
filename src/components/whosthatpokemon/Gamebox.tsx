@@ -13,6 +13,7 @@ import {
   pokemonToGuessAtom,
   whosthatpokemonAnswersAtom,
   whosthatpokemonPracticeAnswersAtom,
+  whosthatpokemonPracticeSolutionAtom,
 } from "@/atoms/GameAtoms";
 import ImagePanel from "./ImagePanel";
 import { defaultGuesses } from "@/constants";
@@ -25,6 +26,8 @@ export default function Gamebox() {
   const whosthatpokemonPracticeAnswers = useAtomValue(
     whosthatpokemonPracticeAnswersAtom,
   );
+  const [whosthatpokemonPracticeSolution, setWhosthatpokemonPracticeSolution] =
+    useAtom(whosthatpokemonPracticeSolutionAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
   const { date } = useAtomValue(dailyAtom) as Daily;
@@ -84,6 +87,22 @@ export default function Gamebox() {
     setGuesses,
     guessedItems.whosthatpokemonUnlimited,
     whosthatpokemonPracticeAnswers,
+  ]);
+
+  useEffect(() => {
+    if (
+      mode === "whosthatpokemonUnlimited" &&
+      whosthatpokemonPracticeSolution === null
+    ) {
+      setWhosthatpokemonPracticeSolution(
+        pokemonToGuess.whosthatpokemonUnlimited,
+      );
+    }
+  }, [
+    mode,
+    pokemonToGuess.whosthatpokemonUnlimited,
+    setWhosthatpokemonPracticeSolution,
+    whosthatpokemonPracticeSolution,
   ]);
 
   return (

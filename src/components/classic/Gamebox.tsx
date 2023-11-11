@@ -13,6 +13,7 @@ import {
   guessAtom,
   classicAnswersAtom,
   dailyAtom,
+  classicPracticeSolutionAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import PokemonFeedback from "./PokemonFeedback";
@@ -21,6 +22,9 @@ import { Daily } from "@prisma/client";
 export default function Gamebox() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const classicPracticeAnswers = useAtomValue(classicPracticeAnswersAtom);
+  const [classicPracticeSolution, setClassicPracticeSolution] = useAtom(
+    classicPracticeSolutionAtom,
+  );
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
   const mode = useAtomValue(currentGameMode);
@@ -81,6 +85,18 @@ export default function Gamebox() {
     setGuessedItems,
     setGuesses,
     guessedItems.classicUnlimited,
+  ]);
+
+  useEffect(() => {
+    if (mode === "classicUnlimited" && classicPracticeSolution === null) {
+      setClassicPracticeSolution(pokemonToGuess.classicUnlimited);
+    }
+  }, [
+    classicPracticeSolution,
+    mode,
+    pokemonToGuess.classicUnlimited,
+    pokemonToGuess.whosthatpokemonUnlimited,
+    setClassicPracticeSolution,
   ]);
 
   return (
