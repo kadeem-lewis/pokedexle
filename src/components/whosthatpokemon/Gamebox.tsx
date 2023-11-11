@@ -1,6 +1,10 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { format } from "date-fns";
+
 import {
   currentGameMode,
   dailyAtom,
@@ -11,9 +15,7 @@ import {
   whosthatpokemonPracticeAnswersAtom,
 } from "@/atoms/GameAtoms";
 import ImagePanel from "./ImagePanel";
-import { format } from "date-fns";
 import { defaultGuesses } from "@/constants";
-import { useSearchParams } from "next/navigation";
 import { Daily } from "@prisma/client";
 
 export default function Gamebox() {

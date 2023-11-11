@@ -1,23 +1,21 @@
 "use client";
 import { useEffect } from "react";
-import { useHydrateAtoms } from "jotai/utils";
+import { useSearchParams } from "next/navigation";
+
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
+import { format } from "date-fns";
+
 import {
-  Pokemon,
-  pokedexAtom,
   pokemonToGuessAtom,
   currentGameMode,
   classicPracticeAnswersAtom,
   guessedItemsAtom,
   guessAtom,
   classicAnswersAtom,
-  dailyPokemonAtom,
   dailyAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import PokemonFeedback from "./PokemonFeedback";
-import { useAtom, useSetAtom, useAtomValue } from "jotai";
-import { format } from "date-fns";
-import { useSearchParams } from "next/navigation";
 import { Daily } from "@prisma/client";
 
 export default function Gamebox() {
