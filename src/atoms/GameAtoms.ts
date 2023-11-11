@@ -163,6 +163,7 @@ export const gameOverAtom = atom({
 gameOverAtom.debugLabel = "gameOverAtom";
 
 //?maybe use enum for types or some other typescript feature
+//! the mode that is the default is unable to save localStorage stats on reset
 export const currentGameMode = atom<
   | "classic"
   | "classicUnlimited"
@@ -170,7 +171,7 @@ export const currentGameMode = atom<
   | "whosthatpokemonUnlimited"
   | "move"
   | "moveUnlimited"
->("classic");
+>("move");
 currentGameMode.debugLabel = "currentGameMode";
 
 //derived writable atom that is attempting to reset all values back to their defaults
