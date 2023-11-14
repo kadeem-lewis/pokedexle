@@ -3,7 +3,6 @@ import { cx } from "class-variance-authority";
 import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "./ui/Button";
-import { useSearchParams } from "next/navigation";
 
 type ModeSwitchProps = {
   href: string;
