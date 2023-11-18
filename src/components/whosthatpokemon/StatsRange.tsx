@@ -22,7 +22,7 @@ export default function StatsRange() {
   const mode = useAtomValue(currentGameMode) as
     | "whosthatpokemon"
     | "whosthatpokemonUnlimited";
-  const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode] as Pokemon;
+  const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
 
   const [generationRange, setGenerationRange] = useState({
@@ -38,14 +38,14 @@ export default function StatsRange() {
     whosthatpokemonUnlimited: { max: maxValue, min: minValue },
   });
 
-  const generationRangeMode = generationRange[mode];
-  const weightRangeMode = weightRange[mode];
-  const heightRangeMode = heightRange[mode];
-
   useEffect(() => {
+    if (!pokemonToGuess) {
+      return;
+    }
+
     for (const item of guessedItems) {
       if (
-        item.height < heightRangeMode.max &&
+        item.height < heightRange[mode].max &&
         item.height > pokemonToGuess.height
       ) {
         setHeightRange((prev) => ({
@@ -54,7 +54,7 @@ export default function StatsRange() {
         }));
       }
       if (
-        item.height > heightRangeMode.min &&
+        item.height > heightRange[mode].min &&
         item.height < pokemonToGuess.height
       ) {
         setHeightRange((prev) => ({
@@ -72,7 +72,7 @@ export default function StatsRange() {
         }));
       }
       if (
-        item.weight < weightRangeMode.max &&
+        item.weight < weightRange[mode].max &&
         item.weight > pokemonToGuess.weight
       ) {
         setWeightRange((prev) => ({
@@ -81,7 +81,7 @@ export default function StatsRange() {
         }));
       }
       if (
-        item.weight > weightRangeMode.min &&
+        item.weight > weightRange[mode].min &&
         item.weight < pokemonToGuess.weight
       ) {
         setWeightRange((prev) => ({
@@ -99,7 +99,7 @@ export default function StatsRange() {
         }));
       }
       if (
-        item.generation < generationRangeMode.max &&
+        item.generation < generationRange[mode].max &&
         item.generation > pokemonToGuess.generation
       ) {
         setGenerationRange((prev) => ({
@@ -108,7 +108,7 @@ export default function StatsRange() {
         }));
       }
       if (
-        item.generation > generationRangeMode.min &&
+        item.generation > generationRange[mode].min &&
         item.generation < pokemonToGuess.generation
       ) {
         setGenerationRange((prev) => ({
@@ -127,20 +127,21 @@ export default function StatsRange() {
       }
     }
   }, [
-    generationRangeMode.max,
-    generationRangeMode.min,
+    generationRange,
     guessedItems,
-    heightRangeMode.max,
-    heightRangeMode.min,
+    heightRange,
     mode,
-    pokemonToGuess.generation,
-    pokemonToGuess.height,
-    pokemonToGuess.weight,
-    weightRangeMode.max,
-    weightRangeMode.min,
+    pokemonToGuess,
+    pokemonToGuess?.generation,
+    pokemonToGuess?.height,
+    pokemonToGuess?.weight,
+    weightRange,
   ]);
 
   function displayHeightRange(heightRange: StatRange) {
+    if (!heightRange) {
+      return <span>???</span>;
+    }
     if (heightRange.min !== minValue || heightRange.max !== maxValue) {
       if (heightRange.min === minValue && heightRange.max !== maxValue) {
         return <span>??? - {decimeterToImperial(heightRange.max)}</span>;
@@ -162,6 +163,9 @@ export default function StatsRange() {
     }
   }
   function displayWeightRange(weightRange: StatRange) {
+    if (!weightRange) {
+      return <span>???</span>;
+    }
     if (weightRange.min !== minValue || weightRange.max !== maxValue) {
       if (weightRange.min === minValue && weightRange.max !== maxValue) {
         return <span>??? - {hectogramToImperial(weightRange.max)}</span>;
@@ -184,6 +188,9 @@ export default function StatsRange() {
   }
 
   function displayGenerationRange(generationRange: StatRange) {
+    if (!generationRange) {
+      return <span>???</span>;
+    }
     if (generationRange.min !== minValue || generationRange.max !== maxValue) {
       if (
         generationRange.min === minValue &&
@@ -215,15 +222,15 @@ export default function StatsRange() {
     <div className="my-4 flex justify-between text-xl">
       <div className="space-x-2">
         <span>Gen:</span>
-        <span>{displayGenerationRange(generationRangeMode)}</span>
+        <span>{displayGenerationRange(generationRange[mode])}</span>
       </div>
       <div className="space-x-2">
         <span>HT:</span>
-        <span>{displayHeightRange(heightRangeMode)}</span>
+        <span>{displayHeightRange(heightRange[mode])}</span>
       </div>
       <div className="space-x-2">
         <span>WT:</span>
-        <span>{displayWeightRange(weightRangeMode)}</span>
+        <span>{displayWeightRange(weightRange[mode])}</span>
       </div>
     </div>
   );
