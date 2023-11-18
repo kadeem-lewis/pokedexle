@@ -36,14 +36,14 @@ export default function Gamebox() {
   useEffect(() => {
     if (mode !== "classic") return;
     const serverTime = format(new Date(date), "yyyy-MM-dd");
-    if (serverTime === classicAnswers.date) {
+    if (serverTime === classicAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,
-        classic: classicAnswers.answers,
+        classic: classicAnswers?.answers,
       }));
       setGuesses((prev) => ({
         ...prev,
-        classic: defaultGuesses - classicAnswers.answers.length,
+        classic: defaultGuesses - classicAnswers?.answers.length,
       }));
     } else {
       console.log("HaHa I keep printing");
@@ -53,8 +53,8 @@ export default function Gamebox() {
       });
     }
   }, [
-    classicAnswers.date,
-    classicAnswers.answers,
+    classicAnswers?.date,
+    classicAnswers?.answers,
     date,
     guessedItems.classic.length,
     mode,

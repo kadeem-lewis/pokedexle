@@ -39,14 +39,15 @@ export default function Gamebox() {
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;
     const serverTime = format(new Date(date), "yyyy-MM-dd");
-    if (serverTime === whosthatpokemonAnswers.date) {
+    if (serverTime === whosthatpokemonAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,
-        whosthatpokemon: whosthatpokemonAnswers.answers,
+        whosthatpokemon: whosthatpokemonAnswers?.answers,
       }));
       setGuesses((prev) => ({
         ...prev,
-        whosthatpokemon: defaultGuesses - whosthatpokemonAnswers.answers.length,
+        whosthatpokemon:
+          defaultGuesses - whosthatpokemonAnswers?.answers.length,
       }));
     } else {
       setWhosthatpokemonAnswers({
@@ -58,8 +59,8 @@ export default function Gamebox() {
     date,
     guessedItems.classic.length,
     mode,
-    whosthatpokemonAnswers.date,
-    whosthatpokemonAnswers.answers,
+    whosthatpokemonAnswers?.date,
+    whosthatpokemonAnswers?.answers,
     setGuessedItems,
     setGuesses,
     setWhosthatpokemonAnswers,
