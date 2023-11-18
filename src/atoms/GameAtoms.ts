@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { format, startOfToday } from "date-fns";
+import { format } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
 
@@ -79,21 +79,7 @@ export const guessedItemsAtom = atom<GuessedItems>({
 });
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
-//atom that gets the current Date and can be used to get dates of other days
-export const dateAtom = atom(format(new Date(), "yyyy-MM-dd"));
-dateAtom.debugLabel = "dateAtom";
-
-//function to fetch Daily entry from database
-export const dailyAtom = atom(async (get) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
-  );
-  if (!response.ok) {
-    throw new Error("Network response was not OK");
-  }
-  const data: Daily = await response.json();
-  return data;
-});
+export const dailyAtom = atom<Daily | null>(null);
 dailyAtom.debugLabel = "dailyAtom";
 
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
@@ -177,6 +163,7 @@ export const gameOverAtom = atom({
 gameOverAtom.debugLabel = "gameOverAtom";
 
 //?maybe use enum for types or some other typescript feature
+//! the mode that is the default is unable to save localStorage stats on reset
 export const currentGameMode = atom<
   | "classic"
   | "classicUnlimited"
@@ -184,7 +171,7 @@ export const currentGameMode = atom<
   | "whosthatpokemonUnlimited"
   | "move"
   | "moveUnlimited"
->("classic");
+>("move");
 currentGameMode.debugLabel = "currentGameMode";
 
 //derived writable atom that is attempting to reset all values back to their defaults

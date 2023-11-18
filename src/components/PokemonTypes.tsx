@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { TypeBadge } from "./ui/TypeBadge";
 import { useAtomValue } from "jotai";
@@ -82,7 +83,7 @@ export default function PokemonTypes() {
   };
 
   return (
-    <div className="grid grid-cols-6 gap-1">
+    <div className="mt-4 grid grid-cols-6 gap-1">
       {TYPES.map((type) => (
         <TypeBadge
           key={type}

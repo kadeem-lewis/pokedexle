@@ -12,6 +12,7 @@ import {
 import { Button } from "./ui/Button";
 import { defaultGuesses } from "@/constants";
 import { Icons } from "./Icons";
+import { Daily } from "@prisma/client";
 
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",
@@ -28,7 +29,7 @@ export default function Share() {
   const attempts = useAtomValue(guessAtom)[mode];
   const guesses = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const gameOver = useAtomValue(gameOverAtom);
-  const { id } = useAtomValue(dailyAtom);
+  const { id } = useAtomValue(dailyAtom) as Daily;
   const [isCopied, setIsCopied] = useState(false);
 
   const comparePokemonValue = (

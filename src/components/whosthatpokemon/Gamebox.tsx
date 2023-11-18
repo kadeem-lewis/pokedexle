@@ -1,82 +1,53 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Tab } from "@headlessui/react";
-import MyComboBox from "../ui/MyComboBox";
-import { Button } from "../ui/Button";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { format } from "date-fns";
+
 import {
-  Pokemon,
   currentGameMode,
   dailyAtom,
-  dailyPokemonAtom,
   guessAtom,
   guessedItemsAtom,
-  pokedexAtom,
   pokemonToGuessAtom,
   whosthatpokemonAnswersAtom,
   whosthatpokemonPracticeAnswersAtom,
+  whosthatpokemonPracticeSolutionAtom,
 } from "@/atoms/GameAtoms";
-import PokemonTypes from "../PokemonTypes";
 import ImagePanel from "./ImagePanel";
-import { useHydrateAtoms } from "jotai/utils";
-import { addDays, format, isSameDay, startOfToday } from "date-fns";
 import { defaultGuesses } from "@/constants";
-import { usePathname } from "next/navigation";
 import { Daily } from "@prisma/client";
 
-type GameboxProps = {
-  pokedex: Pokemon[];
-};
-
-export default function Gamebox({ pokedex }: GameboxProps) {
-  useHydrateAtoms([[pokedexAtom, pokedex]]);
-  const [mode, setMode] = useAtom(currentGameMode);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+export default function Gamebox() {
+  const mode = useAtomValue(currentGameMode);
 
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const whosthatpokemonPracticeAnswers = useAtomValue(
     whosthatpokemonPracticeAnswersAtom,
   );
+  const [whosthatpokemonPracticeSolution, setWhosthatpokemonPracticeSolution] =
+    useAtom(whosthatpokemonPracticeSolutionAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date, whosThatPokemonId } = useAtomValue<Promise<Daily>>(dailyAtom);
+  const { date } = useAtomValue(dailyAtom) as Daily;
   const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
     whosthatpokemonAnswersAtom,
   );
-  const setDailyPokemon = useSetAtom(dailyPokemonAtom);
-  const currentPath = usePathname();
-
-  useEffect(() => {
-    if (currentPath === "/whosthatpokemon" && selectedIndex === 0)
-      setMode("whosthatpokemon");
-  }, [currentPath, selectedIndex, setMode]);
-
-  useEffect(() => {
-    function setDailies() {
-      const dailyClassicPokemon = pokedex.find(
-        (pokemon) => pokemon.id === whosThatPokemonId,
-      );
-      if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
-
-      setDailyPokemon((prev) => ({
-        ...prev,
-        whosthatpokemon: dailyClassicPokemon,
-      }));
-    }
-    setDailies();
-  }, [pokedex, setDailyPokemon, whosThatPokemonId]);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;
     const serverTime = format(new Date(date), "yyyy-MM-dd");
-    if (serverTime === whosthatpokemonAnswers.date) {
+    if (serverTime === whosthatpokemonAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,
-        whosthatpokemon: whosthatpokemonAnswers.answers,
+        whosthatpokemon: whosthatpokemonAnswers?.answers,
       }));
       setGuesses((prev) => ({
         ...prev,
-        whosthatpokemon: defaultGuesses - whosthatpokemonAnswers.answers.length,
+        whosthatpokemon:
+          defaultGuesses - whosthatpokemonAnswers?.answers.length,
       }));
     } else {
       setWhosthatpokemonAnswers({
@@ -88,10 +59,10 @@ export default function Gamebox({ pokedex }: GameboxProps) {
     date,
     guessedItems.classic.length,
     mode,
+    whosthatpokemonAnswers?.date,
+    whosthatpokemonAnswers?.answers,
     setGuessedItems,
     setGuesses,
-    whosthatpokemonAnswers.date,
-    whosthatpokemonAnswers.answers,
     setWhosthatpokemonAnswers,
   ]);
 
@@ -119,54 +90,31 @@ export default function Gamebox({ pokedex }: GameboxProps) {
     whosthatpokemonPracticeAnswers,
   ]);
 
+  useEffect(() => {
+    if (
+      mode === "whosthatpokemonUnlimited" &&
+      whosthatpokemonPracticeSolution === null
+    ) {
+      setWhosthatpokemonPracticeSolution(
+        pokemonToGuess.whosthatpokemonUnlimited,
+      );
+    }
+  }, [
+    mode,
+    pokemonToGuess.whosthatpokemonUnlimited,
+    setWhosthatpokemonPracticeSolution,
+    whosthatpokemonPracticeSolution,
+  ]);
+
   return (
     <>
-      <Tab.Group
-        selectedIndex={selectedIndex}
-        onChange={(index) => {
-          setSelectedIndex(index);
-          if (index === 0) {
-            setMode("whosthatpokemon");
-          } else {
-            setMode("whosthatpokemonUnlimited");
-          }
-        }}
-      >
-        <Tab.List className="mt-2 flex justify-center gap-2">
-          <Tab
-            className="bg-yellow-500 ui-selected:brightness-110 ui-not-selected:brightness-75"
-            as={Button}
-            variant="flat"
-            size="tall"
-          >
-            Daily
-          </Tab>
-          <Tab
-            className="bg-yellow-500 ui-selected:brightness-110 ui-not-selected:brightness-75"
-            as={Button}
-            variant="flat"
-            size="tall"
-          >
-            Unlimited
-          </Tab>
-        </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>
-            {pokemonToGuess.whosthatpokemon && (
-              <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemon} />
-            )}
-          </Tab.Panel>
-          <Tab.Panel>
-            {pokemonToGuess.whosthatpokemonUnlimited && (
-              <ImagePanel
-                correctAnswer={pokemonToGuess.whosthatpokemonUnlimited}
-              />
-            )}
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
-      <PokemonTypes />
-      <MyComboBox />
+      {pokemonToGuess.whosthatpokemon && !searchParams.has("mode") && (
+        <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemon} />
+      )}
+      {pokemonToGuess.whosthatpokemonUnlimited &&
+        searchParams.get("mode") === "unlimited" && (
+          <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemonUnlimited} />
+        )}
     </>
   );
 }
