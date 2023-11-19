@@ -60,8 +60,8 @@ export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
       const dailyWhosThatPokemon = pokedex.find(
         (pokemon) => pokemon.id === whosThatPokemonId,
       );
-      if (!dailyClassicPokemon) throw new Error("Daily Classic Pokemon Not Found");
       if (!dailyWhosThatPokemon) throw new Error("Daily WTP Pokemon Not Found");
+      if (!dailyClassicPokemon) throw new Error("Daily Classic Pokemon Not Found");
 
       setDailyPokemon((prev) => ({
         ...prev,
