@@ -4,6 +4,7 @@ import Guesses from "@/components/Guesses";
 import ModeSwitch from "@/components/ModeSwitch";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
+import { startOfToday } from "date-fns";
 
 type ClassicProps = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -18,7 +19,7 @@ export default async function Classic({ searchParams }: ClassicProps) {
   const pokedex = (await readJson("/data/pokedex.json")) as Pokemon[];
   const dailies = await prisma.daily.findUnique({
     where: {
-      date: new Date(),
+      date: startOfToday(),
     },
   });
 
