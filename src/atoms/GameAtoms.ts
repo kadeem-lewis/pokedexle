@@ -141,8 +141,6 @@ export const newGameAtom = atom(null, (get, set) => {
   const mode = get(currentGameMode);
 
   if (mode === "classicUnlimited") {
-    // Update game over status for the "classicUnlimited" mode.
-    set(gameOverAtom, (prev) => ({ ...prev, classicUnlimited: false }));
 
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
@@ -155,9 +153,6 @@ export const newGameAtom = atom(null, (get, set) => {
     set(classicPracticeAnswersAtom, []);
   }
   if (mode === "whosthatpokemonUnlimited") {
-    // Update game over status for the "classicUnlimited" mode.
-    set(gameOverAtom, (prev) => ({ ...prev, whosthatpokemonUnlimited: false }));
-
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
       get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)];

@@ -7,6 +7,7 @@ import {
   currentGameMode,
   guessAtom,
   Pokemon,
+  gameOverAtom,
 } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import Countdown from "../Countdown";
@@ -16,9 +17,20 @@ import Share from "../Share";
 export default function GameOverContent() {
   const mode = useAtomValue(currentGameMode);
   const setNewGame = useSetAtom(newGameAtom);
+  const setGameOver = useSetAtom(gameOverAtom);
   const guesses = useAtomValue(guessAtom)[mode];
   const pokemonGuesses = useAtomValue(pokemonToGuessAtom);
   const correctAnswer = pokemonGuesses[mode] as Pokemon | null;
+
+  const handleNewGameClick = () => {
+    setGameOver(prev => ({
+      ...prev,
+      [mode]: false,
+    }));
+    setTimeout(() => {
+      setNewGame();
+    }, 500);
+  }
 
   return (
     <div>
@@ -47,7 +59,7 @@ export default function GameOverContent() {
       {mode === "classicUnlimited" || mode === "whosthatpokemonUnlimited" ? (
         <div className="flex justify-center gap-4 text-2xl">
           <span>Wanna try again?</span>
-          <button onClick={() => setNewGame()}>New Game</button>
+          <button onClick={() => handleNewGameClick()}>New Game</button>
         </div>
       ) : (
         <>
