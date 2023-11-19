@@ -1,3 +1,4 @@
+"use client";
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import { Tile, TileContent } from "../ui/Tile";

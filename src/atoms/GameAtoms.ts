@@ -13,25 +13,10 @@ export type Pokemon = {
   generation: number;
   sprite: string;
 };
-export type Move = {
-  id: number;
-  generation: number;
-  name: string;
-  power: number | null;
-  pp: number;
-  type: string;
-  class: string;
-  accuracy: number | null;
-};
 
 type DailyStorage = {
   date: string;
   answers: Pokemon[];
-};
-
-type DailyMoveStorage = {
-  date: string;
-  answers: Move[];
 };
 
 type GuessedItems = {
@@ -39,22 +24,16 @@ type GuessedItems = {
   classicUnlimited: Pokemon[];
   whosthatpokemon: Pokemon[];
   whosthatpokemonUnlimited: Pokemon[];
-  move: Move[];
-  moveUnlimited: Move[];
 };
 
 type DailyAnswers = {
   classic: Pokemon | null;
   whosthatpokemon: Pokemon | null;
-  move: Move | null;
 };
 
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";
-
-export const moveListAtom = atom<Move[]>([]);
-moveListAtom.debugLabel = "moveListAtom";
 
 //the number of guesses a user has
 export const guessAtom = atom({
@@ -62,8 +41,6 @@ export const guessAtom = atom({
   classicUnlimited: defaultGuesses,
   whosthatpokemon: defaultGuesses,
   whosthatpokemonUnlimited: defaultGuesses,
-  move: defaultGuesses,
-  moveUnlimited: defaultGuesses,
 });
 guessAtom.debugLabel = "guessAtom";
 
@@ -74,8 +51,6 @@ export const guessedItemsAtom = atom<GuessedItems>({
   classicUnlimited: [],
   whosthatpokemon: [],
   whosthatpokemonUnlimited: [],
-  move: [],
-  moveUnlimited: [],
 });
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
@@ -91,10 +66,6 @@ classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
 export const whosthatpokemonPracticeSolutionAtom =
   atomWithStorage<Pokemon | null>("whosthatpokemon_solution", null);
 
-export const movePracticeSolutionAtom = atomWithStorage<Move | null>(
-  "move_solution",
-  null,
-);
 //Initializes the pokemon to guess Object
 export const pokemonToGuessAtom = atom((get) => {
   return {
@@ -106,10 +77,6 @@ export const pokemonToGuessAtom = atom((get) => {
     whosthatpokemonUnlimited: get(whosthatpokemonPracticeSolutionAtom)
       ? get(whosthatpokemonPracticeSolutionAtom)
       : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
-    move: get(dailyPokemonAtom).move,
-    moveUnlimited: get(movePracticeSolutionAtom)
-      ? get(movePracticeSolutionAtom)
-      : get(moveListAtom)[Math.floor(Math.random() * get(moveListAtom).length)],
   };
 });
 pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
@@ -118,7 +85,6 @@ pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 export const dailyPokemonAtom = atom<DailyAnswers>({
   classic: null,
   whosthatpokemon: null,
-  move: null,
 });
 dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 
@@ -157,8 +123,6 @@ export const gameOverAtom = atom({
   classicUnlimited: false,
   whosthatpokemon: false,
   whosthatpokemonUnlimited: false,
-  move: false,
-  moveUnlimited: false,
 });
 gameOverAtom.debugLabel = "gameOverAtom";
 
@@ -169,9 +133,7 @@ export const currentGameMode = atom<
   | "classicUnlimited"
   | "whosthatpokemon"
   | "whosthatpokemonUnlimited"
-  | "move"
-  | "moveUnlimited"
->("move");
+>("classic");
 currentGameMode.debugLabel = "currentGameMode";
 
 //derived writable atom that is attempting to reset all values back to their defaults
@@ -179,8 +141,6 @@ export const newGameAtom = atom(null, (get, set) => {
   const mode = get(currentGameMode);
 
   if (mode === "classicUnlimited") {
-    // Update game over status for the "classicUnlimited" mode.
-    set(gameOverAtom, (prev) => ({ ...prev, classicUnlimited: false }));
 
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
@@ -193,9 +153,6 @@ export const newGameAtom = atom(null, (get, set) => {
     set(classicPracticeAnswersAtom, []);
   }
   if (mode === "whosthatpokemonUnlimited") {
-    // Update game over status for the "classicUnlimited" mode.
-    set(gameOverAtom, (prev) => ({ ...prev, whosthatpokemonUnlimited: false }));
-
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
       get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)];
@@ -211,26 +168,6 @@ export const newGameAtom = atom(null, (get, set) => {
     }));
     set(whosthatpokemonPracticeSolutionAtom, newPokemonToGuess);
     set(whosthatpokemonPracticeAnswersAtom, []);
-  }
-  if (mode === "moveUnlimited") {
-    // Update game over status for the "classicUnlimited" mode.
-    set(gameOverAtom, (prev) => ({ ...prev, moveUnlimited: false }));
-
-    // Create a new Pokemon to guess.
-    const newMoveToGuess =
-      get(moveListAtom)[Math.floor(Math.random() * get(moveListAtom).length)];
-
-    //resetting values
-    set(guessedItemsAtom, (prev) => ({
-      ...prev,
-      moveUnlimited: [],
-    }));
-    set(guessAtom, (prev) => ({
-      ...prev,
-      moveUnlimited: defaultGuesses,
-    }));
-    set(movePracticeSolutionAtom, newMoveToGuess);
-    set(movePracticeAnswersAtom, []);
   }
 });
 newGameAtom.debugLabel = "newGameAtom";
@@ -275,54 +212,6 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
     if (mode === "whosthatpokemonUnlimited") {
       set(whosthatpokemonPracticeAnswersAtom, []);
     }
-  }
-});
-addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
-
-export const moveAnswersAtom = atomWithStorage<DailyMoveStorage>(
-  "move_answers",
-  {
-    date: format(new Date(), "yyyy-MM-dd"),
-    answers: [],
-  },
-);
-
-export const movePracticeAnswersAtom = atomWithStorage<Move[]>(
-  "move_practice_answers",
-  [],
-);
-
-const moveWinsAtom = atomWithStorage("move_win_count", 0);
-
-export const addGuessedMoveAtom = atom(null, (get, set, newItem: Move) => {
-  const mode = get(currentGameMode);
-
-  set(guessedItemsAtom, (prev) => ({
-    ...prev,
-    [mode]: [...prev[mode], newItem],
-  }));
-  if (mode === "move") {
-    set(moveAnswersAtom, (prev) => ({
-      date: prev.date,
-      answers: [...prev.answers, newItem],
-    }));
-  } else if (mode === "moveUnlimited") {
-    set(movePracticeAnswersAtom, (prev) => [...prev, newItem]);
-  }
-  if (!(newItem.name === get(pokemonToGuessAtom)[mode]?.name)) {
-    set(guessAtom, (prev) => ({
-      ...prev,
-      [mode]: prev[mode] - 1,
-    }));
-  } else {
-    set(gameOverAtom, (prev) => ({
-      ...prev,
-      [mode]: true,
-    }));
-    if (mode === "move") {
-      set(moveWinsAtom, (prev) => prev++);
-    }
-    if (mode === "moveUnlimited") set(movePracticeAnswersAtom, []);
   }
 });
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";

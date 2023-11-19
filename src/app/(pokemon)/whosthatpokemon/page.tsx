@@ -1,5 +1,6 @@
 import { Pokemon } from "@/atoms/GameAtoms";
 import GameWrapper from "@/components/GameWrapper";
+import Guesses from "@/components/Guesses";
 import ModeSwitch from "@/components/ModeSwitch";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
@@ -25,6 +26,7 @@ export default async function WhosThatPokemon({
   return (
     <>
       <ModeSwitch href="/whosthatpokemon" searchParams={searchParams} />
+      <Guesses/>
       {dailies && <GameWrapper pokedex={pokedex} dailies={dailies} />}
     </>
   );

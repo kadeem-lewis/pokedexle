@@ -1,6 +1,6 @@
+"use client";
 import { Pokemon } from "@/atoms/GameAtoms";
 import React, { useEffect, useState } from "react";
-import Guesses from "../Guesses";
 import Image from "next/image";
 import {
   currentGameMode,
@@ -65,7 +65,6 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
 
   return (
     <>
-      <Guesses />
       <div
         className={`flex items-center justify-center ${
           !gameOver[mode] ? blurIntensity(guesses) : ""

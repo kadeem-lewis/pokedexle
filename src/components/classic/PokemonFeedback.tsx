@@ -12,7 +12,6 @@ import {
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
-import Guesses from "../Guesses";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;
@@ -26,7 +25,7 @@ export default function PokemonFeedback({
   const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
-  //TODO: find a better way to result the pokemon[] or move[] error
+  //TODO: find a better way to result the pokemon[] or error
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
@@ -60,7 +59,6 @@ export default function PokemonFeedback({
   }, [guessedItems, correctAnswer]);
   return (
     <>
-      <Guesses />
       <div className="flex flex-col justify-center gap-x-1 gap-y-2 overflow-x-auto capitalize">
         {guessedItems.length !== 0 && (
           <div className="flex">
