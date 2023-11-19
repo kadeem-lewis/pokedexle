@@ -4,7 +4,7 @@ import Guesses from "@/components/Guesses";
 import ModeSwitch from "@/components/ModeSwitch";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
-import { startOfToday, format } from "date-fns";
+import { formatISO } from "date-fns";
 
 type WhosThatPokemonProps = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -21,7 +21,7 @@ export default async function WhosThatPokemon({
   const pokedex = (await readJson("/data/pokedex.json")) as Pokemon[];
   const dailies = await prisma.daily.findUnique({
     where: {
-      date: format(new Date(), "yyyy-MM-dd")
+      date: formatISO(new Date(), { representation: "date" })
     },
   });
   return (
