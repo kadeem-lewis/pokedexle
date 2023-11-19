@@ -20,7 +20,7 @@ export default async function WhosThatPokemon({
   searchParams,
 }: WhosThatPokemonProps) {
   const pokedex = (await readJson("/data/pokedex.json")) as Pokemon[];
-  console.log(pokedex.slice(0, 10));
+  console.log([...pokedex.slice(0, 10)]);
   console.log(startOfToday());
   const dailies = await prisma.daily.findUnique({
     where: {
