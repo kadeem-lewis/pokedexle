@@ -16,7 +16,7 @@ export const metadata = {
 };
 
 export default async function Classic({ searchParams }: ClassicProps) {
-  const pokedex = (await readJson("/data/pokedex.json")) as Pokemon[];
+  const pokedex = await readJson("/data/pokedex.json");
   const dailies = await prisma.daily.findUnique({
     where: {
       date: startOfToday(),
