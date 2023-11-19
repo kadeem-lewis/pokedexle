@@ -12,7 +12,7 @@ import { Daily } from "@prisma/client";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { usePathname, useSearchParams } from "next/navigation";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import ClassicGamebox from "./classic/Gamebox";
 import WhosThatPokemonGamebox from "./whosthatpokemon/Gamebox";
 import MyComboBox from "./ui/MyComboBox";
@@ -28,6 +28,7 @@ type GameWrapperProps = {
 
 export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
+  const pokedexer = pokedex;
   console.log("Pokedex 1st call:",pokedex)
   useHydrateAtoms([[dailyAtom, dailies]]);
   const [mode, setMode] = useAtom(currentGameMode);
@@ -57,6 +58,7 @@ export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
     console.log("Set Dailies useEffect is running");
     console.log("Pokedex 2nd call:",pokedex)
     console.log("Pokedexy:",pokedexy)
+    console.log("Pokedexer:",pokedexer)
     function setDailies() {
       console.log("Pokemon Ids:",classicId, whosThatPokemonId)
       const dailyClassicPokemon = pokedex.find(
