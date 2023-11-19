@@ -47,6 +47,7 @@ export async function GET(params: NextRequest) {
         date: startOfTomorrow(),
         classicId: classic.id,
         whosThatPokemonId: whosThatPokemon.id,
+        moveId: Math.floor(Math.random() * 1000) + 1,
       },
     });
 
