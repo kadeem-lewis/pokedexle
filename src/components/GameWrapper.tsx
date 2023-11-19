@@ -54,12 +54,15 @@ export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
   useEffect(() => {
     console.log("Set Dailies useEffect is running");
     function setDailies() {
+      console.log("Pokemon Ids:",classicId, whosThatPokemonId)
       const dailyClassicPokemon = pokedex.find(
         (pokemon) => pokemon.id === classicId,
       );
+      console.log("Daily Classic Pokemon:",dailyClassicPokemon)
       const dailyWhosThatPokemon = pokedex.find(
         (pokemon) => pokemon.id === whosThatPokemonId,
       );
+      console.log("Daily WTP Pokemon:",dailyWhosThatPokemon)
       if (!dailyWhosThatPokemon) throw new Error("Daily WTP Pokemon Not Found");
       if (!dailyClassicPokemon) throw new Error("Daily Classic Pokemon Not Found");
 
