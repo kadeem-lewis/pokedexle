@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import {

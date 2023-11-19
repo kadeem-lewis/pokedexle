@@ -1,3 +1,4 @@
+"use client";
 import { Pokemon } from "@/atoms/GameAtoms";
 import React, { useEffect, useState } from "react";
 import Guesses from "../Guesses";

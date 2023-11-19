@@ -1,3 +1,4 @@
+"use client"
 import React, { Dispatch, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Icons } from "../Icons";
