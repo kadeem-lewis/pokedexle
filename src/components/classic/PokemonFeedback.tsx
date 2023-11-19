@@ -12,7 +12,6 @@ import {
 import FeedbackTile from "./FeedbackTile";
 import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
-import Guesses from "../Guesses";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;
@@ -60,7 +59,6 @@ export default function PokemonFeedback({
   }, [guessedItems, correctAnswer]);
   return (
     <>
-      <Guesses />
       <div className="flex flex-col justify-center gap-x-1 gap-y-2 overflow-x-auto capitalize">
         {guessedItems.length !== 0 && (
           <div className="flex">
