@@ -53,6 +53,7 @@ export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
 
   useEffect(() => {
     console.log("Set Dailies useEffect is running");
+    console.log("Pokedex:",pokedex)
     function setDailies() {
       console.log("Pokemon Ids:",classicId, whosThatPokemonId)
       const dailyClassicPokemon = pokedex.find(
