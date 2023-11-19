@@ -2,12 +2,11 @@ import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { startOfTomorrow } from "date-fns";
 import { readJson } from "@/helpers/FileSystem";
-import { Move, Pokemon } from "@/atoms/GameAtoms";
+import { Pokemon } from "@/atoms/GameAtoms";
 
 export async function GET(params: NextRequest) {
   try {
     const allPokemon = (await readJson("/data/pokedex.json")) as Pokemon[];
-    const allMoves = (await readJson("/data/movedex.json")) as Move[];
 
     // Fetch Moves and Pokémon that have been used in the Daily table
     const usedClassicPokemonIds = await prisma.daily.findMany({
@@ -15,9 +14,6 @@ export async function GET(params: NextRequest) {
     });
     const usedWhosThatPokemonIds = await prisma.daily.findMany({
       select: { whosThatPokemonId: true },
-    });
-    const usedMoveIds = await prisma.daily.findMany({
-      select: { moveId: true },
     });
 
     const unusedClassicPokemon = allPokemon.filter(
@@ -29,9 +25,6 @@ export async function GET(params: NextRequest) {
         !usedWhosThatPokemonIds.some(
           (used) => used.whosThatPokemonId === pokemon.id,
         ),
-    );
-    const unusedMoves = allMoves.filter(
-      (move) => !usedMoveIds.some((used) => used.moveId === move.id),
     );
 
     // Random selection logic remains the same
@@ -49,19 +42,11 @@ export async function GET(params: NextRequest) {
           ]
         : allPokemon[Math.floor(Math.random() * allPokemon.length)];
 
-    // If there are no more unused Moves, throw an error
-    if (!unusedMoves.length) {
-      throw new Error("No unused Moves available.");
-    }
-
-    const move = unusedMoves[Math.floor(Math.random() * unusedMoves.length)];
-
     const newDaily = await prisma.daily.create({
       data: {
         date: startOfTomorrow(),
         classicId: classic.id,
         whosThatPokemonId: whosThatPokemon.id,
-        moveId: move.id,
       },
     });
 

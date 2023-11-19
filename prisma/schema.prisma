@@ -15,6 +15,5 @@ model Daily {
   id Int @id @default(autoincrement())
   date DateTime @db.Date @unique
   classicId Int @unique
-  moveId Int @unique
   whosThatPokemonId Int @unique
 }

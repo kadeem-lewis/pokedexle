@@ -1,7 +1,7 @@
-import type { Move, Pokemon } from "@/atoms/GameAtoms";
+import type { Pokemon } from "@/atoms/GameAtoms";
 import { promises as fs } from "fs";
 
-export async function readJson(path: string): Promise<Pokemon[] | Move[]> {
+export async function readJson(path: string): Promise<Pokemon[]> {
   try {
     const fullPath = process.cwd() + "/src" + path;
     const data = await fs.readFile(fullPath, "utf8");

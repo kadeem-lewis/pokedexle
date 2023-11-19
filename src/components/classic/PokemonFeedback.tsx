@@ -26,7 +26,7 @@ export default function PokemonFeedback({
   const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
-  //TODO: find a better way to result the pokemon[] or move[] error
+  //TODO: find a better way to result the pokemon[] or error
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);

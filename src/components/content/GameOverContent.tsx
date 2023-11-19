@@ -31,15 +31,13 @@ export default function GameOverContent() {
 
       {correctAnswer && (
         <div className="flex flex-col items-center justify-center">
-          {mode !== "move" && mode !== "moveUnlimited" && (
-            <Image
-              src={correctAnswer.sprite}
-              alt={`${correctAnswer.name} sprite`}
-              priority={true}
-              width={200}
-              height={200}
-            />
-          )}
+          <Image
+            src={correctAnswer.sprite}
+            alt={`${correctAnswer.name} sprite`}
+            priority={true}
+            width={200}
+            height={200}
+          />
           <p className="text-2xl capitalize">
             The answer was : {correctAnswer.name}
           </p>

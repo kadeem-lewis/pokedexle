@@ -12,12 +12,6 @@ const NAV_LINKS = [
     path: "/whosthatpokemon",
     background: "/images/hollowed-boxes.svg",
   },
-  {
-    title: "Guess the Move",
-    description: "Guess the Move",
-    path: "/move",
-    background: "/images/dragon-scales.svg",
-  },
 ];
 export default function Home() {
   return (
