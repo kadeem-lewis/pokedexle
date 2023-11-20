@@ -81,7 +81,7 @@ export default function Share() {
     //! Shows X/6 if answer is guessed on 6th try
     const textToCopy = `
 Pokedexle ${mode} ${id} ${
-      attempts > 0
+      attempts >= 0 && guesses.some((item) => item.name === correctAnswer?.name)
         ? `${guesses.length}/${defaultGuesses}`
         : `X/${defaultGuesses}`
     }
