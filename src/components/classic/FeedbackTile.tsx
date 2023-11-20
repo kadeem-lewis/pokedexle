@@ -6,6 +6,7 @@ import {
   decimeterToImperial,
   hectogramToImperial,
 } from "@/helpers/Conversions";
+import {Tooltip} from "react-tooltip";
 
 type FeedbackTileProps = {
   guessedItem: Pokemon;
@@ -37,7 +38,7 @@ export default function FeedbackTile({
     <div className="flex gap-x-1">
       {guessedItem.name === correctItem.name ? (
         <>
-          <Tile status="correct">
+          <Tile status="correct" data-tooltip-id={guessedItem.name} data-tooltip-content={guessedItem.name}>
             <TileContent>
               <Image
                 src={guessedItem.sprite}
@@ -48,6 +49,7 @@ export default function FeedbackTile({
               />
             </TileContent>
           </Tile>
+          <Tooltip id={guessedItem.name} opacity={1}/>
           <Tile status="correct">
             <TileContent>Gen {correctItem.generation}</TileContent>
           </Tile>
@@ -65,7 +67,7 @@ export default function FeedbackTile({
         </>
       ) : (
         <>
-          <Tile>
+          <Tile data-tooltip-id={guessedItem.name} data-tooltip-content={guessedItem.name}>
             <TileContent>
               <Image
                 src={guessedItem.sprite}
@@ -76,6 +78,7 @@ export default function FeedbackTile({
               />
             </TileContent>
           </Tile>
+          <Tooltip id={guessedItem.name} opacity={1}/>
 
           {guessedItem.generation === correctItem.generation ? (
             <Tile status="correct">
