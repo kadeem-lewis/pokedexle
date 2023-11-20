@@ -1,26 +1,17 @@
-import { Pokemon } from "@/atoms/GameAtoms";
 import GameWrapper from "@/components/GameWrapper";
 import Guesses from "@/components/Guesses";
 import ModeSwitch from "@/components/ModeSwitch";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
 import { startOfToday } from "date-fns";
-import { start } from "repl";
-
-type WhosThatPokemonProps = {
-  searchParams: { [key: string]: string | string[] | undefined };
-};
 
 export const metadata = {
   title: "Who's That Pokémon",
   description: "Guess the Pokémon based on the image",
 };
 
-export const dynamic = "force-dynamic";
 
-export default async function WhosThatPokemon({
-  searchParams,
-}: WhosThatPokemonProps) {
+export default async function WhosThatPokemon() {
   const pokedex = await readJson("/data/pokedex.json");
   console.log([...pokedex.slice(0, 10)]);
   console.log(startOfToday());
@@ -32,7 +23,7 @@ export default async function WhosThatPokemon({
   console.log(dailies);
   return (
     <>
-      <ModeSwitch href="/whosthatpokemon" searchParams={searchParams} />
+      <ModeSwitch href="/whosthatpokemon"/>
       <Guesses/>
       {dailies && <GameWrapper pokedex={pokedex} dailies={dailies} />}
     </>
