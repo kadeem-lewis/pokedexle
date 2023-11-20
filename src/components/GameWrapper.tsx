@@ -28,11 +28,8 @@ type GameWrapperProps = {
 
 export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
-  const pokedexer = pokedex;
-  console.log("Pokedex 1st call:",pokedex)
   useHydrateAtoms([[dailyAtom, dailies]]);
   const [mode, setMode] = useAtom(currentGameMode);
-  const pokedexy = useAtomValue(pokedexAtom);
   const { classicId, whosThatPokemonId } = dailies;
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const gameOver = useAtomValue(gameOverAtom);
@@ -55,20 +52,13 @@ export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
   }, [currentPath, searchParams, setMode]);
 
   useEffect(() => {
-    console.log("Set Dailies useEffect is running");
-    console.log("Pokedex 2nd call:",pokedex)
-    console.log("Pokedexy:",pokedexy)
-    console.log("Pokedexer:",pokedexer)
     function setDailies() {
-      console.log("Pokemon Ids:",classicId, whosThatPokemonId)
       const dailyClassicPokemon = pokedex.find(
         (pokemon) => pokemon.id === classicId,
       );
-      console.log("Daily Classic Pokemon:",dailyClassicPokemon)
       const dailyWhosThatPokemon = pokedex.find(
         (pokemon) => pokemon.id === whosThatPokemonId,
       );
-      console.log("Daily WTP Pokemon:",dailyWhosThatPokemon)
       if (!dailyWhosThatPokemon) throw new Error("Daily WTP Pokemon Not Found");
       if (!dailyClassicPokemon) throw new Error("Daily Classic Pokemon Not Found");
 
