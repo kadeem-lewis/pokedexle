@@ -133,7 +133,7 @@ export const currentGameMode = atom<
   | "classicUnlimited"
   | "whosthatpokemon"
   | "whosthatpokemonUnlimited"
->("classic");
+>("classicUnlimited");
 currentGameMode.debugLabel = "currentGameMode";
 
 //derived writable atom that is attempting to reset all values back to their defaults

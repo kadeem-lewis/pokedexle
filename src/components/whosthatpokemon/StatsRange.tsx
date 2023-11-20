@@ -80,7 +80,6 @@ export default function StatsRange() {
       whosthatpokemon: { max: maxValue, min: minValue },
       whosthatpokemonUnlimited: { max: maxValue, min: minValue },
     });
-    console.log("reset");
   }, [pokemonToGuess]);
 
 
@@ -91,7 +90,6 @@ export default function StatsRange() {
     guessedItems.forEach((item) => {
       updateRange(setGenerationRange, item.generation, pokemonToGuess?.generation, generationRange);
     });
-    console.log("update generation");
   }, [generationRange, guessedItems, mode, pokemonToGuess, pokemonToGuess?.generation, updateRange]);
   
   useEffect(() => {
@@ -101,7 +99,6 @@ export default function StatsRange() {
     guessedItems.forEach((item) => {
       updateRange(setWeightRange, item.weight, pokemonToGuess.weight, weightRange);
     });
-    console.log("update weight");
   }, [guessedItems, mode, pokemonToGuess, pokemonToGuess?.weight, updateRange, weightRange]);
   
   useEffect(() => {
@@ -111,7 +108,6 @@ export default function StatsRange() {
     guessedItems.forEach((item) => {
       updateRange(setHeightRange, item.height, pokemonToGuess.height, heightRange);
     });
-    console.log("update height");
   }, [guessedItems, heightRange, mode, pokemonToGuess, pokemonToGuess?.height, updateRange]);
 
 

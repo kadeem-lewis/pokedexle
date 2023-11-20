@@ -52,7 +52,6 @@ export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
   }, [currentPath, searchParams, setMode]);
 
   useEffect(() => {
-    console.log("Set Dailies useEffect is running");
     function setDailies() {
       const dailyClassicPokemon = pokedex.find(
         (pokemon) => pokemon.id === classicId,
@@ -60,8 +59,8 @@ export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
       const dailyWhosThatPokemon = pokedex.find(
         (pokemon) => pokemon.id === whosThatPokemonId,
       );
-      if (!dailyClassicPokemon) throw new Error("Daily Pokemon Not Found");
-      if (!dailyWhosThatPokemon) throw new Error("Daily Pokemon Not Found");
+      if (!dailyWhosThatPokemon) throw new Error("Daily WTP Pokemon Not Found");
+      if (!dailyClassicPokemon) throw new Error("Daily Classic Pokemon Not Found");
 
       setDailyPokemon((prev) => ({
         ...prev,

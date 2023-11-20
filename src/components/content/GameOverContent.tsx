@@ -8,6 +8,7 @@ import {
   guessAtom,
   Pokemon,
   gameOverAtom,
+  guessedItemsAtom,
 } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import Countdown from "../Countdown";
@@ -19,6 +20,7 @@ export default function GameOverContent() {
   const setNewGame = useSetAtom(newGameAtom);
   const setGameOver = useSetAtom(gameOverAtom);
   const guesses = useAtomValue(guessAtom)[mode];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   const pokemonGuesses = useAtomValue(pokemonToGuessAtom);
   const correctAnswer = pokemonGuesses[mode] as Pokemon | null;
 
@@ -35,7 +37,7 @@ export default function GameOverContent() {
   return (
     <div>
       <div className="text-3xl">
-        {guesses > 0 ? (
+        {guesses > 0 && guessedItems.some(item=>item.name===correctAnswer?.name) ? (
           <p>You won!!</p>
         ) : (
           <p>You Lost. Better luck Next Time!</p>
