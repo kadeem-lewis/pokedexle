@@ -3,7 +3,6 @@ import Guesses from "@/components/Guesses";
 import ModeSwitch from "@/components/ModeSwitch";
 import { readJson } from "@/helpers/FileSystem";
 import { prisma } from "@/lib/prisma";
-import { startOfToday } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 
 export const metadata = {
@@ -16,7 +15,7 @@ export default async function WhosThatPokemon() {
   const pokedex = await readJson("/data/pokedex.json");
   const dailies = await prisma.daily.findUnique({
     where: {
-      date: utcToZonedTime(startOfToday(),"America/New_York"),
+      date: utcToZonedTime(new Date(),"America/New_York"),
     },
   });
   return (
