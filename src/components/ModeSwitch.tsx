@@ -17,7 +17,7 @@ export default function ModeSwitch({ href }: ModeSwitchProps) {
         className={cx(
           !searchParams.get("mode") ? "brightness-110" : "brightness-75",
           buttonVariants({ variant: "flat", size: "tall" }),
-          "bg-yellow-500",
+          "bg-yellow-500 hover:brightness-110",
         )}
         href={href}
       >
@@ -29,7 +29,7 @@ export default function ModeSwitch({ href }: ModeSwitchProps) {
             ? "brightness-110"
             : "brightness-75",
           buttonVariants({ variant: "flat", size: "tall" }),
-          "bg-yellow-500",
+          "bg-yellow-500 hover:brightness-110",
         )}
         href="?mode=unlimited"
       >

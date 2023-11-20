@@ -11,8 +11,8 @@ const pokemonDs = localFont({
 //add an icon and also set a favicon if thats different
 export const metadata = {
   title: {
-    default: "Pokedéxle",
-    template: "Pokedéxle | %s",
+    default: "Pokédexle",
+    template: "Pokédexle | %s",
   },
   description:
     "A variety of different game modes themed around guessing all things pokemon",
@@ -33,10 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={pokemonDs.className}>
+    <html lang="en" suppressHydrationWarning className={`${pokemonDs.className}`}>
+      <body>
         <Providers>
-          <div className=" mx-auto flex h-screen max-w-md flex-col px-4">
+          <div className=" mx-auto flex h-screen max-w-md flex-col px-4 font-pokemon-ds">
             <Navbar />
             <main className="mb-auto grow pt-2 text-2xl">{children}</main>
             <Footer />

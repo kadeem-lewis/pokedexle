@@ -31,6 +31,8 @@ type DailyAnswers = {
   whosthatpokemon: Pokemon | null;
 };
 
+export type GameMode = "classic" | "classicUnlimited" | "whosthatpokemon" | "whosthatpokemonUnlimited";
+
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
 pokedexAtom.debugLabel = "pokedexAtom";
@@ -128,12 +130,7 @@ gameOverAtom.debugLabel = "gameOverAtom";
 
 //?maybe use enum for types or some other typescript feature
 //! the mode that is the default is unable to save localStorage stats on reset
-export const currentGameMode = atom<
-  | "classic"
-  | "classicUnlimited"
-  | "whosthatpokemon"
-  | "whosthatpokemonUnlimited"
->("classicUnlimited");
+export const currentGameMode = atom<GameMode>("classicUnlimited");
 currentGameMode.debugLabel = "currentGameMode";
 
 //derived writable atom that is attempting to reset all values back to their defaults

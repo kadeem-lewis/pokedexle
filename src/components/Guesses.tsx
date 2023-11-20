@@ -27,9 +27,9 @@ export default function Guesses() {
           />
           {(mode === "whosthatpokemon" ||
             mode === "whosthatpokemonUnlimited") &&
-            guessedItems[index] && (
-              <Tooltip id={`guess-data-${index}`}>
-                <PokemonCard pokemon={guessedItems[index]} />
+            guessedItems[(defaultGuesses-1)-index] && (
+              <Tooltip id={`guess-data-${index}`} className="bg-primary" opacity={1}>
+                <PokemonCard pokemon={guessedItems[(defaultGuesses-1)-index]} />
               </Tooltip>
             )}
         </Fragment>

@@ -16,7 +16,7 @@ const NAV_LINKS = [
 export default function Home() {
   return (
     <div>
-      <p className="text-2xl">Test your Pokémon Knowledge</p>
+      <h2 className="text-3xl">Test your Pokémon Knowledge</h2>
       {NAV_LINKS.map((link) => (
         <LinkCard
           title={link.title}
