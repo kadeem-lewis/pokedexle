@@ -15,6 +15,8 @@ export const metadata = {
   description: "Guess the Pokémon based on hints from previous guesses",
 };
 
+export const dynamic = "force-dynamic"
+
 export default async function Classic({ searchParams }: ClassicProps) {
   const pokedex = await readJson("/data/pokedex.json");
   const dailies = await prisma.daily.findUnique({
