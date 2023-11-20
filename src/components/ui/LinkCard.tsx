@@ -14,7 +14,7 @@ export default function LinkCard({
 }: ModalProps) {
   return (
     <div
-      className="outline-3 my-6 rounded-lg border-4 border-amber-300 text-white outline outline-black dark:border-amber-500 dark:outline-white"
+      className="outline-3 my-6 rounded-lg border-4 border-amber-300 text-white outline outline-black dark:border-amber-500 dark:outline-white hover:scale-105 transition duration-200 ease-in-out transform motion-reduce:transition-none"
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="h-full w-full bg-white/10 p-4">
