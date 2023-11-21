@@ -30,7 +30,7 @@ export default function Share() {
   const attempts = useAtomValue(guessAtom)[mode];
   const guesses = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const gameOver = useAtomValue(gameOverAtom);
-  const { id } = useAtomValue(dailyAtom) as Daily;
+  const { id } = useAtomValue(dailyAtom);
   const [isCopied, setIsCopied] = useState(false);
 
   const comparePokemonValue = (
