@@ -10,6 +10,7 @@ export const metadata = {
   description: "Guess the Pokémon based on the image",
 };
 
+export const dynamic = "force-dynamic";
 
 export default async function WhosThatPokemon() {
   const pokedex = await readJson("/data/pokedex.json");
