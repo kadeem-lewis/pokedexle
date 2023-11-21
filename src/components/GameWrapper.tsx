@@ -23,16 +23,14 @@ import PokemonTypes from "./PokemonTypes";
 
 type GameWrapperProps = {
   pokedex: Pokemon[];
-  dailies: Daily;
 };
 
-export default function GameWrapper({ pokedex, dailies }: GameWrapperProps) {
+export default function GameWrapper({ pokedex }: GameWrapperProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
-  useHydrateAtoms([[dailyAtom, dailies]]);
   const [mode, setMode] = useAtom(currentGameMode);
-  const { classicId, whosThatPokemonId } = dailies;
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const gameOver = useAtomValue(gameOverAtom);
+  const { classicId, whosThatPokemonId } = useAtomValue<Promise<Daily>>(dailyAtom);
 
   const currentPath = usePathname();
   const searchParams = useSearchParams();
