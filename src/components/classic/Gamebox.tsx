@@ -28,7 +28,7 @@ export default function Gamebox() {
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
   const mode = useAtomValue(currentGameMode);
-  const { date } = useAtomValue(dailyAtom) as Daily;
+  const { date } = useAtomValue(dailyAtom);
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
 
   const searchParams = useSearchParams();

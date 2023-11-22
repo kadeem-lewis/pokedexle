@@ -66,14 +66,16 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
   return (
     <>
       <div
-        className={`flex items-center justify-center ${
+        className={`flex items-center justify-center relative ${
           !gameOver[mode] ? blurIntensity(guesses) : ""
         }`}
       >
         <Image
           src={correctAnswer.sprite}
-          height={300}
-          width={300}
+          height={0}
+          width={0}
+          sizes="100vw"
+          className="w-full h-auto"
           priority={true}
           alt={`${correctAnswer.name} sprite`}
         />

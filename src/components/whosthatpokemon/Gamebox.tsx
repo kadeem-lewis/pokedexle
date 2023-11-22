@@ -17,7 +17,6 @@ import {
 } from "@/atoms/GameAtoms";
 import ImagePanel from "./ImagePanel";
 import { defaultGuesses } from "@/constants";
-import { Daily } from "@prisma/client";
 
 export default function Gamebox() {
   const mode = useAtomValue(currentGameMode);
@@ -30,7 +29,7 @@ export default function Gamebox() {
     useAtom(whosthatpokemonPracticeSolutionAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date } = useAtomValue(dailyAtom) as Daily;
+  const { date } = useAtomValue(dailyAtom);
   const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
     whosthatpokemonAnswersAtom,
   );
