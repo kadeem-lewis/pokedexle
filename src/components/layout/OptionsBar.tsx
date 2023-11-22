@@ -19,6 +19,7 @@ export default function OptionsBar() {
       <button
         onClick={() => setHowToPlayClick(true)}
         className="border-r-2 border-foreground py-1"
+        title="How To Play"
         aria-label="open how to play modal"
       >
         <Icons.questionMark className="mx-auto h-6 w-6" />
@@ -36,6 +37,7 @@ export default function OptionsBar() {
       <button
         onClick={() => setSettingClick(true)}
         className="border-r-2 border-foreground py-1"
+        title="Settings"
         aria-label="open settings modal"
       >
         <Icons.settings className="mx-auto h-6 w-6 transition-transform hover:-rotate-45" />
@@ -53,6 +55,7 @@ export default function OptionsBar() {
       <button
         onClick={() => setCalendarClick(true)}
         className="border-r-2 border-foreground py-1"
+        title="Calendar"
         aria-label="open calendar modal"
       >
         <Icons.calendar className="mx-auto h-6 w-6" />
@@ -70,6 +73,7 @@ export default function OptionsBar() {
       <button
         onClick={() => setStatsClick(true)}
         className="border-r-2 border-foreground py-1"
+        title="Stats"
         aria-label="open stats modal"
       >
         <Icons.chart className="mx-auto h-6 w-6" />
@@ -83,7 +87,7 @@ export default function OptionsBar() {
           <StatsContent />
         </OptionsModal>
       )}
-      <button onClick={() => setAboutClick(true)} className="py-1" aria-label="open about modal">
+      <button onClick={() => setAboutClick(true)} className="py-1" title="About" aria-label="open about modal">
         <Icons.exclamationMark className="mx-auto h-6 w-6" />
       </button>
       {aboutClick && (
