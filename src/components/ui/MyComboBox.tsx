@@ -61,6 +61,8 @@ export default function MyComboBox() {
               onChange={(e) => setQuery(e.target.value)}
               displayValue={(item: Pokemon) => item?.name}
               className="w-full border-b-2 border-dashed border-foreground bg-transparent py-1 pl-3"
+              placeholder="Search pokémon by name or type..."
+              aria-label="Search pokémon by name or type..."
               autoComplete="off"
             />
             <Transition
