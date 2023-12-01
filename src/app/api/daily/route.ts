@@ -42,13 +42,11 @@ export async function GET(params: NextRequest) {
           ]
         : allPokemon[Math.floor(Math.random() * allPokemon.length)];
 
-         const moveId = Math.floor(Math.random() * 1000) + 1
-
     const newDaily = await prisma.daily.create({
       data: {
         date: startOfTomorrow(),
         classicId: classic.id,
-        whosThatPokemonId: whosThatPokemon.id
+        whosThatPokemonId: whosThatPokemon.id,
       },
     });
 
