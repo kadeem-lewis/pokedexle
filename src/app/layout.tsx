@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import localFont from "next/font/local";
 
 const pokemonDs = localFont({
-  src: "../../public/fonts/pokemon-ds.ttf",
+  src: "../../public/fonts/pokemon-ds.woff2",
   variable: "--font-pokemon-ds",
 });
 //add an icon and also set a favicon if thats different
@@ -33,7 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${pokemonDs.className}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${pokemonDs.className}`}
+    >
       <body>
         <Providers>
           <div className=" mx-auto flex h-screen max-w-md flex-col px-4 font-pokemon-ds">

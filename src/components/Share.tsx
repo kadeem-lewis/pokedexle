@@ -13,7 +13,6 @@ import {
 import { Button } from "./ui/Button";
 import { defaultGuesses } from "@/constants";
 import { Icons } from "./Icons";
-import { Daily } from "@prisma/client";
 
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",
