@@ -17,7 +17,6 @@ import {
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import PokemonFeedback from "./PokemonFeedback";
-import { Daily } from "@prisma/client";
 
 export default function Gamebox() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
