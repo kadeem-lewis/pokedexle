@@ -29,7 +29,7 @@ export default function Share() {
   const attempts = useAtomValue(guessAtom)[mode];
   const guesses = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
   const gameOver = useAtomValue(gameOverAtom);
-  const { id } = useAtomValue(dailyAtom);
+  const { day } = useAtomValue(dailyAtom);
   const [isCopied, setIsCopied] = useState(false);
 
   const comparePokemonValue = (
@@ -79,7 +79,7 @@ export default function Share() {
     const grid = createEmojiGrid();
     //! Shows X/6 if answer is guessed on 6th try
     const textToCopy = `
-Pokedexle ${mode} ${id} ${
+Pokedexle ${mode} ${day} ${
       attempts >= 0 && guesses.some((item) => item.name === correctAnswer?.name)
         ? `${guesses.length}/${defaultGuesses}`
         : `X/${defaultGuesses}`
