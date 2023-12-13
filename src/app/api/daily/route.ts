@@ -4,9 +4,8 @@ import { differenceInCalendarDays, startOfTomorrow } from "date-fns";
 import { readJson } from "@/helpers/FileSystem";
 import { Pokemon } from "@/atoms/GameAtoms";
 import { Daily } from "@prisma/client";
-import { verifySignatureAppRouter } from "@upstash/qstash/dist/nextjs";
 
-async function handler(_req: NextRequest) {
+export async function GET(_req: NextRequest) {
   let allPokemon: Pokemon[];
   try {
     allPokemon = (await readJson("/data/pokedex.json")) as Pokemon[];
@@ -47,7 +46,9 @@ async function handler(_req: NextRequest) {
 
   let firstDaily: Daily | null;
   try {
-    firstDaily = await prisma.daily.findFirst();
+    firstDaily = await prisma.daily.findUnique({
+      where: { day: 1 },
+    });
   } catch (error) {
     console.error("Error fetching first daily from database:", error);
     return new NextResponse("Error");
@@ -71,5 +72,3 @@ async function handler(_req: NextRequest) {
     return new NextResponse("Error");
   }
 }
-
-export const POST = verifySignatureAppRouter(handler);
