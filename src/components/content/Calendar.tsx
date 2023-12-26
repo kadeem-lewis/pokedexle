@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { DayPicker } from "react-day-picker";
 import { useAtom } from "jotai";
 import { addDays, endOfMonth, format } from "date-fns";
 // Your App.tsx file
