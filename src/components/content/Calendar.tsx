@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useAtom } from "jotai";
 import { addDays, endOfMonth, format } from "date-fns";
 // Your App.tsx file
-import "react-day-picker/dist/style.css";
 
 export default function Calendar() {
   // const [selectedDate, setSelectedDate] = useAtom(dateAtom)
