@@ -5,7 +5,6 @@ import {
   dailyAtom,
   dailyPokemonAtom,
   gameOverAtom,
-  newGameAtom,
   pokedexAtom,
 } from "@/atoms/GameAtoms";
 import { Daily } from "@prisma/client";
@@ -16,9 +15,6 @@ import React, { useEffect } from "react";
 import ClassicGamebox from "./classic/Gamebox";
 import WhosThatPokemonGamebox from "./whosthatpokemon/Gamebox";
 import MyComboBox from "./ui/MyComboBox";
-import Countdown from "./Countdown";
-import { startOfTomorrow } from "date-fns";
-import { Button } from "./ui/Button";
 import PokemonTypes from "./PokemonTypes";
 
 type GameWrapperProps = {
@@ -35,9 +31,6 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
 
   const currentPath = usePathname();
   const searchParams = useSearchParams();
-
-  const targetDate = startOfTomorrow();
-  const setNewGame = useSetAtom(newGameAtom);
 
   useEffect(() => {
     if (currentPath === "/classic") {
