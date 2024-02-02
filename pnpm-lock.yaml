@@ -30,8 +30,8 @@ dependencies:
     specifier: ^2.6.4
     version: 2.6.4(@types/react@18.2.51)(react@18.2.0)
   jotai-devtools:
-    specifier: ^0.6.3
-    version: 0.6.3(@emotion/react@11.11.3)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)(redux@5.0.1)
+    specifier: ^0.7.1
+    version: 0.7.1(@emotion/react@11.11.3)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)(redux@5.0.1)
   next:
     specifier: ^14.1.0
     version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -3757,8 +3757,8 @@ packages:
     resolution: {integrity: sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==}
     hasBin: true
 
-  /jotai-devtools@0.6.3(@emotion/react@11.11.3)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)(redux@5.0.1):
-    resolution: {integrity: sha512-QPS6m2ft6laT5YrVlIlCzjRl1LYmwCtT3jL9TJcrlB5bUxqcls03CmNMRwVBpSOzx3WwiZVEmXALhlI1UvufPQ==}
+  /jotai-devtools@0.7.1(@emotion/react@11.11.3)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)(redux@5.0.1):
+    resolution: {integrity: sha512-Uqz5LOXSNkVBYG7HEauYtguTJyndX5kMVtFSYsqcNrCr2H53okxMwZnRg5n7WOy9uHyi1+a5xa1omjpIH6lGbA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@emotion/react': '>=11.0.0'
