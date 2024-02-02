@@ -23,14 +23,14 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends AriaButtonProps,
+  extends ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {}
 
 //TODO: make sure that I am properly using the forwardRef hook with react-aria-components
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
     return (
-      <Button
+      <button
         ref={ref}
         className={cx(buttonVariants({ variant, className, size }))}
         {...props}
