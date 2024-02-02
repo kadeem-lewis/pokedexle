@@ -25,7 +25,6 @@
     "react-aria": "^3.31.1",
     "react-aria-components": "^1.0.1",
     "react-dom": "18.2.0",
-    "react-tooltip": "^5.26.0",
     "sharp": "^0.32.6",
     "tailwindcss-react-aria-components": "^1.0.0"
   },
