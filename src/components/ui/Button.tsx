@@ -26,7 +26,7 @@ interface ButtonProps
   extends ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {}
 
-//TODO: make sure that I am properly using the forwardRef hook with react-aria-components
+//TODO: find a way to make button properly work using react-aria button
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
     return (

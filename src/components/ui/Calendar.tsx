@@ -18,10 +18,11 @@ interface CalendarProps<T extends DateValue> extends AriaCalendarProps<T> {
   errorMessage?: string;
 }
 
-function Calendar<T extends DateValue>({
+export default function Calendar<T extends DateValue>({
   errorMessage,
   ...props
 }: CalendarProps<T>) {
+  //TODO: replace symbols with Icons matching aesthetic
   return (
     <AriaCalendar {...props}>
       <header>

@@ -17,6 +17,7 @@ export default function Guesses() {
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
 
+  //TODO: make pokeball icon focusable so I don't have to wrap it in a button
   return (
     <div className="my-4 flex flex-row justify-end gap-0.5 ">
       {[...Array(defaultGuesses)].map((value, index) => (
