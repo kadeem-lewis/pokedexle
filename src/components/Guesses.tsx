@@ -1,8 +1,8 @@
 "use client";
-import { Fragment } from "react";
 import { Icons } from "./Icons";
 import { useAtomValue } from "jotai";
-import { Tooltip } from "react-tooltip";
+import { Button, TooltipTrigger } from "react-aria-components";
+import Tooltip from "./ui/Tooltip";
 import {
   Pokemon,
   currentGameMode,
@@ -20,19 +20,22 @@ export default function Guesses() {
   return (
     <div className="my-4 flex flex-row justify-end gap-0.5 ">
       {[...Array(defaultGuesses)].map((value, index) => (
-        <Fragment key={index}>
-          <Icons.pokeball
-            data-tooltip-id={`guess-data-${index}`}
-            className={`h-6 w-6 ${index + 1 > guesses ? "grayscale" : ""}`}
-          />
+        <TooltipTrigger key={index} delay={0}>
+          <Button>
+            <Icons.pokeball
+              className={`h-6 w-6 ${index + 1 > guesses ? "grayscale" : ""}`}
+            />
+          </Button>
           {(mode === "whosthatpokemon" ||
             mode === "whosthatpokemonUnlimited") &&
-            guessedItems[(defaultGuesses-1)-index] && (
-              <Tooltip id={`guess-data-${index}`} className="bg-primary" opacity={1}>
-                <PokemonCard pokemon={guessedItems[(defaultGuesses-1)-index]} />
+            guessedItems[defaultGuesses - 1 - index] && (
+              <Tooltip className="bg-primary">
+                <PokemonCard
+                  pokemon={guessedItems[defaultGuesses - 1 - index]}
+                />
               </Tooltip>
             )}
-        </Fragment>
+        </TooltipTrigger>
       ))}
     </div>
   );
