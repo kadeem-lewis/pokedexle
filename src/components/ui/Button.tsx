@@ -1,5 +1,7 @@
 import { ComponentProps, forwardRef } from "react";
+import type { ButtonProps as AriaButtonProps } from "react-aria-components";
 import { cva, cx, type VariantProps } from "class-variance-authority";
+import { Button as AriaButton } from "react-aria-components";
 
 const buttonVariants = cva(
   "focus-visible:ring-ring inline-flex items-center justify-center  uppercase transition-colors focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
@@ -21,13 +23,14 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends ComponentProps<"button">,
+  extends AriaButtonProps,
     VariantProps<typeof buttonVariants> {}
 
+//TODO: make sure that I am properly using the forwardRef hook with react-aria-components
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
     return (
-      <button
+      <Button
         ref={ref}
         className={cx(buttonVariants({ variant, className, size }))}
         {...props}
