@@ -1,6 +1,6 @@
 "use client";
 import { Pokemon } from "@/atoms/GameAtoms";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import {
   currentGameMode,
@@ -11,8 +11,13 @@ import {
 } from "@/atoms/GameAtoms";
 import { useAtomValue, useAtom } from "jotai";
 import GameOverContent from "../content/GameOverContent";
-import OptionsModal from "../ui/OptionsModal";
 import StatsRange from "./StatsRange";
+import { TypeBadge } from "../ui/TypeBadge";
+import { PokemonType } from "../PokemonTypes";
+import {
+  decimeterToImperial,
+  hectogramToImperial,
+} from "@/helpers/Conversions";
 
 type ImagePanelProps = {
   correctAnswer: Pokemon;
@@ -42,9 +47,8 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode] as Pokemon;
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
-
-  const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
+
   useEffect(() => {
     if (
       guesses <= 0 ||
@@ -55,13 +59,6 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
       setGameOver((prev) => ({ ...prev, [mode]: false }));
     }
   }, [guessedItems, guesses, mode, pokemonToGuess?.name, setGameOver]);
-  useEffect(() => {
-    if (gameOver[mode] === true) {
-      setGameOverClick(true);
-    } else {
-      setGameOverClick(false);
-    }
-  }, [gameOver, mode]);
 
   return (
     <>
@@ -78,16 +75,47 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
           alt={`${correctAnswer.name} sprite`}
         />
       </div>
-      <StatsRange />
 
-      {gameOver && (
-        <OptionsModal
-          isOpen={gameOverClick}
-          setIsOpen={setGameOverClick}
-          title="Game Over"
-        >
+      {!gameOver[mode] ? (
+        <StatsRange />
+      ) : (
+        <div className="space-y-2 text-center">
+          <p className="text-4xl font-bold capitalize">{correctAnswer.name}</p>
+          <span className="flex items-center justify-center gap-4">
+            {correctAnswer.types
+              .filter((type) => type !== "none")
+              .map((type) => (
+                <TypeBadge
+                  type={type as PokemonType}
+                  key={type}
+                  className="px-2  text-base text-white md:text-lg"
+                >
+                  {type}
+                </TypeBadge>
+              ))}
+          </span>
+          <div className="my-4 flex justify-between text-2xl">
+            <div className="space-x-2">
+              <span>Gen:</span>
+              <span>{correctAnswer.generation}</span>
+            </div>
+            <div className="space-x-2">
+              <span>HT:</span>
+              <span>{decimeterToImperial(correctAnswer.height)}</span>
+            </div>
+            <div className="space-x-2">
+              <span>WT:</span>
+              <span>{hectogramToImperial(correctAnswer.weight)}</span>
+            </div>
+          </div>
+          {guesses > 0 &&
+          guessedItems.some((item) => item.name === correctAnswer?.name) ? (
+            <p>You won!!</p>
+          ) : (
+            <p>You Lost. Better luck Next Time!</p>
+          )}
           <GameOverContent />
-        </OptionsModal>
+        </div>
       )}
     </>
   );

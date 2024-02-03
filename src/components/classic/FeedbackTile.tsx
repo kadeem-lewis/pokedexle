@@ -6,7 +6,8 @@ import {
   decimeterToImperial,
   hectogramToImperial,
 } from "@/helpers/Conversions";
-import {Tooltip} from "react-tooltip";
+import { Button, TooltipTrigger } from "react-aria-components";
+import Tooltip from "../ui/Tooltip";
 
 type FeedbackTileProps = {
   guessedItem: Pokemon;
@@ -38,18 +39,22 @@ export default function FeedbackTile({
     <div className="flex gap-x-1">
       {guessedItem.name === correctItem.name ? (
         <>
-          <Tile status="correct" data-tooltip-id={guessedItem.name} data-tooltip-content={guessedItem.name}>
-            <TileContent>
-              <Image
-                src={guessedItem.sprite}
-                alt={`${guessedItem.name} sprite`}
-                priority={true}
-                width={100}
-                height={100}
-              />
-            </TileContent>
-          </Tile>
-          <Tooltip id={guessedItem.name} opacity={1}/>
+          <TooltipTrigger>
+            <Button>
+              <Tile status="correct">
+                <TileContent>
+                  <Image
+                    src={guessedItem.sprite}
+                    alt={`${guessedItem.name} sprite`}
+                    priority={true}
+                    width={100}
+                    height={100}
+                  />
+                </TileContent>
+              </Tile>
+            </Button>
+            <Tooltip>{guessedItem.name}</Tooltip>
+          </TooltipTrigger>
           <Tile status="correct">
             <TileContent>Gen {correctItem.generation}</TileContent>
           </Tile>
@@ -67,18 +72,22 @@ export default function FeedbackTile({
         </>
       ) : (
         <>
-          <Tile data-tooltip-id={guessedItem.name} data-tooltip-content={guessedItem.name}>
-            <TileContent>
-              <Image
-                src={guessedItem.sprite}
-                alt={`${guessedItem.name} sprite`}
-                priority={true}
-                width={100}
-                height={100}
-              />
-            </TileContent>
-          </Tile>
-          <Tooltip id={guessedItem.name} opacity={1}/>
+          <TooltipTrigger delay={0}>
+            <Button>
+              <Tile>
+                <TileContent>
+                  <Image
+                    src={guessedItem.sprite}
+                    alt={`${guessedItem.name} sprite`}
+                    priority={true}
+                    width={100}
+                    height={100}
+                  />
+                </TileContent>
+              </Tile>
+            </Button>
+            <Tooltip>{guessedItem.name}</Tooltip>
+          </TooltipTrigger>
 
           {guessedItem.generation === correctItem.generation ? (
             <Tile status="correct">

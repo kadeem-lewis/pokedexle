@@ -5,7 +5,6 @@ import {
   dailyAtom,
   dailyPokemonAtom,
   gameOverAtom,
-  newGameAtom,
   pokedexAtom,
 } from "@/atoms/GameAtoms";
 import { Daily } from "@prisma/client";
@@ -16,9 +15,6 @@ import React, { useEffect } from "react";
 import ClassicGamebox from "./classic/Gamebox";
 import WhosThatPokemonGamebox from "./whosthatpokemon/Gamebox";
 import MyComboBox from "./ui/MyComboBox";
-import Countdown from "./Countdown";
-import { startOfTomorrow } from "date-fns";
-import { Button } from "./ui/Button";
 import PokemonTypes from "./PokemonTypes";
 
 type GameWrapperProps = {
@@ -30,13 +26,11 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
   const [mode, setMode] = useAtom(currentGameMode);
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const gameOver = useAtomValue(gameOverAtom);
-  const { classicId, whosThatPokemonId } = useAtomValue<Promise<Daily>>(dailyAtom);
+  const { classicId, whosThatPokemonId } =
+    useAtomValue<Promise<Daily>>(dailyAtom);
 
   const currentPath = usePathname();
   const searchParams = useSearchParams();
-
-  const targetDate = startOfTomorrow();
-  const setNewGame = useSetAtom(newGameAtom);
 
   useEffect(() => {
     if (currentPath === "/classic") {
@@ -58,7 +52,8 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
         (pokemon) => pokemon.id === whosThatPokemonId,
       );
       if (!dailyWhosThatPokemon) throw new Error("Daily WTP Pokemon Not Found");
-      if (!dailyClassicPokemon) throw new Error("Daily Classic Pokemon Not Found");
+      if (!dailyClassicPokemon)
+        throw new Error("Daily Classic Pokemon Not Found");
 
       setDailyPokemon((prev) => ({
         ...prev,
@@ -73,24 +68,11 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
     <>
       {currentPath === "/classic" && <ClassicGamebox />}
       {currentPath === "/whosthatpokemon" && <WhosThatPokemonGamebox />}
-      <PokemonTypes />
-      {!gameOver[mode] ? (
-        <MyComboBox />
-      ) : mode === "classicUnlimited" || mode === "whosthatpokemonUnlimited" ? (
-        <div className="my-2 flex justify-center">
-          <Button
-            variant="flat"
-            className="bg-blue-400 hover:bg-blue-500"
-            onClick={() => setNewGame()}
-          >
-            New Game
-          </Button>
-        </div>
-      ) : (
-        <div className="my-2 flex items-center justify-center gap-2">
-          <p className="text-3xl">New Game in:</p>
-          <Countdown targetDate={targetDate} />
-        </div>
+      {!gameOver[mode] && (
+        <>
+          <PokemonTypes />
+          <MyComboBox />
+        </>
       )}
     </>
   );
