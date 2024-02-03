@@ -5,10 +5,11 @@ import { readJson } from "@/helpers/FileSystem";
 import { Pokemon } from "@/atoms/GameAtoms";
 import { Daily } from "@prisma/client";
 
+//TODO: vercel isn't able to read the pokedex.json file
 export async function GET() {
   let allPokemon: Pokemon[];
   try {
-    allPokemon = (await readJson("/data/pokedex.json")) as Pokemon[];
+    allPokemon = await readJson("/data/pokedex.json");
   } catch (error) {
     return NextResponse.json(
       { error: `Error reading JSON file: ${error}` },

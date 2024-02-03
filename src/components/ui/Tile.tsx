@@ -26,6 +26,7 @@ interface TileProps
 
 interface TitleContentProps extends ComponentProps<"div"> {}
 
+//TODO: Tailwind variant will probably allow me to have this as one component
 function Tile({ className, status, difference, ...props }: TileProps) {
   return (
     <div
