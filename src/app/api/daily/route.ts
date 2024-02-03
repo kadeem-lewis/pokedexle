@@ -1,25 +1,29 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { differenceInCalendarDays, startOfTomorrow } from "date-fns";
 import { readJson } from "@/helpers/FileSystem";
 import { Pokemon } from "@/atoms/GameAtoms";
 import { Daily } from "@prisma/client";
 
-export async function GET(_req: NextRequest) {
+export async function GET() {
   let allPokemon: Pokemon[];
   try {
     allPokemon = (await readJson("/data/pokedex.json")) as Pokemon[];
   } catch (error) {
-    console.error("Error reading JSON file:", error);
-    return new NextResponse("Error");
+    return NextResponse.json(
+      { error: `Error reading JSON file: ${error}` },
+      { status: 500 },
+    );
   }
 
   let usedIds: Daily[];
   try {
     usedIds = await prisma.daily.findMany();
   } catch (error) {
-    console.error("Error fetching data from database:", error);
-    return new NextResponse("Error");
+    return NextResponse.json(
+      { error: `Error fetching data from database: ${error}` },
+      { status: 500 },
+    );
   }
 
   const unusedClassicPokemon = allPokemon.filter(
@@ -50,8 +54,10 @@ export async function GET(_req: NextRequest) {
       where: { day: 1 },
     });
   } catch (error) {
-    console.error("Error fetching first daily from database:", error);
-    return new NextResponse("Error");
+    return NextResponse.json(
+      { error: `Error fetching first daily: ${error}` },
+      { status: 500 },
+    );
   }
 
   try {
@@ -66,9 +72,11 @@ export async function GET(_req: NextRequest) {
       },
     });
     console.log("New daily entry added:", newDaily);
-    return new NextResponse("OK");
+    return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error("Error adding new daily entry:", error);
-    return new NextResponse("Error");
+    return NextResponse.json(
+      { error: `Error adding new daily entry: ${error}` },
+      { status: 500 },
+    );
   }
 }
