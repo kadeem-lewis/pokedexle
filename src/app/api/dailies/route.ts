@@ -17,6 +17,6 @@ export async function GET(request: Request) {
     });
     return Response.json(dailies);
   } catch (error) {
-    return new Response("Error", { status: 500 });
+    return Response.json({ error: "Error" }, { status: 500 });
   }
 }

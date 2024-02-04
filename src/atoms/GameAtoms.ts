@@ -31,7 +31,11 @@ type DailyAnswers = {
   whosthatpokemon: Pokemon | null;
 };
 
-export type GameMode = "classic" | "classicUnlimited" | "whosthatpokemon" | "whosthatpokemonUnlimited";
+export type GameMode =
+  | "classic"
+  | "classicUnlimited"
+  | "whosthatpokemon"
+  | "whosthatpokemonUnlimited";
 
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
@@ -152,7 +156,6 @@ export const newGameAtom = atom(null, (get, set) => {
   const mode = get(currentGameMode);
 
   if (mode === "classicUnlimited") {
-
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
       get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)];
