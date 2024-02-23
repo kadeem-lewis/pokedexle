@@ -53,9 +53,6 @@ dependencies:
   sharp:
     specifier: ^0.32.6
     version: 0.32.6
-  tailwind-variants:
-    specifier: ^0.1.20
-    version: 0.1.20(tailwindcss@3.4.1)
   tailwindcss-react-aria-components:
     specifier: ^1.0.0
     version: 1.0.0(tailwindcss@3.4.1)
@@ -5043,20 +5040,6 @@ packages:
   /tailwind-clip-path@1.0.0:
     resolution: {integrity: sha512-pac3BiCZCEKtX+3In4508PFcX2eZL7JwliZMtfYE0RoqFMjfbCVLmu+uuEFqn1y/f2vrOB5rY4XNcmaOSG1csw==}
     dev: true
-
-  /tailwind-merge@1.14.0:
-    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
-    dev: false
-
-  /tailwind-variants@0.1.20(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-AMh7x313t/V+eTySKB0Dal08RHY7ggYK0MSn/ad8wKWOrDUIzyiWNayRUm2PIJ4VRkvRnfNuyRuKbLV3EN+ewQ==}
-    engines: {node: '>=16.x', pnpm: '>=7.x'}
-    peerDependencies:
-      tailwindcss: '*'
-    dependencies:
-      tailwind-merge: 1.14.0
-      tailwindcss: 3.4.1(ts-node@10.9.2)
-    dev: false
 
   /tailwindcss-react-aria-components@1.0.0(tailwindcss@3.4.1):
     resolution: {integrity: sha512-iQNS6/037UPYTxj4G4IMFL7R3FT5I583/c/nQFdvYwU0gpuTZXCSeaWjCp9q0V9DqZypdo+j8KLRVaxD5z7psA==}
