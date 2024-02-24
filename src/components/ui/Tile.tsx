@@ -24,27 +24,25 @@ interface TileProps
   extends ComponentProps<"div">,
     VariantProps<typeof tileVariants> {}
 
-interface TitleContentProps extends ComponentProps<"div"> {}
-
 //TODO: Tailwind variant will probably allow me to have this as one component
-function Tile({ className, status, difference, ...props }: TileProps) {
+function Tile({
+  className,
+  status,
+  difference,
+  children,
+  ...props
+}: TileProps) {
   return (
     <div
       className={cx(tileVariants({ status, difference, className }))}
       {...props}
-    />
+      tabIndex={0}
+    >
+      <div className="flex h-full items-center justify-center text-center">
+        {children}
+      </div>
+    </div>
   );
 }
 
-function TileContent({ className, ...props }: TitleContentProps) {
-  return (
-    <div
-      className={cx(
-        "flex h-full items-center justify-center text-center",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-export { Tile, TileContent, tileVariants };
+export { Tile, tileVariants };
