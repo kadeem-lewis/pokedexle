@@ -1,7 +1,5 @@
 "use client";
-import React, { useState } from "react";
 import { Icons } from "../Icons";
-import OptionsModal from "../ui/OptionsModal";
 import SettingsContent from "../content/SettingsContent";
 import AboutContent from "../content/AboutContent";
 import StatsContent from "../content/StatsContent";
@@ -12,9 +10,6 @@ import { Modal } from "../ui/Modal";
 import { Dialog } from "../ui/Dialog";
 
 export default function OptionsBar() {
-  const [aboutClick, setAboutClick] = useState(false);
-  const [statsClick, setStatsClick] = useState(false);
-  const [calendarClick, setCalendarClick] = useState(false);
   return (
     <nav className=" grid grid-cols-5 border-2 border-foreground">
       <DialogTrigger>
