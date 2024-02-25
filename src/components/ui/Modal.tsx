@@ -1,30 +1,19 @@
-import React from "react";
 import {
   ModalOverlay,
-  ModalOverlayProps,
   Modal as AriaModal,
-  Dialog,
-  Heading,
-  Button,
+  ModalOverlayProps,
 } from "react-aria-components";
-import { Icons } from "../Icons";
 
 export function Modal(props: ModalOverlayProps) {
   return (
-    <ModalOverlay {...props} isDismissable>
-      <AriaModal>
-        <Dialog>
-          <div>
-            <Icons.pokeballOutline className="h-8 w-8" />
-            <Heading slot="title">Modal Title</Heading>
-            <Icons.pokeballOutline className="h-8 w-8" />
-          </div>
-          <Button>
-            <Icons.xMark className="absolute right-6 top-6 h-6 w-6 stroke-2" />
-          </Button>
-          <p>Modal content goes here.</p>
-        </Dialog>
-      </AriaModal>
+    <ModalOverlay
+      {...props}
+      className="fixed left-0 top-0 isolate z-20 flex h-[--visual-viewport-height] w-full items-center justify-center bg-black/[15%] p-4 text-center backdrop-blur-lg"
+    >
+      <AriaModal
+        {...props}
+        className="max-h-full w-full max-w-md rounded-2xl border border-black/10 bg-white bg-clip-padding text-left align-middle text-slate-700 shadow-2xl dark:border-white/10 dark:bg-zinc-800/70 dark:text-zinc-300 dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas]"
+      ></AriaModal>
     </ModalOverlay>
   );
 }
