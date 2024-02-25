@@ -1,54 +1,45 @@
 import type {
-  ComboBoxProps,
+  ComboBoxProps as AriaComboBoxProps,
   ListBoxItemProps,
-  ValidationResult,
 } from "react-aria-components";
 import {
   Button,
   ComboBox as AriaComboBox,
-  FieldError,
-  Header,
   Input,
-  Label,
   ListBox,
   ListBoxItem,
   Popover,
-  Section,
-  Text,
 } from "react-aria-components";
 
-interface MyComboBoxProps<T extends object>
-  extends Omit<ComboBoxProps<T>, "children"> {
-  label?: string;
-  description?: string | null;
-  errorMessage?: string | ((validation: ValidationResult) => string);
+interface ComboBoxProps<T extends object>
+  extends Omit<AriaComboBoxProps<T>, "children"> {
   children: React.ReactNode | ((item: T) => React.ReactNode);
 }
 
-function ComboBox<T extends object>({
-  label,
-  description,
-  errorMessage,
+export function ComboBox<T extends object>({
   children,
+  items,
   ...props
-}: MyComboBoxProps<T>) {
+}: ComboBoxProps<T>) {
   return (
     <AriaComboBox {...props}>
-      <Label>{label}</Label>
       <div className="my-combobox-container">
         <Input />
         <Button>▼</Button>
       </div>
-      {description && <Text slot="description">{description}</Text>}
-      <FieldError>{errorMessage}</FieldError>
       <Popover>
-        <ListBox>{children}</ListBox>
+        <ListBox
+          items={items}
+          className="max-h-[inherit] overflow-auto p-1 outline-0 [clip-path:inset(0_0_0_0_round_.75rem)]"
+        >
+          {children}
+        </ListBox>
       </Popover>
     </AriaComboBox>
   );
 }
 
-function MyItem(props: ListBoxItemProps) {
+export function ComboBoxItem(props: ListBoxItemProps) {
   return (
     <ListBoxItem
       {...props}
