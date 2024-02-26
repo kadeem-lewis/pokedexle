@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef } from "react";
+import { FC } from "react";
 import type { ButtonProps as AriaButtonProps } from "react-aria-components";
 import { cva, cx, type VariantProps } from "class-variance-authority";
 import { Button as AriaButton } from "react-aria-components";
@@ -23,22 +23,16 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends ComponentProps<"button">,
+  extends AriaButtonProps,
     VariantProps<typeof buttonVariants> {}
 
-//TODO: find a way to make button properly work using react-aria button
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
-    return (
-      <button
-        ref={ref}
-        className={cx(buttonVariants({ variant, className, size }))}
-        {...props}
-      />
-    );
-  },
-);
-
-Button.displayName = "Button";
+const Button: FC<ButtonProps> = ({ className, variant, size, ...props }) => {
+  return (
+    <AriaButton
+      className={cx(buttonVariants({ variant, className, size }))}
+      {...props}
+    />
+  );
+};
 
 export { Button, buttonVariants };

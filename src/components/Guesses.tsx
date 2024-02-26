@@ -4,7 +4,6 @@ import { useAtomValue } from "jotai";
 import { Button, TooltipTrigger } from "react-aria-components";
 import Tooltip from "./ui/Tooltip";
 import {
-  Pokemon,
   currentGameMode,
   guessAtom,
   guessedItemsAtom,
@@ -15,7 +14,7 @@ import PokemonCard from "./ui/PokemonCard";
 export default function Guesses() {
   const mode = useAtomValue(currentGameMode);
   const guesses = useAtomValue(guessAtom)[mode];
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
 
   //TODO: make pokeball icon focusable so I don't have to wrap it in a button
   return (

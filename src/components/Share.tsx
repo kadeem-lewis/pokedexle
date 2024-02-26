@@ -105,7 +105,7 @@ ${window.location.href}
   }
 
   return (
-    <Button onClick={handleShareClick} variant="flat" className="flex gap-2">
+    <Button onPress={handleShareClick} variant="flat" className="flex gap-2">
       {!isCopied ? (
         <>
           <Icons.share className="h-5 w-5" />

@@ -1,7 +1,7 @@
 "use client";
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
-import { Tile, TileContent } from "../ui/Tile";
+import { Tile } from "../ui/Tile";
 import {
   decimeterToImperial,
   hectogramToImperial,
@@ -24,13 +24,13 @@ export default function FeedbackTile({
     if (correctItem.types.includes(type)) {
       return (
         <Tile status="correct" key={type}>
-          <TileContent>{type}</TileContent>
+          {type}
         </Tile>
       );
     }
     return (
       <Tile status="incorrect" key={type}>
-        <TileContent>{type}</TileContent>
+        {type}
       </Tile>
     );
   }
@@ -42,57 +42,47 @@ export default function FeedbackTile({
           <TooltipTrigger>
             <Button>
               <Tile status="correct">
-                <TileContent>
-                  <Image
-                    src={guessedItem.sprite}
-                    alt={`${guessedItem.name} sprite`}
-                    priority={true}
-                    width={100}
-                    height={100}
-                  />
-                </TileContent>
+                <Image
+                  src={guessedItem.sprite}
+                  alt={`${guessedItem.name} sprite`}
+                  priority={true}
+                  width={100}
+                  height={100}
+                />
               </Tile>
             </Button>
             <Tooltip>{guessedItem.name}</Tooltip>
           </TooltipTrigger>
-          <Tile status="correct">
-            <TileContent>Gen {correctItem.generation}</TileContent>
-          </Tile>
+          <Tile status="correct">Gen {correctItem.generation}</Tile>
           {correctItem.types.map((type) => (
             <Tile key={type} status="correct">
-              <TileContent>{type}</TileContent>
+              {type}
             </Tile>
           ))}
           <Tile status="correct">
-            <TileContent>{decimeterToImperial(guessedItem.height)}</TileContent>
+            {decimeterToImperial(guessedItem.height)}
           </Tile>
           <Tile status="correct">
-            <TileContent>{hectogramToImperial(correctItem.weight)}</TileContent>
+            {hectogramToImperial(correctItem.weight)}
           </Tile>
         </>
       ) : (
         <>
           <TooltipTrigger delay={0}>
-            <Button>
-              <Tile>
-                <TileContent>
-                  <Image
-                    src={guessedItem.sprite}
-                    alt={`${guessedItem.name} sprite`}
-                    priority={true}
-                    width={100}
-                    height={100}
-                  />
-                </TileContent>
-              </Tile>
-            </Button>
+            <Tile>
+              <Image
+                src={guessedItem.sprite}
+                alt={`${guessedItem.name} sprite`}
+                priority={true}
+                width={100}
+                height={100}
+              />
+            </Tile>
             <Tooltip>{guessedItem.name}</Tooltip>
           </TooltipTrigger>
 
           {guessedItem.generation === correctItem.generation ? (
-            <Tile status="correct">
-              <TileContent>Gen {correctItem.generation}</TileContent>
-            </Tile>
+            <Tile status="correct">Gen {correctItem.generation}</Tile>
           ) : (
             <Tile
               status="incorrect"
@@ -102,15 +92,13 @@ export default function FeedbackTile({
                   : "higher"
               }
             >
-              <TileContent>Gen {guessedItem.generation}</TileContent>
+              Gen {guessedItem.generation}
             </Tile>
           )}
           {guessedItem.types.map((type) => checkTypes(type))}
           {guessedItem.height === correctItem.height ? (
             <Tile status="correct">
-              <TileContent>
-                {decimeterToImperial(correctItem.height)}
-              </TileContent>
+              {decimeterToImperial(correctItem.height)}
             </Tile>
           ) : (
             <Tile
@@ -119,16 +107,12 @@ export default function FeedbackTile({
                 guessedItem.height > correctItem.height ? "lower" : "higher"
               }
             >
-              <TileContent>
-                {decimeterToImperial(guessedItem.height)}
-              </TileContent>
+              {decimeterToImperial(guessedItem.height)}
             </Tile>
           )}
           {guessedItem.weight === correctItem.weight ? (
             <Tile status="correct">
-              <TileContent>
-                {hectogramToImperial(correctItem.weight)}
-              </TileContent>
+              {hectogramToImperial(correctItem.weight)}
             </Tile>
           ) : (
             <Tile
@@ -137,9 +121,7 @@ export default function FeedbackTile({
                 guessedItem.weight > correctItem.weight ? "lower" : "higher"
               }
             >
-              <TileContent>
-                {hectogramToImperial(guessedItem.weight)}
-              </TileContent>
+              {hectogramToImperial(guessedItem.weight)}
             </Tile>
           )}
         </>

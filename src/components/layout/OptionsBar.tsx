@@ -1,104 +1,79 @@
 "use client";
-import React, { useState } from "react";
 import { Icons } from "../Icons";
-import OptionsModal from "../ui/OptionsModal";
 import SettingsContent from "../content/SettingsContent";
 import AboutContent from "../content/AboutContent";
 import StatsContent from "../content/StatsContent";
 import HowToPlayContent from "../content/HowToPlayContent";
 import Calendar from "../content/Calendar";
+import { Button, DialogTrigger } from "react-aria-components";
+import { Modal } from "../ui/Modal";
+import { Dialog } from "../ui/Dialog";
 
 export default function OptionsBar() {
-  const [settingClick, setSettingClick] = useState(false);
-  const [aboutClick, setAboutClick] = useState(false);
-  const [statsClick, setStatsClick] = useState(false);
-  const [howToPlayClick, setHowToPlayClick] = useState(false);
-  const [calendarClick, setCalendarClick] = useState(false);
   return (
     <nav className=" grid grid-cols-5 border-2 border-foreground">
-      <button
-        onClick={() => setHowToPlayClick(true)}
-        className="border-r-2 border-foreground py-1"
-        title="How To Play"
-        aria-label="open how to play modal"
-      >
-        <Icons.questionMark className="mx-auto h-6 w-6" />
-      </button>
-      {howToPlayClick && (
-        <OptionsModal
-          isOpen={howToPlayClick}
-          setIsOpen={setHowToPlayClick}
-          title="How To Play"
+      <DialogTrigger>
+        <Button
+          className="border-r-2 border-foreground py-1"
+          aria-label="open how to play modal"
         >
-          <HowToPlayContent />
-        </OptionsModal>
-      )}
-
-      <button
-        onClick={() => setSettingClick(true)}
-        className="border-r-2 border-foreground py-1"
-        title="Settings"
-        aria-label="open settings modal"
-      >
-        <Icons.settings className="mx-auto h-6 w-6 transition-transform hover:-rotate-45" />
-      </button>
-      {settingClick && (
-        <OptionsModal
-          isOpen={settingClick}
-          setIsOpen={setSettingClick}
-          title="Settings"
+          <Icons.questionMark className="mx-auto h-6 w-6" />
+        </Button>
+        <Modal isDismissable>
+          <Dialog title="How To Play">
+            <HowToPlayContent />
+          </Dialog>
+        </Modal>
+      </DialogTrigger>
+      <DialogTrigger>
+        <Button
+          className="border-r-2 border-foreground py-1"
+          aria-label="open settings modal"
         >
-          <SettingsContent />
-        </OptionsModal>
-      )}
-
-      <button
-        onClick={() => setCalendarClick(true)}
-        className="border-r-2 border-foreground py-1"
-        title="Calendar"
-        aria-label="open calendar modal"
-      >
-        <Icons.calendar className="mx-auto h-6 w-6" />
-      </button>
-      {calendarClick && (
-        <OptionsModal
-          isOpen={calendarClick}
-          setIsOpen={setCalendarClick}
-          title="Calendar"
+          <Icons.settings className="mx-auto h-6 w-6 transition-transform hover:-rotate-45" />
+        </Button>
+        <Modal isDismissable>
+          <Dialog title="Settings">
+            <SettingsContent />
+          </Dialog>
+        </Modal>
+      </DialogTrigger>
+      <DialogTrigger>
+        <Button
+          className="border-r-2 border-foreground py-1"
+          aria-label="open calendar modal"
         >
-          <Calendar />
-        </OptionsModal>
-      )}
-
-      <button
-        onClick={() => setStatsClick(true)}
-        className="border-r-2 border-foreground py-1"
-        title="Stats"
-        aria-label="open stats modal"
-      >
-        <Icons.chart className="mx-auto h-6 w-6" />
-      </button>
-      {statsClick && (
-        <OptionsModal
-          isOpen={statsClick}
-          setIsOpen={setStatsClick}
-          title="Stats"
+          <Icons.calendar className="mx-auto h-6 w-6" />
+        </Button>
+        <Modal isDismissable>
+          <Dialog title="Calendar">
+            <Calendar />
+          </Dialog>
+        </Modal>
+      </DialogTrigger>
+      <DialogTrigger>
+        <Button
+          className="border-r-2 border-foreground py-1"
+          aria-label="open stats modal"
         >
-          <StatsContent />
-        </OptionsModal>
-      )}
-      <button onClick={() => setAboutClick(true)} className="py-1" title="About" aria-label="open about modal">
-        <Icons.exclamationMark className="mx-auto h-6 w-6" />
-      </button>
-      {aboutClick && (
-        <OptionsModal
-          isOpen={aboutClick}
-          setIsOpen={setAboutClick}
-          title="About"
-        >
-          <AboutContent />
-        </OptionsModal>
-      )}
+          <Icons.chart className="mx-auto h-6 w-6" />
+        </Button>
+        <Modal isDismissable>
+          <Dialog title="Stats">
+            <StatsContent />
+          </Dialog>
+        </Modal>
+      </DialogTrigger>
+      <DialogTrigger>
+        <Button className="py-1" aria-label="open about modal">
+          <Icons.exclamationMark className="mx-auto h-6 w-6" />
+        </Button>
+        <Modal isDismissable>
+          <Dialog title="About">
+            <AboutContent />
+          </Dialog>
+        </Modal>
+      </DialogTrigger>
     </nav>
   );
 }

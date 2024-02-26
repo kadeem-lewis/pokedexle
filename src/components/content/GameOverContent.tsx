@@ -1,16 +1,7 @@
 "use client";
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import {
-  pokemonToGuessAtom,
-  newGameAtom,
-  currentGameMode,
-  guessAtom,
-  Pokemon,
-  gameOverAtom,
-  guessedItemsAtom,
-} from "@/atoms/GameAtoms";
-import Image from "next/image";
+import { newGameAtom, currentGameMode, gameOverAtom } from "@/atoms/GameAtoms";
 import Countdown from "../Countdown";
 import { startOfTomorrow } from "date-fns";
 import Share from "../Share";
@@ -20,10 +11,6 @@ export default function GameOverContent() {
   const mode = useAtomValue(currentGameMode);
   const setNewGame = useSetAtom(newGameAtom);
   const setGameOver = useSetAtom(gameOverAtom);
-  const guesses = useAtomValue(guessAtom)[mode];
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
-  const pokemonGuesses = useAtomValue(pokemonToGuessAtom);
-  const correctAnswer = pokemonGuesses[mode] as Pokemon | null;
 
   const handleNewGameClick = () => {
     setGameOver((prev) => ({
@@ -43,7 +30,7 @@ export default function GameOverContent() {
           <Button
             variant="flat"
             className="bg-blue-400 hover:bg-blue-500"
-            onClick={() => handleNewGameClick()}
+            onPress={() => handleNewGameClick()}
           >
             New Game
           </Button>

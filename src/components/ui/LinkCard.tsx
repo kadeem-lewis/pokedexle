@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-type ModalProps = {
+type LinkCardProps = {
   title: string;
   description: string;
   path: string;
@@ -11,10 +11,10 @@ export default function LinkCard({
   description,
   path,
   background,
-}: ModalProps) {
+}: LinkCardProps) {
   return (
     <div
-      className="outline-3 my-6 rounded-lg border-4 border-amber-300 text-white outline outline-black dark:border-amber-500 dark:outline-white hover:scale-105 transition duration-200 ease-in-out transform motion-reduce:transition-none"
+      className="outline-3 my-6 transform rounded-lg border-4 border-amber-300 text-white outline outline-black transition duration-200 ease-in-out hover:scale-105 motion-reduce:transition-none dark:border-amber-500 dark:outline-white"
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="h-full w-full bg-white/10 p-4">

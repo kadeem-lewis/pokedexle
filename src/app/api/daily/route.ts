@@ -1,14 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import {
-  differenceInCalendarDays,
-  startOfTomorrow,
-  startOfYesterday,
-} from "date-fns";
-import { readJson } from "@/helpers/FileSystem";
+import { differenceInCalendarDays, startOfTomorrow } from "date-fns";
 import allPokemon from "@/data/pokedex.json";
-import { promises as fs } from "fs";
-import { Pokemon } from "@/atoms/GameAtoms";
 import { Daily } from "@prisma/client";
 
 //TODO: vercel isn't able to read the pokedex.json file
@@ -60,9 +53,9 @@ export async function GET() {
   try {
     const newDaily = await prisma.daily.create({
       data: {
-        date: startOfYesterday(),
+        date: startOfTomorrow(),
         day: firstDaily
-          ? differenceInCalendarDays(startOfYesterday(), firstDaily.date)
+          ? differenceInCalendarDays(startOfTomorrow(), firstDaily.date)
           : 1,
         classicId: classic.id,
         whosThatPokemonId: whosThatPokemon.id,

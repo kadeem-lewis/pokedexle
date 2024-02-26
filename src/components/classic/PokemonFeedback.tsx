@@ -10,8 +10,9 @@ import {
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
-import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
+import { Modal } from "../ui/Modal";
+import { Dialog } from "../ui/Dialog";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;
@@ -26,7 +27,7 @@ export default function PokemonFeedback({
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
   //TODO: find a better way to result the pokemon[] or error
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
 
@@ -75,13 +76,15 @@ export default function PokemonFeedback({
         {feedbackStatements}
       </div>
       {gameOver && (
-        <OptionsModal
+        <Modal
           isOpen={gameOverClick}
-          setIsOpen={setGameOverClick}
-          title="Game Over"
+          onOpenChange={setGameOverClick}
+          isDismissable
         >
-          <GameOverContent />
-        </OptionsModal>
+          <Dialog title="Game Over">
+            <GameOverContent />
+          </Dialog>
+        </Modal>
       )}
     </>
   );
