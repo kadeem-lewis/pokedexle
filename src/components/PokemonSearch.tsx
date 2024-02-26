@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ComboBox, ComboBoxItem } from "./ui/Combobox";
 import PokemonCard from "./ui/PokemonCard";
 import Fuse from "fuse.js";
@@ -14,13 +14,8 @@ import { useSetAtom, useAtomValue } from "jotai";
 import { Button } from "./ui/Button";
 
 export default function PokemonSearch() {
-  const [fieldState, setFieldState] = useState<{
-    selectedKey: Key | null;
-    inputValue: string;
-  }>({
-    selectedKey: null,
-    inputValue: "",
-  });
+  const [selected, setSelected] = useState<Key | null>(null);
+  const [query, setQuery] = useState("");
   const [error, setError] = useState(false);
   const pokedex = useAtomValue(pokedexAtom);
   const mode = useAtomValue(currentGameMode);
@@ -37,54 +32,49 @@ export default function PokemonSearch() {
   );
 
   const filteredItems =
-    fieldState.inputValue === ""
+    query === ""
       ? pokedex.slice(0, 6)
       : fuse
-          .search(fieldState.inputValue)
+          .search(query)
           .map((res) => ({ ...res.item }))
           .slice(0, 6);
 
   const onInputChange = (value: string) => {
-    setFieldState((prevState) => ({
-      inputValue: value,
-      selectedKey: value === "" ? null : prevState.selectedKey,
-    }));
+    setQuery(value);
+    if (value === "") {
+      setSelected(null);
+    }
   };
 
   const onSelectionChange = (id: Key) => {
-    setFieldState({
-      inputValue: pokedex.find((p) => p.id === id)?.name ?? "",
-      selectedKey: id,
-    });
+    setSelected(id);
+    setQuery(pokedex.find((p) => p.id === id)?.name ?? "");
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (fieldState.selectedKey && fieldState.inputValue) {
-      if (guessedItems.some((item) => item.name === fieldState.inputValue)) {
+    if (selected && query) {
+      if (guessedItems.some((item) => item.name === query)) {
         setError(true);
       } else {
-        const pokemon = pokedex.find((p) => p.name === fieldState.inputValue);
+        const pokemon = pokedex.find((p) => p.name === query);
         if (pokemon) {
           addNewGuess(pokemon);
           setError(false);
         }
       }
-      setFieldState({ selectedKey: null, inputValue: "" });
+      setSelected(null);
+      setQuery("");
     }
   };
-
-  useEffect(() => {
-    console.log(filteredItems);
-  }, [filteredItems]);
 
   return (
     <>
       <form onSubmit={handleSubmit} className="my-4 flex flex-row gap-2">
         <ComboBox
           items={filteredItems}
-          selectedKey={fieldState.selectedKey}
-          inputValue={fieldState.inputValue}
+          selectedKey={selected}
+          inputValue={query}
           onInputChange={onInputChange}
           onSelectionChange={onSelectionChange}
           aria-label="Search pokémon by name or type..."
