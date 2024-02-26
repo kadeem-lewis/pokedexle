@@ -3,7 +3,6 @@ import type {
   ListBoxItemProps,
 } from "react-aria-components";
 import {
-  Button,
   ComboBox as AriaComboBox,
   Input,
   ListBox,
@@ -23,11 +22,10 @@ export function ComboBox<T extends object>({
 }: ComboBoxProps<T>) {
   return (
     <AriaComboBox {...props}>
-      <div className="my-combobox-container">
-        <Input />
-        <Button>▼</Button>
+      <div>
+        <Input className="w-full border-b-2 border-dashed border-foreground bg-transparent py-1 pl-3" />
       </div>
-      <Popover>
+      <Popover className="entering:animate-in entering:fade-in exiting:animate-out exiting:fade-out max-h-60 w-[--trigger-width] overflow-auto rounded-md bg-primary text-base shadow-lg ring-1 ring-black/5">
         <ListBox
           items={items}
           className="max-h-[inherit] overflow-auto p-1 outline-0 [clip-path:inset(0_0_0_0_round_.75rem)]"
