@@ -14,7 +14,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import ClassicGamebox from "./classic/Gamebox";
 import WhosThatPokemonGamebox from "./whosthatpokemon/Gamebox";
-import MyComboBox from "./ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonSearch from "./PokemonSearch";
 
@@ -72,7 +71,6 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
       {!gameOver[mode] && (
         <>
           <PokemonTypes />
-          <MyComboBox />
           <PokemonSearch />
         </>
       )}
