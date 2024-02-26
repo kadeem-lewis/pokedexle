@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ComboBox, ComboBoxItem } from "./ui/Combobox";
 import PokemonCard from "./ui/PokemonCard";
 import Fuse from "fuse.js";
@@ -13,7 +13,7 @@ import { Key } from "react-aria-components";
 import { useSetAtom, useAtomValue } from "jotai";
 import { Button } from "./ui/Button";
 
-export default function DaComboBox() {
+export default function PokemonSearch() {
   const [fieldState, setFieldState] = useState<{
     selectedKey: Key | null;
     inputValue: string;
@@ -74,11 +74,15 @@ export default function DaComboBox() {
     }
   };
 
+  useEffect(() => {
+    console.log(filteredItems);
+  }, [filteredItems]);
+
   return (
     <>
       <form onSubmit={handleSubmit} className="my-4 flex flex-row gap-2">
         <ComboBox
-          defaultItems={filteredItems}
+          items={filteredItems}
           selectedKey={fieldState.selectedKey}
           inputValue={fieldState.inputValue}
           onInputChange={onInputChange}
