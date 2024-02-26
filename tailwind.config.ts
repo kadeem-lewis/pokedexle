@@ -114,9 +114,5 @@ export default {
   },
 
   darkMode: "class",
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@headlessui/tailwindcss"),
-    require("tailwind-clip-path"),
-  ],
+  plugins: [require("tailwindcss-animate"), require("tailwind-clip-path")],
 } satisfies Config;

@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
-    "@headlessui/react": "^1.7.18",
-    "@headlessui/tailwindcss": "^0.2.0",
     "@prisma/client": "^5.10.2",
     "class-variance-authority": "^0.7.0",
     "date-fns": "^2.30.0",
