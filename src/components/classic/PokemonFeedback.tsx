@@ -10,8 +10,9 @@ import {
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
-import OptionsModal from "../ui/OptionsModal";
 import GameOverContent from "../content/GameOverContent";
+import { Modal } from "../ui/Modal";
+import { Dialog } from "../ui/Dialog";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;
@@ -75,13 +76,15 @@ export default function PokemonFeedback({
         {feedbackStatements}
       </div>
       {gameOver && (
-        <OptionsModal
+        <Modal
           isOpen={gameOverClick}
-          setIsOpen={setGameOverClick}
-          title="Game Over"
+          onOpenChange={setGameOverClick}
+          isDismissable
         >
-          <GameOverContent />
-        </OptionsModal>
+          <Dialog title="Game Over">
+            <GameOverContent />
+          </Dialog>
+        </Modal>
       )}
     </>
   );
