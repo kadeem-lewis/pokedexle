@@ -8,9 +8,9 @@ import {
   Calendar as AriaCalendar,
   CalendarCell,
   CalendarGrid,
-  CalendarGridBody,
-  CalendarGridHeader,
-  CalendarHeaderCell,
+  //CalendarGridBody,
+  //CalendarGridHeader,
+  //CalendarHeaderCell,
   Heading,
 } from "react-aria-components";
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pokemon } from "@/atoms/GameAtoms";
 
 export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
