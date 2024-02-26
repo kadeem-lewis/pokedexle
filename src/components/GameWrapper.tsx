@@ -16,8 +16,7 @@ import ClassicGamebox from "./classic/Gamebox";
 import WhosThatPokemonGamebox from "./whosthatpokemon/Gamebox";
 import MyComboBox from "./ui/MyComboBox";
 import PokemonTypes from "./PokemonTypes";
-import { ComboBox, ComboBoxItem } from "./ui/Combobox";
-import PokemonCard from "./ui/PokemonCard";
+import DaComboBox from "./DaComboBox";
 
 type GameWrapperProps = {
   pokedex: Pokemon[];
@@ -74,13 +73,7 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
         <>
           <PokemonTypes />
           <MyComboBox />
-          <ComboBox defaultItems={pokedex}>
-            {(item) => (
-              <ComboBoxItem>
-                <PokemonCard pokemon={item} />
-              </ComboBoxItem>
-            )}
-          </ComboBox>
+          <DaComboBox />
         </>
       )}
     </>
