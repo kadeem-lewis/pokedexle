@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
+import Image from "next/image";
 import { useAtom, useAtomValue } from "jotai";
 import {
   currentGameMode,
@@ -11,8 +12,6 @@ import {
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
 import GameOverContent from "../content/GameOverContent";
-import { Modal } from "../ui/Modal";
-import { Dialog } from "../ui/Dialog";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;
@@ -28,7 +27,6 @@ export default function PokemonFeedback({
   const guesses = useAtomValue(guessAtom)[mode];
   //TODO: find a better way to result the pokemon[] or error
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
-  const [gameOverClick, setGameOverClick] = useState(false);
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
 
   useEffect(() => {
@@ -41,13 +39,6 @@ export default function PokemonFeedback({
       setGameOver((prev) => ({ ...prev, [mode]: false }));
     }
   }, [guessedItems, guesses, mode, pokemonToGuess?.name, setGameOver]);
-  useEffect(() => {
-    if (gameOver[mode] === true) {
-      setGameOverClick(true);
-    } else {
-      setGameOverClick(false);
-    }
-  }, [gameOver, mode]);
 
   const feedbackStatements = useMemo(() => {
     return guessedItems.map((guessedItem) => (
@@ -75,16 +66,24 @@ export default function PokemonFeedback({
         )}
         {feedbackStatements}
       </div>
-      {gameOver && (
-        <Modal
-          isOpen={gameOverClick}
-          onOpenChange={setGameOverClick}
-          isDismissable
-        >
-          <Dialog title="Game Over">
-            <GameOverContent />
-          </Dialog>
-        </Modal>
+      {gameOver[mode] && pokemonToGuess && (
+        <div autoFocus>
+          <GameOverContent>
+            <p>
+              The secret answer was{" "}
+              <span className=" font-bold capitalize">
+                {pokemonToGuess.name}
+              </span>
+            </p>
+            <Image
+              src={pokemonToGuess.sprite}
+              height={400}
+              width={400}
+              priority={true}
+              alt={`${pokemonToGuess.name} sprite`}
+            />
+          </GameOverContent>
+        </div>
       )}
     </>
   );
