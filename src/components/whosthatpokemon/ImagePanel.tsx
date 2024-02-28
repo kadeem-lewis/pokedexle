@@ -108,12 +108,6 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
               <span>{hectogramToImperial(correctAnswer.weight)}</span>
             </div>
           </div>
-          {guesses > 0 &&
-          guessedItems.some((item) => item.name === correctAnswer?.name) ? (
-            <p>You won!!</p>
-          ) : (
-            <p>You Lost. Better luck Next Time!</p>
-          )}
           <GameOverContent />
         </div>
       )}
