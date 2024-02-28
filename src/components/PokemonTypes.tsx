@@ -9,27 +9,7 @@ import {
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
 
-export type PokemonType =
-  | "normal"
-  | "fighting"
-  | "flying"
-  | "poison"
-  | "ground"
-  | "rock"
-  | "bug"
-  | "ghost"
-  | "steel"
-  | "fire"
-  | "water"
-  | "grass"
-  | "electric"
-  | "psychic"
-  | "ice"
-  | "dragon"
-  | "dark"
-  | "fairy";
-
-export const TYPES: PokemonType[] = [
+export const TYPES = [
   "normal",
   "fighting",
   "flying",
@@ -48,7 +28,9 @@ export const TYPES: PokemonType[] = [
   "dragon",
   "dark",
   "fairy",
-];
+] as const;
+
+export type PokemonType = (typeof TYPES)[number];
 
 export default function PokemonTypes() {
   const mode = useAtomValue(currentGameMode);
