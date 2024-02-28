@@ -2,7 +2,6 @@
 import {
   currentGameMode,
   pokemonToGuessAtom,
-  Pokemon,
   guessedItemsAtom,
 } from "@/atoms/GameAtoms";
 import { maxValue, minValue } from "@/constants";
@@ -28,7 +27,7 @@ export default function StatsRange() {
     | "whosthatpokemon"
     | "whosthatpokemonUnlimited";
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
 
   const [generationRange, setGenerationRange] = useState({
     whosthatpokemon: { max: maxValue, min: minValue },
@@ -43,29 +42,37 @@ export default function StatsRange() {
     whosthatpokemonUnlimited: { max: maxValue, min: minValue },
   });
 
-  const updateRange = useCallback((setRange:React.Dispatch<React.SetStateAction<RangeState>>, itemValue:number, pokemonValue:number, range:RangeState) => {
-    if (itemValue < range[mode].max && itemValue > pokemonValue) {
-      setRange((prev) => ({
-        ...prev,
-        [mode]: { ...prev[mode], max: itemValue },
-      }));
-    }
-    if (itemValue > range[mode].min && itemValue < pokemonValue) {
-      setRange((prev) => ({
-        ...prev,
-        [mode]: { ...prev[mode], min: itemValue },
-      }));
-    }
-    if (itemValue === pokemonValue && range[mode].min !== range[mode].max) {
-      setRange((prev) => ({
-        ...prev,
-        [mode]: {
-          min: pokemonValue,
-          max: pokemonValue,
-        },
-      }));
-    }
-  },[mode]);
+  const updateRange = useCallback(
+    (
+      setRange: React.Dispatch<React.SetStateAction<RangeState>>,
+      itemValue: number,
+      pokemonValue: number,
+      range: RangeState,
+    ) => {
+      if (itemValue < range[mode].max && itemValue > pokemonValue) {
+        setRange((prev) => ({
+          ...prev,
+          [mode]: { ...prev[mode], max: itemValue },
+        }));
+      }
+      if (itemValue > range[mode].min && itemValue < pokemonValue) {
+        setRange((prev) => ({
+          ...prev,
+          [mode]: { ...prev[mode], min: itemValue },
+        }));
+      }
+      if (itemValue === pokemonValue && range[mode].min !== range[mode].max) {
+        setRange((prev) => ({
+          ...prev,
+          [mode]: {
+            min: pokemonValue,
+            max: pokemonValue,
+          },
+        }));
+      }
+    },
+    [mode],
+  );
 
   useEffect(() => {
     setGenerationRange({
@@ -82,34 +89,68 @@ export default function StatsRange() {
     });
   }, [pokemonToGuess]);
 
+  useEffect(() => {
+    if (!pokemonToGuess) {
+      return;
+    }
+    guessedItems.forEach((item) => {
+      updateRange(
+        setGenerationRange,
+        item.generation,
+        pokemonToGuess?.generation,
+        generationRange,
+      );
+    });
+  }, [
+    generationRange,
+    guessedItems,
+    mode,
+    pokemonToGuess,
+    pokemonToGuess?.generation,
+    updateRange,
+  ]);
 
   useEffect(() => {
     if (!pokemonToGuess) {
       return;
     }
     guessedItems.forEach((item) => {
-      updateRange(setGenerationRange, item.generation, pokemonToGuess?.generation, generationRange);
+      updateRange(
+        setWeightRange,
+        item.weight,
+        pokemonToGuess.weight,
+        weightRange,
+      );
     });
-  }, [generationRange, guessedItems, mode, pokemonToGuess, pokemonToGuess?.generation, updateRange]);
-  
-  useEffect(() => {
-    if (!pokemonToGuess) {
-      return;
-    }
-    guessedItems.forEach((item) => {
-      updateRange(setWeightRange, item.weight, pokemonToGuess.weight, weightRange);
-    });
-  }, [guessedItems, mode, pokemonToGuess, pokemonToGuess?.weight, updateRange, weightRange]);
-  
-  useEffect(() => {
-    if (!pokemonToGuess) {
-      return;
-    }
-    guessedItems.forEach((item) => {
-      updateRange(setHeightRange, item.height, pokemonToGuess.height, heightRange);
-    });
-  }, [guessedItems, heightRange, mode, pokemonToGuess, pokemonToGuess?.height, updateRange]);
+  }, [
+    guessedItems,
+    mode,
+    pokemonToGuess,
+    pokemonToGuess?.weight,
+    updateRange,
+    weightRange,
+  ]);
 
+  useEffect(() => {
+    if (!pokemonToGuess) {
+      return;
+    }
+    guessedItems.forEach((item) => {
+      updateRange(
+        setHeightRange,
+        item.height,
+        pokemonToGuess.height,
+        heightRange,
+      );
+    });
+  }, [
+    guessedItems,
+    heightRange,
+    mode,
+    pokemonToGuess,
+    pokemonToGuess?.height,
+    updateRange,
+  ]);
 
   function displayHeightRange(heightRange: StatRange) {
     if (!heightRange) {

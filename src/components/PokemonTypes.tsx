@@ -34,7 +34,7 @@ export type PokemonType = (typeof TYPES)[number];
 
 export default function PokemonTypes() {
   const mode = useAtomValue(currentGameMode);
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];
+  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[
     mode
   ] as Pokemon | null;
