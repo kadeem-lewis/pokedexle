@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@prisma/client": "^5.10.2",
+    "@sentry/nextjs": "7.105.0",
     "class-variance-authority": "^0.7.0",
     "date-fns": "^2.30.0",
     "fuse.js": "^6.6.2",
