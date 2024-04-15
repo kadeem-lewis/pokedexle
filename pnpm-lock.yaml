@@ -35,6 +35,9 @@ dependencies:
   next-themes:
     specifier: ^0.2.1
     version: 0.2.1(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+  posthog-js:
+    specifier: ^1.122.0
+    version: 1.122.0
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -3692,6 +3695,10 @@ packages:
     dependencies:
       reusify: 1.0.4
 
+  /fflate@0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
+    dev: false
+
   /file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -4837,6 +4844,17 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /posthog-js@1.122.0:
+    resolution: {integrity: sha512-+8R2/nLaWyI5Jp2Ly7L52qcgDFU3xryyoNG52DPJ8dlGnagphxIc0mLNGurgyKeeTGycsOsuOIP4dtofv3ZoBA==}
+    dependencies:
+      fflate: 0.4.8
+      preact: 10.20.2
+    dev: false
+
+  /preact@10.20.2:
+    resolution: {integrity: sha512-S1d1ernz3KQ+Y2awUxKakpfOg2CEmJmwOP+6igPx6dgr6pgDvenqYviyokWso2rhHvGtTlWWnJDa7RaPbQerTg==}
+    dev: false
 
   /prebuild-install@7.1.1:
     resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}
