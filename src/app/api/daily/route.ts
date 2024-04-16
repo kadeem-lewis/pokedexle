@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { differenceInCalendarDays, startOfTomorrow } from "date-fns";
+import { startOfTomorrow } from "date-fns";
 import allPokemon from "@/data/pokedex.json";
 import { Daily } from "@prisma/client";
 
@@ -38,10 +38,11 @@ export async function GET() {
         ]
       : allPokemon[Math.floor(Math.random() * allPokemon.length)];
 
-  let firstDaily: Daily | null;
+  let lastDaily: Partial<Daily> | null;
   try {
-    firstDaily = await prisma.daily.findUnique({
-      where: { day: 1 },
+    lastDaily = await prisma.daily.findFirst({
+      orderBy: { date: "desc" },
+      select: { date: true, day: true },
     });
   } catch (error) {
     return NextResponse.json(
@@ -54,9 +55,7 @@ export async function GET() {
     const newDaily = await prisma.daily.create({
       data: {
         date: startOfTomorrow(),
-        day: firstDaily
-          ? differenceInCalendarDays(startOfTomorrow(), firstDaily.date)
-          : 1,
+        day: lastDaily?.day ? lastDaily.day + 1 : 1,
         classicId: classic.id,
         whosThatPokemonId: whosThatPokemon.id,
       },

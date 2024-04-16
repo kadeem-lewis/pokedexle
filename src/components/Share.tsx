@@ -29,7 +29,7 @@ export default function Share() {
   const attempts = useAtomValue(guessAtom)[mode];
   const guesses = useAtomValue(guessedItemsAtom)[mode];
   const gameOver = useAtomValue(gameOverAtom);
-  const { day } = useAtomValue(dailyAtom);
+  const { day } = useAtomValue(dailyAtom) ?? { day: null };
   const [isCopied, setIsCopied] = useState(false);
 
   const comparePokemonValue = (
