@@ -23,9 +23,15 @@ export default function ThemeSwitch() {
           className="transform rounded-md border-2 border-foreground p-1 transition duration-200 ease-in-out hover:bg-foreground hover:text-background"
         >
           {resolvedTheme === "light" ? (
-            <Icon name="pixelarticons-moon-star" className="size-6" />
+            <Icon
+              name="pixelarticons-moon-star"
+              className="size-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+            />
           ) : (
-            <Icon name="pixelarticons-sun" className="h-6 w-6" />
+            <Icon
+              name="pixelarticons-sun"
+              className="size-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+            />
           )}
         </button>
       )}
