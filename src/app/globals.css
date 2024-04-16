@@ -2,22 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ Semantic color variables
+
+ - bg-canvas: base background color (1)
+ - bg-muted: Background color for muted elements (2) ( not fully sure where this applies yet )
+ - bg-panel: background color for panels, cards, dropdowns etc (3)
+ - (4) hover state for bg-panel
+ - (5) active state for bg-panel
+ - border: border and separator color for elements (6 or 7)
+ - focus: border color for focused elements (8)
+ - fg-disabled: Text color for disabled elements (10)
+ - fg-muted: Text color for muted elements like placeholder text, description text, etc. (11)
+ - fg: Text color for normal text (12)
+
+ Most of this is currently for the "background" color, accent colors differ slight for some elements
+
+
+
+
+*/
+
 @layer base {
   :root {
-    --background: 259.6 5% 93%;
+    --background: 259.6 5% 93%; /* #212024 */
     --foreground: 0 0% 0%;
     --primary: 259.6 5% 100%;
     --primary-foreground:;
     --secondary:;
     --secondary-foreground:;
+    --success:;
+    --input:;
   }
   .dark {
-    --background: 259.6 5% 13.3%;
+    --background: 252.56, 10%, 13.3%; /* #201F25 */
     --foreground: 0 0% 95%;
     --primary: 259.6 5% 25%;
     --primary-foreground:;
     --secondary:;
     --secondary-foreground:;
+    --success:;
+    --input:;
+    --fg:;
+    --bg-canvas:;
+    --bg-panel:;
+    --bg-muted:;
+    --fg-muted:;
+    --fg-disabled:;
+    --border:;
+    --focus:;
   }
 }
 
