@@ -26,8 +26,11 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
   const [mode, setMode] = useAtom(currentGameMode);
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const gameOver = useAtomValue(gameOverAtom);
-  const { classicId, whosThatPokemonId } =
-    useAtomValue<Promise<Daily>>(dailyAtom);
+  const dailyData = useAtomValue<Promise<Daily | null>>(dailyAtom);
+  const { classicId, whosThatPokemonId } = dailyData ?? {
+    classicId: null,
+    whosThatPokemonId: null,
+  };
 
   const currentPath = usePathname();
   const searchParams = useSearchParams();
@@ -43,18 +46,14 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
     }
   }, [currentPath, searchParams, setMode]);
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     function setDailies() {
-      const dailyClassicPokemon = pokedex.find(
-        (pokemon) => pokemon.id === classicId,
-      );
-      const dailyWhosThatPokemon = pokedex.find(
-        (pokemon) => pokemon.id === whosThatPokemonId,
-      );
-      if (!dailyWhosThatPokemon) throw new Error("Daily WTP Pokemon Not Found");
-      if (!dailyClassicPokemon)
-        throw new Error("Daily Classic Pokemon Not Found");
-
+      const dailyClassicPokemon =
+        pokedex.find((pokemon) => pokemon.id === classicId) ?? null;
+      const dailyWhosThatPokemon =
+        pokedex.find((pokemon) => pokemon.id === whosThatPokemonId) ?? null;
       setDailyPokemon((prev) => ({
         ...prev,
         whosthatpokemon: dailyWhosThatPokemon,
@@ -68,12 +67,13 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
     <>
       {currentPath === "/classic" && <ClassicGamebox />}
       {currentPath === "/whosthatpokemon" && <WhosThatPokemonGamebox />}
-      {!gameOver[mode] && (
+      {!gameOver[mode] &&
+      (searchParams.get("mode") === "unlimited" || dailyData !== null) ? (
         <>
           <PokemonTypes />
           <PokemonSearch />
         </>
-      )}
+      ) : null}
     </>
   );
 }

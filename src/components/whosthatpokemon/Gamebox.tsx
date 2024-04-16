@@ -17,6 +17,8 @@ import {
 } from "@/atoms/GameAtoms";
 import ImagePanel from "./ImagePanel";
 import { defaultGuesses } from "@/constants";
+import { buttonVariants } from "../ui/Button";
+import Link from "next/link";
 
 export default function Gamebox() {
   const mode = useAtomValue(currentGameMode);
@@ -29,7 +31,8 @@ export default function Gamebox() {
     useAtom(whosthatpokemonPracticeSolutionAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const { date } = useAtomValue(dailyAtom);
+  const dailyData = useAtomValue(dailyAtom);
+  const { date } = dailyData ?? { date: null };
   const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
     whosthatpokemonAnswersAtom,
   );
@@ -37,6 +40,7 @@ export default function Gamebox() {
 
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;
+    if (date === null) return;
     const serverTime = format(new Date(date), "yyyy-MM-dd");
     if (serverTime === whosthatpokemonAnswers?.date) {
       setGuessedItems((prev) => ({
@@ -107,8 +111,21 @@ export default function Gamebox() {
 
   return (
     <>
-      {pokemonToGuess.whosthatpokemon && !searchParams.has("mode") && (
+      {pokemonToGuess.whosthatpokemon && !searchParams.has("mode") ? (
         <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemon} />
+      ) : (
+        <div className="flex h-40 flex-col items-center justify-center">
+          <p className="text-center text-3xl font-bold uppercase">
+            Daily Mode is currently unavailable. Check back tomorrow
+          </p>
+          <p>or</p>
+          <Link
+            href="?mode=unlimited"
+            className={buttonVariants({ variant: "flat" })}
+          >
+            Try Unlimited Mode
+          </Link>
+        </div>
       )}
       {pokemonToGuess.whosthatpokemonUnlimited &&
         searchParams.get("mode") === "unlimited" && (
