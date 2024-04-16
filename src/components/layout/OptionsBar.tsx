@@ -1,5 +1,5 @@
 "use client";
-import { Icons } from "../Icons";
+import { Icon } from "../Icon";
 import SettingsContent from "../content/SettingsContent";
 import AboutContent from "../content/AboutContent";
 import StatsContent from "../content/StatsContent";
@@ -17,7 +17,10 @@ export default function OptionsBar() {
           className="border-r-2 border-foreground py-1"
           aria-label="open how to play modal"
         >
-          <Icons.questionMark className="mx-auto h-6 w-6" />
+          <Icon
+            name="heroicons-question-mark-circle-solid"
+            className="mx-auto size-6"
+          />
         </Button>
         <Modal isDismissable>
           <Dialog title="How To Play">
@@ -30,7 +33,10 @@ export default function OptionsBar() {
           className="border-r-2 border-foreground py-1"
           aria-label="open settings modal"
         >
-          <Icons.settings className="mx-auto h-6 w-6 transition-transform hover:-rotate-45" />
+          <Icon
+            name="heroicons-cog-6-tooth-solid"
+            className="mx-auto size-6 transition-transform hover:-rotate-45"
+          />
         </Button>
         <Modal isDismissable>
           <Dialog title="Settings">
@@ -43,7 +49,10 @@ export default function OptionsBar() {
           className="border-r-2 border-foreground py-1"
           aria-label="open calendar modal"
         >
-          <Icons.calendar className="mx-auto h-6 w-6" />
+          <Icon
+            name="pixelarticons-calendar-month"
+            className="mx-auto h-6 w-6"
+          />
         </Button>
         <Modal isDismissable>
           <Dialog title="Calendar">
@@ -56,7 +65,7 @@ export default function OptionsBar() {
           className="border-r-2 border-foreground py-1"
           aria-label="open stats modal"
         >
-          <Icons.chart className="mx-auto h-6 w-6" />
+          <Icon name="heroicons-chart-bar-solid" className="mx-auto h-6 w-6" />
         </Button>
         <Modal isDismissable>
           <Dialog title="Stats">
@@ -66,7 +75,10 @@ export default function OptionsBar() {
       </DialogTrigger>
       <DialogTrigger>
         <Button className="py-1" aria-label="open about modal">
-          <Icons.exclamationMark className="mx-auto h-6 w-6" />
+          <Icon
+            name="heroicons-question-mark-circle-solid"
+            className="mx-auto h-6 w-6"
+          />
         </Button>
         <Modal isDismissable>
           <Dialog title="About">

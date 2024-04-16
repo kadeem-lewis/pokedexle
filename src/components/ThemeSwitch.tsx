@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Icons } from "./Icons";
+import { Icon } from "./Icon";
 export default function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -20,12 +20,12 @@ export default function ThemeSwitch() {
           name="theme-toggle"
           aria-label="Toggle Dark Mode"
           onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
-          className="rounded-md border-2 border-foreground p-1 hover:bg-foreground hover:text-background transition duration-200 ease-in-out transform"
+          className="transform rounded-md border-2 border-foreground p-1 transition duration-200 ease-in-out hover:bg-foreground hover:text-background"
         >
           {resolvedTheme === "light" ? (
-            <Icons.moon className="h-6 w-6" />
+            <Icon name="pixelarticons-moon-star" className="size-6" />
           ) : (
-            <Icons.sun className="h-6 w-6" />
+            <Icon name="pixelarticons-sun" className="h-6 w-6" />
           )}
         </button>
       )}
