@@ -1,6 +1,4 @@
 export type IconName =
-  | "pixelarticons-sun"
-  | "pixelarticons-moon-star"
   | "pixelarticons-check"
   | "pixelarticons-calendar-month"
   | "heroicons-cog-6-tooth-solid"
@@ -12,4 +10,7 @@ export type IconName =
   | "pixelarticons-chevron-up"
   | "heroicons-share-solid"
   | "pixelarticons-close"
-  | "pixelarticons-chevron-left";
+  | "pixelarticons-chevron-left"
+  | "pokemon-sun"
+  | "pokemon-moon"
+  | "pokeball-filled";
