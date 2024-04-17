@@ -11,4 +11,5 @@ export type IconName =
   | "pixelarticons-chevron-right"
   | "pixelarticons-chevron-up"
   | "heroicons-share-solid"
-  | "pixelarticons-close";
+  | "pixelarticons-close"
+  | "pixelarticons-chevron-left";
