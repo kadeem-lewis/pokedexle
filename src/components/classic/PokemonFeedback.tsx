@@ -51,21 +51,23 @@ export default function PokemonFeedback({
   }, [guessedItems, correctAnswer]);
   return (
     <>
-      <div className="flex flex-col justify-center gap-x-1 gap-y-2 overflow-x-auto capitalize">
-        {guessedItems.length !== 0 && (
-          <div className="flex">
-            {HEADINGS.map((heading) => (
-              <div
-                key={heading}
-                className="basis-1/6 text-center font-medium uppercase"
-              >
-                {heading}
-              </div>
-            ))}
-          </div>
-        )}
-        {feedbackStatements}
-      </div>
+      {!gameOver[mode] && (
+        <div className="flex flex-col justify-center gap-x-1 gap-y-2 overflow-x-auto capitalize">
+          {guessedItems.length !== 0 && (
+            <div className="flex">
+              {HEADINGS.map((heading) => (
+                <div
+                  key={heading}
+                  className="basis-1/6 text-center font-medium uppercase"
+                >
+                  {heading}
+                </div>
+              ))}
+            </div>
+          )}
+          {feedbackStatements}
+        </div>
+      )}
       {gameOver[mode] && pokemonToGuess && (
         <div autoFocus>
           <GameOverContent>
