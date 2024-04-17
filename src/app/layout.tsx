@@ -42,8 +42,8 @@ export default function RootLayout({
       <PreloadResources />
       <body>
         <Providers>
+          <Navbar />
           <div className=" mx-auto flex h-screen max-w-md flex-col px-4 font-pokemon-ds">
-            <Navbar />
             <main className="mb-auto grow pt-2 text-2xl">{children}</main>
             <Footer />
           </div>
