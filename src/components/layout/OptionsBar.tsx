@@ -76,7 +76,7 @@ export default function OptionsBar() {
       <DialogTrigger>
         <Button className="py-1" aria-label="open about modal">
           <Icon
-            name="heroicons-question-mark-circle-solid"
+            name="heroicons-exclamation-circle-solid"
             className="mx-auto h-6 w-6"
           />
         </Button>
