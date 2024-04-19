@@ -5,7 +5,7 @@ import {
   Heading,
   Button,
 } from "react-aria-components";
-import { Icons } from "../Icons";
+import { Icon } from "../Icon";
 
 interface DialogProps extends Omit<AriaDialogProps, "children"> {
   title: string;
@@ -22,12 +22,12 @@ export function Dialog({ title, children, ...props }: DialogProps) {
         <>
           <div className="flex justify-between">
             <div className="flex items-center gap-x-2 text-4xl font-bold uppercase">
-              <Icons.pokeballOutline className="h-8 w-8" />
+              <Icon name="mdi-pokeball" className="size-8" />
               <Heading slot="title">{title}</Heading>
-              <Icons.pokeballOutline className="h-8 w-8" />
+              <Icon name="mdi-pokeball" className="size-8" />
             </div>
             <Button onPress={close}>
-              <Icons.xMark className="size-6 stroke-2" />
+              <Icon name="pixelarticons-close" className="size-6 stroke-2" />
             </Button>
           </div>
           <div>{children}</div>

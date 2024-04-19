@@ -1,5 +1,4 @@
 "use client";
-import { Icons } from "./Icons";
 import { useAtomValue } from "jotai";
 import { Button, TooltipTrigger } from "react-aria-components";
 import Tooltip from "./ui/Tooltip";
@@ -10,6 +9,7 @@ import {
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import PokemonCard from "./ui/PokemonCard";
+import Image from "next/image";
 
 export default function Guesses() {
   const mode = useAtomValue(currentGameMode);
@@ -22,8 +22,12 @@ export default function Guesses() {
       {[...Array(defaultGuesses)].map((value, index) => (
         <TooltipTrigger key={index} delay={0}>
           <Button>
-            <Icons.pokeball
-              className={`h-6 w-6 ${index + 1 > guesses ? "grayscale" : ""}`}
+            <Image
+              width={24}
+              height={24}
+              src="./svgs/pokeball.svg"
+              alt="Pokeball Icon"
+              className={index + 1 > guesses ? "grayscale" : ""}
             />
           </Button>
           {(mode === "whosthatpokemon" ||

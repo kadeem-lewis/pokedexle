@@ -1,28 +1,18 @@
 "use client";
-//import React, { useState } from "react";
-//import { useAtom } from "jotai";
-//import { addDays, endOfMonth, format } from "date-fns";
-// Your App.tsx file
+import { useEffect, useState } from "react";
+import { Calendar as MyCalendar } from "../ui/Calendar";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { useRouter } from "next/navigation";
+import { DateValue } from "react-aria-components";
 
 export default function Calendar() {
-  // const [selectedDate, setSelectedDate] = useAtom(dateAtom)
-  // const handleDayClick = (date:Date)=> {
-  //   console.log(date)
-  //   setSelectedDate(date)
-  //   console.log(selectedDate)
-  // };
-  // //disable all days before id 1 in the daily table
-  // const disabledDays = [{from: addDays(new Date(), 1),to: endOfMonth(new Date())}]
-  // const footer = selectedDate ? (
-  //   <p>You selected {format(selectedDate, 'PPP')}.</p>
-  // ) : (
-  //   <p>Please pick a day.</p>
-  // );
+  const [date, setDate] = useState<DateValue>(today(getLocalTimeZone()));
+  const router = useRouter();
 
-  return (
-    <div className="flex w-full items-center justify-start text-2xl">
-      Coming Soon
-      {/* <DayPicker mode="single" selected={selectedDate} onDayClick={handleDayClick} toDate={new Date()} disabled={disabledDays} footer={footer}/> */}
-    </div>
-  );
+  useEffect(() => {
+    router.push("?date=" + date.toString());
+    router.refresh();
+  }, [date, router]);
+
+  return <MyCalendar value={date} onChange={setDate} />;
 }

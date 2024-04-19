@@ -4,13 +4,13 @@ const NAV_LINKS = [
     title: "Classic",
     description: "Guess the Pokémon",
     path: "/classic",
-    background: "images/endless-constellation.svg",
+    background: "/svgs/endless-constellation.svg",
   },
   {
     title: "Who's that Pokémon?",
     description: "Guess the Pokémon based on the image",
     path: "/whosthatpokemon",
-    background: "/images/hollowed-boxes.svg",
+    background: "/svgs/hollowed-boxes.svg",
   },
 ];
 export default function Home() {

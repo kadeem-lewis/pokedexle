@@ -3,6 +3,7 @@ import Providers from "./providers";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import localFont from "next/font/local";
+import { PreloadResources } from "@/components/PreloadResources";
 
 const pokemonDs = localFont({
   src: "../../public/fonts/pokemon-ds.woff2",
@@ -38,10 +39,11 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${pokemonDs.className}`}
     >
+      <PreloadResources />
       <body>
         <Providers>
+          <Navbar />
           <div className=" mx-auto flex h-screen max-w-md flex-col px-4 font-pokemon-ds">
-            <Navbar />
             <main className="mb-auto grow pt-2 text-2xl">{children}</main>
             <Footer />
           </div>

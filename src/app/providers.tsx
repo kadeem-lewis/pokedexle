@@ -5,6 +5,8 @@ import { Provider as JotaiProvider } from "jotai";
 import { DevTools } from "jotai-devtools";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
+import { useRouter } from "next/navigation";
+import { RouterProvider } from "react-aria-components";
 
 type ProviderProps = {
   children: React.ReactNode;
@@ -17,14 +19,17 @@ if (typeof window !== "undefined") {
 }
 
 export default function Providers({ children }: ProviderProps) {
+  const router = useRouter();
   return (
-    <PostHogProvider client={posthog}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <JotaiProvider>
-          <DevTools />
-          {children}
-        </JotaiProvider>
-      </ThemeProvider>
-    </PostHogProvider>
+    <RouterProvider navigate={router.push}>
+      <PostHogProvider client={posthog}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <JotaiProvider>
+            <DevTools />
+            {children}
+          </JotaiProvider>
+        </ThemeProvider>
+      </PostHogProvider>
+    </RouterProvider>
   );
 }

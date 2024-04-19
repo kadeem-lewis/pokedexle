@@ -9,7 +9,27 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: "hsl(var(--primary))",
+        bg: {
+          canvas: "hsl(var(--bg-canvas))",
+          muted: "hsl(var(--bg-muted))",
+          panel: "hsl(var(--bg-panel))",
+        },
+        fg: {
+          DEFAULT: "hsl(var(--fg))",
+          muted: "hsl(var(--fg-muted))",
+          disabled: "hsl(var(--fg-disabled))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          hover: "hsl(var(--primary-hover))",
+          fg: "hsl(var(--primary-fg))",
+          "fg-muted": "hsl(var(--primary-fg-muted))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          hover: "hsl(var(--secondary-hover))",
+        },
+        border: "hsl(var(--border))",
         normal: {
           100: "#C6C6A7",
           200: "#A8A878",

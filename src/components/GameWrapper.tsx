@@ -46,8 +46,6 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
     }
   }, [currentPath, searchParams, setMode]);
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     function setDailies() {
       const dailyClassicPokemon =
