@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
+import { atomWithQuery } from "jotai-tanstack-query";
 import { format } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
@@ -65,17 +66,20 @@ export const dateAtom = atom(format(new Date(), "yyyy-MM-dd"));
 dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
-export const dailyAtom = atom(async (get) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
-  );
-  if (!response.ok) {
-    return null;
-  }
-  const data: Daily = await response.json();
-  return data;
-});
-dailyAtom.debugLabel = "dailyAtom";
+export const dailyDataAtom = atomWithQuery((get) => ({
+  queryKey: ["daily", get(dateAtom)],
+  queryFn: async ({ queryKey: [, date] }) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${date}`,
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    const data: Daily = await response.json();
+    return data;
+  },
+}));
+dailyDataAtom.debugLabel = "dailyDataAtom";
 
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
   "classic_practice_solution",
