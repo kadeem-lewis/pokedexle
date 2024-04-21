@@ -2,12 +2,12 @@
 import {
   Pokemon,
   currentGameMode,
-  dailyAtom,
+  dailyDataAtom,
   dailyPokemonAtom,
+  dateAtom,
   gameOverAtom,
   pokedexAtom,
 } from "@/atoms/GameAtoms";
-import { Daily } from "@prisma/client";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -16,6 +16,7 @@ import ClassicGamebox from "./classic/Gamebox";
 import WhosThatPokemonGamebox from "./whosthatpokemon/Gamebox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonSearch from "./PokemonSearch";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 type GameWrapperProps = {
   pokedex: Pokemon[];
@@ -26,11 +27,9 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
   const [mode, setMode] = useAtom(currentGameMode);
   const setDailyPokemon = useSetAtom(dailyPokemonAtom);
   const gameOver = useAtomValue(gameOverAtom);
-  const dailyData = useAtomValue<Promise<Daily | null>>(dailyAtom);
-  const { classicId, whosThatPokemonId } = dailyData ?? {
-    classicId: null,
-    whosThatPokemonId: null,
-  };
+  const [{ data, isPending, isError }] = useAtom(dailyDataAtom);
+  const [, setAtomDate] = useAtom(dateAtom);
+  console.log(data, isPending, isError);
 
   const currentPath = usePathname();
   const searchParams = useSearchParams();
@@ -47,11 +46,21 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
   }, [currentPath, searchParams, setMode]);
 
   useEffect(() => {
+    if (searchParams.has("date")) {
+      setAtomDate(String(searchParams.get("date")));
+    } else {
+      setAtomDate(today(getLocalTimeZone()).toString());
+    }
+  }, [searchParams, setAtomDate]);
+
+  useEffect(() => {
+    console.log("dailyData", data);
     function setDailies() {
       const dailyClassicPokemon =
-        pokedex.find((pokemon) => pokemon.id === classicId) ?? null;
+        pokedex.find((pokemon) => pokemon.id === data?.classicId) ?? null;
       const dailyWhosThatPokemon =
-        pokedex.find((pokemon) => pokemon.id === whosThatPokemonId) ?? null;
+        pokedex.find((pokemon) => pokemon.id === data?.whosThatPokemonId) ??
+        null;
       setDailyPokemon((prev) => ({
         ...prev,
         whosthatpokemon: dailyWhosThatPokemon,
@@ -59,14 +68,13 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
       }));
     }
     setDailies();
-  }, [classicId, pokedex, setDailyPokemon, whosThatPokemonId]);
+  }, [data, pokedex, setDailyPokemon]);
 
   return (
     <>
       {currentPath === "/classic" && <ClassicGamebox />}
       {currentPath === "/whosthatpokemon" && <WhosThatPokemonGamebox />}
-      {!gameOver[mode] &&
-      (searchParams.get("mode") === "unlimited" || dailyData !== null) ? (
+      {!gameOver[mode] && (searchParams.get("mode") === "unlimited" || data) ? (
         <>
           <PokemonTypes />
           <PokemonSearch />
