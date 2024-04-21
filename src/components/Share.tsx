@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   guessedItemsAtom,
   currentGameMode,
   pokemonToGuessAtom,
   gameOverAtom,
-  dailyAtom,
   guessAtom,
   Pokemon,
+  dailyDataAtom,
 } from "@/atoms/GameAtoms";
 import { Button } from "./ui/Button";
 import { defaultGuesses } from "@/constants";
@@ -29,7 +29,7 @@ export default function Share() {
   const attempts = useAtomValue(guessAtom)[mode];
   const guesses = useAtomValue(guessedItemsAtom)[mode];
   const gameOver = useAtomValue(gameOverAtom);
-  const { day } = useAtomValue(dailyAtom) ?? { day: null };
+  const [{ data }] = useAtom(dailyDataAtom);
   const [isCopied, setIsCopied] = useState(false);
 
   const comparePokemonValue = (
@@ -79,7 +79,7 @@ export default function Share() {
     const grid = createEmojiGrid();
     //! Shows X/6 if answer is guessed on 6th try
     const textToCopy = `
-Pokedexle ${mode} ${day} ${
+Pokedexle ${mode} ${data?.day} ${
       attempts >= 0 && guesses.some((item) => item.name === correctAnswer?.name)
         ? `${guesses.length}/${defaultGuesses}`
         : `X/${defaultGuesses}`
