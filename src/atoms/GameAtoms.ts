@@ -1,9 +1,9 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { atomWithQuery } from "jotai-tanstack-query";
-import { format } from "date-fns";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 export type Pokemon = {
   id: number;
@@ -62,7 +62,7 @@ export const guessedItemsAtom = atom<GuessedItems>({
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
 //atom that gets the current Date and can be used to get dates of other days
-export const dateAtom = atom(format(new Date(), "yyyy-MM-dd"));
+export const dateAtom = atom(today(getLocalTimeZone()).toString());
 dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
@@ -129,7 +129,7 @@ dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
   "classic_answers",
   {
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: today(getLocalTimeZone()).toString(),
     answers: [],
   },
 );
@@ -138,7 +138,7 @@ classicAnswersAtom.debugLabel = "classicAnswersAtom";
 export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
   "whosthatpokemon_answers",
   {
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: today(getLocalTimeZone()).toString(),
     answers: [],
   },
 );
