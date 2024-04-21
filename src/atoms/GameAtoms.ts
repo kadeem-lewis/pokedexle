@@ -81,6 +81,20 @@ export const dailyDataAtom = atomWithQuery((get) => ({
 }));
 dailyDataAtom.debugLabel = "dailyDataAtom";
 
+export const firstDateAtom = atomWithQuery(() => ({
+  queryKey: ["firstDate"],
+  queryFn: async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/first-date`,
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    const data: Daily = await response.json();
+    return data.date;
+  },
+}));
+
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
   "classic_practice_solution",
   null,
