@@ -12,7 +12,7 @@ import React, { useEffect } from "react";
 import { Skeleton } from "../ui/Skeleton";
 import DailyUnavailable from "../DailyUnavailable";
 import PokemonFeedback from "./PokemonFeedback";
-import { CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
+import { CalendarDate } from "@internationalized/date";
 
 export default function DailyGame() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
@@ -21,10 +21,6 @@ export default function DailyGame() {
   const mode = useAtomValue(currentGameMode);
   const [{ data, isPending, isError }] = useAtom(dailyDataAtom);
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
-
-  console.log(
-    today(getLocalTimeZone()).add({ days: 1 }).toDate(getLocalTimeZone()),
-  );
 
   useEffect(() => {
     if (mode !== "classic") return;

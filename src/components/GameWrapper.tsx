@@ -28,10 +28,9 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [mode, setMode] = useAtom(currentGameMode);
   const gameOver = useAtomValue(gameOverAtom);
-  const [{ data, isPending, isError }] = useAtom(dailyDataAtom);
+  const [{ data }] = useAtom(dailyDataAtom);
   const [, setAtomDate] = useAtom(dateAtom);
   const setPokemonToGuess = useSetAtom(pokemonToGuessAtom);
-  console.log(data, isPending, isError);
   const classicPracticeSolution = useAtomValue(classicPracticeSolutionAtom);
   const whosthatpokemonPracticeSolution = useAtomValue(
     whosthatpokemonPracticeSolutionAtom,
