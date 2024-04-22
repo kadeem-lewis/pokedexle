@@ -13,6 +13,7 @@ import {
 import { Button } from "./ui/Button";
 import { defaultGuesses } from "@/constants";
 import { Icon } from "./Icon";
+import { useSearchParams } from "next/navigation";
 
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",
@@ -31,6 +32,7 @@ export default function Share() {
   const gameOver = useAtomValue(gameOverAtom);
   const [{ data }] = useAtom(dailyDataAtom);
   const [isCopied, setIsCopied] = useState(false);
+  const searchParams = useSearchParams();
 
   const comparePokemonValue = (
     correctValue: number,
@@ -47,6 +49,11 @@ export default function Share() {
     return guessedTypes.map((type) =>
       correctTypes.includes(type) ? emojis["correct"] : emojis["incorrect"],
     );
+  };
+
+  const encodeAnswer = (answer: Pokemon | null): string => {
+    if (!answer) return "";
+    return encodeURIComponent(btoa(String(answer.id)));
   };
 
   const createEmojiGrid = (): string => {
@@ -75,6 +82,10 @@ export default function Share() {
       .join("\n");
   };
 
+  const location = searchParams.has("mode")
+    ? `${window.location.href}&x=${encodeAnswer(correctAnswer)}`
+    : window.location.href;
+
   const handleShareClick = async (): Promise<void> => {
     const grid = createEmojiGrid();
     //! Shows X/6 if answer is guessed on 6th try
@@ -85,7 +96,7 @@ Pokedexle ${mode} ${data?.day} ${
         : `X/${defaultGuesses}`
     }
 ${grid}
-${window.location.href}
+${location}
     `;
 
     try {
