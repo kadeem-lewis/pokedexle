@@ -12,6 +12,7 @@ import {
 } from "@/atoms/GameAtoms";
 import Countdown from "../Countdown";
 import { startOfTomorrow } from "date-fns";
+//TODO: probably gonna have to create today and then add one to it
 import Share from "../Share";
 import { Button } from "../ui/Button";
 
@@ -64,9 +65,9 @@ export default function GameOverContent({ children }: GameOverContentProps) {
         <>
           <p className="text-2xl">New Game in:</p>
           <Countdown targetDate={startOfTomorrow()} />
-          <Share />
         </>
       )}
+      <Share />
     </div>
   );
 }
