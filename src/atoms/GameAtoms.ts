@@ -104,20 +104,17 @@ classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
 export const whosthatpokemonPracticeSolutionAtom =
   atomWithStorage<Pokemon | null>("whosthatpokemon_solution", null);
 
-//Initializes the pokemon to guess Object
-export const pokemonToGuessAtom = atom((get) => {
-  return {
-    classic: get(dailyPokemonAtom).classic,
-    classicUnlimited: get(classicPracticeSolutionAtom)
-      ? get(classicPracticeSolutionAtom)
-      : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
-    whosthatpokemon: get(dailyPokemonAtom).whosthatpokemon,
-    whosthatpokemonUnlimited: get(whosthatpokemonPracticeSolutionAtom)
-      ? get(whosthatpokemonPracticeSolutionAtom)
-      : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
-  };
+export const pokemonToGuessAtom = atom<{
+  classic: Pokemon | null;
+  classicUnlimited: Pokemon | null;
+  whosthatpokemon: Pokemon | null;
+  whosthatpokemonUnlimited: Pokemon | null;
+}>({
+  classic: null,
+  classicUnlimited: null,
+  whosthatpokemon: null,
+  whosthatpokemonUnlimited: null,
 });
-pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
 //controls the daily classic Pokemon
 export const dailyPokemonAtom = atom<DailyAnswers>({
