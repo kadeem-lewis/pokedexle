@@ -4,7 +4,6 @@ import { startOfTomorrow } from "date-fns";
 import allPokemon from "@/data/pokedex.json";
 import { Daily } from "@prisma/client";
 
-//TODO: vercel isn't able to read the pokedex.json file
 export async function GET() {
   let usedIds: Daily[];
   try {

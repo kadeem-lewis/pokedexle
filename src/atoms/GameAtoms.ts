@@ -1,8 +1,9 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { format } from "date-fns";
+import { atomWithQuery } from "jotai-tanstack-query";
 import { Daily } from "@prisma/client";
 import { defaultGuesses } from "@/constants";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 export type Pokemon = {
   id: number;
@@ -61,21 +62,38 @@ export const guessedItemsAtom = atom<GuessedItems>({
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
 //atom that gets the current Date and can be used to get dates of other days
-export const dateAtom = atom(format(new Date(), "yyyy-MM-dd"));
+export const dateAtom = atom(today(getLocalTimeZone()).toString());
 dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
-export const dailyAtom = atom(async (get) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${get(dateAtom)}`,
-  );
-  if (!response.ok) {
-    return null;
-  }
-  const data: Daily = await response.json();
-  return data;
-});
-dailyAtom.debugLabel = "dailyAtom";
+export const dailyDataAtom = atomWithQuery((get) => ({
+  queryKey: ["daily", get(dateAtom)],
+  queryFn: async ({ queryKey: [, date] }) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/dailies?date=${date}`,
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    const data: Daily = await response.json();
+    return data;
+  },
+}));
+dailyDataAtom.debugLabel = "dailyDataAtom";
+
+export const firstDateAtom = atomWithQuery(() => ({
+  queryKey: ["firstDate"],
+  queryFn: async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/first-date`,
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    const data: Daily = await response.json();
+    return data.date;
+  },
+}));
 
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
   "classic_practice_solution",
@@ -86,20 +104,17 @@ classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
 export const whosthatpokemonPracticeSolutionAtom =
   atomWithStorage<Pokemon | null>("whosthatpokemon_solution", null);
 
-//Initializes the pokemon to guess Object
-export const pokemonToGuessAtom = atom((get) => {
-  return {
-    classic: get(dailyPokemonAtom).classic,
-    classicUnlimited: get(classicPracticeSolutionAtom)
-      ? get(classicPracticeSolutionAtom)
-      : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
-    whosthatpokemon: get(dailyPokemonAtom).whosthatpokemon,
-    whosthatpokemonUnlimited: get(whosthatpokemonPracticeSolutionAtom)
-      ? get(whosthatpokemonPracticeSolutionAtom)
-      : get(pokedexAtom)[Math.floor(Math.random() * get(pokedexAtom).length)],
-  };
+export const pokemonToGuessAtom = atom<{
+  classic: Pokemon | null;
+  classicUnlimited: Pokemon | null;
+  whosthatpokemon: Pokemon | null;
+  whosthatpokemonUnlimited: Pokemon | null;
+}>({
+  classic: null,
+  classicUnlimited: null,
+  whosthatpokemon: null,
+  whosthatpokemonUnlimited: null,
 });
-pokemonToGuessAtom.debugLabel = "pokemonToGuessAtom";
 
 //controls the daily classic Pokemon
 export const dailyPokemonAtom = atom<DailyAnswers>({
@@ -111,7 +126,7 @@ dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
   "classic_answers",
   {
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: today(getLocalTimeZone()).toString(),
     answers: [],
   },
 );
@@ -120,7 +135,7 @@ classicAnswersAtom.debugLabel = "classicAnswersAtom";
 export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
   "whosthatpokemon_answers",
   {
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: today(getLocalTimeZone()).toString(),
     answers: [],
   },
 );
