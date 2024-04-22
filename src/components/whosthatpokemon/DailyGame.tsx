@@ -7,12 +7,12 @@ import {
   dailyDataAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
-import { format } from "date-fns";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import ImagePanel from "./ImagePanel";
 import DailyUnavailable from "../DailyUnavailable";
 import { Skeleton } from "../ui/Skeleton";
+import { CalendarDate } from "@internationalized/date";
 
 export default function DailyGame() {
   const mode = useAtomValue(currentGameMode);
@@ -27,7 +27,12 @@ export default function DailyGame() {
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;
     if (!data?.date) return;
-    const serverTime = format(new Date(data.date), "yyyy-MM-dd");
+    const date = new Date(data.date);
+    const serverTime = new CalendarDate(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+    ).toString();
     if (serverTime === whosthatpokemonAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,

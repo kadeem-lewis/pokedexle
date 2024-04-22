@@ -7,12 +7,12 @@ import {
   classicAnswersAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
-import { format } from "date-fns";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import React, { useEffect } from "react";
 import { Skeleton } from "../ui/Skeleton";
 import DailyUnavailable from "../DailyUnavailable";
 import PokemonFeedback from "./PokemonFeedback";
+import { CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
 
 export default function DailyGame() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
@@ -22,10 +22,19 @@ export default function DailyGame() {
   const [{ data, isPending, isError }] = useAtom(dailyDataAtom);
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
 
+  console.log(
+    today(getLocalTimeZone()).add({ days: 1 }).toDate(getLocalTimeZone()),
+  );
+
   useEffect(() => {
     if (mode !== "classic") return;
     if (!data?.date) return;
-    const serverTime = format(new Date(data.date), "yyyy-MM-dd");
+    const date = new Date(data.date);
+    const serverTime = new CalendarDate(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+    ).toString();
     if (serverTime === classicAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,
