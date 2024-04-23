@@ -64,10 +64,10 @@
 
 @layer base {
   body {
-    --c1: #444cf7;
-    --c2: #e5e5f7;
+    /* --c1: #444cf7;
+    --c2: #e5e5f7; */
     @apply bg-bg-canvas text-fg;
-    background-color: #e5e5f7;
+    /* background-color: #e5e5f7;
     background-image: repeating-linear-gradient(
         45deg,
         hsl(var(--primary)) 25%,
@@ -87,7 +87,7 @@
     background-position:
       0 0,
       10px 10px;
-    background-size: 20px 20px;
+    background-size: 20px 20px; */
   }
 }
 
