@@ -9,8 +9,8 @@ import {
 import { defaultGuesses } from "@/constants";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import React, { useEffect } from "react";
-import { Skeleton } from "../ui/Skeleton";
-import DailyUnavailable from "../DailyUnavailable";
+import { Skeleton } from "@/components/ui/Skeleton";
+import DailyUnavailable from "@/components/DailyUnavailable";
 import PokemonFeedback from "./PokemonFeedback";
 import { CalendarDate } from "@internationalized/date";
 

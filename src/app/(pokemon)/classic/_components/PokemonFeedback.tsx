@@ -11,7 +11,7 @@ import {
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
-import GameOverContent from "../content/GameOverContent";
+import GameOverContent from "@/components/content/GameOverContent";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;

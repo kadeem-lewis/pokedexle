@@ -10,8 +10,8 @@ import { defaultGuesses } from "@/constants";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import ImagePanel from "./ImagePanel";
-import DailyUnavailable from "../DailyUnavailable";
-import { Skeleton } from "../ui/Skeleton";
+import DailyUnavailable from "@/components/DailyUnavailable";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { CalendarDate } from "@internationalized/date";
 
 export default function DailyGame() {
