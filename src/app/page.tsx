@@ -15,8 +15,10 @@ const NAV_LINKS = [
 ];
 export default function Home() {
   return (
-    <div>
-      <h2 className="text-3xl">Test your Pokémon Knowledge</h2>
+    <>
+      <h2 className="border-y-8 border-double border-y-bg-canvas bg-bg-canvas bg-opacity-20 bg-clip-padding py-2 text-center text-3xl">
+        Test your Pokémon Knowledge
+      </h2>
       {NAV_LINKS.map((link) => (
         <LinkCard
           title={link.title}
@@ -26,6 +28,6 @@ export default function Home() {
           key={link.title}
         />
       ))}
-    </div>
+    </>
   );
 }
