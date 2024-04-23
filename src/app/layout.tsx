@@ -42,9 +42,12 @@ export default function RootLayout({
       <PreloadResources />
       <body>
         <Providers>
-          <Navbar />
-          <div className=" mx-auto flex h-screen max-w-md flex-col px-4 font-pokemon-ds">
-            <main className="mb-auto grow pt-2 text-2xl">{children}</main>
+          {/* TODO: Figure out why there is overflow in the first place */}
+          <div className="mx-auto flex h-screen flex-col items-center overflow-x-hidden">
+            <Navbar />
+            <main className="mb-auto w-full max-w-md grow px-4 pt-2 text-2xl">
+              {children}
+            </main>
             <Footer />
           </div>
         </Providers>
