@@ -1,5 +1,5 @@
 "use client";
-import { cx } from "class-variance-authority";
+import { cx } from "cva";
 import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "./ui/Button";
