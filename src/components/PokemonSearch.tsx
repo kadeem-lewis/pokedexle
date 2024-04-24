@@ -16,7 +16,6 @@ import { Button } from "./ui/Button";
 export default function PokemonSearch() {
   const [selected, setSelected] = useState<Key | null>(null);
   const [query, setQuery] = useState("");
-  const [error, setError] = useState(false);
   const pokedex = useAtomValue(pokedexAtom);
   const mode = useAtomValue(currentGameMode);
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
@@ -54,14 +53,9 @@ export default function PokemonSearch() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selected && query) {
-      if (guessedItems.some((item) => item.name === query)) {
-        setError(true);
-      } else {
-        const pokemon = pokedex.find((p) => p.name === query);
-        if (pokemon) {
-          addNewGuess(pokemon);
-          setError(false);
-        }
+      const pokemon = pokedex.find((p) => p.name === query);
+      if (pokemon) {
+        addNewGuess(pokemon);
       }
       setSelected(null);
       setQuery("");
@@ -77,14 +71,11 @@ export default function PokemonSearch() {
           inputValue={query}
           onInputChange={onInputChange}
           onSelectionChange={onSelectionChange}
+          disabledKeys={guessedItems.map((item) => item.id)}
           aria-label="Search pokémon by name or type..."
-          className="flex w-full flex-col gap-2"
         >
           {(item) => (
-            <ComboBoxItem
-              textValue={item.name}
-              className="relative cursor-default select-none border-b border-foreground capitalize"
-            >
+            <ComboBoxItem textValue={item.name}>
               <PokemonCard pokemon={item} />
             </ComboBoxItem>
           )}
@@ -97,7 +88,6 @@ export default function PokemonSearch() {
           Submit
         </Button>
       </form>
-      {error && <p>Pokemon Already Entered</p>}
     </>
   );
 }
