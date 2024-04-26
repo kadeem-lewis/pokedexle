@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { buttonVariants } from "./ui/Button";
 import { usePathname } from "next/navigation";
 
 export default function DailyUnavailable() {
@@ -15,7 +14,7 @@ export default function DailyUnavailable() {
           pathname,
           query: { mode: "unlimited" },
         }}
-        className={buttonVariants({ variant: "flat" })}
+        className="focus-visible:ring-ring inline-flex items-center justify-center  px-px py-0.5 uppercase transition-colors focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
       >
         Try Unlimited Mode
       </Link>

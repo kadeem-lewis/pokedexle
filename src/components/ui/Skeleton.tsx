@@ -1,4 +1,4 @@
-import { cx } from "cva";
+import { cnBase } from "tailwind-variants";
 
 function Skeleton({
   className,
@@ -6,7 +6,7 @@ function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cx("animate-pulse rounded-md bg-bg-muted", className)}
+      className={cnBase("animate-pulse rounded-md bg-bg-muted", className)}
       {...props}
     />
   );
