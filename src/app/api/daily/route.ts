@@ -7,7 +7,7 @@ import { Daily } from "@prisma/client";
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return new Response("Unauthorized", {
+    return NextResponse.json("Unauthorized", {
       status: 401,
     });
   }
@@ -67,7 +67,15 @@ export async function GET(request: NextRequest) {
       },
     });
     console.log("New daily entry added:", newDaily);
-    return NextResponse.json({ ok: true });
+    return NextResponse.json(
+      { ok: true },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      },
+    );
   } catch (error) {
     return NextResponse.json(
       { error: `Error adding new daily entry: ${error}` },
