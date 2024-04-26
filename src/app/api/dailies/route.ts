@@ -14,7 +14,12 @@ export async function GET(request: Request) {
         date: date,
       },
     });
-    return Response.json(dailies);
+    return Response.json(dailies, {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   } catch (error) {
     return Response.json({ error: "Error" }, { status: 500 });
   }
