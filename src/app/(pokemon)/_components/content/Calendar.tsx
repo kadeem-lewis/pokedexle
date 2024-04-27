@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Calendar as MyCalendar } from "../../../../components/ui/Calendar";
+import { Calendar as MyCalendar } from "@/components/ui/Calendar";
 import {
   getLocalTimeZone,
   today,

@@ -14,7 +14,7 @@ import Countdown from "../Countdown";
 import { startOfTomorrow } from "date-fns";
 //TODO: probably gonna have to create today and then add one to it
 import Share from "../Share";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 type GameOverContentProps = {
   children?: React.ReactNode;

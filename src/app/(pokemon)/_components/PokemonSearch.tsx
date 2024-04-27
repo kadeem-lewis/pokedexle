@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
-import { ComboBox, ComboBoxItem } from "../../../components/ui/Combobox";
-import PokemonCard from "../../../components/ui/PokemonCard";
+import { ComboBox, ComboBoxItem } from "@/components/ui/Combobox";
+import PokemonCard from "@/components/ui/PokemonCard";
 import Fuse from "fuse.js";
 import {
   addGuessedItemAtom,
@@ -11,7 +11,7 @@ import {
 } from "@/atoms/GameAtoms";
 import { Key } from "react-aria-components";
 import { useSetAtom, useAtomValue } from "jotai";
-import { Button } from "../../../components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 export default function PokemonSearch() {
   const [selected, setSelected] = useState<Key | null>(null);

@@ -1,14 +1,14 @@
 "use client";
 import { useAtomValue } from "jotai";
 import { Button, TooltipTrigger } from "react-aria-components";
-import Tooltip from "../../../components/ui/Tooltip";
+import Tooltip from "@/components/ui/Tooltip";
 import {
   currentGameMode,
   guessAtom,
   guessedItemsAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
-import PokemonCard from "../../../components/ui/PokemonCard";
+import PokemonCard from "@/components/ui/PokemonCard";
 import Image from "next/image";
 
 export default function Guesses() {
