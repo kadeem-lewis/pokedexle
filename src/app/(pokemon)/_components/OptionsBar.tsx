@@ -5,9 +5,8 @@ import AboutContent from "./content/AboutContent";
 import StatsContent from "./content/StatsContent";
 import HowToPlayContent from "./content/HowToPlayContent";
 import Calendar from "./content/Calendar";
-import { Button, DialogTrigger } from "react-aria-components";
-import { Modal } from "@/components/ui/Modal";
-import { Dialog } from "@/components/ui/Dialog";
+import { Button } from "react-aria-components";
+import { Dialog, DialogTrigger, DialogModal } from "@/components/ui/Dialog";
 
 export default function OptionsBar() {
   return (
@@ -22,11 +21,11 @@ export default function OptionsBar() {
             className="mx-auto size-6"
           />
         </Button>
-        <Modal isDismissable>
+        <DialogModal>
           <Dialog title="How To Play">
             <HowToPlayContent />
           </Dialog>
-        </Modal>
+        </DialogModal>
       </DialogTrigger>
       <DialogTrigger>
         <Button
@@ -38,11 +37,11 @@ export default function OptionsBar() {
             className="mx-auto size-6 transition-transform hover:-rotate-45"
           />
         </Button>
-        <Modal isDismissable>
+        <DialogModal>
           <Dialog title="Settings">
             <SettingsContent />
           </Dialog>
-        </Modal>
+        </DialogModal>
       </DialogTrigger>
       <DialogTrigger>
         <Button
@@ -54,11 +53,11 @@ export default function OptionsBar() {
             className="mx-auto h-6 w-6"
           />
         </Button>
-        <Modal isDismissable>
+        <DialogModal>
           <Dialog title="Calendar">
             <Calendar />
           </Dialog>
-        </Modal>
+        </DialogModal>
       </DialogTrigger>
       <DialogTrigger>
         <Button
@@ -67,11 +66,11 @@ export default function OptionsBar() {
         >
           <Icon name="heroicons-chart-bar-solid" className="mx-auto h-6 w-6" />
         </Button>
-        <Modal isDismissable>
+        <DialogModal>
           <Dialog title="Stats">
             <StatsContent />
           </Dialog>
-        </Modal>
+        </DialogModal>
       </DialogTrigger>
       <DialogTrigger>
         <Button className="py-1" aria-label="open about modal">
@@ -80,11 +79,11 @@ export default function OptionsBar() {
             className="mx-auto h-6 w-6"
           />
         </Button>
-        <Modal isDismissable>
+        <DialogModal>
           <Dialog title="About">
             <AboutContent />
           </Dialog>
-        </Modal>
+        </DialogModal>
       </DialogTrigger>
     </nav>
   );
