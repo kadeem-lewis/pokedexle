@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { defaultGuesses } from "@/constants";
-import { Tile } from "../ui/Tile";
+import { Tile } from "../../../../components/ui/Tile";
 import { useAtomValue } from "jotai";
 import { pokedexAtom } from "@/atoms/GameAtoms";
 import Image from "next/image";

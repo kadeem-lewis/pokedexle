@@ -10,7 +10,7 @@ import { defaultGuesses } from "@/constants";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import React, { useEffect } from "react";
 import { Skeleton } from "@/components/ui/Skeleton";
-import DailyUnavailable from "@/components/DailyUnavailable";
+import DailyUnavailable from "@/app/(pokemon)/_components/DailyUnavailable";
 import PokemonFeedback from "./PokemonFeedback";
 import { CalendarDate } from "@internationalized/date";
 

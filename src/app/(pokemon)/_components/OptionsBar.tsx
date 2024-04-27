@@ -1,13 +1,13 @@
 "use client";
-import { Icon } from "../Icon";
-import SettingsContent from "../content/SettingsContent";
-import AboutContent from "../content/AboutContent";
-import StatsContent from "../content/StatsContent";
-import HowToPlayContent from "../content/HowToPlayContent";
-import Calendar from "../content/Calendar";
+import { Icon } from "../../../components/Icon";
+import SettingsContent from "./content/SettingsContent";
+import AboutContent from "./content/AboutContent";
+import StatsContent from "./content/StatsContent";
+import HowToPlayContent from "./content/HowToPlayContent";
+import Calendar from "./content/Calendar";
 import { Button, DialogTrigger } from "react-aria-components";
-import { Modal } from "../ui/Modal";
-import { Dialog } from "../ui/Dialog";
+import { Modal } from "../../../components/ui/Modal";
+import { Dialog } from "../../../components/ui/Dialog";
 
 export default function OptionsBar() {
   return (
