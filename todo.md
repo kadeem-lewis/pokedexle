@@ -46,3 +46,8 @@ TODO In Order 4/16
 
 - I temporarily just copied all the button code over for places where buttonVariants were used. Mainly for links. I need to create a link component for these instances
 - I had to add twMerge false to tv because it was getting rid of custom text shadow
+
+- There is no scroll in content on mobile
+- there is no autofocus for combobox
+- I am thinking about potentially hiding navbar on mobile but I would need to use router.replace or something so users are stuck on page because they clicked too much
+- dialog should open more to top of screen instead of center
