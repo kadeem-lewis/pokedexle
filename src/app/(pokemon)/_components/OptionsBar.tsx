@@ -11,7 +11,7 @@ import Support from "./content/Support";
 
 export default function OptionsBar() {
   return (
-    <nav className=" grid grid-cols-6 border-2 border-foreground">
+    <nav className=" grid grid-cols-6 border-2 border-foreground bg-bg-panel ring-4 ring-purple-700">
       <DialogTrigger>
         <Button
           className="border-r-2 border-foreground py-1"
