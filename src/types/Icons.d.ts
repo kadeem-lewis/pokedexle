@@ -13,4 +13,5 @@ export type IconName =
   | "pixelarticons-chevron-left"
   | "pokemon-sun"
   | "pokemon-moon"
-  | "pokeball-filled";
+  | "pokeball-filled"
+  | "heroicons-heart-solid";
