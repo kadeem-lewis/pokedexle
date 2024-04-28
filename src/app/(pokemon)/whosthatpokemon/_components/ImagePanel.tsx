@@ -10,7 +10,7 @@ import {
   gameOverAtom,
 } from "@/atoms/GameAtoms";
 import { useAtomValue, useAtom } from "jotai";
-import GameOverContent from "@/app/(pokemon)/_components/content/GameOverContent";
+import GameOverContent from "@/app/(pokemon)/_components/content/GameOver";
 import StatsRange from "./StatsRange";
 import { TypeBadge } from "@/components/ui/TypeBadge";
 import { PokemonType } from "@/app/(pokemon)/_components/PokemonTypes";

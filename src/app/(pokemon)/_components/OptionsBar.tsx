@@ -1,9 +1,9 @@
 "use client";
 import { Icon } from "@/components/Icon";
-import SettingsContent from "./content/SettingsContent";
-import AboutContent from "./content/AboutContent";
-import StatsContent from "./content/StatsContent";
-import HowToPlayContent from "./content/HowToPlayContent";
+import SettingsContent from "./content/Settings";
+import AboutContent from "./content/About";
+import StatsContent from "./content/Stats";
+import HowToPlayContent from "./content/HowToPlay";
 import Calendar from "./content/Calendar";
 import { Button } from "react-aria-components";
 import { Dialog, DialogTrigger, DialogModal } from "@/components/ui/Dialog";
