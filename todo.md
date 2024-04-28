@@ -51,3 +51,4 @@ TODO In Order 4/16
 - there is no autofocus for combobox
 - I am thinking about potentially hiding navbar on mobile but I would need to use router.replace or something so users are stuck on page because they clicked too much
 - dialog should open more to top of screen instead of center
+- I don't think I should use pokemon-ds for everything since it seems to greatly affect readability at some points. Figure out if I need to do that after additional styling though
