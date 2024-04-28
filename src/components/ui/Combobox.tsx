@@ -17,10 +17,10 @@ const combobox = tv({
   slots: {
     input:
       "w-full border-b-2 border-dashed border-foreground bg-transparent py-1 pl-3",
-    root: "w-full max-h-inherit overflow-auto p-1 outline-none",
+    root: "max-h-inherit w-full overflow-auto p-1 outline-none",
     popover:
-      " mx-auto max-h-60 min-w-[--inherit] overflow-auto rounded-md bg-bg-panel text-base shadow-lg ring-1 ring-black/5",
-    item: "relative m-1 flex cursor-default flex-col p-1 rounded-md outline-none selected:bg-teal-600 disabled:brightness-50 focus:bg-teal-600 focus:selected:bg-teal-700 border-b border-border capitalize",
+      " m-2 mx-auto max-h-60 min-w-[--inherit] overflow-auto rounded-md border-2 border-white bg-bg-panel text-base shadow-lg ring-4 ring-border",
+    item: "relative m-1 flex cursor-default flex-col rounded-md border-b border-border p-1 capitalize outline-none focus:bg-teal-600 selected:bg-teal-600 focus:selected:bg-teal-700 disabled:brightness-50",
   },
 });
 //TODO: popover width should be the same as the input. If I use full, it will be the same as the window width and inherit will be the same as the parent width. I need the same as the input width.
@@ -43,7 +43,7 @@ export function ComboBox<T extends object>({
         <Input className={input()} />
         <Button className="hidden">▼</Button>
       </Group>
-      <Popover placement="bottom" className={popover()}>
+      <Popover className={popover()}>
         <ListBox>{children}</ListBox>
       </Popover>
     </AriaComboBox>
