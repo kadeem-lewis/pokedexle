@@ -1,10 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { startOfTomorrow } from "date-fns";
 import allPokemon from "@/data/pokedex.json";
 import { Daily } from "@prisma/client";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const authHeader = request.headers.get("authorization");
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json("Unauthorized", {
+      status: 401,
+    });
+  }
+
   let usedIds: Daily[];
   try {
     usedIds = await prisma.daily.findMany();
@@ -60,7 +67,15 @@ export async function GET() {
       },
     });
     console.log("New daily entry added:", newDaily);
-    return NextResponse.json({ ok: true });
+    return NextResponse.json(
+      { ok: true },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      },
+    );
   } catch (error) {
     return NextResponse.json(
       { error: `Error adding new daily entry: ${error}` },

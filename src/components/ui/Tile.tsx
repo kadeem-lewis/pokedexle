@@ -1,10 +1,10 @@
-import { VariantProps, cva, cx } from "class-variance-authority";
+import { tv, type VariantProps } from "tailwind-variants";
 import { ComponentProps } from "react";
 //proposed reusable component that would be responsible for showing the titles in the FeedbackRow?
 
-const tileVariants = cva(
-  "text-shadow basis-1/6 border-2 border-black text-white shadow-inner before:block",
+const tile = tv(
   {
+    base: "text-shadow basis-1/6 border-2 border-black text-white shadow-inner before:block",
     variants: {
       status: {
         correct: "bg-green-500",
@@ -18,14 +18,15 @@ const tileVariants = cva(
       },
     },
   },
+  { twMerge: false },
 );
 
-interface TileProps
-  extends ComponentProps<"div">,
-    VariantProps<typeof tileVariants> {}
+interface TileProps extends ComponentProps<"div">, VariantProps<typeof tile> {
+  className?: string;
+}
 
 //TODO: Tailwind variant will probably allow me to have this as one component
-function Tile({
+export function Tile({
   className,
   status,
   difference,
@@ -34,7 +35,7 @@ function Tile({
 }: TileProps) {
   return (
     <div
-      className={cx(tileVariants({ status, difference, className }))}
+      className={tile({ status, difference, className })}
       {...props}
       tabIndex={0}
     >
@@ -44,5 +45,3 @@ function Tile({
     </div>
   );
 }
-
-export { Tile, tileVariants };

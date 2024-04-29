@@ -134,5 +134,9 @@ export default {
   },
 
   darkMode: "class",
-  plugins: [require("tailwindcss-animate"), require("tailwind-clip-path")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwind-clip-path"),
+    require("tailwindcss-react-aria-components"),
+  ],
 } satisfies Config;

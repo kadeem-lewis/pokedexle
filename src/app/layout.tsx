@@ -43,9 +43,9 @@ export default function RootLayout({
       <body>
         <Providers>
           {/* TODO: Figure out why there is overflow in the first place */}
-          <div className="mx-auto flex h-screen flex-col items-center overflow-x-hidden">
+          <div className="mx-auto flex min-h-screen flex-col items-center justify-between gap-y-2 overflow-y-hidden">
             <Navbar />
-            <main className="mb-auto w-full max-w-md grow px-4 pt-2 text-2xl">
+            <main className="w-full max-w-md grow px-4 text-2xl">
               {children}
             </main>
             <Footer />

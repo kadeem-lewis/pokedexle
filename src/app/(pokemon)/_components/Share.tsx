@@ -10,9 +10,9 @@ import {
   Pokemon,
   dailyDataAtom,
 } from "@/atoms/GameAtoms";
-import { Button } from "./ui/Button";
+import { Button } from "@/components/ui/Button";
 import { defaultGuesses } from "@/constants";
-import { Icon } from "./Icon";
+import { Icon } from "@/components/Icon";
 import { useSearchParams } from "next/navigation";
 
 const emojis: { [key: string]: string } = {

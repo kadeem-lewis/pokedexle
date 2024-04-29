@@ -1,13 +1,13 @@
 "use client";
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
-import { Tile } from "../ui/Tile";
+import { Tile } from "@/components/ui/Tile";
 import {
   decimeterToImperial,
   hectogramToImperial,
 } from "@/helpers/Conversions";
 import { Button, TooltipTrigger } from "react-aria-components";
-import Tooltip from "../ui/Tooltip";
+import Tooltip from "@/components/ui/Tooltip";
 
 type FeedbackTileProps = {
   guessedItem: Pokemon;
@@ -36,7 +36,7 @@ export default function FeedbackTile({
   }
 
   return (
-    <div className="flex gap-x-1">
+    <>
       {guessedItem.name === correctItem.name ? (
         <>
           <TooltipTrigger>
@@ -126,6 +126,6 @@ export default function FeedbackTile({
           )}
         </>
       )}
-    </div>
+    </>
   );
 }

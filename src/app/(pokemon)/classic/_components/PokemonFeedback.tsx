@@ -11,7 +11,7 @@ import {
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
 import FeedbackTile from "./FeedbackTile";
-import GameOverContent from "../content/GameOverContent";
+import GameOverContent from "@/app/(pokemon)/_components/content/GameOver";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;
@@ -52,20 +52,19 @@ export default function PokemonFeedback({
   return (
     <>
       {!gameOver[mode] && (
-        <div className="flex flex-col justify-center gap-x-1 gap-y-2 overflow-x-auto capitalize">
-          {guessedItems.length !== 0 && (
-            <div className="flex">
-              {HEADINGS.map((heading) => (
+        <div className="overflow-x-auto md:overflow-x-visible">
+          <div className=" grid w-[600px] grid-cols-6 justify-center gap-x-1 gap-y-2 capitalize md:mx-auto md:-ml-[30%] md:w-[160%]">
+            {guessedItems.length !== 0 &&
+              HEADINGS.map((heading) => (
                 <div
                   key={heading}
-                  className="basis-1/6 text-center font-medium uppercase"
+                  className="min-w-[100px] basis-1/6 text-center font-medium uppercase"
                 >
                   {heading}
                 </div>
               ))}
-            </div>
-          )}
-          {feedbackStatements}
+            {feedbackStatements}
+          </div>
         </div>
       )}
       {gameOver[mode] && pokemonToGuess && (

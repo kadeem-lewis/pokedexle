@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TYPES, PokemonType } from "../PokemonTypes";
+import { TYPES, PokemonType } from "@/app/(pokemon)/_components/PokemonTypes";
 import { TypeBadge } from "./TypeBadge";
 import { Pokemon } from "@/atoms/GameAtoms";
 import {

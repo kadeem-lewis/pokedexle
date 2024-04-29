@@ -1,4 +1,4 @@
-import OptionsBar from "@/components/layout/OptionsBar";
+import OptionsBar from "@/app/(pokemon)/_components/OptionsBar";
 import React, { Suspense } from "react";
 import Loading from "./loading";
 

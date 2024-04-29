@@ -1,9 +1,9 @@
-import { VariantProps, cva, cx } from "class-variance-authority";
+import { tv, type VariantProps } from "tailwind-variants";
 import { ComponentProps } from "react";
 
-const badgeVariants = cva(
-  "text-shadow rounded-md border-b-2 border-t-2 text-center font-medium uppercase leading-none",
+const badge = tv(
   {
+    base: "text-shadow rounded-md border-b-2 border-t-2 text-center font-medium uppercase leading-none",
     variants: {
       type: {
         normal: "border-b-normal-300 border-t-normal-100 bg-normal-200",
@@ -32,19 +32,15 @@ const badgeVariants = cva(
       },
     },
   },
+  {
+    twMerge: false,
+  },
 );
 
-interface BadgeProps
-  extends ComponentProps<"div">,
-    VariantProps<typeof badgeVariants> {}
-
-function TypeBadge({ className, type, effect, ...props }: BadgeProps) {
-  return (
-    <div
-      {...props}
-      className={cx(badgeVariants({ type, effect, className }))}
-    />
-  );
+interface BadgeProps extends ComponentProps<"div">, VariantProps<typeof badge> {
+  className?: string;
 }
 
-export { TypeBadge, badgeVariants };
+export function TypeBadge({ className, type, effect, ...props }: BadgeProps) {
+  return <div {...props} className={badge({ type, effect, className })} />;
+}

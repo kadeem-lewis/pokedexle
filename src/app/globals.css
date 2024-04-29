@@ -26,7 +26,6 @@
 
 @layer base {
   :root {
-    --background: 259.6 5% 93%; /* #212024 */
     --bg-canvas: 259.6 5% 93%; /* #212024 */
     --foreground: 0 0% 0%;
     --primary: 259.6 5% 100%;
@@ -41,7 +40,6 @@
   background: #121212,
   */
   .dark {
-    --background: 240, 5.3%, 7.5%; /* #121214 */
     --foreground: 0 0% 95%; /*  */
     --primary: 253.1, 67.6%, 58.8%; /* #6e4fdd */
     --primary-hover: 252, 46.2%, 51.2%; /* #6049bc */
@@ -50,6 +48,8 @@
     --success:; /* */
     --fg: 240, 6.2%, 93.7%; /* #eeeef0 */
     --bg-canvas: 240, 5.3%, 7.5%; /* #121214 */
+    --canvas:; /*  */
+    --canvas-accent:; /*  */
     --bg-panel: 225, 5.6%, 14.1%; /* #222326 */
     --bg-panel-hover: 254.2, 54.3%, 27.5%; /* #32206C */
     --bg-panel-active: 253, 50.3%, 32.4%; /* #3B297C */
@@ -59,6 +59,16 @@
     --border: 231.4, 5.8%, 23.7%; /* #393A40 */
     --focus: 252, 48.1%, 53.1%; /* #654EC1 */
     --pokemon:; /*  */
+    --canvas-muted:; /*  */
+    --canvas-accent-muted:; /*  */
+    --panel:; /*  */
+    --panel-accent:; /*  */
+    --panel-accent-hover:; /*  */
+    --panel-accent-active:; /*  */
+    --border-accent:; /*  */
+    --border-interactive:; /*  */
+    --border-accent-interactive:; /*  */
+    --focus-accent:; /*  */
   }
 }
 

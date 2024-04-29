@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { TypeBadge } from "./ui/TypeBadge";
+import { TypeBadge } from "@/components/ui/TypeBadge";
 import { useAtomValue } from "jotai";
 import {
   Pokemon,

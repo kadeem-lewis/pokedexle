@@ -1,29 +1,31 @@
 import {
-  pokemonToGuessAtom,
+  currentGameMode,
   guessedItemsAtom,
   guessAtom,
-  currentGameMode,
+  whosthatpokemonAnswersAtom,
+  pokemonToGuessAtom,
   dailyDataAtom,
-  classicAnswersAtom,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
-import React, { useEffect } from "react";
-import { Skeleton } from "../ui/Skeleton";
-import DailyUnavailable from "../DailyUnavailable";
-import PokemonFeedback from "./PokemonFeedback";
+import { useEffect } from "react";
+import ImagePanel from "./ImagePanel";
+import DailyUnavailable from "@/app/(pokemon)/_components/DailyUnavailable";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { CalendarDate } from "@internationalized/date";
 
 export default function DailyGame() {
+  const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const mode = useAtomValue(currentGameMode);
   const [{ data, isPending, isError }] = useAtom(dailyDataAtom);
-  const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
+  const [whosthatpokemonAnswers, setWhosthatpokemonAnswers] = useAtom(
+    whosthatpokemonAnswersAtom,
+  );
 
   useEffect(() => {
-    if (mode !== "classic") return;
+    if (mode !== "whosthatpokemon") return;
     if (!data?.date) return;
     const date = new Date(data.date);
     const serverTime = new CalendarDate(
@@ -31,38 +33,38 @@ export default function DailyGame() {
       date.getMonth(),
       date.getDate(),
     ).toString();
-    if (serverTime === classicAnswers?.date) {
+    if (serverTime === whosthatpokemonAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,
-        classic: classicAnswers?.answers,
+        whosthatpokemon: whosthatpokemonAnswers?.answers,
       }));
       setGuesses((prev) => ({
         ...prev,
-        classic: defaultGuesses - classicAnswers?.answers.length,
+        whosthatpokemon:
+          defaultGuesses - whosthatpokemonAnswers?.answers.length,
       }));
     } else {
-      console.log("HaHa I keep printing");
-      setClassicAnswers({
+      setWhosthatpokemonAnswers({
         date: serverTime,
         answers: [],
       });
     }
   }, [
-    classicAnswers?.date,
-    classicAnswers?.answers,
     guessedItems.classic.length,
     mode,
-    setClassicAnswers,
+    whosthatpokemonAnswers?.date,
+    whosthatpokemonAnswers?.answers,
     setGuessedItems,
     setGuesses,
+    setWhosthatpokemonAnswers,
     data?.date,
   ]);
 
   if (isPending) return <Skeleton className="h-48" />;
   if (isError) return <DailyUnavailable />;
 
-  return pokemonToGuess.classic ? (
-    <PokemonFeedback correctAnswer={pokemonToGuess.classic} />
+  return pokemonToGuess.whosthatpokemon ? (
+    <ImagePanel correctAnswer={pokemonToGuess.whosthatpokemon} />
   ) : (
     <DailyUnavailable />
   );
