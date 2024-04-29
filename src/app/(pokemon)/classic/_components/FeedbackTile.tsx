@@ -36,7 +36,7 @@ export default function FeedbackTile({
   }
 
   return (
-    <div className="flex gap-x-1">
+    <>
       {guessedItem.name === correctItem.name ? (
         <>
           <TooltipTrigger>
@@ -126,6 +126,6 @@ export default function FeedbackTile({
           )}
         </>
       )}
-    </div>
+    </>
   );
 }
