@@ -27,77 +27,83 @@
 @layer base {
   :root {
     --bg-canvas: 259.6 5% 93%; /* #212024 */
-    --foreground: 0 0% 0%;
-    --primary: 259.6 5% 100%;
-    --primary-foreground:;
-    --secondary:;
-    --secondary-foreground:;
-    --success:; /**/
-    --fg: 0 0% 0%; /**/
+    --primary: 231, 5%, 50%; /* #787A85 */
+    --primary-accent: 253, 47%, 36%; /* #423086 */
+    --primary-hover: 230, 5%, 45%; /* #6E707A */
+    --primary-accent-hover: 251, 40%, 43%; /* #52429A */
+    --canvas: 240, 3%, 93.5%; /* #eeeeef */
+    --canvas-accent: 240, 13.3%, 94.1%; /* #EEEEF2 */
+    --bg-muted: 240, 3.8%, 10.2%; /* #19191B */
+    --fg-muted: 234.5, 7.7%, 72%; /* #B2B3BD */
+    --fg-disabled: 230.8, 5.1%, 50%; /* #797B86 */
+    --canvas-muted: 220, 7.3%, 92%; /* #e9eaec */
+    --canvas-accent-muted: 240, 25.7%, 93.1%; /* #e9e9f2 */
+    --panel: 225, 6.7%, 88.2%; /* #dfe0e3 */
+    --panel-accent: 242.7, 52.4%, 91.8%; /* #e0dff5 */
+    --panel-hover: 228, 6.5%, 84.9%; /* #D6D7DB */
+    --panel-accent-hover: 241.7, 68.6%, 90%; /* #D5D4F7 */
+    --panel-active: 231, 8%, 82%; /* #CECFD5 */
+    --panel-accent-active: 244, 75%, 87%; /* #C9C6F7 */
+    --border: 231, 7%, 79%; /* #C6C7CD */
+    --border-accent: 245, 76%, 84%; /* #BBB6F5 */
+    --border-interactive: 228, 8%, 75%; /* #B9BBC3 */
+    --border-accent-interactive: 246, 76%, 79%; /* #A8A0F2 */
+    --focus: 231, 8%, 67%; /* #A5A7B2 */
+    --focus-accent: 248, 76%, 72%; /* #9283EE */
+    --fg: 230, 9%, 13%; /* #1E1F24 */
+    --fg-accent: 256, 59%, 28%; /* #341E73 */
+    --fg-muted: 234, 6%, 34%; /* #51525B */
+    --fg-muted-accent: 251, 43%, 45%; /* #5542A6 */
+    --fg-disabled: 230, 5%, 45%; /* #6E707A */
+    --fg-disabled-accent: 251, 40%, 43%; /* #52429A */
   }
   /* 
   primary color: #423086,
   background: #121212,
   */
   .dark {
-    --foreground: 0 0% 95%; /*  */
-    --primary: 253.1, 67.6%, 58.8%; /* #6e4fdd */
-    --primary-hover: 252, 46.2%, 51.2%; /* #6049bc */
-    --primary-fg: 245.3, 100%, 93.3%; /* #E0DDFF */
-    --primary-fg-muted: 249.9, 100%, 82.2%; /* #B3A4FF */
-    --success:; /* */
+    --primary: 231, 6%, 45%; /* #6C6E79 */
+    --primary-accent: 253.1, 67.6%, 58.8%; /* #6e4fdd */
+    --primary-hover: 230.8, 5.1%, 50%; /* #797B86 */
+    --primary-accent-hover: 252, 46%, 51%; /* #6049BC */
     --fg: 240, 6.2%, 93.7%; /* #eeeef0 */
-    --bg-canvas: 240, 5.3%, 7.5%; /* #121214 */
-    --canvas:; /*  */
-    --canvas-accent:; /*  */
-    --bg-panel: 225, 5.6%, 14.1%; /* #222326 */
-    --bg-panel-hover: 254.2, 54.3%, 27.5%; /* #32206C */
-    --bg-panel-active: 253, 50.3%, 32.4%; /* #3B297C */
+    --fg-accent: 245, 100%, 93%; /* #E0DDFF */
+    --canvas: 240, 5.3%, 7.5%; /* #121214 */
+    --canvas-accent: 244.3, 30.4%, 9%; /* #11101e */
     --bg-muted: 240, 3.8%, 10.2%; /* #19191B */
     --fg-muted: 234.5, 7.7%, 72%; /* #B2B3BD */
+    --fg-accent-muted: 250, 100%, 82%; /* #B3A4FF */
     --fg-disabled: 230.8, 5.1%, 50%; /* #797B86 */
+    --fg-accent-disabled: 252, 46%, 51%; /* #6049BC */
+    --canvas-muted: 240, 3.8%, 10.2%; /* #19191b */
+    --canvas-accent-muted: 246.3, 31.1%, 12%; /* #171528 */
+    --panel: 225, 5.6%, 14.1%; /* #222326 */
+    --panel-accent: 251.3, 45.3%, 20.8%; /* #261d4d */
+    --panel-hover: 228, 5.7%, 17.1%; /* #292a2e */
+    --panel-accent-hover: 254.2, 54.3%, 27.5%; /* #32206C */
+    --panel-active: 230, 5.9%, 20%; /* #303136 */
+    --panel-accent-active: 253, 50.3%, 32.4%; /* #3B297C */
     --border: 231.4, 5.8%, 23.7%; /* #393A40 */
-    --focus: 252, 48.1%, 53.1%; /* #654EC1 */
-    --pokemon:; /*  */
-    --canvas-muted:; /*  */
-    --canvas-accent-muted:; /*  */
-    --panel:; /*  */
-    --panel-accent:; /*  */
-    --panel-accent-hover:; /*  */
-    --panel-accent-active:; /*  */
-    --border-accent:; /*  */
-    --border-interactive:; /*  */
-    --border-accent-interactive:; /*  */
-    --focus-accent:; /*  */
+    --border-accent: 251.9, 45.3%, 37.3%; /* #45348a */
+    --border-interactive: 226.7, 6%, 29.2%; /* #46484f */
+    --border-accent-interactive: 251.4, 42.2%, 44.1%; /* #5341A0 */
+    --focus: 234.5, 5.5%, 39.4%; /* #5f606a */
+    --focus-accent: 252, 48.1%, 53.1%; /* #654EC1 */
   }
 }
+/* I need to have colors for red, red arrow, red hover, red arrow hover and save for the greens */
 
 @layer base {
   body {
-    /* --c1: #444cf7;
-    --c2: #e5e5f7; */
-    @apply bg-bg-canvas text-fg;
-    /* background-color: #e5e5f7;
-    background-image: repeating-linear-gradient(
-        45deg,
-        hsl(var(--primary)) 25%,
-        transparent 25%,
-        transparent 75%,
-        hsl(var(--primary)) 75%,
-        hsl(var(--primary))
+    --c1: #444cf7;
+    --c2: #e5e5f7;
+    @apply bg-canvas text-fg;
+    background-image: linear-gradient(
+        hsl(var(--border-accent)) 1px,
+        transparent 1px
       ),
-      repeating-linear-gradient(
-        45deg,
-        hsl(var(--primary)) 25%,
-        hsl(var(--primary-fg)) 25%,
-        hsl(var(--primary-fg)) 75%,
-        hsl(var(--primary)) 75%,
-        hsl(var(--primary))
-      );
-    background-position:
-      0 0,
-      10px 10px;
-    background-size: 20px 20px; */
+      linear-gradient(to right, hsl(var(--border-accent)) 1px, transparent 1px);
+    background-size: 100px 100px;
   }
 }
 
@@ -107,5 +113,13 @@
   }
   .text-border {
     text-shadow: 0px 0px 2px black;
+  }
+  .stripes {
+    background-image: linear-gradient(
+      0deg,
+      hsl(var(--panel-active)) 50%,
+      hsl(var(--primary-accent)) 50%
+    );
+    background-size: 10px 10px;
   }
 }

@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 
 const tile = tv(
   {
-    base: "text-shadow basis-1/6 border-2 border-black text-white shadow-inner before:block",
+    base: "text-shadow basis-1/6 rounded-md border-2 border-primary text-white shadow-inner before:block",
     variants: {
       status: {
         correct: "bg-green-500",

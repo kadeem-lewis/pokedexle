@@ -25,7 +25,7 @@ export default function ThemeSwitch() {
       <Button
         name="theme-toggle"
         aria-label="Toggle Dark Mode"
-        className="inline-flex transform items-center justify-center rounded-md border-2 border-foreground p-1 text-fg transition duration-200 ease-in-out hover:bg-bg-muted"
+        className="inline-flex transform items-center justify-center rounded-md border-2 border-fg p-1 text-fg transition duration-200 ease-in-out hover:bg-bg-muted"
       >
         <Icon
           name="pokemon-moon"
@@ -36,7 +36,7 @@ export default function ThemeSwitch() {
           className="absolute size-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
         />
       </Button>
-      <MenuContent onAction={handleThemeChange}>
+      <MenuContent onAction={handleThemeChange} className="text-2xl">
         <MenuItem id="light">Light</MenuItem>
         <MenuItem id="dark">Dark</MenuItem>
         <MenuItem id="system">System</MenuItem>

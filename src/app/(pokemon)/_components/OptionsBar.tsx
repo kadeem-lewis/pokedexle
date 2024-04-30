@@ -11,10 +11,10 @@ import Support from "./content/Support";
 
 export default function OptionsBar() {
   return (
-    <nav className=" grid grid-cols-6 border-2 border-foreground bg-bg-panel ring-4 ring-purple-700">
+    <nav className=" bg-panel grid grid-cols-6 border-2 border-fg ring-4 ring-purple-700">
       <DialogTrigger>
         <Button
-          className="border-r-2 border-foreground py-1"
+          className="border-r-2 border-fg py-1"
           aria-label="open how to play modal"
         >
           <Icon
@@ -30,7 +30,7 @@ export default function OptionsBar() {
       </DialogTrigger>
       <DialogTrigger>
         <Button
-          className="border-r-2 border-foreground py-1"
+          className="border-r-2 border-fg py-1"
           aria-label="open about modal"
         >
           <Icon
@@ -46,7 +46,7 @@ export default function OptionsBar() {
       </DialogTrigger>
       <DialogTrigger>
         <Button
-          className="border-r-2 border-foreground py-1"
+          className="border-r-2 border-fg py-1"
           aria-label="open stats modal"
         >
           <Icon name="heroicons-chart-bar-solid" className="mx-auto h-6 w-6" />
@@ -59,7 +59,7 @@ export default function OptionsBar() {
       </DialogTrigger>
       <DialogTrigger>
         <Button
-          className="border-r-2 border-foreground py-1"
+          className="border-r-2 border-fg py-1"
           aria-label="open calendar modal"
         >
           <Icon
@@ -75,7 +75,7 @@ export default function OptionsBar() {
       </DialogTrigger>
       <DialogTrigger>
         <Button
-          className="border-r-2 border-foreground py-1"
+          className="border-r-2 border-fg py-1"
           aria-label="open support modal"
         >
           <Icon name="heroicons-heart-solid" className="mx-auto h-6 w-6" />
