@@ -53,12 +53,12 @@ export default function PokemonFeedback({
     <>
       {!gameOver[mode] && (
         <div className="overflow-x-auto md:overflow-x-visible">
-          <div className=" grid w-[600px] grid-cols-6 justify-center gap-x-1 gap-y-2 capitalize md:mx-auto md:-ml-[30%] md:w-[160%]">
+          <div className=" grid w-[140%] grid-cols-6 justify-center gap-x-1 gap-y-2 capitalize md:-ml-[15%] md:w-[130%]">
             {guessedItems.length !== 0 &&
               HEADINGS.map((heading) => (
                 <div
                   key={heading}
-                  className="min-w-[100px] basis-1/6 text-center font-medium uppercase"
+                  className="basis-1/6 text-center font-medium uppercase"
                 >
                   {heading}
                 </div>
