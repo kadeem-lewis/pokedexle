@@ -41,7 +41,7 @@ export default function FeedbackTile({
         <>
           <TooltipTrigger>
             <Button>
-              <Tile status="correct">
+              <Tile status="correct" className="stripes">
                 <Image
                   src={guessedItem.sprite}
                   alt={`${guessedItem.name} sprite`}
@@ -69,7 +69,7 @@ export default function FeedbackTile({
       ) : (
         <>
           <TooltipTrigger delay={0}>
-            <Tile>
+            <Tile className="stripes">
               <Image
                 src={guessedItem.sprite}
                 alt={`${guessedItem.name} sprite`}
