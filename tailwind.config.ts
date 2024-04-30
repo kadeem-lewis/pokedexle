@@ -17,9 +17,9 @@ export default {
           DEFAULT: "hsl(var(--panel))",
           accent: "hsl(var(--panel-accent))",
           hover: "hsl(var(--panel-hover))",
-          "hover-accent": "hsl(var(--panel-hover-accent))",
+          "accent-hover": "hsl(var(--panel-accent-hover))",
           active: "hsl(var(--panel-active))",
-          "active-accent": "hsl(var(--panel-active-accent))",
+          "accent-active": "hsl(var(--panel-accent-active))",
         },
         fg: {
           DEFAULT: "hsl(var(--fg))",
