@@ -7,12 +7,19 @@ export default {
         "pokemon-ds": ["var(--font-pokemon-ds)"],
       },
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        bg: {
-          canvas: "hsl(var(--bg-canvas))",
-          muted: "hsl(var(--bg-muted))",
-          panel: "hsl(var(--bg-panel))",
+        canvas: {
+          DEFAULT: "hsl(var(--canvas))",
+          accent: "hsl(var(--canvas-accent))",
+          muted: "hsl(var(--canvas-muted))",
+          "accent-muted": "hsl(var(--canvas-accent-muted))",
+        },
+        panel: {
+          DEFAULT: "hsl(var(--panel))",
+          accent: "hsl(var(--panel-accent))",
+          hover: "hsl(var(--panel-hover))",
+          "hover-accent": "hsl(var(--panel-hover-accent))",
+          active: "hsl(var(--panel-active))",
+          "active-accent": "hsl(var(--panel-active-accent))",
         },
         fg: {
           DEFAULT: "hsl(var(--fg))",
@@ -21,15 +28,24 @@ export default {
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
+          accent: "hsl(var(--primary-accent))",
           hover: "hsl(var(--primary-hover))",
-          fg: "hsl(var(--primary-fg))",
-          "fg-muted": "hsl(var(--primary-fg-muted))",
+          "accent-hover": "hsl(var(--primary-accent-hover))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           hover: "hsl(var(--secondary-hover))",
         },
-        border: "hsl(var(--border))",
+        border: {
+          DEFAULT: "hsl(var(--border))",
+          accent: "hsl(var(--border-accent))",
+          interactive: "hsl(var(--border-interactive))",
+          "accent-interactive": "hsl(var(--border-accent-interactive))",
+        },
+        focus: {
+          DEFAULT: "hsl(var(--focus))",
+          accent: "hsl(var(--focus-accent))",
+        },
         normal: {
           100: "#C6C6A7",
           200: "#A8A878",
