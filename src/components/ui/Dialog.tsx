@@ -17,9 +17,9 @@ const dialog = tv({
     overlay:
       "fixed left-0 top-0 isolate z-20 flex h-[--visual-viewport-height] w-full items-center justify-center bg-black/[15%] p-4 text-center backdrop-blur-lg",
     modal:
-      "relative max-h-full w-full max-w-xl rounded-lg border-4 border-white bg-bg-panel bg-clip-padding text-left align-middle text-fg shadow-2xl ring-8 ring-border dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas]",
+      "bg-panel relative max-h-full w-full max-w-xl rounded-lg border-4 border-white bg-clip-padding text-left align-middle text-fg shadow-2xl ring-8 ring-border dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas]",
     content:
-      "relative max-h-[inherit] overflow-auto p-6 outline outline-0 before:absolute before:inset-0 before:z-[-1] before:bg-[url('/svgs/pokeball-hollow.svg')] before:bg-contain before:bg-center  before:bg-no-repeat before:bg-origin-content before:px-4 before:py-1 [[data-placement]>&]:p-4",
+      "relative max-h-[inherit] overflow-auto overflow-y-auto p-6 outline outline-0 before:absolute before:inset-0 before:z-[-1] before:bg-[url('/svgs/pokeball-hollow.svg')] before:bg-contain before:bg-center  before:bg-no-repeat before:bg-origin-content before:px-4 before:py-1 [[data-placement]>&]:p-4",
   },
 });
 

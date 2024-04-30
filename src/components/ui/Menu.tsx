@@ -16,7 +16,7 @@ import { tv } from "tailwind-variants";
 export const menu = tv({
   slots: {
     menuPopover:
-      "entering:animate-fade exiting:animate-fadeOut overflow-auto rounded-xl border-2 border-border border-white bg-bg-panel shadow-xl ring-4 ring-border",
+      "entering:animate-fade exiting:animate-fadeOut bg-panel overflow-auto rounded-xl border-2 border-border border-white shadow-xl ring-4 ring-border",
     header: "p-2",
     content: "flex h-fit w-56 flex-col gap-2 p-2 outline-none",
     item: "relative flex cursor-pointer justify-between rounded-md p-2 text-fg outline-none focus:bg-primary",
