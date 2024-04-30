@@ -233,7 +233,7 @@ export default function StatsRange() {
   }
 
   return (
-    <div className="my-4 flex justify-between text-xl font-semibold">
+    <div className="my-4 flex flex-wrap justify-center gap-3 text-2xl font-semibold md:font-medium">
       <div className="space-x-2">
         <span>Gen:</span>
         <span>{displayGenerationRange(generationRange[mode])}</span>
