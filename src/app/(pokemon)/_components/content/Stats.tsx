@@ -5,6 +5,7 @@ import {
 } from "@/atoms/GameAtoms";
 import { useAtomValue } from "jotai";
 import { usePathname } from "next/navigation";
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from "recharts";
 import React from "react";
 
 export default function StatsContent() {
@@ -12,18 +13,29 @@ export default function StatsContent() {
   const whosthatpokemonAnswers = useAtomValue(whosthatpokemonAnswersAtom);
 
   const pathname = usePathname();
-  console.log(pathname);
 
   const stats =
     pathname === "/classic"
       ? { name: "Classic", ...classicAnswers.stats }
       : pathname === "/whosthatpokemon"
         ? { name: "Who's that Pokemon", ...whosthatpokemonAnswers.stats }
-        : { plays: 0, wins: 0, streak: 0, name: "Unknown", maxStreak: 0 };
+        : {
+            plays: 0,
+            wins: 0,
+            streak: 0,
+            name: "Unknown",
+            maxStreak: 0,
+            guesses: [0, 0, 0, 0, 0, 0],
+          };
+
+  const data = stats.guesses.map((guess, index) => ({
+    name: String(index + 1),
+    value: guess,
+  }));
 
   return (
     <>
-      <p className="text-2xl font-semibold">{stats.name}</p>
+      <p className="text-2xl font-semibold">{stats.name} Stats</p>
       <div className="mb-4 grid grid-cols-6 text-center text-xl">
         <div className="col-span-2">
           <div>{stats.plays}</div>
@@ -53,6 +65,18 @@ export default function StatsContent() {
       <div>
         <p className="text-2xl font-semibold">Guess Distribution</p>
         {/* TODO: Add a radar chart or a bar chart from recharts */}
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart data={data} layout="vertical">
+            <XAxis type="number" hide />
+            <YAxis dataKey="name" type="category" />
+            <Bar
+              dataKey="value"
+              fill="#8884d8"
+              label={{ fill: "white", fontWeight: "bold" }}
+              minPointSize={10}
+            />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </>
   );
