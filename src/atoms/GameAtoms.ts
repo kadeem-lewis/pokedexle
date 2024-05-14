@@ -15,13 +15,15 @@ export type Pokemon = {
   sprite: string;
 };
 
+type FixedGuessArray = [number, number, number, number, number, number];
+
 type DailyStorage = {
   date: string;
   answers: Pokemon[];
   stats: {
     plays: number;
     wins: number;
-    guesses: [number, number, number, number, number, number];
+    guesses: FixedGuessArray;
     streak: number;
     maxStreak: number;
   };
@@ -260,34 +262,42 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
     }));
     // updating stats and localstorage on win
     if (mode === "classic") {
-      set(classicAnswersAtom, (prev) => ({
-        ...prev,
-        stats: {
-          guesses: prev.stats.guesses,
-          wins: prev.stats.wins + 1,
-          plays: prev.stats.plays + 1,
-          streak: prev.stats.streak + 1,
-          maxStreak:
-            prev.stats.streak >= prev.stats.maxStreak
-              ? prev.stats.streak + 1
-              : prev.stats.maxStreak,
-        },
-      }));
+      set(classicAnswersAtom, (prev) => {
+        const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
+        newGuesses[prev.answers.length - 1]++;
+        return {
+          ...prev,
+          stats: {
+            guesses: newGuesses,
+            wins: prev.stats.wins + 1,
+            plays: prev.stats.plays + 1,
+            streak: prev.stats.streak + 1,
+            maxStreak:
+              prev.stats.streak >= prev.stats.maxStreak
+                ? prev.stats.streak + 1
+                : prev.stats.maxStreak,
+          },
+        };
+      });
     }
     if (mode === "whosthatpokemon") {
-      set(whosthatpokemonAnswersAtom, (prev) => ({
-        ...prev,
-        stats: {
-          guesses: prev.stats.guesses,
-          wins: prev.stats.wins + 1,
-          plays: prev.stats.plays + 1,
-          streak: prev.stats.streak + 1,
-          maxStreak:
-            prev.stats.streak > prev.stats.maxStreak
-              ? prev.stats.streak + 1
-              : prev.stats.maxStreak,
-        },
-      }));
+      set(whosthatpokemonAnswersAtom, (prev) => {
+        const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
+        newGuesses[prev.answers.length - 1] + 1;
+        return {
+          ...prev,
+          stats: {
+            guesses: newGuesses,
+            wins: prev.stats.wins + 1,
+            plays: prev.stats.plays + 1,
+            streak: prev.stats.streak + 1,
+            maxStreak:
+              prev.stats.streak > prev.stats.maxStreak
+                ? prev.stats.streak + 1
+                : prev.stats.maxStreak,
+          },
+        };
+      });
     }
   }
 });
