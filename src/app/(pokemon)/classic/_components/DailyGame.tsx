@@ -42,10 +42,11 @@ export default function DailyGame() {
       }));
     } else {
       console.log("HaHa I keep printing");
-      setClassicAnswers({
+      setClassicAnswers((prev) => ({
+        ...prev,
         date: serverTime,
         answers: [],
-      });
+      }));
     }
   }, [
     classicAnswers?.date,

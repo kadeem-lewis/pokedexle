@@ -44,10 +44,11 @@ export default function DailyGame() {
           defaultGuesses - whosthatpokemonAnswers?.answers.length,
       }));
     } else {
-      setWhosthatpokemonAnswers({
+      setWhosthatpokemonAnswers((prev) => ({
+        ...prev,
         date: serverTime,
         answers: [],
-      });
+      }));
     }
   }, [
     guessedItems.classic.length,
