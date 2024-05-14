@@ -231,6 +231,7 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
     ...prev,
     [mode]: [...prev[mode], newItem],
   }));
+  // Here I am adding the guessed item to localStorage
   if (mode === "classic") {
     set(classicAnswersAtom, (prev) => ({
       ...prev,
@@ -246,6 +247,7 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   } else if (mode === "whosthatpokemonUnlimited") {
     set(whosthatpokemonPracticeAnswersAtom, (prev) => [...prev, newItem]);
   }
+  // Decrementing guesses if the item is not the correct answer
   if (!(newItem.name === get(pokemonToGuessAtom)[mode]?.name)) {
     set(guessAtom, (prev) => ({
       ...prev,
@@ -256,6 +258,7 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
       ...prev,
       [mode]: true,
     }));
+    // updating stats and localstorage on win
     if (mode === "classic") {
       set(classicAnswersAtom, (prev) => ({
         ...prev,
@@ -285,10 +288,6 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
               : prev.stats.maxStreak,
         },
       }));
-    }
-    if (mode === "classicUnlimited") set(classicPracticeAnswersAtom, []);
-    if (mode === "whosthatpokemonUnlimited") {
-      set(whosthatpokemonPracticeAnswersAtom, []);
     }
   }
 });
