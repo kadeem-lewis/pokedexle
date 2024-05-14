@@ -83,7 +83,7 @@ export default function PokemonSearch() {
         <Button
           type="submit"
           variant="flat"
-          className="flex-none cursor-pointer bg-purple-300 hover:bg-purple-400"
+          className="bg-primary-accent hover:bg-primary-accent-hover flex-none cursor-pointer"
         >
           Submit
         </Button>

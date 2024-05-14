@@ -25,7 +25,9 @@ interface TileProps extends ComponentProps<"div">, VariantProps<typeof tile> {
   className?: string;
 }
 
-//TODO: Tailwind variant will probably allow me to have this as one component
+//TODO: Tailwind variant will probably allow me to have this as one component. I need to make the two divs different slots
+//TODO: I also need to use react-aria to make this focusable or at least the image ones.
+//TODO: I need to make a variant for images
 export function Tile({
   className,
   status,

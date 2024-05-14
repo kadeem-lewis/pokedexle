@@ -34,12 +34,7 @@ const MenuContent = <T extends object>({
   className,
   ...props
 }: MenuProps<T> & { className?: string }) => (
-  <Popover
-    isNonModal
-    {...props}
-    className={menuPopover()}
-    placement="bottom right"
-  >
+  <Popover {...props} className={menuPopover()} placement="bottom right">
     <AriaMenu {...props} className={content({ className })}>
       {children}
     </AriaMenu>

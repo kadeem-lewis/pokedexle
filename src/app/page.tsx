@@ -16,7 +16,7 @@ const NAV_LINKS = [
 export default function Home() {
   return (
     <>
-      <h2 className=" border-y-8 border-double border-y-purple-600 border-opacity-75 bg-purple-600 bg-opacity-75 bg-clip-padding py-2 text-center text-3xl">
+      <h2 className=" border-y-primary-accent bg-primary-accent border-y-8 border-double border-opacity-75 bg-opacity-75 bg-clip-padding py-2 text-center text-3xl">
         Test your Pokémon Knowledge
       </h2>
       {NAV_LINKS.map((link) => (

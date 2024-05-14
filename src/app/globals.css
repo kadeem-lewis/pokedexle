@@ -26,20 +26,18 @@
 
 @layer base {
   :root {
-    --bg-canvas: 259.6 5% 93%; /* #212024 */
     --primary: 231, 5%, 50%; /* #787A85 */
     --primary-accent: 253, 47%, 36%; /* #423086 */
     --primary-hover: 230, 5%, 45%; /* #6E707A */
     --primary-accent-hover: 251, 40%, 43%; /* #52429A */
-    --canvas: 240, 3%, 93.5%; /* #eeeeef */
-    --canvas-accent: 240, 13.3%, 94.1%; /* #EEEEF2 */
-    --bg-muted: 240, 3.8%, 10.2%; /* #19191B */
+    --canvas: 225, 6.7%, 88.2%; /* #dfe0e3 */
+    --canvas-accent: 242.7, 52.4%, 91.8%; /* #e0dff5 */
     --fg-muted: 234.5, 7.7%, 72%; /* #B2B3BD */
     --fg-disabled: 230.8, 5.1%, 50%; /* #797B86 */
     --canvas-muted: 220, 7.3%, 92%; /* #e9eaec */
     --canvas-accent-muted: 240, 25.7%, 93.1%; /* #e9e9f2 */
-    --panel: 225, 6.7%, 88.2%; /* #dfe0e3 */
-    --panel-accent: 242.7, 52.4%, 91.8%; /* #e0dff5 */
+    --panel: 240, 3%, 93.5%; /* #eeeeef */
+    --panel-accent: 240, 13.3%, 94.1%; /* #EEEEF2 */
     --panel-hover: 228, 6.5%, 84.9%; /* #D6D7DB */
     --panel-accent-hover: 241.7, 68.6%, 90%; /* #D5D4F7 */
     --panel-active: 231, 8%, 82%; /* #CECFD5 */
@@ -70,7 +68,7 @@
     --fg-accent: 245, 100%, 93%; /* #E0DDFF */
     --canvas: 240, 5.3%, 7.5%; /* #121214 */
     --canvas-accent: 244.3, 30.4%, 9%; /* #11101e */
-    --bg-muted: 240, 3.8%, 10.2%; /* #19191B */
+    --canvas-muted: 240, 3.8%, 10.2%; /* #19191B */
     --fg-muted: 234.5, 7.7%, 72%; /* #B2B3BD */
     --fg-accent-muted: 250, 100%, 82%; /* #B3A4FF */
     --fg-disabled: 230.8, 5.1%, 50%; /* #797B86 */

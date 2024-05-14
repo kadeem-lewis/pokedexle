@@ -16,25 +16,22 @@
 
 - [x] Don't show new answer briefly when clicking new game
 - [x] Don't show game lost when getting it right on the last guess
-- [ ] Images need to load faster
-- [ ] All buttons and links should have some visual change when hover
 - [x] Add a tooltip to icons and to pokemon images
-- [ ] Create a background for who's that pokemon and for pokemon image tile
 - [x] Make "Test your knowledge" bigger
+- [x] game over should not be a modal. It should either replace to add on to the content on screen so that the user doesn't have to constantly close a modal
+- [x] replace react-tooltip, react-day-picker, headlessui/react, headlessui/tailwindcss with react-aria and tailwindcss-react-aria-components
+- [x] I might actually not need the base react aria package. I do, for focus and hover of non button type elements
+
+- [ ] All buttons and links should have some visual change when hover
+- [ ] Images need to load faster
+- [ ] Create a background for who's that pokemon and for pokemon image tile
 - [ ] find a way to make images grow to take up full container
-
-- [ ] game over should not be a modal. It should either replace to add on to the content on screen so that the user doesn't have to constantly close a modal
-
-- [ ] replace react-tooltip, react-day-picker, headlessui/react, headlessui/tailwindcss with react-aria and tailwindcss-react-aria-components
 - [ ] fix wsl2 turning off server randomly
-
 - [ ] make pokemon tiles focusable so I don't have to render a button inside to use tooltip
 - [ ] find a better system for rendering the tiles so that I can enable scroll, they don't randomly change size and can be dynamically resized
 - [ ] fix error happening with unlimited mode
 - [ ] create calendar component and then begin styling the react aria components using tailwind and maybe framer motion
 - [ ] create an additional combobox component that will likely handle the filtering as well as submitting data etc
-
-- [ ] I might actually not need the base react aria package
 
 TODO In Order 4/16
 
@@ -47,8 +44,12 @@ TODO In Order 4/16
 - I temporarily just copied all the button code over for places where buttonVariants were used. Mainly for links. I need to create a link component for these instances
 - I had to add twMerge false to tv because it was getting rid of custom text shadow
 
-- There is no scroll in content on mobile
-- there is no autofocus for combobox
-- I am thinking about potentially hiding navbar on mobile but I would need to use router.replace or something so users are stuck on page because they clicked too much
-- dialog should open more to top of screen instead of center
-- I don't think I should use pokemon-ds for everything since it seems to greatly affect readability at some points. Figure out if I need to do that after additional styling though
+- [ ] There is no scroll in content on mobile
+- [ ] there is no autofocus for combobox
+- [ ] I am thinking about potentially hiding navbar on mobile but I would need to use router.replace or something so users are stuck on page because they clicked too much
+- [ ] dialog should open more to top of screen instead of center
+- [ ] I don't think I should use pokemon-ds for everything since it seems to greatly affect readability at some points. Figure out if I need to do that after additional styling though
+- [ ] figure out why whosthatpokemon is breaking on first load
+- [ ] look more into jotai to make sure that I can properly track changes in other atoms
+
+on desktop, the answers should break out of container but still be centered. On Mobile its gonna be shown from the start with a scroll

@@ -25,18 +25,16 @@ export default function PokemonFeedback({
   const mode = useAtomValue(currentGameMode);
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
-  //TODO: find a better way to result the pokemon[] or error
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   const [gameOver, setGameOver] = useAtom(gameOverAtom);
 
+  //TODO: Maybe this could become a custom hook
   useEffect(() => {
     if (
       guesses <= 0 ||
       guessedItems.some((item) => item.name === pokemonToGuess?.name)
     ) {
       setGameOver((prev) => ({ ...prev, [mode]: true }));
-    } else {
-      setGameOver((prev) => ({ ...prev, [mode]: false }));
     }
   }, [guessedItems, guesses, mode, pokemonToGuess?.name, setGameOver]);
 

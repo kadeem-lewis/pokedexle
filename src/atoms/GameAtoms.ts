@@ -15,9 +15,18 @@ export type Pokemon = {
   sprite: string;
 };
 
+type FixedGuessArray = [number, number, number, number, number, number];
+
 type DailyStorage = {
   date: string;
   answers: Pokemon[];
+  stats: {
+    plays: number;
+    wins: number;
+    guesses: FixedGuessArray;
+    streak: number;
+    maxStreak: number;
+  };
 };
 
 type GuessedItems = {
@@ -128,6 +137,13 @@ export const classicAnswersAtom = atomWithStorage<DailyStorage>(
   {
     date: today(getLocalTimeZone()).toString(),
     answers: [],
+    stats: {
+      plays: 0,
+      wins: 0,
+      guesses: [0, 0, 0, 0, 0, 0],
+      streak: 0,
+      maxStreak: 0,
+    },
   },
 );
 classicAnswersAtom.debugLabel = "classicAnswersAtom";
@@ -137,6 +153,13 @@ export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
   {
     date: today(getLocalTimeZone()).toString(),
     answers: [],
+    stats: {
+      plays: 0,
+      wins: 0,
+      guesses: [0, 0, 0, 0, 0, 0],
+      streak: 0,
+      maxStreak: 0,
+    },
   },
 );
 whosthatpokemonAnswersAtom.debugLabel = "whosthatpokemonAnswersAtom";
@@ -202,6 +225,7 @@ export const newGameAtom = atom(null, (get, set) => {
 newGameAtom.debugLabel = "newGameAtom";
 
 //derived writable atom that adds the value passed into the guessed item array
+//! This atom has too many responsibilities. It should be broken up into smaller atoms
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
   const mode = get(currentGameMode);
 
@@ -209,21 +233,23 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
     ...prev,
     [mode]: [...prev[mode], newItem],
   }));
+  // Here I am adding the guessed item to localStorage
   if (mode === "classic") {
     set(classicAnswersAtom, (prev) => ({
-      date: prev.date,
+      ...prev,
       answers: [...prev.answers, newItem],
     }));
   } else if (mode === "classicUnlimited") {
     set(classicPracticeAnswersAtom, (prev) => [...prev, newItem]);
   } else if (mode === "whosthatpokemon") {
     set(whosthatpokemonAnswersAtom, (prev) => ({
-      date: prev.date,
+      ...prev,
       answers: [...prev.answers, newItem],
     }));
   } else if (mode === "whosthatpokemonUnlimited") {
     set(whosthatpokemonPracticeAnswersAtom, (prev) => [...prev, newItem]);
   }
+  // Decrementing guesses if the item is not the correct answer
   if (!(newItem.name === get(pokemonToGuessAtom)[mode]?.name)) {
     set(guessAtom, (prev) => ({
       ...prev,
@@ -234,15 +260,50 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
       ...prev,
       [mode]: true,
     }));
+    // updating stats and localstorage on win
     if (mode === "classic") {
-      set(classicWinsAtom, (prev) => prev++);
+      set(classicAnswersAtom, (prev) => {
+        const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
+        newGuesses[prev.answers.length - 1]++;
+        return {
+          ...prev,
+          stats: {
+            guesses: newGuesses,
+            wins: prev.stats.wins + 1,
+            plays: prev.stats.plays + 1,
+            streak: prev.stats.streak + 1,
+            maxStreak:
+              prev.stats.streak >= prev.stats.maxStreak
+                ? prev.stats.streak + 1
+                : prev.stats.maxStreak,
+          },
+        };
+      });
     }
-    if (mode === "classicUnlimited") set(classicPracticeAnswersAtom, []);
-    if (mode === "whosthatpokemonUnlimited") {
-      set(whosthatpokemonPracticeAnswersAtom, []);
+    if (mode === "whosthatpokemon") {
+      set(whosthatpokemonAnswersAtom, (prev) => {
+        const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
+        newGuesses[prev.answers.length - 1] + 1;
+        return {
+          ...prev,
+          stats: {
+            guesses: newGuesses,
+            wins: prev.stats.wins + 1,
+            plays: prev.stats.plays + 1,
+            streak: prev.stats.streak + 1,
+            maxStreak:
+              prev.stats.streak > prev.stats.maxStreak
+                ? prev.stats.streak + 1
+                : prev.stats.maxStreak,
+          },
+        };
+      });
     }
   }
 });
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
 
-export const classicWinsAtom = atomWithStorage("classic_win_count", 0);
+//TODO: Localstorage stat to track if it's the first time the user is playing the game
+//! The way framed does stats is it saves guesses as an array and it increments the value in the array correspondent to the guess. makes it easy to add into a chart
+// The other values can just be incremented. If the user loses then reset streak and if they win increment streak. If streak is greater than max streak then set max streak to streak
+// Don't save the results of archive games

@@ -233,17 +233,17 @@ export default function StatsRange() {
   }
 
   return (
-    <div className="my-4 flex justify-between text-xl">
-      <div className="space-x-2">
-        <span>Gen:</span>
+    <div className="my-4 flex flex-wrap justify-between gap-3 text-center text-2xl">
+      <div className="flex-grow space-x-2">
+        <span className="font-semibold">Gen:</span>
         <span>{displayGenerationRange(generationRange[mode])}</span>
       </div>
-      <div className="space-x-2">
-        <span>HT:</span>
+      <div className="flex-grow space-x-2">
+        <span className="font-semibold">HT:</span>
         <span>{displayHeightRange(heightRange[mode])}</span>
       </div>
-      <div className="space-x-2">
-        <span>WT:</span>
+      <div className="flex-grow space-x-2">
+        <span className="font-semibold">WT:</span>
         <span>{displayWeightRange(weightRange[mode])}</span>
       </div>
     </div>
