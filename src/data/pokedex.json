@@ -12118,5 +12118,185 @@
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1010.png",
     "height": 15,
     "weight": 1250
+  },
+  {
+    "id": 1011,
+    "name": "dipplin",
+    "generation": 9,
+    "types": [
+      "grass",
+      "dragon"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1011.png",
+    "height": 4,
+    "weight": 97
+  },
+  {
+    "id": 1012,
+    "name": "poltchageist",
+    "generation": 9,
+    "types": [
+      "grass",
+      "ghost"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1012.png",
+    "height": 1,
+    "weight": 11
+  },
+  {
+    "id": 1013,
+    "name": "sinistcha",
+    "generation": 9,
+    "types": [
+      "grass",
+      "ghost"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1013.png",
+    "height": 2,
+    "weight": 22
+  },
+  {
+    "id": 1014,
+    "name": "okidogi",
+    "generation": 9,
+    "types": [
+      "poison",
+      "fighting"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1014.png",
+    "height": 18,
+    "weight": 922
+  },
+  {
+    "id": 1015,
+    "name": "munkidori",
+    "generation": 9,
+    "types": [
+      "poison",
+      "psychic"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1015.png",
+    "height": 10,
+    "weight": 122
+  },
+  {
+    "id": 1016,
+    "name": "fezandipiti",
+    "generation": 9,
+    "types": [
+      "poison",
+      "fairy"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1016.png",
+    "height": 14,
+    "weight": 301
+  },
+  {
+    "id": 1017,
+    "name": "ogerpon",
+    "generation": 9,
+    "types": [
+      "grass",
+      "none"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1017.png",
+    "height": 12,
+    "weight": 398
+  },
+  {
+    "id": 1018,
+    "name": "archaludon",
+    "generation": 9,
+    "types": [
+      "steel",
+      "dragon"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1018.png",
+    "height": 20,
+    "weight": 600
+  },
+  {
+    "id": 1019,
+    "name": "hydrapple",
+    "generation": 9,
+    "types": [
+      "grass",
+      "dragon"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1019.png",
+    "height": 18,
+    "weight": 930
+  },
+  {
+    "id": 1020,
+    "name": "gouging fire",
+    "generation": 9,
+    "types": [
+      "fire",
+      "dragon"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1020.png",
+    "height": 35,
+    "weight": 5900
+  },
+  {
+    "id": 1021,
+    "name": "raging bolt",
+    "generation": 9,
+    "types": [
+      "electric",
+      "dragon"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1021.png",
+    "height": 52,
+    "weight": 4800
+  },
+  {
+    "id": 1022,
+    "name": "iron boulder",
+    "generation": 9,
+    "types": [
+      "rock",
+      "psychic"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1022.png",
+    "height": 15,
+    "weight": 1625
+  },
+  {
+    "id": 1023,
+    "name": "iron crown",
+    "generation": 9,
+    "types": [
+      "steel",
+      "psychic"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1023.png",
+    "height": 16,
+    "weight": 1560
+  },
+  {
+    "id": 1024,
+    "name": "terapagos",
+    "generation": 9,
+    "types": [
+      "normal",
+      "none"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1024.png",
+    "height": 2,
+    "weight": 65
+  },
+  {
+    "id": 1025,
+    "name": "pecharunt",
+    "generation": 9,
+    "types": [
+      "poison",
+      "ghost"
+    ],
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1025.png",
+    "height": 3,
+    "weight": 3
   }
 ]
