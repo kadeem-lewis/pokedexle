@@ -18,7 +18,6 @@ export default function FeedbackTile({
   correctItem,
 }: FeedbackTileProps) {
   //TODO: find a way to have the pokemon images scale to the size of the container so smaller characters arent barely visible
-  //TODO: increase the size of the grid and have each box have a defined size and have them be in a vertical scrollable container
 
   function checkTypes(type: string): JSX.Element {
     if (correctItem.types.includes(type)) {

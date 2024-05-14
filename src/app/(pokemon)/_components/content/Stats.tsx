@@ -64,7 +64,6 @@ export default function StatsContent() {
       </div>
       <div>
         <p className="text-2xl font-semibold">Guess Distribution</p>
-        {/* TODO: Add a radar chart or a bar chart from recharts */}
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={data} layout="vertical">
             <XAxis type="number" hide />
