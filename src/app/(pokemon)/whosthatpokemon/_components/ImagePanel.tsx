@@ -55,8 +55,6 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
       guessedItems.some((item) => item.name === pokemonToGuess?.name)
     ) {
       setGameOver((prev) => ({ ...prev, [mode]: true }));
-    } else {
-      setGameOver((prev) => ({ ...prev, [mode]: false }));
     }
   }, [guessedItems, guesses, mode, pokemonToGuess?.name, setGameOver]);
 
