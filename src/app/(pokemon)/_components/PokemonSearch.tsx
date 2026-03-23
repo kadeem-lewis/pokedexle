@@ -45,7 +45,7 @@ export default function PokemonSearch() {
     }
   };
 
-  const onSelectionChange = (id: Key) => {
+  const onSelectionChange = (id: Key|null) => {
     setSelected(id);
     setQuery(pokedex.find((p) => p.id === id)?.name ?? "");
   };
