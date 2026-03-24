@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     swcPlugins: [["@swc-jotai/react-refresh", {}]],
+    typedRoutes: true,
   },
   transpilePackages: ["jotai-devtools"],
   images: {
