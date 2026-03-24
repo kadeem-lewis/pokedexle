@@ -73,8 +73,8 @@ importers:
         version: 6.3.4
     devDependencies:
       '@swc-jotai/react-refresh':
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: ^0.5.0
+        version: 0.5.0
       '@tailwindcss/postcss':
         specifier: ^4.2.2
         version: 4.2.2
@@ -1853,8 +1853,8 @@ packages:
     peerDependencies:
       webpack: '>=5.0.0'
 
-  '@swc-jotai/react-refresh@0.1.1':
-    resolution: {integrity: sha512-Zke+Wd8tJIpGkzXhoWA9yLVcfV57hSef2EE5K/Cp1n3A1yl9E+Umpz/b1OyIuwXAALeiHah+MQM4JtXEN0tMsg==}
+  '@swc-jotai/react-refresh@0.5.0':
+    resolution: {integrity: sha512-TXCQJ/eZ8mZXGnO0W1nK73VKGDt5dVsrPd3wSYypLOth5tSdBRtbU2opYeUJEXY4iUI5sVu1zUAmRJSJ7V+h8A==}
 
   '@swc/helpers@0.5.11':
     resolution: {integrity: sha512-YNlnKRWF2sVojTpIyzwou9XoTNbzbzONwRhOoniEioF1AtaitTvVZblaQRrAzChWQ1bLYyYSWzM18y4WwgzJ+A==}
@@ -6635,7 +6635,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@swc-jotai/react-refresh@0.1.1': {}
+  '@swc-jotai/react-refresh@0.5.0': {}
 
   '@swc/helpers@0.5.11':
     dependencies:
