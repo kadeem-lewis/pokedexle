@@ -1,6 +1,4 @@
-"use client";
-
-export default function SettingsContent() {
+export default function page() {
   return (
     <div className="text-xl">
       <p className="text-2xl font-semibold">Unlimited</p>

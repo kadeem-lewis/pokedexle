@@ -1,4 +1,4 @@
-export default function Support() {
+export default function page() {
   return (
     <div className="flex flex-col gap-2 text-2xl">
       <span>I don&apos;t have anything to promote yet.</span>
