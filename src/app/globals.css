@@ -143,8 +143,6 @@
 
   @theme inline {
 
-    --font-pokemon-ds: var(--font-pokemon-ds);
-
     --blur-2: 6px;
     --blur-5: 14px;
 
