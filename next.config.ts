@@ -3,10 +3,10 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  typedRoutes: true,
   turbopack:{},
   experimental: {
     swcPlugins: [["@swc-jotai/react-refresh", {}]],
-    typedRoutes: true,
   },
   transpilePackages: ["jotai-devtools"],
   images: {
@@ -44,14 +44,5 @@ export default withSentryConfig(
     sourcemaps: {
       disable: true,
     },
-
-    // Automatically tree-shake Sentry logger statements to reduce bundle size
-    disableLogger: true,
-
-    // Enables automatic instrumentation of Vercel Cron Monitors.
-    // See the following for more information:
-    // https://docs.sentry.io/product/crons/
-    // https://vercel.com/docs/cron-jobs
-    automaticVercelMonitors: true,
   }
 );
