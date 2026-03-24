@@ -4,7 +4,7 @@ import { Tile } from "@/components/ui/Tile";
 import { useAtomValue } from "jotai";
 import { pokedexAtom } from "@/atoms/GameAtoms";
 import Image from "next/image";
-import { HEADINGS } from "../../classic/_components/PokemonFeedback";
+import { HEADINGS } from "../../(modes)/classic/_components/PokemonFeedback";
 import {
   decimeterToImperial,
   hectogramToImperial,
