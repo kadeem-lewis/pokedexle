@@ -21,6 +21,6 @@ export async function GET(request: Request) {
       },
     });
   } catch (error) {
-    return Response.json({ error: "Error" }, { status: 500 });
+    return Response.json({ error }, { status: 500 });
   }
 }
