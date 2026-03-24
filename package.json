@@ -2,6 +2,7 @@
   "name": "pokedexle",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev -p 3001 --turbo",
     "build": "prisma generate && next build",
@@ -13,7 +14,7 @@
   "dependencies": {
     "@internationalized/date": "^3.5.4",
     "@prisma/client": "^5.15.0",
-    "@sentry/nextjs": "7.112.1",
+    "@sentry/nextjs": "10.45.0",
     "@tanstack/query-core": "^5.45.0",
     "date-fns": "^3.6.0",
     "fuse.js": "^7.0.0",
