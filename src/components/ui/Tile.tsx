@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 
 const tile = tv(
   {
-    base: "text-shadow basis-1/6 rounded-md border-2 border-primary text-white shadow-inner before:block",
+    base: "text-shadow basis-1/6 z-0 rounded-md border-2 border-primary text-white shadow-inner ",
     variants: {
       status: {
         correct: "bg-green-500",
@@ -12,9 +12,9 @@ const tile = tv(
       },
       difference: {
         higher:
-          "relative after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:bg-red-800 after:clip-path-arrowup after:hover:bg-red-950",
+          "arrow-up",
         lower:
-          "relative after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:bg-red-800 after:clip-path-arrowdown after:hover:bg-red-950",
+          "arrow-down",
       },
     },
   },

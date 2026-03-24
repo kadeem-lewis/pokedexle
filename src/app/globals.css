@@ -1,7 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "tailwindcss-react-aria-components";
 
+@custom-variant dark (&:is(.dark *));
 /*
  Semantic color variables
 
@@ -24,8 +24,7 @@
 
 */
 
-@layer base {
-  :root {
+:root {
     --primary: 231, 5%, 50%; /* #787A85 */
     --primary-accent: 253, 47%, 36%; /* #423086 */
     --primary-hover: 230, 5%, 45%; /* #6E707A */
@@ -54,6 +53,61 @@
     --fg-muted-accent: 251, 43%, 45%; /* #5542A6 */
     --fg-disabled: 230, 5%, 45%; /* #6E707A */
     --fg-disabled-accent: 251, 40%, 43%; /* #52429A */
+
+    --normal-100: #C6C6A7;
+    --normal-200: #A8A878;
+    --normal-300: #6D6D4E;
+    --fire-100: #F5AC78;
+    --fire-200: #F08030;
+    --fire-300: #9C531F;
+    --water-100: #9DB7F5;
+    --water-200: #6890F0;
+    --water-300: #445E9C;
+    --grass-100: #A7DB8D;
+    --grass-200: #78C850;
+    --grass-300: #4E8234;
+    --electric-100: #FAE078;
+    --electric-200: #F8D030;
+    --electric-300: #A1871F;
+    --ice-100: #BCE6E6;
+    --ice-200: #98D8D8;
+    --ice-300: #638D8D;
+    --fighting-100: #D67873;
+    --fighting-200: #C03028;
+    --fighting-300: #7D1F1A;
+    --poison-100: #C183C1;
+    --poison-200: #A040A0;
+    --poison-300: #682A68;
+    --ground-100: #EBD69D;
+    --ground-200: #E0C068;
+    --ground-300: #927D44;
+    --flying-100: #C6B7F5;
+    --flying-200: #A890F0;
+    --flying-300: #6D5E9C;
+    --psychic-100: #FA92B2;
+    --psychic-200: #F85888;
+    --psychic-300: #A13959;
+    --bug-100: #C6D16E;
+    --bug-200: #A8B820;
+    --bug-300: #6D7815;
+    --rock-100: #D1C17D;
+    --rock-200: #B8A038;
+    --rock-300: #786824;
+    --ghost-100: #A292BC;
+    --ghost-200: #705898;
+    --ghost-300: #493963;
+    --dark-100: #A29288;
+    --dark-200: #705848;
+    --dark-300: #49392F;
+    --dragon-100: #A27DFA;
+    --dragon-200: #7038F8;
+    --dragon-300: #4924A1;
+    --steel-100: #D1D1E0;
+    --steel-200: #B8B8D0;
+    --steel-300: #787887;
+    --fairy-100: #F4BDC9;
+    --fairy-200: #EE99AC;
+    --fairy-300: #9B6470;
   }
   /* 
   primary color: #423086,
@@ -88,7 +142,96 @@
     --focus: 234.5, 5.5%, 39.4%; /* #5f606a */
     --focus-accent: 252, 48.1%, 53.1%; /* #654EC1 */
   }
-}
+
+  @theme inline {
+
+    --font-pokemon-ds: var(--font-pokemon-ds);
+
+    --blur-2: 6px;
+    --blur-5: 14px;
+
+    --color-primary: hsl(var(--primary));
+    --color-primary-accent: hsl(var(--primary-accent));
+    --color-primary-hover: hsl(var(--primary-hover));
+    --color-primary-accent-hover: hsl(var(--primary-accent-hover));
+    --color-fg: hsl(var(--fg));
+    --color-fg-accent: hsl(var(--fg-accent));
+    --color-canvas: hsl(var(--canvas));
+    --color-canvas-accent: hsl(var(--canvas-accent));
+    --color-fg-muted: hsl(var(--fg-muted));
+    --color-fg-disabled: hsl(var(--fg-disabled));
+    --color-canvas-muted: hsl(var(--canvas-muted));
+    --color-canvas-accent-muted: hsl(var(--canvas-accent-muted));
+    --color-panel: hsl(var(--panel));
+    --color-panel-accent: hsl(var(--panel-accent));
+    --color-panel-hover: hsl(var(--panel-hover));
+    --color-panel-accent-hover: hsl(var(--panel-accent-hover));
+    --color-panel-active: hsl(var(--panel-active));
+    --color-panel-accent-active: hsl(var(--panel-accent-active));
+    --color-border: hsl(var(--border));
+    --color-border-accent: hsl(var(--border-accent));
+    --color-border-interactive: hsl(var(--border-interactive));
+    --color-border-accent-interactive: hsl(var(--border-accent-interactive));
+    --color-focus: hsl(var(--focus));
+    --color-focus-accent: hsl(var(--focus-accent));
+
+    --color-normal-100: var(--normal-100);
+    --color-normal-200: var(--normal-200);
+    --color-normal-300: var(--normal-300);
+    --color-fire-100: var(--fire-100);
+    --color-fire-200: var(--fire-200);
+    --color-fire-300: var(--fire-300);
+    --color-water-100: var(--water-100);
+    --color-water-200: var(--water-200);
+    --color-water-300: var(--water-300);
+    --color-grass-100: var(--grass-100);
+    --color-grass-200: var(--grass-200);
+    --color-grass-300: var(--grass-300);
+    --color-electric-100: var(--electric-100);
+    --color-electric-200: var(--electric-200);
+    --color-electric-300: var(--electric-300);
+    --color-ice-100: var(--ice-100);
+    --color-ice-200: var(--ice-200);
+    --color-ice-300: var(--ice-300);
+    --color-fighting-100: var(--fighting-100);
+    --color-fighting-200: var(--fighting-200);
+    --color-fighting-300: var(--fighting-300);
+    --color-poison-100: var(--poison-100);
+    --color-poison-200: var(--poison-200);
+    --color-poison-300: var(--poison-300);
+    --color-ground-100: var(--ground-100);
+    --color-ground-200: var(--ground-200);
+    --color-ground-300: var(--ground-300);
+    --color-flying-100: var(--flying-100);
+    --color-flying-200: var(--flying-200);
+    --color-flying-300: var(--flying-300);
+    --color-psychic-100: var(--psychic-100);
+    --color-psychic-200: var(--psychic-200);
+    --color-psychic-300: var(--psychic-300);
+    --color-bug-100: var(--bug-100);
+    --color-bug-200: var(--bug-200);
+    --color-bug-300: var(--bug-300);
+    --color-rock-100: var(--rock-100);
+    --color-rock-200: var(--rock-200);
+    --color-rock-300: var(--rock-300);
+    --color-ghost-100: var(--ghost-100);
+    --color-ghost-200: var(--ghost-200);
+    --color-ghost-300: var(--ghost-300);
+    --color-dark-100: var(--dark-100);
+    --color-dark-200: var(--dark-200);
+    --color-dark-300: var(--dark-300);
+    --color-dragon-100: var(--dragon-100);
+    --color-dragon-200: var(--dragon-200);
+    --color-dragon-300: var(--dragon-300);
+    --color-steel-100: var(--steel-100);
+    --color-steel-200: var(--steel-200);
+    --color-steel-300: var(--steel-300);
+    --color-fairy-100: var(--fairy-100);
+    --color-fairy-200: var(--fairy-200);
+    --color-fairy-300: var(--fairy-300);
+
+  }
+
 /* I need to have colors for red, red arrow, red hover, red arrow hover and save for the greens */
 
 @layer base {
@@ -119,5 +262,52 @@
       hsl(var(--primary-accent)) 50%
     );
     background-size: 10px 10px;
+  }
+
+  .arrow-up {
+    position: relative;
+    &::after {
+    content:"";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -10;
+    background: rgba(0, 0, 0, 0.5);
+    clip-path: polygon(50% 0,100% 50%,80% 50%,80% 100%,20% 100%,20% 50%,0 50%);
+    }
+
+    &:hover::after {
+      background: rgba(0, 0, 0, 0.7);
+  }
+
+    &::before {
+    content: "";
+    display: block;
+  }
+  }
+  .arrow-down {
+    position: relative;
+    &::after {
+      content:"";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -10;
+      background: rgba(0, 0, 0, 0.5);
+      clip-path: polygon(0 50%,20% 50%,20% 0,80% 0,80% 50%,100% 50%,50% 100%);
+    }
+
+    &:hover::after {
+      background: rgba(0, 0, 0, 0.7);
+  }
+
+    &::before {
+    content: "";
+    display: block;
+  }
   }
 }
