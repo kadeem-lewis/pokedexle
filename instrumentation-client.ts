@@ -28,3 +28,6 @@ Sentry.init({
     }),
   ],
 });
+
+// This export will instrument router navigations
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
