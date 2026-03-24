@@ -1,37 +1,37 @@
 "use client";
 import { cx } from "tailwind-variants";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-type ModeSwitchProps = {
-  href: string;
-};
+export default function ModeSwitch() {
+  const pathname = usePathname();
+  const isUnlimited = pathname.endsWith("/unlimited");
 
-export default function ModeSwitch({ href }: ModeSwitchProps) {
-  const searchParams = useSearchParams();
+  const basePath = isUnlimited
+    ? pathname.replace(/\/unlimited$/, "")
+    : pathname;
+
   return (
     <div className="mt-2 flex justify-center gap-2">
       <Link
         className={cx(
-          !searchParams.get("mode") ? "brightness-110" : "brightness-75",
+          !isUnlimited ? "brightness-110" : "brightness-75",
           "focus-visible:ring-ring inline-flex items-center justify-center border-2 border-white px-px py-0.5 text-white uppercase outline outline-black transition-colors focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
 
           "bg-yellow-500 hover:brightness-110",
         )}
-        href={href}
+        href={basePath}
       >
         Daily
       </Link>
       <Link
         className={cx(
-          searchParams.get("mode") === "unlimited"
-            ? "brightness-110"
-            : "brightness-75",
+          isUnlimited ? "brightness-110" : "brightness-75",
           "focus-visible:ring-ring inline-flex items-center justify-center border-2 border-white px-px py-0.5 text-white uppercase outline outline-black transition-colors focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
 
           "bg-yellow-500 hover:brightness-110",
         )}
-        href="?mode=unlimited"
+        href={`${basePath}/unlimited`}
       >
         Unlimited
       </Link>
