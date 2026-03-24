@@ -13,7 +13,7 @@ import {
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { usePathname, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ClassicGamebox from "../classic/_components/Gamebox";
 import WhosThatPokemonGamebox from "../whosthatpokemon/_components/Gamebox";
 import PokemonTypes from "./PokemonTypes";

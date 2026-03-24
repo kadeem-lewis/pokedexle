@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { TypeBadge } from "@/components/ui/TypeBadge";
 import { useAtomValue } from "jotai";
 import {
@@ -70,7 +69,7 @@ export default function PokemonTypes() {
         <TypeBadge
           key={type}
           type={type}
-          className="col-span-1 text-base  text-white md:text-lg"
+          className="col-span-1 text-base text-white md:text-lg"
           effect={getTypeEffect(type)}
         >
           {type}

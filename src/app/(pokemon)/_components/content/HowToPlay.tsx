@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { defaultGuesses } from "@/constants";
 import { Tile } from "@/components/ui/Tile";
 import { useAtomValue } from "jotai";
@@ -14,7 +13,7 @@ import {
 export default function HowToPlayContent() {
   const pokedex = useAtomValue(pokedexAtom);
   return (
-    <div className=" space-y-2 text-2xl">
+    <div className="space-y-2 text-2xl">
       <p>Guess the pokemon in {defaultGuesses} tries</p>
       <hr />
       <p>
