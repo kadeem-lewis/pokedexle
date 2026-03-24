@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Support() {
   return (
     <div className="flex flex-col gap-2 text-2xl">

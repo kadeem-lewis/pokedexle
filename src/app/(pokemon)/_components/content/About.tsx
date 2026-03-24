@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function AboutContent() {
   return (
     <div className="text-2xl">

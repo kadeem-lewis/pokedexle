@@ -1,6 +1,6 @@
 "use client";
 import { Pokemon } from "@/atoms/GameAtoms";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import {
   currentGameMode,
@@ -86,7 +86,7 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
                 <TypeBadge
                   type={type as PokemonType}
                   key={type}
-                  className="px-2  text-base text-white md:text-lg"
+                  className="px-2 text-base text-white md:text-lg"
                 >
                   {type}
                 </TypeBadge>

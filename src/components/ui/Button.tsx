@@ -4,11 +4,11 @@ import { Button as AriaButton } from "react-aria-components";
 
 const button = tv(
   {
-    base: "focus-visible:ring-ring inline-flex items-center justify-center  uppercase transition-colors focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
+    base: "focus-visible:ring-ring inline-flex items-center justify-center uppercase transition-colors focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
     variants: {
       variant: {
         classic: "",
-        flat: "border-2 border-white text-border text-white outline outline-black",
+        flat: "border-2 border-white text-white outline outline-black",
       },
       size: {
         default: "px-2 py-1",

@@ -9,6 +9,6 @@ export async function GET() {
     });
     return Response.json(firstDate);
   } catch (error) {
-    return Response.json({ error: "Error" }, { status: 500 });
+    return Response.json({ error }, { status: 500 });
   }
 }

@@ -1,4 +1,5 @@
 "use client";
+import type { JSX } from "react";
 import { Pokemon } from "@/atoms/GameAtoms";
 import Image from "next/image";
 import { Tile } from "@/components/ui/Tile";
