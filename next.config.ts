@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
+  reactCompiler: true,
+  turbopack:{},
   experimental: {
     swcPlugins: [["@swc-jotai/react-refresh", {}]],
     typedRoutes: true,

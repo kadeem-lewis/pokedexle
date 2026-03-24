@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3001 --turbo",
+    "dev": "next dev -p 3001",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint .",
@@ -41,6 +41,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
+    "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "16.2.1",
     "eslint-config-prettier": "^10.1.8",
