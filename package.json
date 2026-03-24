@@ -25,7 +25,6 @@
     "next-themes": "^0.3.0",
     "posthog-js": "^1.139.2",
     "react": "19.2.4",
-    "react-aria": "^3.33.1",
     "react-aria-components": "^1.16.0",
     "react-dom": "19.2.4",
     "recharts": "^2.12.7",
