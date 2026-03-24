@@ -6,7 +6,6 @@ import {
 import { useAtomValue } from "jotai";
 import { usePathname } from "next/navigation";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from "recharts";
-import React from "react";
 
 export default function StatsContent() {
   const classicAnswers = useAtomValue(classicAnswersAtom);
