@@ -7,24 +7,16 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: "https://7f3938ab26e510808e8182f3aa25c0c7@o4506349855244288.ingest.us.sentry.io/4507005056581632",
 
-  // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: 1,
+  // Adds request headers and IP for users
+  sendDefaultPii: true,
 
-  // Setting this option to true will print useful information to the console while you're setting up Sentry.
-  debug: false,
+  // Capture 100% in dev, 10% in production
+  // Adjust based on your traffic volume
+  tracesSampleRate: process.env.NODE_ENV === "development" ? 1.0 : 0.1,
 
-  replaysOnErrorSampleRate: 1.0,
-
-  // This sets the sample rate to be 10%. You may want this to be 100% while
-  // in development and sample at a lower rate in production
-  replaysSessionSampleRate: 0.1,
-
-  // You can remove this option if you're not planning to use the Sentry Session Replay feature:
-  integrations: [
-    Sentry.replayIntegration({
-      // Additional Replay configuration goes in here, for example:
-      maskAllText: true,
-      blockAllMedia: true,
-    }),
-  ],
+  // Enable logs to be sent to Sentry
+  enableLogs: true,
 });
+
+// This export will instrument router navigations
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
