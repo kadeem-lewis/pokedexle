@@ -1,5 +1,5 @@
 module.exports = {
   plugins: ["prettier-plugin-tailwindcss"],
-  tailwindConfig: "./tailwind.config.ts",
+  tailwindStylesheet: "./app/globals.css",
   tailwindFunctions: ["cva", "cx", "tv"],
 };
