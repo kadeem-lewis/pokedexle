@@ -1,4 +1,4 @@
-import Stats from "../_components/content/Stats";
+import Stats from "./Stats";
 
 export default function page() {
   return <Stats />;
