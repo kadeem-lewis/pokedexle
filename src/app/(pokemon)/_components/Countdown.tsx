@@ -1,10 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { differenceInSeconds } from "date-fns";
 
 type CountdownProps = {
   targetDate: Date;
 };
+
+function calculateTimeLeft(endDate: Date): number {
+  const now = new Date();
+  return differenceInSeconds(endDate, now);
+}
 
 export default function Countdown({ targetDate }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState<number>(
@@ -24,11 +29,6 @@ export default function Countdown({ targetDate }: CountdownProps) {
 
     return () => clearInterval(intervalId);
   }, [targetDate]);
-
-  function calculateTimeLeft(endDate: Date): number {
-    const now = new Date();
-    return differenceInSeconds(endDate, now);
-  }
 
   function formatTimeLeft(timeLeftInSeconds: number): string {
     const hours = Math.floor(timeLeftInSeconds / 3600);
