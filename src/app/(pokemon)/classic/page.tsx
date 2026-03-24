@@ -10,9 +10,6 @@ export const metadata = {
 
 const GameWrapper = dynamic(
   () => import("@/app/(pokemon)/_components/GameWrapper"),
-  {
-    ssr: false,
-  },
 );
 
 export default async function Classic() {
