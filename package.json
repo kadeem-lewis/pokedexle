@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
     "db:generate": "prisma generate",
     "populate": "ts-node --esm scripts/GetPokemonData.ts"
   },
