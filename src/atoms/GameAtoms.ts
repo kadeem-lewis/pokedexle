@@ -283,7 +283,7 @@ export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
     if (mode === "whosthatpokemon") {
       set(whosthatpokemonAnswersAtom, (prev) => {
         const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
-        newGuesses[prev.answers.length - 1] + 1;
+        newGuesses[prev.answers.length - 1]++;
         return {
           ...prev,
           stats: {
