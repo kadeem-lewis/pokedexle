@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { startOfTomorrow } from "date-fns";
 import allPokemon from "@/data/pokedex.json";
-import { Daily } from "@prisma/client";
+import type { Daily } from "@/app/generated/prisma/client";
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");

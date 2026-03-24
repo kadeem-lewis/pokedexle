@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { atomWithQuery } from "jotai-tanstack-query";
-import { Daily } from "@prisma/client";
+import type { Daily } from "@/app/generated/prisma/client";
 import { defaultGuesses } from "@/constants";
 import { getLocalTimeZone, today } from "@internationalized/date";
 
