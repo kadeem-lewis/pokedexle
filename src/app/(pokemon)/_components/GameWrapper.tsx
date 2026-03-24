@@ -14,17 +14,16 @@ import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import ClassicGamebox from "../(modes)/classic/_components/Gamebox";
-import WhosThatPokemonGamebox from "../(modes)/whosthatpokemon/_components/Gamebox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonSearch from "./PokemonSearch";
 import { getLocalTimeZone, today } from "@internationalized/date";
 
 type GameWrapperProps = {
   pokedex: Pokemon[];
+  children: React.ReactNode;
 };
 
-export default function GameWrapper({ pokedex }: GameWrapperProps) {
+export default function GameWrapper({ pokedex, children }: GameWrapperProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [mode, setMode] = useAtom(currentGameMode);
   const gameOver = useAtomValue(gameOverAtom);
@@ -120,11 +119,13 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
     whosthatpokemonPracticeSolution,
   ]);
 
+  const pathname = usePathname();
+  const isUnlimited = pathname.endsWith("/unlimited");
+
   return (
     <>
-      {currentPath === "/classic" && <ClassicGamebox />}
-      {currentPath === "/whosthatpokemon" && <WhosThatPokemonGamebox />}
-      {!gameOver[mode] && (searchParams.get("mode") === "unlimited" || data) ? (
+      {children}
+      {!gameOver[mode] && (isUnlimited || data) ? (
         <>
           <PokemonTypes />
           <PokemonSearch />
