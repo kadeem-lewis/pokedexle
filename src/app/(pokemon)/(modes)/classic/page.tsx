@@ -1,7 +1,6 @@
-import Guesses from "@/app/(pokemon)/_components/Guesses";
-import ModeSwitch from "@/app/(pokemon)/_components/ModeSwitch";
 import pokedex from "@/data/pokedex.json";
 import dynamic from "next/dynamic";
+import DailyGame from "./_components/DailyGame";
 
 export const metadata = {
   title: "Classic",
@@ -15,9 +14,9 @@ const GameWrapper = dynamic(
 export default async function Classic() {
   return (
     <>
-      <ModeSwitch href="/classic" />
-      <Guesses />
-      <GameWrapper pokedex={pokedex} />
+      <GameWrapper pokedex={pokedex}>
+        <DailyGame />
+      </GameWrapper>
     </>
   );
 }
