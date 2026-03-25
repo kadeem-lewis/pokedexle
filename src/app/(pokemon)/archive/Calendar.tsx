@@ -11,6 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { DateValue } from "react-aria-components";
 import { useAtom } from "jotai";
 import { dateAtom, firstDateAtom } from "@/atoms/GameAtoms";
+import { Route } from "next";
 
 export default function Calendar() {
   const [date, setDate] = useState<DateValue>(today(getLocalTimeZone()));
@@ -35,7 +36,7 @@ export default function Calendar() {
     setAtomDate(date.toString());
 
     if (!isEqualDay(date, today(getLocalTimeZone()))) {
-      router.push("?date=" + date.toString());
+      router.push(`?date=${date.toString()}` as Route);
     } else {
       router.push(pathname);
     }

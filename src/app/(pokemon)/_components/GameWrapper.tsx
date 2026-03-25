@@ -14,17 +14,16 @@ import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import ClassicGamebox from "../classic/_components/Gamebox";
-import WhosThatPokemonGamebox from "../whosthatpokemon/_components/Gamebox";
 import PokemonTypes from "./PokemonTypes";
 import PokemonSearch from "./PokemonSearch";
 import { getLocalTimeZone, today } from "@internationalized/date";
 
 type GameWrapperProps = {
   pokedex: Pokemon[];
+  children: React.ReactNode;
 };
 
-export default function GameWrapper({ pokedex }: GameWrapperProps) {
+export default function GameWrapper({ pokedex, children }: GameWrapperProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
   const [mode, setMode] = useAtom(currentGameMode);
   const gameOver = useAtomValue(gameOverAtom);
@@ -39,16 +38,21 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
   const currentPath = usePathname();
   const searchParams = useSearchParams();
 
+  const isUnlimited = currentPath.endsWith("/unlimited");
+  const basePath = isUnlimited
+    ? currentPath.replace(/\/unlimited$/, "")
+    : currentPath;
+
+  //TODO: Make this a hook
   useEffect(() => {
-    if (currentPath === "/classic") {
-      if (searchParams.get("mode") === "unlimited") setMode("classicUnlimited");
+    if (basePath === "/classic") {
+      if (isUnlimited) setMode("classicUnlimited");
       else setMode("classic");
-    } else if (currentPath === "/whosthatpokemon") {
-      if (searchParams.get("mode") === "unlimited")
-        setMode("whosthatpokemonUnlimited");
+    } else if (basePath === "/whosthatpokemon") {
+      if (isUnlimited) setMode("whosthatpokemonUnlimited");
       else setMode("whosthatpokemon");
     }
-  }, [currentPath, searchParams, setMode]);
+  }, [basePath, isUnlimited, setMode]);
 
   useEffect(() => {
     if (searchParams.has("date")) {
@@ -122,9 +126,8 @@ export default function GameWrapper({ pokedex }: GameWrapperProps) {
 
   return (
     <>
-      {currentPath === "/classic" && <ClassicGamebox />}
-      {currentPath === "/whosthatpokemon" && <WhosThatPokemonGamebox />}
-      {!gameOver[mode] && (searchParams.get("mode") === "unlimited" || data) ? (
+      {children}
+      {!gameOver[mode] && (isUnlimited || data) ? (
         <>
           <PokemonTypes />
           <PokemonSearch />

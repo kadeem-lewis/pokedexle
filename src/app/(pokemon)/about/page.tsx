@@ -1,9 +1,9 @@
-export default function AboutContent() {
+export default function About() {
   return (
     <div className="text-2xl">
       <p>
         Pokedexle is a variety of different games themed around Guessing
-        Pokedexle. It was heavily inspired by games such as Wordle, Squirdle,
+        Pokemon. It was heavily inspired by games such as Wordle, Squirdle,
         Pokedexle.app and Loldle
       </p>
       <hr />

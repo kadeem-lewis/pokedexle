@@ -1,17 +1,14 @@
-"use client";
 import { defaultGuesses } from "@/constants";
 import { Tile } from "@/components/ui/Tile";
-import { useAtomValue } from "jotai";
-import { pokedexAtom } from "@/atoms/GameAtoms";
 import Image from "next/image";
-import { HEADINGS } from "../../classic/_components/PokemonFeedback";
+import { HEADINGS } from "@/constants";
 import {
   decimeterToImperial,
   hectogramToImperial,
 } from "@/helpers/Conversions";
+import { Pokemon } from "@/atoms/GameAtoms";
 
-export default function HowToPlayContent() {
-  const pokedex = useAtomValue(pokedexAtom);
+export default function HowToPlayContent({ pokedex }: { pokedex: Pokemon[] }) {
   return (
     <div className="space-y-2 text-2xl">
       <p>Guess the pokemon in {defaultGuesses} tries</p>

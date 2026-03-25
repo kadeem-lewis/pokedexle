@@ -74,6 +74,7 @@ export default function StatsRange() {
     [mode],
   );
 
+  // This is resetting state and I think the docs has a paragraph specifically about this
   useEffect(() => {
     setGenerationRange({
       whosthatpokemon: { max: maxValue, min: minValue },

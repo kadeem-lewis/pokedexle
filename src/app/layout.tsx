@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import localFont from "next/font/local";
 import { PreloadResources } from "@/components/PreloadResources";
+import Script from "next/script";
 
 const pokemonDs = localFont({
   src: "../../public/fonts/pokemon-ds.woff2",
@@ -40,6 +41,11 @@ export default function RootLayout({
       className={`${pokemonDs.className}`}
     >
       <PreloadResources />
+      <Script
+        strategy="afterInteractive"
+        src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC}
+        data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+      />
       <body>
         <Providers>
           <div className="mx-auto flex min-h-screen flex-col items-center justify-between gap-y-2 overflow-y-hidden">
