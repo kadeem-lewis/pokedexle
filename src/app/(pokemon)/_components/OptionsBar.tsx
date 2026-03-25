@@ -8,7 +8,7 @@ export default function OptionsBar() {
       <Link
         href="/how-to-play"
         className="border-r-2 border-fg py-1"
-        aria-label="open how to play modal"
+        aria-label="how to play link"
       >
         <Icon
           name="heroicons-question-mark-circle-solid"
@@ -19,7 +19,7 @@ export default function OptionsBar() {
       <Link
         href="/about"
         className="border-r-2 border-fg py-1"
-        aria-label="open about modal"
+        aria-label="about link"
       >
         <Icon
           name="heroicons-exclamation-circle-solid"
@@ -29,26 +29,26 @@ export default function OptionsBar() {
       <Link
         href="/stats"
         className="border-r-2 border-fg py-1"
-        aria-label="open stats modal"
+        aria-label="stats link"
       >
         <Icon name="heroicons-chart-bar-solid" className="mx-auto h-6 w-6" />
       </Link>
       <Link
         href="/archive"
         className="border-r-2 border-fg py-1"
-        aria-label="open calendar modal"
+        aria-label="archive link"
       >
         <Icon name="pixelarticons-calendar-month" className="mx-auto h-6 w-6" />
       </Link>
       <Link
         href="/support"
         className="border-r-2 border-fg py-1"
-        aria-label="open support modal"
+        aria-label="support link"
       >
         <Icon name="heroicons-heart-solid" className="mx-auto h-6 w-6" />
       </Link>
 
-      <Link href="/settings" className="py-1" aria-label="open settings modal">
+      <Link href="/settings" className="py-1" aria-label="settings link">
         <Icon
           name="heroicons-cog-6-tooth-solid"
           className="mx-auto size-6 transition-transform hover:-rotate-45"
