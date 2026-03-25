@@ -65,9 +65,12 @@ importers:
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
+      tailwind-merge:
+        specifier: ^3.5.0
+        version: 3.5.0
       tailwind-variants:
         specifier: ^3.2.2
-        version: 3.2.2(tailwindcss@4.2.2)
+        version: 3.2.2(tailwind-merge@3.5.0)(tailwindcss@4.2.2)
       tailwindcss-react-aria-components:
         specifier: ^2.0.1
         version: 2.0.1(tailwindcss@4.2.2)
@@ -4242,6 +4245,9 @@ packages:
 
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
+
+  tailwind-merge@3.5.0:
+    resolution: {integrity: sha512-I8K9wewnVDkL1NTGoqWmVEIlUcB9gFriAEkXkfCjX5ib8ezGxtR3xD7iZIxrfArjEsH7F1CHD4RFUtxefdqV/A==}
 
   tailwind-variants@3.2.2:
     resolution: {integrity: sha512-Mi4kHeMTLvKlM98XPnK+7HoBPmf4gygdFmqQPaDivc3DpYS6aIY6KiG/PgThrGvii5YZJqRsPz0aPyhoFzmZgg==}
@@ -9459,9 +9465,13 @@ snapshots:
 
   tabbable@6.2.0: {}
 
-  tailwind-variants@3.2.2(tailwindcss@4.2.2):
+  tailwind-merge@3.5.0: {}
+
+  tailwind-variants@3.2.2(tailwind-merge@3.5.0)(tailwindcss@4.2.2):
     dependencies:
       tailwindcss: 4.2.2
+    optionalDependencies:
+      tailwind-merge: 3.5.0
 
   tailwindcss-react-aria-components@2.0.1(tailwindcss@4.2.2):
     dependencies:
