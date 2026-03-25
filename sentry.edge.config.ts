@@ -3,6 +3,8 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: "https://7f3938ab26e510808e8182f3aa25c0c7@o4506349855244288.ingest.us.sentry.io/4507005056581632",
 
+  enabled: process.env.NODE_ENV === "production",
+
   // Adds request headers and IP for users
   sendDefaultPii: true,
 
