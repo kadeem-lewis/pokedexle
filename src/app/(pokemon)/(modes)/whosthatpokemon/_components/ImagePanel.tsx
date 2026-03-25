@@ -75,7 +75,7 @@ export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
       </div>
 
       {!gameOver[mode] ? (
-        <StatsRange />
+        <StatsRange key={pokemonToGuess?.name} />
       ) : (
         <div className="space-y-2 text-center">
           <p className="text-4xl font-bold capitalize">{correctAnswer.name}</p>

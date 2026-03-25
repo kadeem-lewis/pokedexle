@@ -74,22 +74,6 @@ export default function StatsRange() {
     [mode],
   );
 
-  // This is resetting state and I think the docs has a paragraph specifically about this
-  useEffect(() => {
-    setGenerationRange({
-      whosthatpokemon: { max: maxValue, min: minValue },
-      whosthatpokemonUnlimited: { max: maxValue, min: minValue },
-    });
-    setWeightRange({
-      whosthatpokemon: { max: maxValue, min: minValue },
-      whosthatpokemonUnlimited: { max: maxValue, min: minValue },
-    });
-    setHeightRange({
-      whosthatpokemon: { max: maxValue, min: minValue },
-      whosthatpokemonUnlimited: { max: maxValue, min: minValue },
-    });
-  }, [pokemonToGuess]);
-
   useEffect(() => {
     if (!pokemonToGuess) {
       return;
@@ -235,15 +219,15 @@ export default function StatsRange() {
 
   return (
     <div className="my-4 flex flex-wrap justify-between gap-3 text-center text-2xl">
-      <div className="flex-grow space-x-2">
+      <div className="grow space-x-2">
         <span className="font-semibold">Gen:</span>
         <span>{displayGenerationRange(generationRange[mode])}</span>
       </div>
-      <div className="flex-grow space-x-2">
+      <div className="grow space-x-2">
         <span className="font-semibold">HT:</span>
         <span>{displayHeightRange(heightRange[mode])}</span>
       </div>
-      <div className="flex-grow space-x-2">
+      <div className="grow space-x-2">
         <span className="font-semibold">WT:</span>
         <span>{displayWeightRange(weightRange[mode])}</span>
       </div>
