@@ -42,7 +42,7 @@ export default function RootLayout({
     >
       <PreloadResources />
       <Script
-        async
+        strategy="afterInteractive"
         src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC}
         data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
       />
