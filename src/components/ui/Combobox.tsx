@@ -18,16 +18,18 @@ const combobox = tv({
     input: "w-full border-b-2 border-dashed border-fg bg-transparent py-1 pl-3",
     root: "max-h-inherit w-full overflow-auto p-1 outline-none",
     popover:
-      "m-2 mx-auto max-h-64  overflow-auto rounded-md border-2 border-white bg-panel text-base shadow-lg ring-4 ring-border md:w-[412px]",
-    item: "relative m-1 flex cursor-default flex-col rounded-md border-b border-border p-1 capitalize outline-none focus:bg-teal-600 selected:bg-teal-600 focus:selected:bg-teal-700 disabled:brightness-50",
+      "m-2 mx-auto max-h-64 overflow-auto rounded-md border-2 border-white bg-panel text-base shadow-lg ring-4 ring-border md:w-103",
+    item: "relative m-1 flex cursor-default flex-col rounded-md border-b border-border p-1 capitalize outline-none focus:bg-teal-600 disabled:brightness-50 selected:bg-teal-600 focus:selected:bg-teal-700",
   },
 });
 //TODO: popover width should be the same as the input. If I use full, it will be the same as the window width and inherit will be the same as the parent width. I need the same as the input width.
 
 const { input, root, popover, item } = combobox();
 
-interface ComboBoxProps<T extends object>
-  extends Omit<AriaComboBoxProps<T>, "children"> {
+interface ComboBoxProps<T extends object> extends Omit<
+  AriaComboBoxProps<T>,
+  "children"
+> {
   children: React.ReactNode | ((item: T) => React.ReactNode);
 }
 
