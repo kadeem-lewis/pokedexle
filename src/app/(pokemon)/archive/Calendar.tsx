@@ -38,7 +38,7 @@ export default function Calendar() {
     if (!isEqualDay(date, today(getLocalTimeZone()))) {
       router.push(`?date=${date.toString()}` as Route);
     } else {
-      router.push(pathname);
+      router.push(pathname as Route);
     }
   };
 

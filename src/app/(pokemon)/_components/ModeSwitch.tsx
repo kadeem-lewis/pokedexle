@@ -2,6 +2,7 @@
 import { cx } from "tailwind-variants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Route } from "next";
 
 export default function ModeSwitch() {
   const pathname = usePathname();
@@ -20,7 +21,7 @@ export default function ModeSwitch() {
 
           "bg-yellow-500 hover:brightness-110",
         )}
-        href={basePath}
+        href={basePath as Route}
       >
         Daily
       </Link>
@@ -31,7 +32,7 @@ export default function ModeSwitch() {
 
           "bg-yellow-500 hover:brightness-110",
         )}
-        href={`${basePath}/unlimited`}
+        href={`${basePath}/unlimited` as Route}
       >
         Unlimited
       </Link>
