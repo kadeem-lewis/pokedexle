@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { defaultGuesses } from "@/constants";
 import { Icon } from "@/components/Icon";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",
@@ -32,7 +32,6 @@ export default function Share() {
   const gameOver = useAtomValue(gameOverAtom);
   const [{ data }] = useAtom(dailyDataAtom);
   const [isCopied, setIsCopied] = useState(false);
-  const searchParams = useSearchParams();
 
   const comparePokemonValue = (
     correctValue: number,
@@ -82,7 +81,10 @@ export default function Share() {
       .join("\n");
   };
 
-  const location = searchParams.has("mode")
+  const pathname = usePathname();
+  const isUnlimited = pathname.endsWith("/unlimited");
+
+  const location = isUnlimited
     ? `${window.location.href}&x=${encodeAnswer(correctAnswer)}`
     : window.location.href;
 
