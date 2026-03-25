@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
     "db:generate": "prisma generate",
-    "populate": "ts-node --esm scripts/GetPokemonData.ts"
+    "populate": "tsx ./scripts/GetPokemonData.ts"
   },
   "engines": {
     "node": "22.x"
@@ -57,7 +57,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "prisma": "^7.5.0",
     "tailwindcss": "^4.2.2",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
