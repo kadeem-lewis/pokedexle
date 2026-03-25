@@ -3,17 +3,17 @@ import { promises as fs } from "fs";
 
 const query = `
 query MyQuery {
-  pokemon_v2_pokemon {
+  pokemon {
     name
     id
     height
     weight
-    pokemon_v2_pokemontypes {
-      pokemon_v2_type {
+    pokemontypes {
+      type {
         name
       }
     }
-    pokemon_v2_pokemonspecy {
+    pokemonspecy {
       generation_id
     }
   }
@@ -21,7 +21,7 @@ query MyQuery {
 
 async function fetchPokemonData() {
   try {
-    const res = await fetch("https://beta.pokeapi.co/graphql/v1beta", {
+    const res = await fetch("https://graphql.pokeapi.co/v1beta2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,10 +31,10 @@ async function fetchPokemonData() {
 
     const { data } = await res.json();
 
-    if (data && data.pokemon_v2_pokemon) {
-      const transformedData = updatePokemonData(data.pokemon_v2_pokemon);
+    if (data && data.pokemon) {
+      const transformedData = updatePokemonData(data.pokemon);
       await fs.writeFile(
-        "../src/data/pokedex.json",
+        "./src/data/pokedex.json",
         JSON.stringify(transformedData, null, 2),
       );
 

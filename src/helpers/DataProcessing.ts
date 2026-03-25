@@ -8,10 +8,8 @@ export function updatePokemonData(pokemonData: Array<any>): Pokemon[] {
       const name = !exceptions.includes(pokemon.name)
         ? pokemon.name.replaceAll("-", " ")
         : pokemon.name;
-      const generation = pokemon.pokemon_v2_pokemonspecy.generation_id;
-      const types = pokemon.pokemon_v2_pokemontypes.map(
-        (type: any) => type.pokemon_v2_type.name,
-      );
+      const generation = pokemon.pokemonspecy.generation_id;
+      const types = pokemon.pokemontypes.map((type: any) => type.type.name);
       if (types.length === 1) {
         types.push("none");
       }

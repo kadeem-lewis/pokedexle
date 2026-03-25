@@ -7093,7 +7093,7 @@
   },
   {
     "id": 592,
-    "name": "frillish",
+    "name": "frillish male",
     "generation": 5,
     "types": [
       "water",
@@ -7105,7 +7105,7 @@
   },
   {
     "id": 593,
-    "name": "jellicent",
+    "name": "jellicent male",
     "generation": 5,
     "types": [
       "water",
@@ -8005,7 +8005,7 @@
   },
   {
     "id": 668,
-    "name": "pyroar",
+    "name": "pyroar male",
     "generation": 6,
     "types": [
       "fire",
@@ -10981,7 +10981,7 @@
   },
   {
     "id": 916,
-    "name": "oinkologne",
+    "name": "oinkologne male",
     "generation": 9,
     "types": [
       "normal",
@@ -11089,7 +11089,7 @@
   },
   {
     "id": 925,
-    "name": "maushold",
+    "name": "maushold family of four",
     "generation": 9,
     "types": [
       "normal",
@@ -11161,7 +11161,7 @@
   },
   {
     "id": 931,
-    "name": "squawkabilly",
+    "name": "squawkabilly green plumage",
     "generation": 9,
     "types": [
       "normal",
@@ -11557,7 +11557,7 @@
   },
   {
     "id": 964,
-    "name": "palafin",
+    "name": "palafin zero",
     "generation": 9,
     "types": [
       "water",
@@ -11725,7 +11725,7 @@
   },
   {
     "id": 978,
-    "name": "tatsugiri",
+    "name": "tatsugiri curly",
     "generation": 9,
     "types": [
       "dragon",
@@ -11773,7 +11773,7 @@
   },
   {
     "id": 982,
-    "name": "dudunsparce",
+    "name": "dudunsparce two segment",
     "generation": 9,
     "types": [
       "normal",
