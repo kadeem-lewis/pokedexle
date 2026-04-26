@@ -1,15 +1,9 @@
 "use client";
-import {
-  currentGameMode,
-  pokemonToGuessAtom,
-  guessedItemsAtom,
-} from "@/atoms/GameAtoms";
-import { maxValue, minValue } from "@/constants";
+import { Pokemon } from "@/atoms/GameAtoms";
 import {
   decimeterToImperial,
   hectogramToImperial,
 } from "@/helpers/Conversions";
-import { useAtomValue } from "jotai";
 import React, { useCallback, useEffect, useState } from "react";
 
 type StatRange = {
@@ -18,28 +12,28 @@ type StatRange = {
 };
 
 type RangeState = {
-  whosthatpokemon: { max: number; min: number };
-  whosthatpokemonUnlimited: { max: number; min: number };
+  max: number;
+  min: number;
 };
 
-export default function StatsRange() {
-  const mode = useAtomValue(currentGameMode) as
-    | "whosthatpokemon"
-    | "whosthatpokemonUnlimited";
-  const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
-  const guessedItems = useAtomValue(guessedItemsAtom)[mode];
-
+export default function StatsRange({
+  correctAnswer,
+  guessedItems,
+}: {
+  correctAnswer: Pokemon;
+  guessedItems: Pokemon[];
+}) {
   const [generationRange, setGenerationRange] = useState({
-    whosthatpokemon: { max: maxValue, min: minValue },
-    whosthatpokemonUnlimited: { max: maxValue, min: minValue },
+    max: Infinity,
+    min: -Infinity,
   });
   const [weightRange, setWeightRange] = useState({
-    whosthatpokemon: { max: maxValue, min: minValue },
-    whosthatpokemonUnlimited: { max: maxValue, min: minValue },
+    max: Infinity,
+    min: -Infinity,
   });
   const [heightRange, setHeightRange] = useState({
-    whosthatpokemon: { max: maxValue, min: minValue },
-    whosthatpokemonUnlimited: { max: maxValue, min: minValue },
+    max: Infinity,
+    min: -Infinity,
   });
 
   const updateRange = useCallback(
@@ -49,103 +43,70 @@ export default function StatsRange() {
       pokemonValue: number,
       range: RangeState,
     ) => {
-      if (itemValue < range[mode].max && itemValue > pokemonValue) {
+      if (itemValue < range.max && itemValue > pokemonValue) {
         setRange((prev) => ({
           ...prev,
-          [mode]: { ...prev[mode], max: itemValue },
+          max: itemValue,
         }));
       }
-      if (itemValue > range[mode].min && itemValue < pokemonValue) {
+      if (itemValue > range.min && itemValue < pokemonValue) {
         setRange((prev) => ({
           ...prev,
-          [mode]: { ...prev[mode], min: itemValue },
+          min: itemValue,
         }));
       }
-      if (itemValue === pokemonValue && range[mode].min !== range[mode].max) {
-        setRange((prev) => ({
-          ...prev,
-          [mode]: {
-            min: pokemonValue,
-            max: pokemonValue,
-          },
-        }));
+      if (itemValue === pokemonValue && range.min !== range.max) {
+        setRange({
+          min: pokemonValue,
+          max: pokemonValue,
+        });
       }
     },
-    [mode],
+    [],
   );
 
   useEffect(() => {
-    if (!pokemonToGuess) {
-      return;
-    }
     guessedItems.forEach((item) => {
       updateRange(
         setGenerationRange,
         item.generation,
-        pokemonToGuess?.generation,
+        correctAnswer.generation,
         generationRange,
       );
     });
-  }, [
-    generationRange,
-    guessedItems,
-    mode,
-    pokemonToGuess,
-    pokemonToGuess?.generation,
-    updateRange,
-  ]);
+  }, [generationRange, guessedItems, correctAnswer.generation, updateRange]);
 
   useEffect(() => {
-    if (!pokemonToGuess) {
-      return;
-    }
     guessedItems.forEach((item) => {
       updateRange(
         setWeightRange,
         item.weight,
-        pokemonToGuess.weight,
+        correctAnswer.weight,
         weightRange,
       );
     });
-  }, [
-    guessedItems,
-    mode,
-    pokemonToGuess,
-    pokemonToGuess?.weight,
-    updateRange,
-    weightRange,
-  ]);
+  }, [guessedItems, correctAnswer.weight, updateRange, weightRange]);
 
   useEffect(() => {
-    if (!pokemonToGuess) {
-      return;
-    }
     guessedItems.forEach((item) => {
       updateRange(
         setHeightRange,
         item.height,
-        pokemonToGuess.height,
+        correctAnswer.height,
         heightRange,
       );
     });
-  }, [
-    guessedItems,
-    heightRange,
-    mode,
-    pokemonToGuess,
-    pokemonToGuess?.height,
-    updateRange,
-  ]);
+  }, [guessedItems, heightRange, correctAnswer.height, updateRange]);
 
   function displayHeightRange(heightRange: StatRange) {
     if (!heightRange) {
       return <span>???</span>;
     }
-    if (heightRange.min !== minValue || heightRange.max !== maxValue) {
-      if (heightRange.min === minValue && heightRange.max !== maxValue) {
+    if (heightRange.min !== -Infinity || heightRange.max !== Infinity) {
+      if (heightRange.min === -Infinity && heightRange.max !== Infinity) {
         return <span>??? - {decimeterToImperial(heightRange.max)}</span>;
       }
-      if (heightRange.max === maxValue && heightRange.min !== minValue) {
+      if (heightRange.max === Infinity && heightRange.min !== -Infinity) {
         return <span>{decimeterToImperial(heightRange.min)} - ???</span>;
       }
       if (heightRange.min === heightRange.max) {
@@ -157,19 +118,18 @@ export default function StatsRange() {
           {decimeterToImperial(heightRange.max)}
         </span>
       );
-    } else {
-      return <span>???</span>;
     }
+    return <span>???</span>;
   }
   function displayWeightRange(weightRange: StatRange) {
     if (!weightRange) {
       return <span>???</span>;
     }
-    if (weightRange.min !== minValue || weightRange.max !== maxValue) {
-      if (weightRange.min === minValue && weightRange.max !== maxValue) {
+    if (weightRange.min !== -Infinity || weightRange.max !== Infinity) {
+      if (weightRange.min === -Infinity && weightRange.max !== Infinity) {
         return <span>??? - {hectogramToImperial(weightRange.max)}</span>;
       }
-      if (weightRange.max === maxValue && weightRange.min !== minValue) {
+      if (weightRange.max === Infinity && weightRange.min !== -Infinity) {
         return <span>{hectogramToImperial(weightRange.min)} - ???</span>;
       }
       if (weightRange.min === weightRange.max) {
@@ -181,25 +141,24 @@ export default function StatsRange() {
           {hectogramToImperial(weightRange.max)}
         </span>
       );
-    } else {
-      return <span>???</span>;
     }
+    return <span>???</span>;
   }
 
   function displayGenerationRange(generationRange: StatRange) {
     if (!generationRange) {
       return <span>???</span>;
     }
-    if (generationRange.min !== minValue || generationRange.max !== maxValue) {
+    if (generationRange.min !== -Infinity || generationRange.max !== Infinity) {
       if (
-        generationRange.min === minValue &&
-        generationRange.max !== maxValue
+        generationRange.min === -Infinity &&
+        generationRange.max !== Infinity
       ) {
         return <span>??? - {generationRange.max}</span>;
       }
       if (
-        generationRange.max === maxValue &&
-        generationRange.min !== minValue
+        generationRange.max === Infinity &&
+        generationRange.min !== -Infinity
       ) {
         return <span>{generationRange.min} - ???</span>;
       }
@@ -221,15 +180,15 @@ export default function StatsRange() {
     <div className="my-4 flex flex-wrap justify-between gap-3 text-center text-2xl">
       <div className="grow space-x-2">
         <span className="font-semibold">Gen:</span>
-        <span>{displayGenerationRange(generationRange[mode])}</span>
+        <span>{displayGenerationRange(generationRange)}</span>
       </div>
       <div className="grow space-x-2">
         <span className="font-semibold">HT:</span>
-        <span>{displayHeightRange(heightRange[mode])}</span>
+        <span>{displayHeightRange(heightRange)}</span>
       </div>
       <div className="grow space-x-2">
         <span className="font-semibold">WT:</span>
-        <span>{displayWeightRange(weightRange[mode])}</span>
+        <span>{displayWeightRange(weightRange)}</span>
       </div>
     </div>
   );
