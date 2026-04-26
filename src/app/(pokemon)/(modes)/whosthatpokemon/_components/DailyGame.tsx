@@ -12,8 +12,8 @@ import { useEffect } from "react";
 import ImagePanel from "./ImagePanel";
 import DailyUnavailable from "@/app/(pokemon)/_components/DailyUnavailable";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { CalendarDate } from "@internationalized/date";
 import { useGameMode } from "@/hooks/useGameMode";
+import { format } from "date-fns";
 
 export default function DailyGame() {
   const { mode } = useGameMode();
@@ -28,13 +28,9 @@ export default function DailyGame() {
   useEffect(() => {
     if (mode !== "whosthatpokemon") return;
     if (!data?.date) return;
-    const date = new Date(data.date);
-    const serverTime = new CalendarDate(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-    ).toString();
-    if (serverTime === whosthatpokemonAnswers?.date) {
+    const date = format(data.date, "yyyy-MM-dd");
+
+    if (date === whosthatpokemonAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,
         whosthatpokemon: whosthatpokemonAnswers?.answers,
@@ -47,7 +43,7 @@ export default function DailyGame() {
     } else {
       setWhosthatpokemonAnswers((prev) => ({
         ...prev,
-        date: serverTime,
+        date,
         answers: [],
       }));
     }

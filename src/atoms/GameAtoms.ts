@@ -3,8 +3,9 @@ import { atomWithStorage } from "jotai/utils";
 import { atomWithQuery } from "jotai-tanstack-query";
 import type { Daily } from "@/app/generated/prisma/client";
 import { defaultGuesses } from "@/constants";
-import { getLocalTimeZone, today } from "@internationalized/date";
 import { GameMode } from "@/hooks/useGameMode";
+
+import { format } from "date-fns";
 
 export type Pokemon = {
   id: number;
@@ -66,7 +67,7 @@ export const guessedItemsAtom = atom<GuessedItems>({
 guessedItemsAtom.debugLabel = "guessedItemsAtom";
 
 //atom that gets the current Date and can be used to get dates of other days
-export const dateAtom = atom(today(getLocalTimeZone()).toString());
+export const dateAtom = atom(format(new Date(), "yyyy-MM-dd"));
 dateAtom.debugLabel = "dateAtom";
 
 //function to fetch Daily entry from database
@@ -102,11 +103,17 @@ export const firstDateAtom = atomWithQuery(() => ({
 export const classicPracticeSolutionAtom = atomWithStorage<Pokemon | null>(
   "classic_practice_solution",
   null,
+  undefined,
+  {
+    getOnInit: true,
+  },
 );
 classicPracticeSolutionAtom.debugLabel = "classicPracticeSolutionAtom";
 
 export const whosthatpokemonPracticeSolutionAtom =
-  atomWithStorage<Pokemon | null>("whosthatpokemon_solution", null);
+  atomWithStorage<Pokemon | null>("whosthatpokemon_solution", null, undefined, {
+    getOnInit: true,
+  });
 
 export const pokemonToGuessAtom = atom<{
   classic: Pokemon | null;
@@ -130,7 +137,7 @@ dailyPokemonAtom.debugLabel = "dailyPokemonAtom";
 export const classicAnswersAtom = atomWithStorage<DailyStorage>(
   "classic_answers",
   {
-    date: today(getLocalTimeZone()).toString(),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
     stats: {
       plays: 0,
@@ -139,6 +146,10 @@ export const classicAnswersAtom = atomWithStorage<DailyStorage>(
       streak: 0,
       maxStreak: 0,
     },
+  },
+  undefined,
+  {
+    getOnInit: true,
   },
 );
 classicAnswersAtom.debugLabel = "classicAnswersAtom";
@@ -146,7 +157,7 @@ classicAnswersAtom.debugLabel = "classicAnswersAtom";
 export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
   "whosthatpokemon_answers",
   {
-    date: today(getLocalTimeZone()).toString(),
+    date: format(new Date(), "yyyy-MM-dd"),
     answers: [],
     stats: {
       plays: 0,
@@ -156,18 +167,30 @@ export const whosthatpokemonAnswersAtom = atomWithStorage<DailyStorage>(
       maxStreak: 0,
     },
   },
+  undefined,
+  {
+    getOnInit: true,
+  },
 );
 whosthatpokemonAnswersAtom.debugLabel = "whosthatpokemonAnswersAtom";
 
 export const classicPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
   "classic_practice_answers",
   [],
+  undefined,
+  {
+    getOnInit: true,
+  },
 );
 classicPracticeAnswersAtom.debugLabel = "classicPracticeAnswersAtom";
 
 export const whosthatpokemonPracticeAnswersAtom = atomWithStorage<Pokemon[]>(
   "whosthatpokemon_practice_answers",
   [],
+  undefined,
+  {
+    getOnInit: true,
+  },
 );
 
 //atom that is responsible for saying if the game is over or not

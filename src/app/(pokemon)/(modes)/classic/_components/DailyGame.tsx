@@ -12,8 +12,8 @@ import { useEffect } from "react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import DailyUnavailable from "@/app/(pokemon)/_components/DailyUnavailable";
 import PokemonFeedback from "./PokemonFeedback";
-import { CalendarDate } from "@internationalized/date";
 import { useGameMode } from "@/hooks/useGameMode";
+import { format } from "date-fns";
 
 export default function DailyGame() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
@@ -26,13 +26,8 @@ export default function DailyGame() {
   useEffect(() => {
     if (mode !== "classic") return;
     if (!data?.date) return;
-    const date = new Date(data.date);
-    const serverTime = new CalendarDate(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-    ).toString();
-    if (serverTime === classicAnswers?.date) {
+    const date = format(data.date, "yyyy-MM-dd");
+    if (date === classicAnswers?.date) {
       setGuessedItems((prev) => ({
         ...prev,
         classic: classicAnswers?.answers,
@@ -45,7 +40,7 @@ export default function DailyGame() {
       console.log("HaHa I keep printing");
       setClassicAnswers((prev) => ({
         ...prev,
-        date: serverTime,
+        date,
         answers: [],
       }));
     }
