@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import {
   guessedItemsAtom,
-  currentGameMode,
   pokemonToGuessAtom,
   gameOverAtom,
   guessAtom,
@@ -13,7 +12,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { defaultGuesses } from "@/constants";
 import { Icon } from "@/components/Icon";
-import { usePathname } from "next/navigation";
+import { useGameMode } from "@/hooks/useGameMode";
 
 const emojis: { [key: string]: string } = {
   incorrect: "🟥",
@@ -23,7 +22,7 @@ const emojis: { [key: string]: string } = {
 };
 
 export default function Share() {
-  const mode = useAtomValue(currentGameMode);
+  const { mode, isUnlimited } = useGameMode();
   const correctAnswer = useAtomValue(pokemonToGuessAtom)[
     mode
   ] as Pokemon | null;
@@ -80,9 +79,6 @@ export default function Share() {
       })
       .join("\n");
   };
-
-  const pathname = usePathname();
-  const isUnlimited = pathname.endsWith("/unlimited");
 
   const location = isUnlimited
     ? `${window.location.href}&x=${encodeAnswer(correctAnswer)}`

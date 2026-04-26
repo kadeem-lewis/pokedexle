@@ -3,7 +3,6 @@ import {
   pokemonToGuessAtom,
   guessedItemsAtom,
   guessAtom,
-  currentGameMode,
   dailyDataAtom,
   classicAnswersAtom,
 } from "@/atoms/GameAtoms";
@@ -14,12 +13,13 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import DailyUnavailable from "@/app/(pokemon)/_components/DailyUnavailable";
 import PokemonFeedback from "./PokemonFeedback";
 import { CalendarDate } from "@internationalized/date";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export default function DailyGame() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
   const [{ data, isPending, isError }] = useAtom(dailyDataAtom);
   const [classicAnswers, setClassicAnswers] = useAtom(classicAnswersAtom);
 

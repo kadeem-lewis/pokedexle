@@ -1,6 +1,5 @@
 "use client";
 import {
-  currentGameMode,
   guessedItemsAtom,
   guessAtom,
   whosthatpokemonAnswersAtom,
@@ -14,9 +13,10 @@ import ImagePanel from "./ImagePanel";
 import DailyUnavailable from "@/app/(pokemon)/_components/DailyUnavailable";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { CalendarDate } from "@internationalized/date";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export default function DailyGame() {
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);

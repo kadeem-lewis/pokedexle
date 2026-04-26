@@ -3,7 +3,6 @@ import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
   newGameAtom,
-  currentGameMode,
   gameOverAtom,
   guessAtom,
   guessedItemsAtom,
@@ -15,13 +14,14 @@ import { startOfTomorrow } from "date-fns";
 //TODO: probably gonna have to create today and then add one to it
 import Share from "../Share";
 import { Button } from "@/components/ui/Button";
+import { useGameMode } from "@/hooks/useGameMode";
 
 type GameOverContentProps = {
   children?: React.ReactNode;
 };
 
 export default function GameOverContent({ children }: GameOverContentProps) {
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
   const setNewGame = useSetAtom(newGameAtom);
   const setGameOver = useSetAtom(gameOverAtom);
   const guesses = useAtomValue(guessAtom)[mode];
@@ -49,7 +49,7 @@ export default function GameOverContent({ children }: GameOverContentProps) {
           <p>You Lost. Better luck Next Time!</p>
         )}
       </div>
-      <div className=" text-center">{children}</div>
+      <div className="text-center">{children}</div>
       {mode === "classicUnlimited" || mode === "whosthatpokemonUnlimited" ? (
         <div className="flex justify-center gap-4 text-2xl">
           <span>Wanna try again?</span>

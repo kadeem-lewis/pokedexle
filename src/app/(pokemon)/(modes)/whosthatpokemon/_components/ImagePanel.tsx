@@ -3,7 +3,6 @@ import { Pokemon } from "@/atoms/GameAtoms";
 import { useEffect } from "react";
 import Image from "next/image";
 import {
-  currentGameMode,
   pokemonToGuessAtom,
   guessAtom,
   guessedItemsAtom,
@@ -18,6 +17,7 @@ import {
   decimeterToImperial,
   hectogramToImperial,
 } from "@/helpers/Conversions";
+import { useGameMode } from "@/hooks/useGameMode";
 
 type ImagePanelProps = {
   correctAnswer: Pokemon;
@@ -43,7 +43,7 @@ function blurIntensity(guesses: number) {
 }
 
 export default function ImagePanel({ correctAnswer }: ImagePanelProps) {
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode] as Pokemon;
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode] as Pokemon[];

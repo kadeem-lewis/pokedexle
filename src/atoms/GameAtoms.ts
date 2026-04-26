@@ -4,6 +4,7 @@ import { atomWithQuery } from "jotai-tanstack-query";
 import type { Daily } from "@/app/generated/prisma/client";
 import { defaultGuesses } from "@/constants";
 import { getLocalTimeZone, today } from "@internationalized/date";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export type Pokemon = {
   id: number;
@@ -40,12 +41,6 @@ type DailyAnswers = {
   classic: Pokemon | null;
   whosthatpokemon: Pokemon | null;
 };
-
-export type GameMode =
-  | "classic"
-  | "classicUnlimited"
-  | "whosthatpokemon"
-  | "whosthatpokemonUnlimited";
 
 //gets the array of pokemon from prisma
 export const pokedexAtom = atom<Pokemon[]>([]);
@@ -186,12 +181,10 @@ gameOverAtom.debugLabel = "gameOverAtom";
 
 //?maybe use enum for types or some other typescript feature
 //! the mode that is the default is unable to save localStorage stats on reset
-export const currentGameMode = atom<GameMode>("classicUnlimited");
-currentGameMode.debugLabel = "currentGameMode";
 
 //derived writable atom that is attempting to reset all values back to their defaults
 export const newGameAtom = atom(null, (get, set) => {
-  const mode = get(currentGameMode);
+  const { mode } = useGameMode();
 
   if (mode === "classicUnlimited") {
     // Create a new Pokemon to guess.
@@ -227,7 +220,7 @@ newGameAtom.debugLabel = "newGameAtom";
 //derived writable atom that adds the value passed into the guessed item array
 //! This atom has too many responsibilities. It should be broken up into smaller atoms
 export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
-  const mode = get(currentGameMode);
+  const { mode } = useGameMode();
 
   set(guessedItemsAtom, (prev) => ({
     ...prev,

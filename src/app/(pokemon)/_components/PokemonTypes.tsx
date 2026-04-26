@@ -3,10 +3,10 @@ import { TypeBadge } from "@/components/ui/TypeBadge";
 import { useAtomValue } from "jotai";
 import {
   Pokemon,
-  currentGameMode,
   guessedItemsAtom,
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export const TYPES = [
   "normal",
@@ -32,7 +32,7 @@ export const TYPES = [
 export type PokemonType = (typeof TYPES)[number];
 
 export default function PokemonTypes() {
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[
     mode

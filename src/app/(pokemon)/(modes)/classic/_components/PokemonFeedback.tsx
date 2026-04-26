@@ -3,7 +3,6 @@ import { useEffect, useMemo } from "react";
 import Image from "next/image";
 import { useAtom, useAtomValue } from "jotai";
 import {
-  currentGameMode,
   gameOverAtom,
   guessAtom,
   guessedItemsAtom,
@@ -13,6 +12,7 @@ import {
 import FeedbackTile from "./FeedbackTile";
 import GameOverContent from "@/app/(pokemon)/_components/content/GameOver";
 import { HEADINGS } from "@/constants";
+import { useGameMode } from "@/hooks/useGameMode";
 
 type PokemonFeedbackProps = {
   correctAnswer: Pokemon;
@@ -21,7 +21,7 @@ type PokemonFeedbackProps = {
 export default function PokemonFeedback({
   correctAnswer,
 }: PokemonFeedbackProps) {
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom)[mode];
   const guesses = useAtomValue(guessAtom)[mode];
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];

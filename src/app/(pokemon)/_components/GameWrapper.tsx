@@ -2,7 +2,6 @@
 import {
   Pokemon,
   classicPracticeSolutionAtom,
-  currentGameMode,
   dailyDataAtom,
   dateAtom,
   gameOverAtom,
@@ -12,11 +11,12 @@ import {
 } from "@/atoms/GameAtoms";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import PokemonTypes from "./PokemonTypes";
 import PokemonSearch from "./PokemonSearch";
 import { getLocalTimeZone, today } from "@internationalized/date";
+import { useGameMode } from "@/hooks/useGameMode";
 
 type GameWrapperProps = {
   pokedex: Pokemon[];
@@ -25,7 +25,7 @@ type GameWrapperProps = {
 
 export default function GameWrapper({ pokedex, children }: GameWrapperProps) {
   useHydrateAtoms([[pokedexAtom, pokedex]]);
-  const [mode, setMode] = useAtom(currentGameMode);
+  const { mode, isUnlimited } = useGameMode();
   const gameOver = useAtomValue(gameOverAtom);
   const [{ data }] = useAtom(dailyDataAtom);
   const [, setAtomDate] = useAtom(dateAtom);
@@ -35,24 +35,7 @@ export default function GameWrapper({ pokedex, children }: GameWrapperProps) {
     whosthatpokemonPracticeSolutionAtom,
   );
 
-  const currentPath = usePathname();
   const searchParams = useSearchParams();
-
-  const isUnlimited = currentPath.endsWith("/unlimited");
-  const basePath = isUnlimited
-    ? currentPath.replace(/\/unlimited$/, "")
-    : currentPath;
-
-  //TODO: Make this a hook
-  useEffect(() => {
-    if (basePath === "/classic") {
-      if (isUnlimited) setMode("classicUnlimited");
-      else setMode("classic");
-    } else if (basePath === "/whosthatpokemon") {
-      if (isUnlimited) setMode("whosthatpokemonUnlimited");
-      else setMode("whosthatpokemon");
-    }
-  }, [basePath, isUnlimited, setMode]);
 
   useEffect(() => {
     if (searchParams.has("date")) {

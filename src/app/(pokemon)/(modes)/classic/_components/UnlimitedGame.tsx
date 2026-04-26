@@ -5,12 +5,12 @@ import {
   classicPracticeSolutionAtom,
   guessedItemsAtom,
   guessAtom,
-  currentGameMode,
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import PokemonFeedback from "./PokemonFeedback";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export default function UnlimitedGame() {
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
@@ -20,7 +20,7 @@ export default function UnlimitedGame() {
   );
   const [guessedItems, setGuessedItems] = useAtom(guessedItemsAtom);
   const setGuesses = useSetAtom(guessAtom);
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
 
   useEffect(() => {
     console.log("Classic Unlimited useEffect is running");

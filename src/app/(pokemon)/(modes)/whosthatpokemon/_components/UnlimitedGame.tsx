@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import ImagePanel from "./ImagePanel";
 import {
-  currentGameMode,
   pokemonToGuessAtom,
   whosthatpokemonPracticeAnswersAtom,
   whosthatpokemonPracticeSolutionAtom,
@@ -11,9 +10,10 @@ import {
 } from "@/atoms/GameAtoms";
 import { defaultGuesses } from "@/constants";
 import { useAtomValue, useAtom, useSetAtom } from "jotai";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export default function UnlimitedGame() {
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
 
   const pokemonToGuess = useAtomValue(pokemonToGuessAtom);
   const whosthatpokemonPracticeAnswers = useAtomValue(

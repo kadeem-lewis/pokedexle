@@ -3,10 +3,11 @@ import { cx } from "tailwind-variants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Route } from "next";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export default function ModeSwitch() {
   const pathname = usePathname();
-  const isUnlimited = pathname.endsWith("/unlimited");
+  const { isUnlimited } = useGameMode();
 
   const basePath = isUnlimited
     ? pathname.replace(/\/unlimited$/, "")

@@ -6,18 +6,18 @@ import Fuse from "fuse.js";
 import {
   addGuessedItemAtom,
   pokedexAtom,
-  currentGameMode,
   guessedItemsAtom,
 } from "@/atoms/GameAtoms";
 import { Key } from "react-aria-components";
 import { useSetAtom, useAtomValue } from "jotai";
 import { Button } from "@/components/ui/Button";
+import { useGameMode } from "@/hooks/useGameMode";
 
 export default function PokemonSearch() {
   const [selected, setSelected] = useState<Key | null>(null);
   const [query, setQuery] = useState("");
   const pokedex = useAtomValue(pokedexAtom);
-  const mode = useAtomValue(currentGameMode);
+  const { mode } = useGameMode();
   const guessedItems = useAtomValue(guessedItemsAtom)[mode];
   const addNewGuess = useSetAtom(addGuessedItemAtom);
 
@@ -45,7 +45,7 @@ export default function PokemonSearch() {
     }
   };
 
-  const onSelectionChange = (id: Key|null) => {
+  const onSelectionChange = (id: Key | null) => {
     setSelected(id);
     setQuery(pokedex.find((p) => p.id === id)?.name ?? "");
   };
@@ -83,7 +83,7 @@ export default function PokemonSearch() {
         <Button
           type="submit"
           variant="flat"
-          className="bg-primary-accent hover:bg-primary-accent-hover flex-none cursor-pointer"
+          className="flex-none cursor-pointer bg-primary-accent hover:bg-primary-accent-hover"
         >
           Submit
         </Button>
