@@ -21,7 +21,7 @@ type GameOverContentProps = {
 };
 
 export default function GameOverContent({ children }: GameOverContentProps) {
-  const { mode } = useGameMode();
+  const { mode, isUnlimited } = useGameMode();
   const setNewGame = useSetAtom(newGameAtom);
   const setGameOver = useSetAtom(gameOverAtom);
   const guesses = useAtomValue(guessAtom)[mode];
@@ -35,7 +35,7 @@ export default function GameOverContent({ children }: GameOverContentProps) {
       [mode]: false,
     }));
     setTimeout(() => {
-      setNewGame();
+      setNewGame(mode);
     }, 500);
   };
 
@@ -50,7 +50,7 @@ export default function GameOverContent({ children }: GameOverContentProps) {
         )}
       </div>
       <div className="text-center">{children}</div>
-      {mode === "classicUnlimited" || mode === "whosthatpokemonUnlimited" ? (
+      {isUnlimited ? (
         <div className="flex justify-center gap-4 text-2xl">
           <span>Wanna try again?</span>
           <Button

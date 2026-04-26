@@ -55,7 +55,7 @@ export default function PokemonSearch() {
     if (selected && query) {
       const pokemon = pokedex.find((p) => p.name === query);
       if (pokemon) {
-        addNewGuess(pokemon);
+        addNewGuess(pokemon, mode);
       }
       setSelected(null);
       setQuery("");

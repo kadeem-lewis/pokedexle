@@ -4,7 +4,7 @@ import { atomWithQuery } from "jotai-tanstack-query";
 import type { Daily } from "@/app/generated/prisma/client";
 import { defaultGuesses } from "@/constants";
 import { getLocalTimeZone, today } from "@internationalized/date";
-import { useGameMode } from "@/hooks/useGameMode";
+import { GameMode } from "@/hooks/useGameMode";
 
 export type Pokemon = {
   id: number;
@@ -183,9 +183,7 @@ gameOverAtom.debugLabel = "gameOverAtom";
 //! the mode that is the default is unable to save localStorage stats on reset
 
 //derived writable atom that is attempting to reset all values back to their defaults
-export const newGameAtom = atom(null, (get, set) => {
-  const { mode } = useGameMode();
-
+export const newGameAtom = atom(null, (get, set, mode: GameMode) => {
   if (mode === "classicUnlimited") {
     // Create a new Pokemon to guess.
     const newPokemonToGuess =
@@ -219,81 +217,82 @@ newGameAtom.debugLabel = "newGameAtom";
 
 //derived writable atom that adds the value passed into the guessed item array
 //! This atom has too many responsibilities. It should be broken up into smaller atoms
-export const addGuessedItemAtom = atom(null, (get, set, newItem: Pokemon) => {
-  const { mode } = useGameMode();
-
-  set(guessedItemsAtom, (prev) => ({
-    ...prev,
-    [mode]: [...prev[mode], newItem],
-  }));
-  // Here I am adding the guessed item to localStorage
-  if (mode === "classic") {
-    set(classicAnswersAtom, (prev) => ({
+export const addGuessedItemAtom = atom(
+  null,
+  (get, set, newItem: Pokemon, mode: GameMode) => {
+    set(guessedItemsAtom, (prev) => ({
       ...prev,
-      answers: [...prev.answers, newItem],
+      [mode]: [...prev[mode], newItem],
     }));
-  } else if (mode === "classicUnlimited") {
-    set(classicPracticeAnswersAtom, (prev) => [...prev, newItem]);
-  } else if (mode === "whosthatpokemon") {
-    set(whosthatpokemonAnswersAtom, (prev) => ({
-      ...prev,
-      answers: [...prev.answers, newItem],
-    }));
-  } else if (mode === "whosthatpokemonUnlimited") {
-    set(whosthatpokemonPracticeAnswersAtom, (prev) => [...prev, newItem]);
-  }
-  // Decrementing guesses if the item is not the correct answer
-  if (!(newItem.name === get(pokemonToGuessAtom)[mode]?.name)) {
-    set(guessAtom, (prev) => ({
-      ...prev,
-      [mode]: prev[mode] - 1,
-    }));
-  } else {
-    set(gameOverAtom, (prev) => ({
-      ...prev,
-      [mode]: true,
-    }));
-    // updating stats and localstorage on win
+    // Here I am adding the guessed item to localStorage
     if (mode === "classic") {
-      set(classicAnswersAtom, (prev) => {
-        const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
-        newGuesses[prev.answers.length - 1]++;
-        return {
-          ...prev,
-          stats: {
-            guesses: newGuesses,
-            wins: prev.stats.wins + 1,
-            plays: prev.stats.plays + 1,
-            streak: prev.stats.streak + 1,
-            maxStreak:
-              prev.stats.streak >= prev.stats.maxStreak
-                ? prev.stats.streak + 1
-                : prev.stats.maxStreak,
-          },
-        };
-      });
+      set(classicAnswersAtom, (prev) => ({
+        ...prev,
+        answers: [...prev.answers, newItem],
+      }));
+    } else if (mode === "classicUnlimited") {
+      set(classicPracticeAnswersAtom, (prev) => [...prev, newItem]);
+    } else if (mode === "whosthatpokemon") {
+      set(whosthatpokemonAnswersAtom, (prev) => ({
+        ...prev,
+        answers: [...prev.answers, newItem],
+      }));
+    } else if (mode === "whosthatpokemonUnlimited") {
+      set(whosthatpokemonPracticeAnswersAtom, (prev) => [...prev, newItem]);
     }
-    if (mode === "whosthatpokemon") {
-      set(whosthatpokemonAnswersAtom, (prev) => {
-        const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
-        newGuesses[prev.answers.length - 1]++;
-        return {
-          ...prev,
-          stats: {
-            guesses: newGuesses,
-            wins: prev.stats.wins + 1,
-            plays: prev.stats.plays + 1,
-            streak: prev.stats.streak + 1,
-            maxStreak:
-              prev.stats.streak > prev.stats.maxStreak
-                ? prev.stats.streak + 1
-                : prev.stats.maxStreak,
-          },
-        };
-      });
+    // Decrementing guesses if the item is not the correct answer
+    if (!(newItem.name === get(pokemonToGuessAtom)[mode]?.name)) {
+      set(guessAtom, (prev) => ({
+        ...prev,
+        [mode]: prev[mode] - 1,
+      }));
+    } else {
+      set(gameOverAtom, (prev) => ({
+        ...prev,
+        [mode]: true,
+      }));
+      // updating stats and localstorage on win
+      if (mode === "classic") {
+        set(classicAnswersAtom, (prev) => {
+          const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
+          newGuesses[prev.answers.length - 1]++;
+          return {
+            ...prev,
+            stats: {
+              guesses: newGuesses,
+              wins: prev.stats.wins + 1,
+              plays: prev.stats.plays + 1,
+              streak: prev.stats.streak + 1,
+              maxStreak:
+                prev.stats.streak >= prev.stats.maxStreak
+                  ? prev.stats.streak + 1
+                  : prev.stats.maxStreak,
+            },
+          };
+        });
+      }
+      if (mode === "whosthatpokemon") {
+        set(whosthatpokemonAnswersAtom, (prev) => {
+          const newGuesses = [...prev.stats.guesses] as FixedGuessArray;
+          newGuesses[prev.answers.length - 1]++;
+          return {
+            ...prev,
+            stats: {
+              guesses: newGuesses,
+              wins: prev.stats.wins + 1,
+              plays: prev.stats.plays + 1,
+              streak: prev.stats.streak + 1,
+              maxStreak:
+                prev.stats.streak > prev.stats.maxStreak
+                  ? prev.stats.streak + 1
+                  : prev.stats.maxStreak,
+            },
+          };
+        });
+      }
     }
-  }
-});
+  },
+);
 addGuessedItemAtom.debugLabel = "addGuessedItemAtom";
 
 //TODO: Localstorage stat to track if it's the first time the user is playing the game
