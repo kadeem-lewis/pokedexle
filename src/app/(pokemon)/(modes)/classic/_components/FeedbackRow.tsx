@@ -14,7 +14,7 @@ type FeedbackTileProps = {
   guessedItem: Pokemon;
   correctItem: Pokemon;
 };
-export default function FeedbackTile({
+export default function FeedbackRow({
   guessedItem,
   correctItem,
 }: FeedbackTileProps) {

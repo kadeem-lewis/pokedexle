@@ -9,7 +9,7 @@ import {
   Pokemon,
   pokemonToGuessAtom,
 } from "@/atoms/GameAtoms";
-import FeedbackTile from "./FeedbackTile";
+import FeedbackRow from "./FeedbackRow";
 import GameOverContent from "@/app/(pokemon)/_components/content/GameOver";
 import { HEADINGS } from "@/constants";
 import { useGameMode } from "@/hooks/useGameMode";
@@ -39,7 +39,7 @@ export default function PokemonFeedback({
 
   const feedbackStatements = useMemo(() => {
     return guessedItems.map((guessedItem) => (
-      <FeedbackTile
+      <FeedbackRow
         guessedItem={guessedItem}
         key={guessedItem.name}
         correctItem={correctAnswer}
